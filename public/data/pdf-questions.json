@@ -9,7 +9,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What is one potential benefit of using a test automation tool?"
+          "text": "What is one potential benefit of using a test automation tool?"
         }
       ],
       "options": [
@@ -97,7 +97,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a benefit of early stakeholder feedback?"
+          "text": "Which of the following is a benefit of early stakeholder feedback?"
         }
       ],
       "options": [
@@ -186,7 +186,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a good testing practice that applies regardless of the specific software development lifecycle being used?"
+          "text": "Which of the following is a good testing practice that applies regardless of the specific software development lifecycle being used?"
         }
       ],
       "options": [
@@ -274,7 +274,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In an Agile development model, the completion of testing or “done” is defined by which of the following?"
+          "text": "In an Agile development model, the completion of testing or “done” is defined by which of the following?"
         }
       ],
       "options": [
@@ -362,7 +362,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are testing web application software that allows a person to use their travel points to make flight and hotel reservations. When the user logs into the software (username/password) they are presented with a set of options. From that set of options, they can pick the following: 1. View points balance 2. Make flight reservation 3. Make hotel reservation From the login page, they can log in successfully or might fail and need to try again. Once they login successfully they can go to either the view points, flight reservation or hotel reservation page. Which of the following is the correct list of the transitions (a transition is shown as >) that should be tested, assuming that the test ends when a reservation state is reached."
+          "text": "You are testing web application software that allows a person to use their travel points to make flight and hotel reservations. When the user logs into the software (username/password) they are presented with a set of options. From that set of options, they can pick the following: 1. View points balance 2. Make flight reservation 3. Make hotel reservation From the login page, they can log in successfully or might fail and need to try again. Once they login successfully they can go to either the view points, flight reservation or hotel reservation page. Which of the following is the correct list of the transitions (a transition is shown as >) that should be tested, assuming that the test ends when a reservation state is reached."
         }
       ],
       "options": [
@@ -450,7 +450,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an advantage of the whole team approach?"
+          "text": "Which of the following is an advantage of the whole team approach?"
         }
       ],
       "options": [
@@ -538,7 +538,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ If you are using test results to learn more about the software and are then creating additional tests based on those results, what type of testing are you doing?"
+          "text": "If you are using test results to learn more about the software and are then creating additional tests based on those results, what type of testing are you doing?"
         }
       ],
       "options": [
@@ -626,7 +626,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are working on calculating the estimation for a project. You have been given the following numbers by your manager, who is considered to be an expert in estimation: Optimistic = 35 days - Likely = 40 days - Pessimistic = 65 days - Apply the three-point estimation technique, what is the proper expression of the final estimate?"
+          "text": "You are working on calculating the estimation for a project. You have been given the following numbers by your manager, who is considered to be an expert in estimation: Optimistic = 35 days - Likely = 40 days - Pessimistic = 65 days - Apply the three-point estimation technique, what is the proper expression of the final estimate?"
         }
       ],
       "options": [
@@ -716,7 +716,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which black-box technique should be used to verify different responses of the system, depending on its current conditions or previous history?"
+          "text": "Which black-box technique should be used to verify different responses of the system, depending on its current conditions or previous history?"
         }
       ],
       "options": [
@@ -805,7 +805,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You have been given the following story: As a help desk worker - I want to enter a caller’s birth date So the system can display the caller’s account information As a team, you have developed the following table of acceptance criteria: You have developed the following test cases and will execute them in the specified order: 1. Enter a valid date and verify that the account retrieved matches the birth date entered. 2. Enter an invalid date and verify that the error indicates the date is invalid. 3. Verify that the date prompt is already formatted for the date with xx/xx/xx format. 4. Enter a valid date and verify that two pages of account information are readable. 5. Enter a valid date and verify that the response occurs within 2 seconds when the system is under an average load. What is incorrect about this approach?"
+          "text": "You have been given the following story: As a help desk worker - I want to enter a caller’s birth date So the system can display the caller’s account information As a team, you have developed the following table of acceptance criteria: You have developed the following test cases and will execute them in the specified order: 1. Enter a valid date and verify that the account retrieved matches the birth date entered. 2. Enter an invalid date and verify that the error indicates the date is invalid. 3. Verify that the date prompt is already formatted for the date with xx/xx/xx format. 4. Enter a valid date and verify that two pages of account information are readable. 5. Enter a valid date and verify that the response occurs within 2 seconds when the system is under an average load. What is incorrect about this approach?"
         }
       ],
       "options": [
@@ -895,7 +895,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In what way does configuration management help the tester?"
+          "text": "In what way does configuration management help the tester?"
         }
       ],
       "options": [
@@ -984,7 +984,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ If you are responsible for test analysis and test design what is your primary role in your team?"
+          "text": "If you are responsible for test analysis and test design what is your primary role in your team?"
         }
       ],
       "options": [
@@ -1073,7 +1073,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A functional requirement states that pressure values must always be positive and stay within a range of 100 to 200 pounds for a particular tank (100 and 200 are valid within the range). Which of the following is the minimum set of values that would achieve coverage using the equivalence partitioning technique?"
+          "text": "A functional requirement states that pressure values must always be positive and stay within a range of 100 to 200 pounds for a particular tank (100 and 200 are valid within the range). Which of the following is the minimum set of values that would achieve coverage using the equivalence partitioning technique?"
         }
       ],
       "options": [
@@ -1161,7 +1161,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You have been given the following test cases for execution. You have been told that security and usability are the highest priorities respectively for this banking application. What is the proper execution order for these test cases? 1. Update a customer’s account balance 2. Query a customer’s account balance 3. Delete a request for a paper statement 4. Change the font size on the page to improve readability 5. Create a new payee in a customer’s automatic bill pay list"
+          "text": "You have been given the following test cases for execution. You have been told that security and usability are the highest priorities respectively for this banking application. What is the proper execution order for these test cases? 1. Update a customer’s account balance 2. Query a customer’s account balance 3. Delete a request for a paper statement 4. Change the font size on the page to improve readability 5. Create a new payee in a customer’s automatic bill pay list"
         }
       ],
       "options": [
@@ -1250,7 +1250,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ When is the detailed risk analysis for a story first conducted?"
+          "text": "When is the detailed risk analysis for a story first conducted?"
         }
       ],
       "options": [
@@ -1338,7 +1338,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ When tests are being created to achieve statement coverage, what are they exercising?"
+          "text": "When tests are being created to achieve statement coverage, what are they exercising?"
         }
       ],
       "options": [
@@ -1427,7 +1427,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You have just completed a retrospective at the end of a sprint. One of the developers raised an issue with defect reports not containing information about the configuration, data, and system being used when the failure occurred. When this happens, they reject the defect report and the tester has to update it and send it again. This sometimes takes three or four iterations to get all the information on the report. The test team will take this feedback and will improve the details included in the defect reports. This is an example of which type of benefit for testing?"
+          "text": "You have just completed a retrospective at the end of a sprint. One of the developers raised an issue with defect reports not containing information about the configuration, data, and system being used when the failure occurred. When this happens, they reject the defect report and the tester has to update it and send it again. This sometimes takes three or four iterations to get all the information on the report. The test team will take this feedback and will improve the details included in the defect reports. This is an example of which type of benefit for testing?"
         }
       ],
       "options": [
@@ -1516,7 +1516,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What is a reasonable way to control and minimize the cost of testing and development?"
+          "text": "What is a reasonable way to control and minimize the cost of testing and development?"
         }
       ],
       "options": [
@@ -1604,7 +1604,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a technique that can be used to develop user stories in collaboration with the developers and business?"
+          "text": "Which of the following is a technique that can be used to develop user stories in collaboration with the developers and business?"
         }
       ],
       "options": [
@@ -1692,7 +1692,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which is a key function of a test management tool?"
+          "text": "Which is a key function of a test management tool?"
         }
       ],
       "options": [
@@ -1780,7 +1780,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following best suggests the need for maintenance testing?"
+          "text": "Which of the following best suggests the need for maintenance testing?"
         }
       ],
       "options": [
@@ -1868,7 +1868,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following should you review using static testing?"
+          "text": "Which of the following should you review using static testing?"
         }
       ],
       "options": [
@@ -1956,7 +1956,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is supported by good information traceability?"
+          "text": "Which of the following is supported by good information traceability?"
         }
       ],
       "options": [
@@ -2044,7 +2044,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a methodical approach to error guessing?"
+          "text": "Which of the following is a methodical approach to error guessing?"
         }
       ],
       "options": [
@@ -2132,7 +2132,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Given the following requirement: The system shall compute the car’s position using the following equation: new_distance_traveled + old_position Which type of testing should be implemented to help ensure this requirement is met?"
+          "text": "Given the following requirement: The system shall compute the car’s position using the following equation: new_distance_traveled + old_position Which type of testing should be implemented to help ensure this requirement is met?"
         }
       ],
       "options": [
@@ -2220,7 +2220,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ How is branch coverage determined?"
+          "text": "How is branch coverage determined?"
         }
       ],
       "options": [
@@ -2308,7 +2308,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are using boundary value analysis to determine your test data. What values should you use to test a routine that requires an integer input (x) to be greater than zero and less than 100 to achieve 100% minimum coverage using the two-point boundary value analysis technique?"
+          "text": "You are using boundary value analysis to determine your test data. What values should you use to test a routine that requires an integer input (x) to be greater than zero and less than 100 to achieve 100% minimum coverage using the two-point boundary value analysis technique?"
         }
       ],
       "options": [
@@ -2398,7 +2398,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are working with a geographically and time zone distributed team. It is important that the entire team always have access to the latest test execution information. Which of these is the most appropriate method for communicating that status?"
+          "text": "You are working with a geographically and time zone distributed team. It is important that the entire team always have access to the latest test execution information. Which of these is the most appropriate method for communicating that status?"
         }
       ],
       "options": [
@@ -2488,7 +2488,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ During which activity in the review process are the quality characteristics selected for evaluation?"
+          "text": "During which activity in the review process are the quality characteristics selected for evaluation?"
         }
       ],
       "options": [
@@ -2577,7 +2577,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which testing principle provides a good reason to base testing upon risk mitigation priorities?"
+          "text": "Which testing principle provides a good reason to base testing upon risk mitigation priorities?"
         }
       ],
       "options": [
@@ -2665,7 +2665,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a correct statement regarding Quadrant Q2 of the testing quadrants?"
+          "text": "Which of the following is a correct statement regarding Quadrant Q2 of the testing quadrants?"
         }
       ],
       "options": [
@@ -2753,7 +2753,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following provides two defined risk response actions to help control product risk?"
+          "text": "Which of the following provides two defined risk response actions to help control product risk?"
         }
       ],
       "options": [
@@ -2841,7 +2841,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Your company has been working in a waterfall lifecycle model. They have now decided to implement DevOps and will be using CI/CD. Which of the following is a change that will be required from the testing team?"
+          "text": "Your company has been working in a waterfall lifecycle model. They have now decided to implement DevOps and will be using CI/CD. Which of the following is a change that will be required from the testing team?"
         }
       ],
       "options": [
@@ -2930,7 +2930,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Testing can be seen as a destructive activity. Which of the following generic skills will help a tester overcome this barrier?"
+          "text": "Testing can be seen as a destructive activity. Which of the following generic skills will help a tester overcome this barrier?"
         }
       ],
       "options": [
@@ -3018,7 +3018,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ If a developer is analyzing a failure to determine the cause, he is engaging in what type of activity?"
+          "text": "If a developer is analyzing a failure to determine the cause, he is engaging in what type of activity?"
         }
       ],
       "options": [
@@ -3107,7 +3107,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ If test cases are written in the given/when/then format, what type of test-first software development is being used?"
+          "text": "If test cases are written in the given/when/then format, what type of test-first software development is being used?"
         }
       ],
       "options": [
@@ -3195,7 +3195,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a valid test objective?"
+          "text": "Which of the following is a valid test objective?"
         }
       ],
       "options": [
@@ -3283,7 +3283,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are a functional tester, performing system testing of a flight reservation application. After logging into the system, you selected the “New Reservation” option on the main menu, and clicked the “Submit” button without making any changes to the default values on the screen. The system charged your test credit card for $523.00 instead of the expected $1046.00. This happens every time you execute the test case. You are entering a defect into your system, and submitting it to development for correction. Your defect report currently includes: The date of the incident - The identity of the tester who discovered the incident The steps executed to cause the incident, noting 100% reproducibility The impact on the system and the priority of the defect The expected and actual results - What information is missing from this defect report?"
+          "text": "You are a functional tester, performing system testing of a flight reservation application. After logging into the system, you selected the “New Reservation” option on the main menu, and clicked the “Submit” button without making any changes to the default values on the screen. The system charged your test credit card for $523.00 instead of the expected $1046.00. This happens every time you execute the test case. You are entering a defect into your system, and submitting it to development for correction. Your defect report currently includes: The date of the incident - The identity of the tester who discovered the incident The steps executed to cause the incident, noting 100% reproducibility The impact on the system and the priority of the defect The expected and actual results - What information is missing from this defect report?"
         }
       ],
       "options": [
@@ -3371,7 +3371,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of a test work product?"
+          "text": "Which of the following is an example of a test work product?"
         }
       ],
       "options": [
@@ -3459,7 +3459,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are getting ready to test software that will be used to dispatch spa pool technicians. You have decided to use a decision table to determine when chemicals will be needed and when maintenance functions should be performed. You have been given the following requirements: 1. Spa pools need chemicals checked and added once a week. 2. Spa pool filters must be cleaned once a month. 3. Technicians should add chemicals and clean filters for an emergency maintenance call. You have created the conditions part of the decision table: Given this information, which of the following is the correct set of actions indicated by this decision table? 1. 2. 3. 4."
+          "text": "You are getting ready to test software that will be used to dispatch spa pool technicians. You have decided to use a decision table to determine when chemicals will be needed and when maintenance functions should be performed. You have been given the following requirements: 1. Spa pools need chemicals checked and added once a week. 2. Spa pool filters must be cleaned once a month. 3. Technicians should add chemicals and clean filters for an emergency maintenance call. You have created the conditions part of the decision table: Given this information, which of the following is the correct set of actions indicated by this decision table? 1. 2. 3. 4."
         }
       ],
       "options": [
@@ -3548,7 +3548,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You have been given the following story: As a help desk worker - I want to enter a caller’s birth date So the system can display the caller’s account information As a team, you have developed the following table of acceptance criteria: You have developed the following test cases and will execute them in the specified order: 1. Enter a valid date and verify that the account retrieved matches the birth date entered. 2. Enter an invalid date and verify that the error indicates the date is invalid. 3. Verify that the date prompt is already formatted for the date with xx/xx/xx format. 4. Enter a valid date and verify that two pages of account information are readable. 5. Enter a valid date and verify that the response occurs within 2 seconds when the system is under an average load. What is incorrect about this approach?"
+          "text": "You have been given the following story: As a help desk worker - I want to enter a caller’s birth date So the system can display the caller’s account information As a team, you have developed the following table of acceptance criteria: You have developed the following test cases and will execute them in the specified order: 1. Enter a valid date and verify that the account retrieved matches the birth date entered. 2. Enter an invalid date and verify that the error indicates the date is invalid. 3. Verify that the date prompt is already formatted for the date with xx/xx/xx format. 4. Enter a valid date and verify that two pages of account information are readable. 5. Enter a valid date and verify that the response occurs within 2 seconds when the system is under an average load. What is incorrect about this approach?"
         }
       ],
       "options": [
@@ -3638,7 +3638,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following provides two defined risk response actions to help control product risk?"
+          "text": "Which of the following provides two defined risk response actions to help control product risk?"
         }
       ],
       "options": [
@@ -3726,7 +3726,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A typical objective of testing is to:"
+          "text": "A typical objective of testing is to:"
         }
       ],
       "options": [
@@ -3814,7 +3814,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Exploratory testing is an experience-based test technique:"
+          "text": "Exploratory testing is an experience-based test technique:"
         }
       ],
       "options": [
@@ -3902,7 +3902,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an advantage of the whole team approach?"
+          "text": "Which of the following is an advantage of the whole team approach?"
         }
       ],
       "options": [
@@ -3991,7 +3991,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about checklist-based testing is TRUE?"
+          "text": "Which of the following statements about checklist-based testing is TRUE?"
         }
       ],
       "options": [
@@ -4080,7 +4080,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ An application is subjected to a constant load for an extended period of time as part of a performance test. While running this test, the response time of the application steadily slows down, which results in a requirement not being met. This slowdown is caused by a memory leak where the application code does not properly release some of the dynamically allocated memory when it is no longer needed. Which of the following statements is TRUE?"
+          "text": "An application is subjected to a constant load for an extended period of time as part of a performance test. While running this test, the response time of the application steadily slows down, which results in a requirement not being met. This slowdown is caused by a memory leak where the application code does not properly release some of the dynamically allocated memory when it is no longer needed. Which of the following statements is TRUE?"
         }
       ],
       "options": [
@@ -4169,7 +4169,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is TRUE?"
+          "text": "Which of the following statements is TRUE?"
         }
       ],
       "options": [
@@ -4258,7 +4258,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In addition to thorough testing of the requirements specification, a development team aims to involve users as early as possible in the development process, using practices such as prototyping, to ensure that the software systems being developed will meet the users’ expectations. This approach is especially useful at mitigating the risks associated with one of the seven testing principles, which one?"
+          "text": "In addition to thorough testing of the requirements specification, a development team aims to involve users as early as possible in the development process, using practices such as prototyping, to ensure that the software systems being developed will meet the users’ expectations. This approach is especially useful at mitigating the risks associated with one of the seven testing principles, which one?"
         }
       ],
       "options": [
@@ -4346,7 +4346,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A requirement specifies that a certain identifier (ID) must be between 5 and 10 characters long, must contain only alphanumeric characters, and its first character must be a letter. As a tester, you want to apply one-dimensional equivalence partitioning to test this ID. This means that you have to apply equivalence partitioning individually: to the length of the ID, the type of characters contained within the ID, and the type of the first character of the ID. What is the number of partitions to cover?"
+          "text": "A requirement specifies that a certain identifier (ID) must be between 5 and 10 characters long, must contain only alphanumeric characters, and its first character must be a letter. As a tester, you want to apply one-dimensional equivalence partitioning to test this ID. This means that you have to apply equivalence partitioning individually: to the length of the ID, the type of characters contained within the ID, and the type of the first character of the ID. What is the number of partitions to cover?"
         }
       ],
       "options": [
@@ -4435,7 +4435,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Determining the schedule for each testing activity and test milestones for a test project, using activity estimates, available resources, and other constraints is a typical task performed during:"
+          "text": "Determining the schedule for each testing activity and test milestones for a test project, using activity estimates, available resources, and other constraints is a typical task performed during:"
         }
       ],
       "options": [
@@ -4523,7 +4523,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A requirement specifies that if the total amount of sales (TAS) made during the year by a corporate seller is 300,000€ or more, the bonus that must be paid to the seller is 100% of a certain amount agreed upon at the beginning of the year. The software contains a fault as it implements this requirement with the decision \"IF (TAS = 300,000)\" instead of \"IF (TAS >= 300,000)\". The application of the 3-value boundary value analysis to this problem consists of the following three test cases (TAS is an integer variable): TC1 = 299,999 - TC2=300,000 - TC=300,001 - Which of the following statements is TRUE?"
+          "text": "A requirement specifies that if the total amount of sales (TAS) made during the year by a corporate seller is 300,000€ or more, the bonus that must be paid to the seller is 100% of a certain amount agreed upon at the beginning of the year. The software contains a fault as it implements this requirement with the decision \"IF (TAS = 300,000)\" instead of \"IF (TAS >= 300,000)\". The application of the 3-value boundary value analysis to this problem consists of the following three test cases (TAS is an integer variable): TC1 = 299,999 - TC2=300,000 - TC=300,001 - Which of the following statements is TRUE?"
         }
       ],
       "options": [
@@ -4612,7 +4612,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A document describes the test procedures that have been derived for the identified test sets. Among other things, the order in which the test cases in the corresponding test set are to be executed according to the dependencies described by preconditions and postconditions is specified. This document is a typical work product produced as part of:"
+          "text": "A document describes the test procedures that have been derived for the identified test sets. Among other things, the order in which the test cases in the corresponding test set are to be executed according to the dependencies described by preconditions and postconditions is specified. This document is a typical work product produced as part of:"
         }
       ],
       "options": [
@@ -4700,7 +4700,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following types of tools is BEST suited for determining source code compliance with the guidelines provided by a coding standard?"
+          "text": "Which of the following types of tools is BEST suited for determining source code compliance with the guidelines provided by a coding standard?"
         }
       ],
       "options": [
@@ -4788,7 +4788,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about traceability is FALSE?"
+          "text": "Which of the following statements about traceability is FALSE?"
         }
       ],
       "options": [
@@ -4878,7 +4878,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a typical potential risk of using test automation tools?"
+          "text": "Which of the following is a typical potential risk of using test automation tools?"
         }
       ],
       "options": [
@@ -4966,7 +4966,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A typical generic skill required for the role of tester is the ability to:"
+          "text": "A typical generic skill required for the role of tester is the ability to:"
         }
       ],
       "options": [
@@ -5054,7 +5054,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ As a tester, as part of a V-model project, you are currently executing some tests aimed at verifying if a mobile app asks the user to grant the proper access permissions during the installation process and after the installation process. The requirements specification states that in both cases the app shall ask the user to grant access permissions only to the camera and photos stored on the device. However, you observe that the app also asks the user to grant access permission to all contacts on the device. Consider the following items: [I]. Test environment. [II]. Expected result. [III]. Actual result. [IV]. Test level. [V]. Root cause. Based on only the given information, which of the items listed above, are you able to CORRECTLY specify in a defect report?"
+          "text": "As a tester, as part of a V-model project, you are currently executing some tests aimed at verifying if a mobile app asks the user to grant the proper access permissions during the installation process and after the installation process. The requirements specification states that in both cases the app shall ask the user to grant access permissions only to the camera and photos stored on the device. However, you observe that the app also asks the user to grant access permission to all contacts on the device. Consider the following items: [I]. Test environment. [II]. Expected result. [III]. Actual result. [IV]. Test level. [V]. Root cause. Based on only the given information, which of the items listed above, are you able to CORRECTLY specify in a defect report?"
         }
       ],
       "options": [
@@ -5142,7 +5142,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements refers to a good testing practice that applies to all software development lifecycles?"
+          "text": "Which of the following statements refers to a good testing practice that applies to all software development lifecycles?"
         }
       ],
       "options": [
@@ -5230,7 +5230,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The following decision table is used to assist a doctor in determining the drug therapy to prescribe for a patient (aged 6 to 65 years) diagnosed with acute sinusitis. The table consists of three Boolean conditions and six actions: Based only on the given information, which of the following statements is TRUE?"
+          "text": "The following decision table is used to assist a doctor in determining the drug therapy to prescribe for a patient (aged 6 to 65 years) diagnosed with acute sinusitis. The table consists of three Boolean conditions and six actions: Based only on the given information, which of the following statements is TRUE?"
         }
       ],
       "options": [
@@ -5320,7 +5320,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about TDD, BDD and ATDD is TRUE?"
+          "text": "Which of the following statements about TDD, BDD and ATDD is TRUE?"
         }
       ],
       "options": [
@@ -5409,7 +5409,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ An anti-intrusion system is battery powered and is activated by pressing the only available button. To deactivate the system, the operator must enter a PIN code. The system will stay in alert mode within a configurable timeout and an alarm bell will ring if the system is not deactivated before the timeout expires. The following state transition diagram describes the behavior of the system: What is the minimum number of test cases needed to cover every unique sequence of exactly 4 states / 3 transitions starting and ending in the “Inactive” state? (note that “Inactive” is not a final state in the diagram)."
+          "text": "An anti-intrusion system is battery powered and is activated by pressing the only available button. To deactivate the system, the operator must enter a PIN code. The system will stay in alert mode within a configurable timeout and an alarm bell will ring if the system is not deactivated before the timeout expires. The following state transition diagram describes the behavior of the system: What is the minimum number of test cases needed to cover every unique sequence of exactly 4 states / 3 transitions starting and ending in the “Inactive” state? (note that “Inactive” is not a final state in the diagram)."
         }
       ],
       "options": [
@@ -5497,7 +5497,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is TRUE?"
+          "text": "Which of the following statements is TRUE?"
         }
       ],
       "options": [
@@ -5586,7 +5586,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following user story about an e-commerce website's registration feature that only allows registered users to make purchases: “As a new user, | want to register to the website, so that | can start shopping online” The following are some of the acceptance criteria defined for the user story: [a] The registration form consists of the following fields: username, email address, first name, last name, date of birth, password and repeat password. [b] To submit the registration request, the new user must fill in all the fields of the registration form with valid values and must agree to the terms and conditions. [c] To be valid, the email address must not be provided by free online mail services that allow to create disposable email addresses. A dedicated error message must be presented to inform the new user when an invalid address is entered. [d] To be valid, the first name and last name must contain only alphabetic characters and must be between 2 and 80 characters long. A dedicated error message must be presented to inform the new user when an invalid first name and/or the last name is entered. [e] After submitting the registration request, the new user must receive an e-mail containing the confirmation link to the e-mail address specified in the registration form. Based only on the given information, which of the following ATDD tests is MOST LIKELY to be written first?"
+          "text": "Consider the following user story about an e-commerce website's registration feature that only allows registered users to make purchases: “As a new user, | want to register to the website, so that | can start shopping online” The following are some of the acceptance criteria defined for the user story: [a] The registration form consists of the following fields: username, email address, first name, last name, date of birth, password and repeat password. [b] To submit the registration request, the new user must fill in all the fields of the registration form with valid values and must agree to the terms and conditions. [c] To be valid, the email address must not be provided by free online mail services that allow to create disposable email addresses. A dedicated error message must be presented to inform the new user when an invalid address is entered. [d] To be valid, the first name and last name must contain only alphabetic characters and must be between 2 and 80 characters long. A dedicated error message must be presented to inform the new user when an invalid first name and/or the last name is entered. [e] After submitting the registration request, the new user must receive an e-mail containing the confirmation link to the e-mail address specified in the registration form. Based only on the given information, which of the following ATDD tests is MOST LIKELY to be written first?"
         }
       ],
       "options": [
@@ -5675,7 +5675,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ After being in operation for many years, a document management system must be decommissioned as it has reached its end of life. This system will not be replaced by any other new system. A legal obligation provides that all documents within the system must be kept for at least 20 years in a state archive. Which of the following statements about maintenance testing for decommissioning of this system is TRUE?"
+          "text": "After being in operation for many years, a document management system must be decommissioned as it has reached its end of life. This system will not be replaced by any other new system. A legal obligation provides that all documents within the system must be kept for at least 20 years in a state archive. Which of the following statements about maintenance testing for decommissioning of this system is TRUE?"
         }
       ],
       "options": [
@@ -5764,7 +5764,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about the test pyramid is TRUE?"
+          "text": "Which of the following statements about the test pyramid is TRUE?"
         }
       ],
       "options": [
@@ -5853,7 +5853,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about retrospectives is TRUE?"
+          "text": "Which of the following statements about retrospectives is TRUE?"
         }
       ],
       "options": [
@@ -5942,7 +5942,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following about typical information found within a test plan is FALSE?"
+          "text": "Which of the following about typical information found within a test plan is FALSE?"
         }
       ],
       "options": [
@@ -6030,7 +6030,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about the shift-left approach is FALSE?"
+          "text": "Which of the following statements about the shift-left approach is FALSE?"
         }
       ],
       "options": [
@@ -6119,7 +6119,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about the testing quadrants is TRUE?"
+          "text": "Which of the following statements about the testing quadrants is TRUE?"
         }
       ],
       "options": [
@@ -6209,7 +6209,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a role that is usually responsible for documenting the findings (e.g., action items, decisions, recommendations) made by the review team as part of a typical formal review?"
+          "text": "Which of the following is a role that is usually responsible for documenting the findings (e.g., action items, decisions, recommendations) made by the review team as part of a typical formal review?"
         }
       ],
       "options": [
@@ -6297,7 +6297,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following examples of risks identified in different software development projects: [I]. It may not be possible to generate the expected workloads to run performance tests, due to the poor hardware equipment of the machines (load injectors) that should generate these workloads. [II]. A user's session on a web application is not invalidated after a certain period of inactivity (configured by the system administrator) of the user. [III]. The test team will not have an adequate requirements specification (since many requirements will still be missing) by the time test design and analysis activities should begin according to the test plan. [IV]. Following a failure, the system is unable to continue to maintain its pre-failure operation and some data becomes corrupted. Which of the following statements is TRUE?"
+          "text": "Consider the following examples of risks identified in different software development projects: [I]. It may not be possible to generate the expected workloads to run performance tests, due to the poor hardware equipment of the machines (load injectors) that should generate these workloads. [II]. A user's session on a web application is not invalidated after a certain period of inactivity (configured by the system administrator) of the user. [III]. The test team will not have an adequate requirements specification (since many requirements will still be missing) by the time test design and analysis activities should begin according to the test plan. [IV]. Following a failure, the system is unable to continue to maintain its pre-failure operation and some data becomes corrupted. Which of the following statements is TRUE?"
         }
       ],
       "options": [
@@ -6387,7 +6387,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a factor that contributes to a successful review?"
+          "text": "Which of the following is a factor that contributes to a successful review?"
         }
       ],
       "options": [
@@ -6475,7 +6475,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A test status report SHOULD:"
+          "text": "A test status report SHOULD:"
         }
       ],
       "options": [
@@ -6563,7 +6563,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about static testing and dynamic testing is TRUE?"
+          "text": "Which of the following statements about static testing and dynamic testing is TRUE?"
         }
       ],
       "options": [
@@ -6652,7 +6652,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ From a testing perspective, configuration management:"
+          "text": "From a testing perspective, configuration management:"
         }
       ],
       "options": [
@@ -6740,7 +6740,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about the typical activities of a formal review process is TRUE?"
+          "text": "Which of the following statements about the typical activities of a formal review process is TRUE?"
         }
       ],
       "options": [
@@ -6829,7 +6829,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider an estimation session in which a six-member Agile team (Mempb1, ..., Memb6) uses the planning poker technique to estimate a user story (in story points). The team members will use a set of cards with the following values: 1, 2, 3, 5, 8, 13, 21. Below is the outcome of the first round of estimation for this session: Memb1 = 3 Memb2 = 3 Memb3 = 3 Memb4 = 21 Memb5 = 3 Memb6 = 1 Which of the following answers BEST describes how the estimation session should proceed?"
+          "text": "Consider an estimation session in which a six-member Agile team (Mempb1, ..., Memb6) uses the planning poker technique to estimate a user story (in story points). The team members will use a set of cards with the following values: 1, 2, 3, 5, 8, 13, 21. Below is the outcome of the first round of estimation for this session: Memb1 = 3 Memb2 = 3 Memb3 = 3 Memb4 = 21 Memb5 = 3 Memb6 = 1 Which of the following answers BEST describes how the estimation session should proceed?"
         }
       ],
       "options": [
@@ -6919,7 +6919,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following answers describes a reason for adopting experience-based testing techniques?"
+          "text": "Which of the following answers describes a reason for adopting experience-based testing techniques?"
         }
       ],
       "options": [
@@ -7008,7 +7008,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ For each test case to be executed, the following table specifies its dependencies and the required configuration of the test environment for running such test case: Assume that CONF1 is the initial configuration of the test environment. Based on this assumption, which of the following is a test execution schedule that is compatible with the specified dependencies and allows MINIMIZING the number of switches between the different configurations of the test environment?"
+          "text": "For each test case to be executed, the following table specifies its dependencies and the required configuration of the test environment for running such test case: Assume that CONF1 is the initial configuration of the test environment. Based on this assumption, which of the following is a test execution schedule that is compatible with the specified dependencies and allows MINIMIZING the number of switches between the different configurations of the test environment?"
         }
       ],
       "options": [
@@ -7097,7 +7097,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about white-box testing is FALSE?"
+          "text": "Which of the following statements about white-box testing is FALSE?"
         }
       ],
       "options": [
@@ -7186,7 +7186,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about statement coverage is TRUE?"
+          "text": "Which of the following statements about statement coverage is TRUE?"
         }
       ],
       "options": [
@@ -7276,7 +7276,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The following decision table is an excerpt of a larger decision table used to assist a doctor in determining the drug therapy to prescribe for a patient (aged 6 to 65 years) diagnosed with acute sinusitis. The table consists of four Boolean conditions and six actions: Based only on the given information, which of the following represent an impossible situation?"
+          "text": "The following decision table is an excerpt of a larger decision table used to assist a doctor in determining the drug therapy to prescribe for a patient (aged 6 to 65 years) diagnosed with acute sinusitis. The table consists of four Boolean conditions and six actions: Based only on the given information, which of the following represent an impossible situation?"
         }
       ],
       "options": [
@@ -7365,7 +7365,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ An anti-intrusion system is battery powered and is activated by pressing the only available button. To deactivate the system, the operator must enter a PIN code. The system will stay in alert mode within a configurable timeout and an alarm bell will ring if the system is not deactivated before the timeout expires. The following state transition diagram describes the behavior of the system: Assume that each test case has the following form, in which states are indicated in quotation marks and transitions in square brackets: “State 1”, [Transition 1], “State 2”, [Transition 2], …, “State N-1”, [Transition N-1], “State N”. Which of the following test cases, in addition to being valid, covers all states with minimal effort?"
+          "text": "An anti-intrusion system is battery powered and is activated by pressing the only available button. To deactivate the system, the operator must enter a PIN code. The system will stay in alert mode within a configurable timeout and an alarm bell will ring if the system is not deactivated before the timeout expires. The following state transition diagram describes the behavior of the system: Assume that each test case has the following form, in which states are indicated in quotation marks and transitions in square brackets: “State 1”, [Transition 1], “State 2”, [Transition 2], …, “State N-1”, [Transition N-1], “State N”. Which of the following test cases, in addition to being valid, covers all states with minimal effort?"
         }
       ],
       "options": [
@@ -7454,7 +7454,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following test-related items (1, 2, 3, 4) and four testing quadrants (Q1, Q2, Q3, Q4): 1. Security tests 2. Examples 3. Component integration tests 4. Exploratory tests Q1: technology facing, supporting the development team Q2: business facing, supporting the development team Q3: business facing, critique the product Q4: technology facing, critique the product How do the specified test-related items map onto the four testing quadrants?"
+          "text": "Consider the following test-related items (1, 2, 3, 4) and four testing quadrants (Q1, Q2, Q3, Q4): 1. Security tests 2. Examples 3. Component integration tests 4. Exploratory tests Q1: technology facing, supporting the development team Q2: business facing, supporting the development team Q3: business facing, critique the product Q4: technology facing, critique the product How do the specified test-related items map onto the four testing quadrants?"
         }
       ],
       "options": [
@@ -7542,7 +7542,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are a tester working on a critical project. Based on the risk analysis you need to decide on the order of test execution. Which of the following lists the correct sequence of test execution? Priority 1 is the highest and Priority 3 is the lowest priority."
+          "text": "You are a tester working on a critical project. Based on the risk analysis you need to decide on the order of test execution. Which of the following lists the correct sequence of test execution? Priority 1 is the highest and Priority 3 is the lowest priority."
         }
       ],
       "options": [
@@ -7631,7 +7631,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are a test manager responsible for implementing risk-based testing in your organization which deals with software in the healthcare domain. You are writing a handbook of various product risk mitigation options. Which ONE of the following options correctly represent the correct mitigation options?"
+          "text": "You are a test manager responsible for implementing risk-based testing in your organization which deals with software in the healthcare domain. You are writing a handbook of various product risk mitigation options. Which ONE of the following options correctly represent the correct mitigation options?"
         }
       ],
       "options": [
@@ -7719,7 +7719,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about impact of DevOps on testing is CORRECT?"
+          "text": "Which of the following statements about impact of DevOps on testing is CORRECT?"
         }
       ],
       "options": [
@@ -7807,7 +7807,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which sequence of state transitions is INCORRECT in accordance with the following description? To provide for disaster recovery a system (designated as A) has been provided with a backup system (designated as B). Only one of them can be active at a time. When A goes down, В becomes active. When A comes back up then В becomes inactive and A becomes active again. However, when A is down and В also goes down then a message is sent to the system administrator. After this once A comes back up, A becomes active or if В comes up then В becomes Active."
+          "text": "Which sequence of state transitions is INCORRECT in accordance with the following description? To provide for disaster recovery a system (designated as A) has been provided with a backup system (designated as B). Only one of them can be active at a time. When A goes down, В becomes active. When A comes back up then В becomes inactive and A becomes active again. However, when A is down and В also goes down then a message is sent to the system administrator. After this once A comes back up, A becomes active or if В comes up then В becomes Active."
         }
       ],
       "options": [
@@ -7895,7 +7895,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In a review which of the following is the responsibility of the manager?"
+          "text": "In a review which of the following is the responsibility of the manager?"
         }
       ],
       "options": [
@@ -7983,7 +7983,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What does the \"absence-of-defects fallacy\" refer to in software development?"
+          "text": "What does the \"absence-of-defects fallacy\" refer to in software development?"
         }
       ],
       "options": [
@@ -8071,7 +8071,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Given some statements about independence of testing i. Independence is a replacement for familiarity with the code ii. Independence helps remove the biases produced because of own work iii. Similar kind of failures can be detected by anyone iv. Assumptions by different people are different revealing weaknesses Which of the following CORRECTLY represents the benefits?"
+          "text": "Given some statements about independence of testing i. Independence is a replacement for familiarity with the code ii. Independence helps remove the biases produced because of own work iii. Similar kind of failures can be detected by anyone iv. Assumptions by different people are different revealing weaknesses Which of the following CORRECTLY represents the benefits?"
         }
       ],
       "options": [
@@ -8160,7 +8160,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In branch testing, what is the significance of a conditional branch in a software program?"
+          "text": "In branch testing, what is the significance of a conditional branch in a software program?"
         }
       ],
       "options": [
@@ -8248,7 +8248,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ For a given set of test-cases, which of the following is a benefit of running these tests with a test automation tool?"
+          "text": "For a given set of test-cases, which of the following is a benefit of running these tests with a test automation tool?"
         }
       ],
       "options": [
@@ -8336,7 +8336,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is CORRECT about the value added by a tester to release planning?"
+          "text": "Which of the following statements is CORRECT about the value added by a tester to release planning?"
         }
       ],
       "options": [
@@ -8424,7 +8424,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements correctly describe the business facing quadrant that supports the team?"
+          "text": "Which of the following statements correctly describe the business facing quadrant that supports the team?"
         }
       ],
       "options": [
@@ -8512,7 +8512,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following is a characteristic of exploratory testing?"
+          "text": "Which ONE of the following is a characteristic of exploratory testing?"
         }
       ],
       "options": [
@@ -8601,7 +8601,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Pariksha labs is a mature software testing company. They are TMMi level 5 certified. Their testing processes are well defined. Which ONE of the following statements is likely to be CORRECT about them?"
+          "text": "Pariksha labs is a mature software testing company. They are TMMi level 5 certified. Their testing processes are well defined. Which ONE of the following statements is likely to be CORRECT about them?"
         }
       ],
       "options": [
@@ -8689,7 +8689,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You are working on creating test cases for a user story. As a customer, I want to be able to book an ISTQB exam for a particular date, so that I can find choose my time slot and pay the correct amount, including discounts, if any. The acceptance criteria for this: 1. The dates shown should be from the current date to 2 years in future. 2. Initially there should be 10 timeslots available for each day, 1 hour each starting at 8 AM GMT. 3. Maximum 5 persons should be able to select a time slot after which that time slot should become unavailable. 4. First timeslot should have a 10% discount. Which of the following is the BEST example of a test case for this user story?"
+          "text": "You are working on creating test cases for a user story. As a customer, I want to be able to book an ISTQB exam for a particular date, so that I can find choose my time slot and pay the correct amount, including discounts, if any. The acceptance criteria for this: 1. The dates shown should be from the current date to 2 years in future. 2. Initially there should be 10 timeslots available for each day, 1 hour each starting at 8 AM GMT. 3. Maximum 5 persons should be able to select a time slot after which that time slot should become unavailable. 4. First timeslot should have a 10% discount. Which of the following is the BEST example of a test case for this user story?"
         }
       ],
       "options": [
@@ -8778,7 +8778,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A number of characteristics are given for impact of SDLC on the testing effort. i. Finishing of requirements review leading to test analysts ii. Both - static and dynamic testing performed at unit testing level iii. Frequent regression testing may need to be performed iv. Extensive product documentation v. More use of exploratory testing Which of the following statements is MOST correct?"
+          "text": "A number of characteristics are given for impact of SDLC on the testing effort. i. Finishing of requirements review leading to test analysts ii. Both - static and dynamic testing performed at unit testing level iii. Frequent regression testing may need to be performed iv. Extensive product documentation v. More use of exploratory testing Which of the following statements is MOST correct?"
         }
       ],
       "options": [
@@ -8867,7 +8867,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of scenario-oriented acceptance criteria?"
+          "text": "Which of the following is an example of scenario-oriented acceptance criteria?"
         }
       ],
       "options": [
@@ -8955,7 +8955,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider a program that computes the factorial of a number (n). From the specifications you know that: •If n < 0, a message \"Value out of range\" must be issued •If 0 ≤ n ≤ 100, the program calculates the factorial and returns the number •If 100 ≤ n ≤ 200 message \"Value out of range\" must be issued Which of the following statements about the equivalence partitions is CORRECT?"
+          "text": "Consider a program that computes the factorial of a number (n). From the specifications you know that: •If n < 0, a message \"Value out of range\" must be issued •If 0 ≤ n ≤ 100, the program calculates the factorial and returns the number •If 100 ≤ n ≤ 200 message \"Value out of range\" must be issued Which of the following statements about the equivalence partitions is CORRECT?"
         }
       ],
       "options": [
@@ -9044,7 +9044,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a good testing practice which is applicable INDEPENDENT of the software development lifecycle followed?"
+          "text": "Which of the following is a good testing practice which is applicable INDEPENDENT of the software development lifecycle followed?"
         }
       ],
       "options": [
@@ -9132,7 +9132,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following is a CORRECT example of the purpose of a test plan?"
+          "text": "Which ONE of the following is a CORRECT example of the purpose of a test plan?"
         }
       ],
       "options": [
@@ -9220,7 +9220,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A software development company invests heavily in tools to support the entire software development lifecycle, including testing. They have a tool that allows automated creation and installation of builds and subsequent execution of various types of automated tests. Which ONE of the following is a CORRECT statement about this type of test tool?"
+          "text": "A software development company invests heavily in tools to support the entire software development lifecycle, including testing. They have a tool that allows automated creation and installation of builds and subsequent execution of various types of automated tests. Which ONE of the following is a CORRECT statement about this type of test tool?"
         }
       ],
       "options": [
@@ -9308,7 +9308,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ An e-commerce site accepts credit cards for processing the payment. The payment processing form has a field for the amount of money to be deducted. The minimum amount of money that can be processed is $10. The credit cards have a limit of $5,000 (Five Thousand). Assume that only integers can be accepted as inputs. Which of the following set of boundary values you will choose for EFFICIENT testing for the amount of money that can be spent?"
+          "text": "An e-commerce site accepts credit cards for processing the payment. The payment processing form has a field for the amount of money to be deducted. The minimum amount of money that can be processed is $10. The credit cards have a limit of $5,000 (Five Thousand). Assume that only integers can be accepted as inputs. Which of the following set of boundary values you will choose for EFFICIENT testing for the amount of money that can be spent?"
         }
       ],
       "options": [
@@ -9397,7 +9397,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is the BEST example of whole team approach?"
+          "text": "Which of the following is the BEST example of whole team approach?"
         }
       ],
       "options": [
@@ -9486,7 +9486,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is CORRECT?"
+          "text": "Which of the following statements is CORRECT?"
         }
       ],
       "options": [
@@ -9574,7 +9574,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Match the Work Product with the category it belongs to: Work Product: 1. Risk register 2. Risk information 3. Test cases 4. Test conditions Category of work products: A) Test planning work products - В) Test analysis work products - С) Test design work products - D) Test monitoring and control work products"
+          "text": "Match the Work Product with the category it belongs to: Work Product: 1. Risk register 2. Risk information 3. Test cases 4. Test conditions Category of work products: A) Test planning work products - В) Test analysis work products - С) Test design work products - D) Test monitoring and control work products"
         }
       ],
       "options": [
@@ -9663,7 +9663,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is the main difference between quality assurance (QA) and quality control (QC)?"
+          "text": "Which of the following is the main difference between quality assurance (QA) and quality control (QC)?"
         }
       ],
       "options": [
@@ -9751,7 +9751,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Shripriya is defining the guidelines for the review process implementation in her company. Which of the following statements is LEAST likely to have been recommended by her?"
+          "text": "Shripriya is defining the guidelines for the review process implementation in her company. Which of the following statements is LEAST likely to have been recommended by her?"
         }
       ],
       "options": [
@@ -9839,7 +9839,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following examples represents System Integration testing?"
+          "text": "Which of the following examples represents System Integration testing?"
         }
       ],
       "options": [
@@ -9927,7 +9927,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is CORRECT about error guessing?"
+          "text": "Which of the following statements is CORRECT about error guessing?"
         }
       ],
       "options": [
@@ -10016,7 +10016,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is LEAST likely to describe a task performed by someone in a testing role?"
+          "text": "Which of the following is LEAST likely to describe a task performed by someone in a testing role?"
         }
       ],
       "options": [
@@ -10104,7 +10104,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following correctly represents a test first approach?"
+          "text": "Which of the following correctly represents a test first approach?"
         }
       ],
       "options": [
@@ -10192,7 +10192,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following statements is correct?"
+          "text": "Which ONE of the following statements is correct?"
         }
       ],
       "options": [
@@ -10280,7 +10280,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A test manager has started a cycle of testing for an e-commerce application. The reason for testing is the change in the protocol for connecting to the payment gateway because of new regulations. Which of the following correctly names this type of testing?"
+          "text": "A test manager has started a cycle of testing for an e-commerce application. The reason for testing is the change in the protocol for connecting to the payment gateway because of new regulations. Which of the following correctly names this type of testing?"
         }
       ],
       "options": [
@@ -10368,7 +10368,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ An organization is working on updating test cases for a particular module of their software. Sam updated a set of test cases yesterday and saved the new version on his PC. Unfortunately, the hard disk of his PC crashed and his work was lost. The IT department of the organization restored the contents of his hard disk with the last available back-up - from the previous morning. However, the changes made by him yesterday were lost forever. Which of the following tools had it been used, would have prevented the loss of Sam's updates?"
+          "text": "An organization is working on updating test cases for a particular module of their software. Sam updated a set of test cases yesterday and saved the new version on his PC. Unfortunately, the hard disk of his PC crashed and his work was lost. The IT department of the organization restored the contents of his hard disk with the last available back-up - from the previous morning. However, the changes made by him yesterday were lost forever. Which of the following tools had it been used, would have prevented the loss of Sam's updates?"
         }
       ],
       "options": [
@@ -10457,7 +10457,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is CORRECT about White-box testing?"
+          "text": "Which of the following statements is CORRECT about White-box testing?"
         }
       ],
       "options": [
@@ -10546,7 +10546,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following types of bug are more likely to be found by static testing then by dynamic testing?"
+          "text": "Which of the following types of bug are more likely to be found by static testing then by dynamic testing?"
         }
       ],
       "options": [
@@ -10634,7 +10634,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A tester created a decision table (DT) given below. While reviewing the DT some of the actions for the given conditions were found to be incorrect. The user is trying to view the profile which of the given conditions has CORRECT action(s) listed?"
+          "text": "A tester created a decision table (DT) given below. While reviewing the DT some of the actions for the given conditions were found to be incorrect. The user is trying to view the profile which of the given conditions has CORRECT action(s) listed?"
         }
       ],
       "options": [
@@ -10722,7 +10722,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is NOT a typical debugging activity when a failure is triggered by dynamic testing?"
+          "text": "Which of the following is NOT a typical debugging activity when a failure is triggered by dynamic testing?"
         }
       ],
       "options": [
@@ -10811,7 +10811,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ An agile software development organization has recently hired a senior tester. The organization has distributed teams spread across time zones. They need to share test status with various stakeholders including upper management and customers at a regular interval. Which of the following statements seems to be correct with regards to the communication?"
+          "text": "An agile software development organization has recently hired a senior tester. The organization has distributed teams spread across time zones. They need to share test status with various stakeholders including upper management and customers at a regular interval. Which of the following statements seems to be correct with regards to the communication?"
         }
       ],
       "options": [
@@ -10899,7 +10899,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following defect report for an Exam Booking System. Defect ID: ST1041 | Title: Unable to cancel an exam booking | Severity: Very High | Priority: Very High | Environment: Windows 10, Firefox Description: When attempting to cancel an exam booking using the cancel exam feature, the system does not cancel the exam even though it shows a message that the exam has been cancelled. Which ONE of the following indicates the information that should be added to the description for reproducing the defect easily?"
+          "text": "Consider the following defect report for an Exam Booking System. Defect ID: ST1041 | Title: Unable to cancel an exam booking | Severity: Very High | Priority: Very High | Environment: Windows 10, Firefox Description: When attempting to cancel an exam booking using the cancel exam feature, the system does not cancel the exam even though it shows a message that the exam has been cancelled. Which ONE of the following indicates the information that should be added to the description for reproducing the defect easily?"
         }
       ],
       "options": [
@@ -10987,7 +10987,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Calculate the measurement error SD for the following estimates done using three-point estimation technique: Most optimistic effort (a) -120 person days Most likely effort (m) -180 person days Most pessimistic effort (b) - 240 person days"
+          "text": "Calculate the measurement error SD for the following estimates done using three-point estimation technique: Most optimistic effort (a) -120 person days Most likely effort (m) -180 person days Most pessimistic effort (b) - 240 person days"
         }
       ],
       "options": [
@@ -11075,7 +11075,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Scenario “Big Drop”: The management of the company “The Big Drop” has instructed the Product Team to configure the discounts in the sales terminals so that frequent customers receive an additional discount on top of a bulk discount, based on the following table. You must design test cases to represent all POSSIBLE and REAL business scenarios. Test cases should be generated using the input data provided in the table above. How many POSSIBLE decision rules can be extracted from the table above?"
+          "text": "Scenario “Big Drop”: The management of the company “The Big Drop” has instructed the Product Team to configure the discounts in the sales terminals so that frequent customers receive an additional discount on top of a bulk discount, based on the following table. You must design test cases to represent all POSSIBLE and REAL business scenarios. Test cases should be generated using the input data provided in the table above. How many POSSIBLE decision rules can be extracted from the table above?"
         }
       ],
       "options": [
@@ -11164,7 +11164,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options is a PRODUCT risk and NOT a PROJECT risk?"
+          "text": "Which ONE of the following options is a PRODUCT risk and NOT a PROJECT risk?"
         }
       ],
       "options": [
@@ -11252,7 +11252,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following iteration planning tasks where a tester can provide value: • Break down user stories into tasks (particularly testing tasks) • Estimate test effort for all testing tasks • Identify and refine functional and non-functional aspects of the test object. Which ONE of the following tasks should be ADDED to the above list?"
+          "text": "Consider the following iteration planning tasks where a tester can provide value: • Break down user stories into tasks (particularly testing tasks) • Estimate test effort for all testing tasks • Identify and refine functional and non-functional aspects of the test object. Which ONE of the following tasks should be ADDED to the above list?"
         }
       ],
       "options": [
@@ -11341,7 +11341,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options MOST ACCURATELY describes statement testing?"
+          "text": "Which ONE of the following options MOST ACCURATELY describes statement testing?"
         }
       ],
       "options": [
@@ -11431,7 +11431,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Scenario “Happy Tomatoes” An intelligent application for agricultural use incorporates temperature sensors located at different points of an enclosure. The sensors measure and record the temperature at regular intervals and extract the statistical values for these measurements. These values include the average daily temperature. A new variety of tomatoes is currently being grown and the “World Organization for Happy Tomatoes” has established temperature ranges related to vegetative development. When the system establishes that the average temperature is within a specific range, it emits a value that will be used to monitor and control the crop. Using the Boundary Value Analysis technique (in its two-point variant), identify the set of input values that provides the HIGHEST coverage."
+          "text": "Scenario “Happy Tomatoes” An intelligent application for agricultural use incorporates temperature sensors located at different points of an enclosure. The sensors measure and record the temperature at regular intervals and extract the statistical values for these measurements. These values include the average daily temperature. A new variety of tomatoes is currently being grown and the “World Organization for Happy Tomatoes” has established temperature ranges related to vegetative development. When the system establishes that the average temperature is within a specific range, it emits a value that will be used to monitor and control the crop. Using the Boundary Value Analysis technique (in its two-point variant), identify the set of input values that provides the HIGHEST coverage."
         }
       ],
       "options": [
@@ -11521,7 +11521,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Scenario “Happy Tomatoes” An intelligent application for agricultural use incorporates temperature sensors located at different points of an enclosure. The sensors measure and record the temperature at regular intervals and extract the statistical values for these measurements. These values include the average daily temperature. A new variety of tomatoes is currently being grown and the “World Organization for Happy Tomatoes” has established temperature ranges related to vegetative development. When the system establishes that the average temperature is within a specific range, it emits a value that will be used to monitor and control the crop. When running test case TC_59 the actual result for t = 35 degrees Celsius is OUTPUT = X. Which information should NOT be included in the defect report?"
+          "text": "Scenario “Happy Tomatoes” An intelligent application for agricultural use incorporates temperature sensors located at different points of an enclosure. The sensors measure and record the temperature at regular intervals and extract the statistical values for these measurements. These values include the average daily temperature. A new variety of tomatoes is currently being grown and the “World Organization for Happy Tomatoes” has established temperature ranges related to vegetative development. When the system establishes that the average temperature is within a specific range, it emits a value that will be used to monitor and control the crop. When running test case TC_59 the actual result for t = 35 degrees Celsius is OUTPUT = X. Which information should NOT be included in the defect report?"
         }
       ],
       "options": [
@@ -11610,7 +11610,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Scenario “Happy Tomatoes” An intelligent application for agricultural use incorporates temperature sensors located at different points of an enclosure. The sensors measure and record the temperature at regular intervals and extract the statistical values for these measurements. These values include the average daily temperature. A new variety of tomatoes is currently being grown and the “World Organization for Happy Tomatoes” has established temperature ranges related to vegetative development. When the system establishes that the average temperature is within a specific range, it emits a value that will be used to monitor and control the crop. Using the equivalence partitioning technique, identify the set of input values that provides the HIGHEST coverage."
+          "text": "Scenario “Happy Tomatoes” An intelligent application for agricultural use incorporates temperature sensors located at different points of an enclosure. The sensors measure and record the temperature at regular intervals and extract the statistical values for these measurements. These values include the average daily temperature. A new variety of tomatoes is currently being grown and the “World Organization for Happy Tomatoes” has established temperature ranges related to vegetative development. When the system establishes that the average temperature is within a specific range, it emits a value that will be used to monitor and control the crop. Using the equivalence partitioning technique, identify the set of input values that provides the HIGHEST coverage."
         }
       ],
       "options": [
@@ -11699,7 +11699,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options CANNOT be subjected to static analysis?"
+          "text": "Which ONE of the following options CANNOT be subjected to static analysis?"
         }
       ],
       "options": [
@@ -11787,7 +11787,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following statements about the objectives of confirmation and regression testing is the BEST?"
+          "text": "Which ONE of the following statements about the objectives of confirmation and regression testing is the BEST?"
         }
       ],
       "options": [
@@ -11876,7 +11876,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following list of possible benefits of retrospectives (A to D): [A] Team bonding and learning [B] Increased test effectiveness/efficiency [C] Improved quality of the test basis [D] Better cooperation between development and testing ... and the list of possible characteristics of retrospectives (1 to 4) that enable achieving these benefits: 1. The possibility of implementing suggestions for process improvement 2. The opportunity to raise problems and propose points for improvement 3. The regular review and optimization of the collaboration between team members 4. The possibility of addressing and solving deficiencies in the extent and quality of the requirements Which ONE of the following options presents the BEST mapping between benefits and characteristics from retrospectives?"
+          "text": "Consider the following list of possible benefits of retrospectives (A to D): [A] Team bonding and learning [B] Increased test effectiveness/efficiency [C] Improved quality of the test basis [D] Better cooperation between development and testing ... and the list of possible characteristics of retrospectives (1 to 4) that enable achieving these benefits: 1. The possibility of implementing suggestions for process improvement 2. The opportunity to raise problems and propose points for improvement 3. The regular review and optimization of the collaboration between team members 4. The possibility of addressing and solving deficiencies in the extent and quality of the requirements Which ONE of the following options presents the BEST mapping between benefits and characteristics from retrospectives?"
         }
       ],
       "options": [
@@ -11964,7 +11964,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options explains a benefit of independent testing the BEST?"
+          "text": "Which ONE of the following options explains a benefit of independent testing the BEST?"
         }
       ],
       "options": [
@@ -12052,7 +12052,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options is NOT a test objective?"
+          "text": "Which ONE of the following options is NOT a test objective?"
         }
       ],
       "options": [
@@ -12140,7 +12140,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following statements (I to V) about software testing: I. Can be applied to non-executable work products. II. Can be used to measure performance efficiency. III. Can lead to the detection of defects. IV. Can find defects directly. V. Can identify unexpected behaviors caused by potential defects. Which ONE of the following options is the list that characterizes static tests the BEST?"
+          "text": "Consider the following statements (I to V) about software testing: I. Can be applied to non-executable work products. II. Can be used to measure performance efficiency. III. Can lead to the detection of defects. IV. Can find defects directly. V. Can identify unexpected behaviors caused by potential defects. Which ONE of the following options is the list that characterizes static tests the BEST?"
         }
       ],
       "options": [
@@ -12229,7 +12229,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options MOST ACCURATELY describes the activities of “testing” and “debugging”?"
+          "text": "Which ONE of the following options MOST ACCURATELY describes the activities of “testing” and “debugging”?"
         }
       ],
       "options": [
@@ -12317,7 +12317,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The following state transition diagram describes the behavior of a control system in terms of its possible modes of operation. The initial start state will be the “NORMAL MODE”. Which ONE of the following test cases covers an INVALID sequence?"
+          "text": "The following state transition diagram describes the behavior of a control system in terms of its possible modes of operation. The initial start state will be the “NORMAL MODE”. Which ONE of the following test cases covers an INVALID sequence?"
         }
       ],
       "options": [
@@ -12405,7 +12405,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ As a result of the joint evaluation of a product version with the customer, it has been concluded that it would be appropriate to retrieve an earlier version of the product and carry out a benchmark. Depending on the result, further development will be carried out based on the current version or the retrieved version. Which mechanism, process, and/or technique will allow the specific version (including the testing work products) of a given software product to be restored?"
+          "text": "As a result of the joint evaluation of a product version with the customer, it has been concluded that it would be appropriate to retrieve an earlier version of the product and carry out a benchmark. Depending on the result, further development will be carried out based on the current version or the retrieved version. Which mechanism, process, and/or technique will allow the specific version (including the testing work products) of a given software product to be restored?"
         }
       ],
       "options": [
@@ -12494,7 +12494,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following tools would be MOST SUITABLE for facilitating the creation of test cases, test data, and test procedures?"
+          "text": "Which ONE of the following tools would be MOST SUITABLE for facilitating the creation of test cases, test data, and test procedures?"
         }
       ],
       "options": [
@@ -12583,7 +12583,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Your organization's test strategy states that it is desirable to use more than one method for estimating the test effort. You are responsible for establishing the test effort for the next project. Based on historical information, the type of project you are going to estimate has a development-to-test effort ratio of 5:3. The initial estimate of the development effort is 450 person-days. Which ONE of the following options corresponds to the estimated test effort using the ratio-based method?"
+          "text": "Your organization's test strategy states that it is desirable to use more than one method for estimating the test effort. You are responsible for establishing the test effort for the next project. Based on historical information, the type of project you are going to estimate has a development-to-test effort ratio of 5:3. The initial estimate of the development effort is 450 person-days. Which ONE of the following options corresponds to the estimated test effort using the ratio-based method?"
         }
       ],
       "options": [
@@ -12672,7 +12672,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ User Story: As a member of the “Agnotoly” association, I want to be able to pay the association's dues through an automatic payment method so that I can forget about payment deadlines. Acceptance Criteria: • The member can only pay with “Agnosis Master” credit card. • The member must register their cell phone number. • The member must register the credit card in the association's payment system. • The member must select one of the following credit card payment methods: monthly or annual. • For the payment system to proceed with the transaction, the member must accept the terms and conditions applicable to the selected payment method (monthly or annual payment). • If the member accepts the terms and conditions, the payment system sends a message to the member's mobile/cell phone with a one-time password and prompts the member to enter the one-time password. • The payment method is registered in the association's payment system once the one-time key sent by the payment system is verified. • Once the payment method is registered, the association's payment system will charge the member on the first business day of the following month. Remark: The payment method registration is a transactional process; therefore, if the acceptance criteria 1 through 7 are not met, the payment system will revert to its previous state and will not maintain any information that may have been entered. In the test cycle that has just ended, the following objectives have been achieved: •Members of the association have been able to pay association dues with the credit card. •Dues payments have been made on a monthly basis and for more than a year since the initial payment. Which ONE of the following options identifies the acceptance criteria that has NOT been fully covered during the above test cycle?"
+          "text": "User Story: As a member of the “Agnotoly” association, I want to be able to pay the association's dues through an automatic payment method so that I can forget about payment deadlines. Acceptance Criteria: • The member can only pay with “Agnosis Master” credit card. • The member must register their cell phone number. • The member must register the credit card in the association's payment system. • The member must select one of the following credit card payment methods: monthly or annual. • For the payment system to proceed with the transaction, the member must accept the terms and conditions applicable to the selected payment method (monthly or annual payment). • If the member accepts the terms and conditions, the payment system sends a message to the member's mobile/cell phone with a one-time password and prompts the member to enter the one-time password. • The payment method is registered in the association's payment system once the one-time key sent by the payment system is verified. • Once the payment method is registered, the association's payment system will charge the member on the first business day of the following month. Remark: The payment method registration is a transactional process; therefore, if the acceptance criteria 1 through 7 are not met, the payment system will revert to its previous state and will not maintain any information that may have been entered. In the test cycle that has just ended, the following objectives have been achieved: •Members of the association have been able to pay association dues with the credit card. •Dues payments have been made on a monthly basis and for more than a year since the initial payment. Which ONE of the following options identifies the acceptance criteria that has NOT been fully covered during the above test cycle?"
         }
       ],
       "options": [
@@ -12761,7 +12761,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following activities TYPICALLY belongs to the planning phase of the review process?"
+          "text": "Which ONE of the following activities TYPICALLY belongs to the planning phase of the review process?"
         }
       ],
       "options": [
@@ -12850,7 +12850,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options is a practice that does NOT TYPICALLY correspond to a shift left approach?"
+          "text": "Which ONE of the following options is a practice that does NOT TYPICALLY correspond to a shift left approach?"
         }
       ],
       "options": [
@@ -12938,7 +12938,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following list of activities (I to V): I. Test design - I. Test planning - III. Review test basis - IV. Be a facilitator of a peer review V. Test monitoring and control - Which ONE of the following options identifies the activities that the test management role is MAINLY focused on?"
+          "text": "Consider the following list of activities (I to V): I. Test design - I. Test planning - III. Review test basis - IV. Be a facilitator of a peer review V. Test monitoring and control - Which ONE of the following options identifies the activities that the test management role is MAINLY focused on?"
         }
       ],
       "options": [
@@ -13026,7 +13026,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options CORRECTLY describes one of the seven principles of the testing process?"
+          "text": "Which ONE of the following options CORRECTLY describes one of the seven principles of the testing process?"
         }
       ],
       "options": [
@@ -13114,7 +13114,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following table, which contains information about test cases from the test management system: Where: • REQ stands for REQuirement • TC stands for Test Case • TC 60 depends on REQ 1 • TC 80 depends on REQ 2 • The priority of the requirement is inherited by the test case • The priority varies from 1 to 5 • Priority 5 is the highest priority Which ONE of the following options organizes the test cases based on the statement coverage strategy, while considering practical constraints?"
+          "text": "Consider the following table, which contains information about test cases from the test management system: Where: • REQ stands for REQuirement • TC stands for Test Case • TC 60 depends on REQ 1 • TC 80 depends on REQ 2 • The priority of the requirement is inherited by the test case • The priority varies from 1 to 5 • Priority 5 is the highest priority Which ONE of the following options organizes the test cases based on the statement coverage strategy, while considering practical constraints?"
         }
       ],
       "options": [
@@ -13204,7 +13204,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following work products TYPICALLY belongs to test execution?"
+          "text": "Which ONE of the following work products TYPICALLY belongs to test execution?"
         }
       ],
       "options": [
@@ -13293,7 +13293,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following statements would you expect to be the MOST DIRECT advantage of the whole-team approach?"
+          "text": "Which ONE of the following statements would you expect to be the MOST DIRECT advantage of the whole-team approach?"
         }
       ],
       "options": [
@@ -13383,7 +13383,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following roles is responsible for mediating, managing time, and generating a safe review environment in which everyone can speak freely?"
+          "text": "Which ONE of the following roles is responsible for mediating, managing time, and generating a safe review environment in which everyone can speak freely?"
         }
       ],
       "options": [
@@ -13471,7 +13471,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following elements is TYPICALLY used to guide testing during exploratory testing?"
+          "text": "Which ONE of the following elements is TYPICALLY used to guide testing during exploratory testing?"
         }
       ],
       "options": [
@@ -13559,7 +13559,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following statements BEST applies checklist-based testing?"
+          "text": "Which ONE of the following statements BEST applies checklist-based testing?"
         }
       ],
       "options": [
@@ -13648,7 +13648,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options corresponds to an activity in the testing process in which testable features are identified?"
+          "text": "Which ONE of the following options corresponds to an activity in the testing process in which testable features are identified?"
         }
       ],
       "options": [
@@ -13736,7 +13736,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options MOST ACCURATELY describes branch testing?"
+          "text": "Which ONE of the following options MOST ACCURATELY describes branch testing?"
         }
       ],
       "options": [
@@ -13824,7 +13824,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following is a GOOD testing practice that is INDEPENDENT of the chosen SDLC (Software Development Life Cycle) model?"
+          "text": "Which ONE of the following is a GOOD testing practice that is INDEPENDENT of the chosen SDLC (Software Development Life Cycle) model?"
         }
       ],
       "options": [
@@ -13913,7 +13913,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options is NOT a benefit of test automation?"
+          "text": "Which ONE of the following options is NOT a benefit of test automation?"
         }
       ],
       "options": [
@@ -14002,7 +14002,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following elements is TYPICALLY NOT part of a test progress report?"
+          "text": "Which ONE of the following elements is TYPICALLY NOT part of a test progress report?"
         }
       ],
       "options": [
@@ -14090,7 +14090,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following statements about acceptance test levels (I to V): I. Acceptance test levels focus on validating and demonstrating readiness for deployment. II. Acceptance test levels must be performed by an independent test team. III. Acceptance test levels often require specific support, such as test harnesses. IV. Acceptance test levels ideally should be performed by the intended users. V. Acceptance test levels use component specifications as the test basis for the system. Which ONE of the following options contains the statements (I - V) that MOST ACCURATELY characterize acceptance test levels?"
+          "text": "Consider the following statements about acceptance test levels (I to V): I. Acceptance test levels focus on validating and demonstrating readiness for deployment. II. Acceptance test levels must be performed by an independent test team. III. Acceptance test levels often require specific support, such as test harnesses. IV. Acceptance test levels ideally should be performed by the intended users. V. Acceptance test levels use component specifications as the test basis for the system. Which ONE of the following options contains the statements (I - V) that MOST ACCURATELY characterize acceptance test levels?"
         }
       ],
       "options": [
@@ -14179,7 +14179,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options BEST characterizes the Behavior-Driven Development (BDD) approach?"
+          "text": "Which ONE of the following options BEST characterizes the Behavior-Driven Development (BDD) approach?"
         }
       ],
       "options": [
@@ -14267,7 +14267,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following elements is TYPICALLY part of the test plan?"
+          "text": "Which ONE of the following elements is TYPICALLY part of the test plan?"
         }
       ],
       "options": [
@@ -14355,7 +14355,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options identifies the perspectives through which a collective authorship process generates a shared vision of user stories?"
+          "text": "Which ONE of the following options identifies the perspectives through which a collective authorship process generates a shared vision of user stories?"
         }
       ],
       "options": [
@@ -14444,7 +14444,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options BEST describes the third test quadrant (3)?"
+          "text": "Which ONE of the following options BEST describes the third test quadrant (3)?"
         }
       ],
       "options": [
@@ -14532,7 +14532,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which ONE of the following options BEST describes black-box test techniques?"
+          "text": "Which ONE of the following options BEST describes black-box test techniques?"
         }
       ],
       "options": [
@@ -14620,7 +14620,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a typical test objective?"
+          "text": "Which of the following is a typical test objective?"
         }
       ],
       "options": [
@@ -14708,7 +14708,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider two situations: (1) A code statement is “return x*y + z”, but should be “return x*(y+z)” (2) For the input x=2, y=3, z=4 the system returns 10, but should return 14 Which of the following is TRUE?"
+          "text": "Consider two situations: (1) A code statement is “return x*y + z”, but should be “return x*(y+z)” (2) For the input x=2, y=3, z=4 the system returns 10, but should return 14 Which of the following is TRUE?"
         }
       ],
       "options": [
@@ -14797,7 +14797,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The Pareto principle states that a few causes are responsible for most effects. Which test principle illustrates this phenomenon?"
+          "text": "The Pareto principle states that a few causes are responsible for most effects. Which test principle illustrates this phenomenon?"
         }
       ],
       "options": [
@@ -14885,7 +14885,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Match test activities (1)-(4) with related tasks (P)-(S): (1) Test analysis (2) Test completion (3) Test implementation (4) Test execution (P) Defining test conditions (Q) Reporting defects (R) Creating change requests for unresolved defects (5) Creating test cases"
+          "text": "Match test activities (1)-(4) with related tasks (P)-(S): (1) Test analysis (2) Test completion (3) Test implementation (4) Test execution (P) Defining test conditions (Q) Reporting defects (R) Creating change requests for unresolved defects (5) Creating test cases"
         }
       ],
       "options": [
@@ -14974,7 +14974,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a testware created during test analysis?"
+          "text": "Which of the following is a testware created during test analysis?"
         }
       ],
       "options": [
@@ -15062,7 +15062,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ How can a tester use traceability?"
+          "text": "How can a tester use traceability?"
         }
       ],
       "options": [
@@ -15151,7 +15151,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which approach BEST improves team dynamics, enhances communication, and creates synergy by allowing the various skill sets within the team to be leveraged for the benefit of the project?"
+          "text": "Which approach BEST improves team dynamics, enhances communication, and creates synergy by allowing the various skill sets within the team to be leveraged for the benefit of the project?"
         }
       ],
       "options": [
@@ -15240,7 +15240,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A developer assumed users would always filter items by category to narrow their search. However, a tester conducted usability testing and found that most users prefer using the search bar instead, highlighting a potential gap in the user interface design. Which practice allowed the benefit described in the scenario to be achieved?"
+          "text": "A developer assumed users would always filter items by category to narrow their search. However, a tester conducted usability testing and found that most users prefer using the search bar instead, highlighting a potential gap in the user interface design. Which practice allowed the benefit described in the scenario to be achieved?"
         }
       ],
       "options": [
@@ -15328,7 +15328,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which practice should be applied to ALL software development lifecycles?"
+          "text": "Which practice should be applied to ALL software development lifecycles?"
         }
       ],
       "options": [
@@ -15416,7 +15416,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is NOT an example of a test-first approach to development?"
+          "text": "Which of the following is NOT an example of a test-first approach to development?"
         }
       ],
       "options": [
@@ -15504,7 +15504,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of a shift left?"
+          "text": "Which of the following is an example of a shift left?"
         }
       ],
       "options": [
@@ -15592,7 +15592,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of how retrospectives can be used for process improvement?"
+          "text": "Which of the following is an example of how retrospectives can be used for process improvement?"
         }
       ],
       "options": [
@@ -15681,7 +15681,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What is the difference between confirmation testing and regression testing?"
+          "text": "What is the difference between confirmation testing and regression testing?"
         }
       ],
       "options": [
@@ -15770,7 +15770,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What kind of work products can be examined by reviews?"
+          "text": "What kind of work products can be examined by reviews?"
         }
       ],
       "options": [
@@ -15859,7 +15859,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about static and dynamic testing is TRUE?"
+          "text": "Which of the following statements about static and dynamic testing is TRUE?"
         }
       ],
       "options": [
@@ -15948,7 +15948,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which role is responsible for ensuring the effective running of review meetings?"
+          "text": "Which role is responsible for ensuring the effective running of review meetings?"
         }
       ],
       "options": [
@@ -16036,7 +16036,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The development team is finalizing the design of a database schema for a banking application. Before implementation, architects want to get a consensus among team members on the details of this scheme. Which type of review fits this scenario BEST?"
+          "text": "The development team is finalizing the design of a database schema for a banking application. Before implementation, architects want to get a consensus among team members on the details of this scheme. Which type of review fits this scenario BEST?"
         }
       ],
       "options": [
@@ -16125,7 +16125,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following characteristics of test techniques. (i) They are based on an analysis of the software model (ii) They are based on an analysis of the test object's internal structure (iii) The derived test cases are independent of how software is implemented (iv) It is difficult to define precise coverage measures for these techniques (v) Their effectiveness depends heavily on the tester’s skills and creativity Which of them describe black-box, white-box, and experience-based test techniques?"
+          "text": "Consider the following characteristics of test techniques. (i) They are based on an analysis of the software model (ii) They are based on an analysis of the test object's internal structure (iii) The derived test cases are independent of how software is implemented (iv) It is difficult to define precise coverage measures for these techniques (v) Their effectiveness depends heavily on the tester’s skills and creativity Which of them describe black-box, white-box, and experience-based test techniques?"
         }
       ],
       "options": [
@@ -16213,7 +16213,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You validate the correctness of price calculation in a food ordering application. The input parameter is the order amount (in $), and the result is the final price reflecting the discount. If the order amount is less than $100, the discount is not granted (0% discount). If the order amount is greater than $500, a 50% discount is granted. In other cases, the 10% discount is granted. You apply equivalence partitioning for the “order amount” domain to check if discounts are granted correctly. Which test data set achieves the highest coverage?"
+          "text": "You validate the correctness of price calculation in a food ordering application. The input parameter is the order amount (in $), and the result is the final price reflecting the discount. If the order amount is less than $100, the discount is not granted (0% discount). If the order amount is greater than $500, a 50% discount is granted. In other cases, the 10% discount is granted. You apply equivalence partitioning for the “order amount” domain to check if discounts are granted correctly. Which test data set achieves the highest coverage?"
         }
       ],
       "options": [
@@ -16301,7 +16301,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The temperature controller receives the temperature in full degrees Celsius (°C) as input. For 0 degrees, it returns the message ‘zero temperature’. For positive temperatures, it returns the message ‘positive temperature’. For negative temperatures, it returns the message ‘negative temperature’. You use a 3-value boundary value analysis to test the controller's behavior. Which test data set achieves the HIGHEST coverage?"
+          "text": "The temperature controller receives the temperature in full degrees Celsius (°C) as input. For 0 degrees, it returns the message ‘zero temperature’. For positive temperatures, it returns the message ‘positive temperature’. For negative temperatures, it returns the message ‘negative temperature’. You use a 3-value boundary value analysis to test the controller's behavior. Which test data set achieves the HIGHEST coverage?"
         }
       ],
       "options": [
@@ -16389,7 +16389,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You test a system that grants a driving license. You design test cases based on the following minimized decision table. You have already designed three following test cases: •18 years old, passed both vision and driving tests; expected result: grant a license •17 years old, passed vision test, failed driving test; expected result: do not grant a license •19 years old, failed both vision and driving tests; expected result: do not grant a license Which test case needs to be added to this set to achieve full decision table coverage?"
+          "text": "You test a system that grants a driving license. You design test cases based on the following minimized decision table. You have already designed three following test cases: •18 years old, passed both vision and driving tests; expected result: grant a license •17 years old, passed vision test, failed driving test; expected result: do not grant a license •19 years old, failed both vision and driving tests; expected result: do not grant a license Which test case needs to be added to this set to achieve full decision table coverage?"
         }
       ],
       "options": [
@@ -16479,7 +16479,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You work on a project where the executed test set achieved 100% statement coverage. What is the consequence of this fact?"
+          "text": "You work on a project where the executed test set achieved 100% statement coverage. What is the consequence of this fact?"
         }
       ],
       "options": [
@@ -16568,7 +16568,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ If: •EC = number of exercised conditional branches in a code •EU = number of exercised unconditional branches in a code •С = number of conditional branches in a code •U = number of unconditional branches in a code Which metric correctly defines the branch coverage?"
+          "text": "If: •EC = number of exercised conditional branches in a code •EU = number of exercised unconditional branches in a code •С = number of conditional branches in a code •U = number of unconditional branches in a code Which metric correctly defines the branch coverage?"
         }
       ],
       "options": [
@@ -16656,7 +16656,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What is error guessing?"
+          "text": "What is error guessing?"
         }
       ],
       "options": [
@@ -16744,7 +16744,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is TRUE about exploratory testing?"
+          "text": "Which of the following is TRUE about exploratory testing?"
         }
       ],
       "options": [
@@ -16832,7 +16832,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following two versions of acceptance criteria for a user story: “As a registered user, I want to be able to change my user’s name to update my personal data” What is the format of the acceptance criteria in these variants?"
+          "text": "Consider the following two versions of acceptance criteria for a user story: “As a registered user, I want to be able to change my user’s name to update my personal data” What is the format of the acceptance criteria in these variants?"
         }
       ],
       "options": [
@@ -16921,7 +16921,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which TWO are the examples of entry criteria for system testing of a food order app? (Choose two.)"
+          "text": "Which TWO are the examples of entry criteria for system testing of a food order app? (Choose two.)"
         }
       ],
       "options": [
@@ -17018,7 +17018,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Your team is developing a new functionality for an employee management system, a Simple Reporting feature. The team is tasked with estimating the test effort required to test this feature. The team used the standard three-point estimation method to provide the predicted effort. The team came up with the following estimates: •in the optimistic scenario, the testing can be done in 1 hour •in the most likely scenario, the testing can be done in 2 hours •in the worst-case scenario, the testing can be done in 9 hours What is the team's final estimation of the test effort?"
+          "text": "Your team is developing a new functionality for an employee management system, a Simple Reporting feature. The team is tasked with estimating the test effort required to test this feature. The team used the standard three-point estimation method to provide the predicted effort. The team came up with the following estimates: •in the optimistic scenario, the testing can be done in 1 hour •in the most likely scenario, the testing can be done in 2 hours •in the worst-case scenario, the testing can be done in 9 hours What is the team's final estimation of the test effort?"
         }
       ],
       "options": [
@@ -17107,7 +17107,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You prioritize test cases using the additional coverage prioritization technique, using the requirements coverage as a coverage measure. All four test cases must be executed. The coverage achieved by your test cases is shown in the table below. Which test case should be executed LAST?"
+          "text": "You prioritize test cases using the additional coverage prioritization technique, using the requirements coverage as a coverage measure. All four test cases must be executed. The coverage achieved by your test cases is shown in the table below. Which test case should be executed LAST?"
         }
       ],
       "options": [
@@ -17195,7 +17195,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In the testing quadrants model, which testing is business-facing and supports the team?"
+          "text": "In the testing quadrants model, which testing is business-facing and supports the team?"
         }
       ],
       "options": [
@@ -17284,7 +17284,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What does the risk level depend on?"
+          "text": "What does the risk level depend on?"
         }
       ],
       "options": [
@@ -17372,7 +17372,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Categorize these risks into project risks and product risks. (i) Unforeseen technical difficulties, such as integrating with third-party APIs for payment or delivery tracking, could slow down progress (ii) Sensitive customer information, such as payment details and addresses, may be exposed due to insufficient security measures (iii) Uncontrolled additional feature requests or unclear requirements may lead to delays and budget overruns (iv) Limited availability of skilled developers, testers, or designers could hinder the timely delivery of the product (v) Confusing navigation may lead to user dissatisfaction, causing a high churn rate"
+          "text": "Categorize these risks into project risks and product risks. (i) Unforeseen technical difficulties, such as integrating with third-party APIs for payment or delivery tracking, could slow down progress (ii) Sensitive customer information, such as payment details and addresses, may be exposed due to insufficient security measures (iii) Uncontrolled additional feature requests or unclear requirements may lead to delays and budget overruns (iv) Limited availability of skilled developers, testers, or designers could hinder the timely delivery of the product (v) Confusing navigation may lead to user dissatisfaction, causing a high churn rate"
         }
       ],
       "options": [
@@ -17460,7 +17460,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which type of report will MOST LIKELY contain information about testing planned for the next period?"
+          "text": "Which type of report will MOST LIKELY contain information about testing planned for the next period?"
         }
       ],
       "options": [
@@ -17548,7 +17548,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The customer reported the software failure in the form of a defect report, providing the version number of the software they use. Based on this information, the team identified the files used to build this version and the elements of the environment in which this version was created. This made it possible to identify and fix the defect quickly. What process enabled the above actions?"
+          "text": "The customer reported the software failure in the form of a defect report, providing the version number of the software they use. Based on this information, the team identified the files used to build this version and the elements of the environment in which this version was created. This made it possible to identify and fix the defect quickly. What process enabled the above actions?"
         }
       ],
       "options": [
@@ -17636,7 +17636,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You prepared the following defect report. Defect ID: DR-00123 Date: 2025-01-12 Title: “Order Confirmation” button not responsive after adding items to the cart Severity: High Priority: Critical Reported By: John Doe Steps to reproduce: 1. Launch the app and log in. 2. Browse the menu and add items to the cart. 3. Navigate to the cart and tap the “Order Confirmation” button. Expected result: The “Order Confirmation” button should process the order and navigate to the confirmation screen. Actual result: The “Order Confirmation” button is unresponsive, and no action is taken. Attachments: Screenshot: [order_button_issue.png], Video: [order_button_issue.mp4] Which of the following is the BEST way to improve this report to help developers resolve the reported problem?"
+          "text": "You prepared the following defect report. Defect ID: DR-00123 Date: 2025-01-12 Title: “Order Confirmation” button not responsive after adding items to the cart Severity: High Priority: Critical Reported By: John Doe Steps to reproduce: 1. Launch the app and log in. 2. Browse the menu and add items to the cart. 3. Navigate to the cart and tap the “Order Confirmation” button. Expected result: The “Order Confirmation” button should process the order and navigate to the confirmation screen. Actual result: The “Order Confirmation” button is unresponsive, and no action is taken. Attachments: Screenshot: [order_button_issue.png], Video: [order_button_issue.mp4] Which of the following is the BEST way to improve this report to help developers resolve the reported problem?"
         }
       ],
       "options": [
@@ -17725,7 +17725,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which tools support delivery pipelines, automated build processes, and practices such as Continuous Integration/Continuous Delivery?"
+          "text": "Which tools support delivery pipelines, automated build processes, and practices such as Continuous Integration/Continuous Delivery?"
         }
       ],
       "options": [
@@ -17813,7 +17813,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following BEST illustrates the benefit of using test coverage tools?"
+          "text": "Which of the following BEST illustrates the benefit of using test coverage tools?"
         }
       ],
       "options": [
@@ -17903,7 +17903,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about how different types of test tools support testers is true?"
+          "text": "Which of the following statements about how different types of test tools support testers is true?"
         }
       ],
       "options": [
@@ -17991,7 +17991,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Following a risk-based testing approach you have designed 10 tests to cover a product risk with a high-risk level. You want to estimate, adopting the three-point test estimation technique, the test effort required to reduce the risk level to zero by executing those 10 tests. You made the following three initial estimates: most optimistic = 6 person hours. most likely = 30 person hours. most pessimistic = 54 person hours. Based only on the given information, which of the following answers about the three-point test estimation technique applied to this problem is true?"
+          "text": "Following a risk-based testing approach you have designed 10 tests to cover a product risk with a high-risk level. You want to estimate, adopting the three-point test estimation technique, the test effort required to reduce the risk level to zero by executing those 10 tests. You made the following three initial estimates: most optimistic = 6 person hours. most likely = 30 person hours. most pessimistic = 54 person hours. Based only on the given information, which of the following answers about the three-point test estimation technique applied to this problem is true?"
         }
       ],
       "options": [
@@ -18081,7 +18081,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The whole-team approach:"
+          "text": "The whole-team approach:"
         }
       ],
       "options": [
@@ -18169,7 +18169,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is true?"
+          "text": "Which of the following statements is true?"
         }
       ],
       "options": [
@@ -18257,7 +18257,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The fact that defects are usually not evenly distributed among the various modules that make up a software application, but rather their distribution tends to reflect the Pareto principle:"
+          "text": "The fact that defects are usually not evenly distributed among the various modules that make up a software application, but rather their distribution tends to reflect the Pareto principle:"
         }
       ],
       "options": [
@@ -18345,7 +18345,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a test task that usually occurs during test implementation?"
+          "text": "Which of the following is a test task that usually occurs during test implementation?"
         }
       ],
       "options": [
@@ -18433,7 +18433,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A virtual service emulating a real third-party service and the automated test scripts (aimed at testing the system under test) that interact with that service, are test work products that are typically created during:"
+          "text": "A virtual service emulating a real third-party service and the automated test scripts (aimed at testing the system under test) that interact with that service, are test work products that are typically created during:"
         }
       ],
       "options": [
@@ -18521,7 +18521,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about the value of maintaining traceability between the test basis and test work products is false?"
+          "text": "Which of the following statements about the value of maintaining traceability between the test basis and test work products is false?"
         }
       ],
       "options": [
@@ -18609,7 +18609,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is not an example of a typical generic skill required for testing?"
+          "text": "Which of the following is not an example of a typical generic skill required for testing?"
         }
       ],
       "options": [
@@ -18697,7 +18697,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements refers to a good testing practice that applies to all software development lifecycles?"
+          "text": "Which of the following statements refers to a good testing practice that applies to all software development lifecycles?"
         }
       ],
       "options": [
@@ -18785,7 +18785,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a test-first approach to development, where tests that express a shared understanding from stakeholders of how the application is expected to work, are first written in business-readable language (following the Given/When/Then format), and then made executable to drive development?"
+          "text": "Which of the following is a test-first approach to development, where tests that express a shared understanding from stakeholders of how the application is expected to work, are first written in business-readable language (following the Given/When/Then format), and then made executable to drive development?"
         }
       ],
       "options": [
@@ -18874,7 +18874,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is true?"
+          "text": "Which of the following statements is true?"
         }
       ],
       "options": [
@@ -18963,7 +18963,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Confirmation testing is performed after:"
+          "text": "Confirmation testing is performed after:"
         }
       ],
       "options": [
@@ -19052,7 +19052,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is true?"
+          "text": "Which of the following statements is true?"
         }
       ],
       "options": [
@@ -19140,7 +19140,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about the shift-left approach is true?"
+          "text": "Which of the following statements about the shift-left approach is true?"
         }
       ],
       "options": [
@@ -19228,7 +19228,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following work products cannot be examined by static analysis?"
+          "text": "Which of the following work products cannot be examined by static analysis?"
         }
       ],
       "options": [
@@ -19316,7 +19316,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is a task the author is responsible for, as part of a typical formal review?"
+          "text": "Which of the following is a task the author is responsible for, as part of a typical formal review?"
         }
       ],
       "options": [
@@ -19404,7 +19404,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about static testing and dynamic testing is true?"
+          "text": "Which of the following statements about static testing and dynamic testing is true?"
         }
       ],
       "options": [
@@ -19492,7 +19492,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider a review for a high-level architectural document written by a software architect. The architect does most of the review preparation work, including distributing the document to reviewers before the review meeting However, reviewers are not required to analyse the document in advance, and during the review meeting the software architect explains the document step by step. The only goal of this review is to establish a common understanding of the software architecture that will be used in a software development project. Which of the following review types does this review refer to?"
+          "text": "Consider a review for a high-level architectural document written by a software architect. The architect does most of the review preparation work, including distributing the document to reviewers before the review meeting However, reviewers are not required to analyse the document in advance, and during the review meeting the software architect explains the document step by step. The only goal of this review is to establish a common understanding of the software architecture that will be used in a software development project. Which of the following review types does this review refer to?"
         }
       ],
       "options": [
@@ -19580,7 +19580,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements is true?"
+          "text": "Which of the following statements is true?"
         }
       ],
       "options": [
@@ -19668,7 +19668,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about branch coverage is true?"
+          "text": "Which of the following statements about branch coverage is true?"
         }
       ],
       "options": [
@@ -19757,7 +19757,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about white-box test techniques is true?"
+          "text": "Which of the following statements about white-box test techniques is true?"
         }
       ],
       "options": [
@@ -19846,7 +19846,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about error guessing is true?"
+          "text": "Which of the following statements about error guessing is true?"
         }
       ],
       "options": [
@@ -19935,7 +19935,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements about exploratory testing is true?"
+          "text": "Which of the following statements about exploratory testing is true?"
         }
       ],
       "options": [
@@ -20024,7 +20024,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The acceptance criteria associated with a user story:"
+          "text": "The acceptance criteria associated with a user story:"
         }
       ],
       "options": [
@@ -20113,7 +20113,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The following rules determine the annual bonus to be paid to a salesman of a company based on the total annual amount of the sales made (referred to as TAS). If the TAS is between 50k€ and 80k€, the bonus is 10%. If the TAS exceeds 80k€ by a value not greater than 40k€, the bonus is 15%. Finally, if the TAS exceeds the maximum threshold which entitles to a 15% bonus, the bonus is 22%. Consider applying equivalence partitioning to the TAS (Note: 1k€ = 1000 euros). Which one of the following answers contain only test cases that belong to the same equivalence partition?"
+          "text": "The following rules determine the annual bonus to be paid to a salesman of a company based on the total annual amount of the sales made (referred to as TAS). If the TAS is between 50k€ and 80k€, the bonus is 10%. If the TAS exceeds 80k€ by a value not greater than 40k€, the bonus is 15%. Finally, if the TAS exceeds the maximum threshold which entitles to a 15% bonus, the bonus is 22%. Consider applying equivalence partitioning to the TAS (Note: 1k€ = 1000 euros). Which one of the following answers contain only test cases that belong to the same equivalence partition?"
         }
       ],
       "options": [
@@ -20201,7 +20201,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ An alphanumeric password must be between 4 and 7 characters long and must contain at least one numeric character, one capital (uppercase) letter and one lowercase letter of the alphabet. Which one of the following sets of test cases represents the correct outcome of a two-value boundary value analysis applied to the password length? (Note: test cases are separated by a semicolon)"
+          "text": "An alphanumeric password must be between 4 and 7 characters long and must contain at least one numeric character, one capital (uppercase) letter and one lowercase letter of the alphabet. Which one of the following sets of test cases represents the correct outcome of a two-value boundary value analysis applied to the password length? (Note: test cases are separated by a semicolon)"
         }
       ],
       "options": [
@@ -20289,7 +20289,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A company wants to reward each of its salespeople with an annual bonus that represents the sum of all the bonuses accumulated for every single sale made by that salesperson. The bonus for a single sale can take on the following four values: 3%, 5%, 7% and 10% (the percentage refers to the amount of the single sale). These values are determined on the basis of the type of customer (classified as “Basic” or “Premium”) to which such sale was made, and on the amount of such sale classified into the following three groups G1, G2 and G3: [G]: less than 300 euros. [G2]: between 300 and 2000 euros. [G3]: greater than 2000 euros. Which of the following is the minimum number of test cases needed to cover the full decision table associated with this scenario?"
+          "text": "A company wants to reward each of its salespeople with an annual bonus that represents the sum of all the bonuses accumulated for every single sale made by that salesperson. The bonus for a single sale can take on the following four values: 3%, 5%, 7% and 10% (the percentage refers to the amount of the single sale). These values are determined on the basis of the type of customer (classified as “Basic” or “Premium”) to which such sale was made, and on the amount of such sale classified into the following three groups G1, G2 and G3: [G]: less than 300 euros. [G2]: between 300 and 2000 euros. [G3]: greater than 2000 euros. Which of the following is the minimum number of test cases needed to cover the full decision table associated with this scenario?"
         }
       ],
       "options": [
@@ -20377,7 +20377,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The following simplified version of a state transition diagram specifies the behaviour of a video poker game: What is the minimum number of test cases needed to cover every unique sequence of up to 3 states/2 transitions starting in the “Start” state and ending in the “End” state?"
+          "text": "The following simplified version of a state transition diagram specifies the behaviour of a video poker game: What is the minimum number of test cases needed to cover every unique sequence of up to 3 states/2 transitions starting in the “Start” state and ending in the “End” state?"
         }
       ],
       "options": [
@@ -20466,7 +20466,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following user story about the authentication functionality of an e-commerce website: “As a logged-in user, I want to change my current password with a new one, so that I can make my account safer”. The following are some of the acceptance criteria defined for the user story: [a] After the logged-in user has successfully changed his password, an e-mail confirming the change must be sent to him. [b] To successfully change the password, the logged-in user must enter the current password, enter a new valid password, and finally confirm by pressing the ‘Change Password’ button. [c] To be valid, the new password entered by the logged-in user is not only required to meet the criteria related to the length and type of characters, but must also be different from the last 5 passwords of that user. [d] A dedicated error message must be presented to the logged-in user when he enters a wrong current password. [e] A dedicated error message must be presented to the logged-in user when he enters the correct current password, but enters an invalid password. Based only on the given information, which of the following ATDD tests is most likely to be written first?"
+          "text": "Consider the following user story about the authentication functionality of an e-commerce website: “As a logged-in user, I want to change my current password with a new one, so that I can make my account safer”. The following are some of the acceptance criteria defined for the user story: [a] After the logged-in user has successfully changed his password, an e-mail confirming the change must be sent to him. [b] To successfully change the password, the logged-in user must enter the current password, enter a new valid password, and finally confirm by pressing the ‘Change Password’ button. [c] To be valid, the new password entered by the logged-in user is not only required to meet the criteria related to the length and type of characters, but must also be different from the last 5 passwords of that user. [d] A dedicated error message must be presented to the logged-in user when he enters a wrong current password. [e] A dedicated error message must be presented to the logged-in user when he enters the correct current password, but enters an invalid password. Based only on the given information, which of the following ATDD tests is most likely to be written first?"
         }
       ],
       "options": [
@@ -20555,7 +20555,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ The tests at the bottom layer of the test pyramid:"
+          "text": "The tests at the bottom layer of the test pyramid:"
         }
       ],
       "options": [
@@ -20643,7 +20643,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider a given test plan which, among others, contains the following three sections: “Test Scope”, “Testing Communication”, and “Stakeholders”. The features of the test object to be tested and those excluded from the testing represent information that is:"
+          "text": "Consider a given test plan which, among others, contains the following three sections: “Test Scope”, “Testing Communication”, and “Stakeholders”. The features of the test object to be tested and those excluded from the testing represent information that is:"
         }
       ],
       "options": [
@@ -20731,7 +20731,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In a two-hour uninterrupted test session, performed as part of an iteration on an Agile project, a heuristic checklist was used to help the tester focus on some specific usability issues of a web application. The unscripted tests produced by the tester’s experience during such a session belong to which one of the following testing quadrants?"
+          "text": "In a two-hour uninterrupted test session, performed as part of an iteration on an Agile project, a heuristic checklist was used to help the tester focus on some specific usability issues of a web application. The unscripted tests produced by the tester’s experience during such a session belong to which one of the following testing quadrants?"
         }
       ],
       "options": [
@@ -20820,7 +20820,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following examples of risks identified in different software development projects: [I]. The contrast colour ratio for both normal text and large text of a website does not comply with the applicable accessibility guidelines, making it difficult for many users to read the content on the pages. [II]. A development vendor fails to deliver their software system on time, causing significant delays to system integration testing activities that have been planned as part of a development project for a system of systems. [III]. People in the test team do not have sufficient skills to automate tests at the test levels required by the test automation strategy which does not allow production of an effective regression test suite. [IV]. In a web application, data from untrusted sources is not subject to proper input validation, making the application vulnerable to several security attacks. Which of the following statements is true?"
+          "text": "Consider the following examples of risks identified in different software development projects: [I]. The contrast colour ratio for both normal text and large text of a website does not comply with the applicable accessibility guidelines, making it difficult for many users to read the content on the pages. [II]. A development vendor fails to deliver their software system on time, causing significant delays to system integration testing activities that have been planned as part of a development project for a system of systems. [III]. People in the test team do not have sufficient skills to automate tests at the test levels required by the test automation strategy which does not allow production of an effective regression test suite. [IV]. In a web application, data from untrusted sources is not subject to proper input validation, making the application vulnerable to several security attacks. Which of the following statements is true?"
         }
       ],
       "options": [
@@ -20908,7 +20908,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is not an example of a typical content of a test completion report for a test project?"
+          "text": "Which of the following is not an example of a typical content of a test completion report for a test project?"
         }
       ],
       "options": [
@@ -20996,7 +20996,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following statements best describes how configuration management supports testing?"
+          "text": "Which of the following statements best describes how configuration management supports testing?"
         }
       ],
       "options": [
@@ -21085,7 +21085,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ For each of the test cases to be executed, the following table specifies the priority order and dependencies on other test cases. Which of the following test execution schedules is compatible with the logical dependencies and allows executing the test cases in priority order?"
+          "text": "For each of the test cases to be executed, the following table specifies the priority order and dependencies on other test cases. Which of the following test execution schedules is compatible with the logical dependencies and allows executing the test cases in priority order?"
         }
       ],
       "options": [
@@ -21174,7 +21174,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A new web app aims at offering a rich user experience. As a functional tester, you have run some functional tests to verify that, before releasing the app, such app works correctly on several mobile devices, all of which are listed as supported devices within the requirements specification. These tests were performed on stable and isolated test environments where you were the only user interacting with the application. All tests passed, but in some of those tests you observed the following issue: on some mobile devices only, the response time for two web pages containing images was extremely slow. Based only on the given information, which of the following recommendations would you follow?"
+          "text": "A new web app aims at offering a rich user experience. As a functional tester, you have run some functional tests to verify that, before releasing the app, such app works correctly on several mobile devices, all of which are listed as supported devices within the requirements specification. These tests were performed on stable and isolated test environments where you were the only user interacting with the application. All tests passed, but in some of those tests you observed the following issue: on some mobile devices only, the response time for two web pages containing images was extremely slow. Based only on the given information, which of the following recommendations would you follow?"
         }
       ],
       "options": [
@@ -21263,7 +21263,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Test automation allows you to:"
+          "text": "Test automation allows you to:"
         }
       ],
       "options": [
@@ -21351,7 +21351,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A typical test objective is to ensure that:"
+          "text": "A typical test objective is to ensure that:"
         }
       ],
       "options": [
@@ -21439,7 +21439,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of an error?"
+          "text": "Which of the following is an example of an error?"
         }
       ],
       "options": [
@@ -21527,7 +21527,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ According to one of the seven testing principles, what can the testing show?"
+          "text": "According to one of the seven testing principles, what can the testing show?"
         }
       ],
       "options": [
@@ -21615,7 +21615,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an advantage of the whole team approach?"
+          "text": "Which of the following is an advantage of the whole team approach?"
         }
       ],
       "options": [
@@ -21703,7 +21703,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ One good testing practice says that each development activity should have a corresponding test activity. Which sentence correctly describes how it should apply to software development lifecycles (SDLCs)?"
+          "text": "One good testing practice says that each development activity should have a corresponding test activity. Which sentence correctly describes how it should apply to software development lifecycles (SDLCs)?"
         }
       ],
       "options": [
@@ -21791,7 +21791,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In which software development lifecycle does the tester participate in requirement reviews and test design in the initial phases, and in dynamic testing in later phases?"
+          "text": "In which software development lifecycle does the tester participate in requirement reviews and test design in the initial phases, and in dynamic testing in later phases?"
         }
       ],
       "options": [
@@ -21879,7 +21879,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A tester validates the logic of a new authentication service. Since the actual database and external authentication API are still under development, the tester replaces the database connection with a mock that returns pre-defined user data. At what level of testing was this test conducted?"
+          "text": "A tester validates the logic of a new authentication service. Since the actual database and external authentication API are still under development, the tester replaces the database connection with a mock that returns pre-defined user data. At what level of testing was this test conducted?"
         }
       ],
       "options": [
@@ -21967,7 +21967,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which work product can be the subject of a review?"
+          "text": "Which work product can be the subject of a review?"
         }
       ],
       "options": [
@@ -22055,7 +22055,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You test a university grading system that assigns grades based on a student’s final score out of 100. Scores from 0 to 49 result in “Fail”, scores from 50 result in “Borderline pass”, and scores from 51 to 100 result in “Pass”. The system allows input only of the integer numbers from 0 to 100. You use a 2-value boundary value analysis to test the grading system. What is the MINIMAL number of test data (final score) that allows for achieving the 100% coverage?"
+          "text": "You test a university grading system that assigns grades based on a student’s final score out of 100. Scores from 0 to 49 result in “Fail”, scores from 50 result in “Borderline pass”, and scores from 51 to 100 result in “Pass”. The system allows input only of the integer numbers from 0 to 100. You use a 2-value boundary value analysis to test the grading system. What is the MINIMAL number of test data (final score) that allows for achieving the 100% coverage?"
         }
       ],
       "options": [
@@ -22144,7 +22144,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You test a system modeled by the state transition diagram below. The initial state is INIT, and the final state is OFF. See attachment - What MINIMUM number of test cases is needed to achieve 100% all states coverage?"
+          "text": "You test a system modeled by the state transition diagram below. The initial state is INIT, and the final state is OFF. See attachment - What MINIMUM number of test cases is needed to achieve 100% all states coverage?"
         }
       ],
       "options": [
@@ -22233,7 +22233,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You designed two test cases, each of which achieves 50% statement coverage of your code. Which sentence is true about the coverage achieved by the test suite TS, composed of these two test cases?"
+          "text": "You designed two test cases, each of which achieves 50% statement coverage of your code. Which sentence is true about the coverage achieved by the test suite TS, composed of these two test cases?"
         }
       ],
       "options": [
@@ -22323,7 +22323,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What are the test coverage items in branch testing?"
+          "text": "What are the test coverage items in branch testing?"
         }
       ],
       "options": [
@@ -22412,7 +22412,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of error guessing?"
+          "text": "Which of the following is an example of error guessing?"
         }
       ],
       "options": [
@@ -22500,7 +22500,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which is an example of an acceptance criterion documented with a scenario-oriented format?"
+          "text": "Which is an example of an acceptance criterion documented with a scenario-oriented format?"
         }
       ],
       "options": [
@@ -22588,7 +22588,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You were asked to design test cases based on the following user story: As a registered e-banking user - I want to transfer funds between my accounts So that I can manage my finances more efficiently without visiting a branch Acceptance criteria - 1. The user can select both a source and destination account from their list of linked accounts. 2. The system should prevent transfer if the transfer amount exceeds the available balance in the source account, if the destination account is the same as the source account, or if the amount is less than $1. 3. A confirmation screen is shown with all transfer details before final submission. 4. Upon successful transfer, a message confirms the transaction, and a unique reference ID is shown. Your test case looks as follows: Precondition: a user with account No. 1034 with a balance of $99 is registered Test step 1: User selects the “Transfer funds” option. Expected result: the system allows to select the source account and enter the number of the destination account Test step 2: User selects 1034 as the source account, X as the destination account, and Y as the transfer amount. Expected result: Z. Which values of X, Y, and Z make the test case correctly derived from the user story?"
+          "text": "You were asked to design test cases based on the following user story: As a registered e-banking user - I want to transfer funds between my accounts So that I can manage my finances more efficiently without visiting a branch Acceptance criteria - 1. The user can select both a source and destination account from their list of linked accounts. 2. The system should prevent transfer if the transfer amount exceeds the available balance in the source account, if the destination account is the same as the source account, or if the amount is less than $1. 3. A confirmation screen is shown with all transfer details before final submission. 4. Upon successful transfer, a message confirms the transaction, and a unique reference ID is shown. Your test case looks as follows: Precondition: a user with account No. 1034 with a balance of $99 is registered Test step 1: User selects the “Transfer funds” option. Expected result: the system allows to select the source account and enter the number of the destination account Test step 2: User selects 1034 as the source account, X as the destination account, and Y as the transfer amount. Expected result: Z. Which values of X, Y, and Z make the test case correctly derived from the user story?"
         }
       ],
       "options": [
@@ -22676,7 +22676,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ How does configuration management support testing?"
+          "text": "How does configuration management support testing?"
         }
       ],
       "options": [
@@ -22764,7 +22764,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which tools support scalability and standardization of deployment?"
+          "text": "Which tools support scalability and standardization of deployment?"
         }
       ],
       "options": [
@@ -22852,7 +22852,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which test activity is done during test analysis?"
+          "text": "Which test activity is done during test analysis?"
         }
       ],
       "options": [
@@ -22940,7 +22940,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Consider the following document: Title: Promo code not applied at checkout Description: When the user enters a valid promo code during checkout, the discount is not applied to the total amount. Steps to reproduce: 1) Log into the app, 2) Add items to the cart, 3) Go to checkout, 4) Enter promo code “FOOD20”, 5) Tap “Apply” Expected result: A 20% discount is applied. Actual result: No discount is applied. When was this document created?"
+          "text": "Consider the following document: Title: Promo code not applied at checkout Description: When the user enters a valid promo code during checkout, the discount is not applied to the total amount. Steps to reproduce: 1) Log into the app, 2) Add items to the cart, 3) Go to checkout, 4) Enter promo code “FOOD20”, 5) Tap “Apply” Expected result: A 20% discount is applied. Actual result: No discount is applied. When was this document created?"
         }
       ],
       "options": [
@@ -23028,7 +23028,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ During a sprint review, the product owner decides to change a requirement: instead of allowing only one promo code per order, the app should now allow users to stack up to two promo codes. What can help the tester to perform an impact analysis and quickly identify all test cases linked to the original requirement?"
+          "text": "During a sprint review, the product owner decides to change a requirement: instead of allowing only one promo code per order, the app should now allow users to stack up to two promo codes. What can help the tester to perform an impact analysis and quickly identify all test cases linked to the original requirement?"
         }
       ],
       "options": [
@@ -23116,7 +23116,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of the HIGHEST level of independence of testing for the FoodApp - a food ordering mobile application?"
+          "text": "Which of the following is an example of the HIGHEST level of independence of testing for the FoodApp - a food ordering mobile application?"
         }
       ],
       "options": [
@@ -23204,7 +23204,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of a test-first approach to development?"
+          "text": "Which of the following is an example of a test-first approach to development?"
         }
       ],
       "options": [
@@ -23293,7 +23293,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ In your project, testers collaborate with business analysts and developers before any code is written. They review the specification documents and create detailed test cases covering all functional scenarios. This is an example of which practice?"
+          "text": "In your project, testers collaborate with business analysts and developers before any code is written. They review the specification documents and create detailed test cases covering all functional scenarios. This is an example of which practice?"
         }
       ],
       "options": [
@@ -23381,7 +23381,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ After updating the online banking app to add a new bill payment feature, a tester ran existing tests on account balance checks, transaction history, and fund transfers to ensure these previously working features still function correctly. What test type is it, and why?"
+          "text": "After updating the online banking app to add a new bill payment feature, a tester ran existing tests on account balance checks, transaction history, and fund transfers to ensure these previously working features still function correctly. What test type is it, and why?"
         }
       ],
       "options": [
@@ -23469,7 +23469,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following correctly contrasts static and dynamic testing?"
+          "text": "Which of the following correctly contrasts static and dynamic testing?"
         }
       ],
       "options": [
@@ -23557,7 +23557,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What is the responsibility of a moderator during a review?"
+          "text": "What is the responsibility of a moderator during a review?"
         }
       ],
       "options": [
@@ -23645,7 +23645,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Match review types (P-S) with their characteristics (1-4). (P) Informal review (Q) Walkthrough (R) Technical review (S) Inspection (1) The main objective is to detect anomalies. Documented output is not required. (2) The main objective is to detect anomalies. Metrics are collected to improve the review. (3) Led by moderator. Its main objective is to gain consensus. (4) Led by the author. Its main objective can be to educate reviewers."
+          "text": "Match review types (P-S) with their characteristics (1-4). (P) Informal review (Q) Walkthrough (R) Technical review (S) Inspection (1) The main objective is to detect anomalies. Documented output is not required. (2) The main objective is to detect anomalies. Metrics are collected to improve the review. (3) Led by moderator. Its main objective is to gain consensus. (4) Led by the author. Its main objective can be to educate reviewers."
         }
       ],
       "options": [
@@ -23733,7 +23733,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which sentence about test techniques is true?"
+          "text": "Which sentence about test techniques is true?"
         }
       ],
       "options": [
@@ -23821,7 +23821,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ You test a hotel booking system and you identified three domains, each with three equivalence partitions: •Number of guests. Partitions: o(G1) single guest o(G2) couple o(G3) group •Room type. Partitions: o(R1) standard o(R2) deluxe o(R3) suite •Booking duration. Partitions: o(D1) 1-2 nights o(D2) 3-6 nights o(D3) 7 or more nights The hotel booking policy has some constraints, which are controlled by the reservation system, so your test cases cannot violate them. The constraints are: •Group booking (G3) cannot be made in standard rooms (R1). •Suite room (R3) cannot be booked for short stays of 1 or 2 nights (D1) •Single guests (G1) cannot book deluxe room (R2) for long stays of 7 or more nights (D3) A test case contains the number of guests, the room type, and the booking duration. You apply equivalence partitioning when designing the test cases. What is the MINIMAL number of test cases to achieve Each Choice coverage?"
+          "text": "You test a hotel booking system and you identified three domains, each with three equivalence partitions: •Number of guests. Partitions: o(G1) single guest o(G2) couple o(G3) group •Room type. Partitions: o(R1) standard o(R2) deluxe o(R3) suite •Booking duration. Partitions: o(D1) 1-2 nights o(D2) 3-6 nights o(D3) 7 or more nights The hotel booking policy has some constraints, which are controlled by the reservation system, so your test cases cannot violate them. The constraints are: •Group booking (G3) cannot be made in standard rooms (R1). •Suite room (R3) cannot be booked for short stays of 1 or 2 nights (D1) •Single guests (G1) cannot book deluxe room (R2) for long stays of 7 or more nights (D3) A test case contains the number of guests, the room type, and the booking duration. You apply equivalence partitioning when designing the test cases. What is the MINIMAL number of test cases to achieve Each Choice coverage?"
         }
       ],
       "options": [
@@ -23910,7 +23910,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ A health insurance system decides whether to fully approve (F), partially approve (P), or reject (R) a claim based on various factors, according to the following decision table. See Attachment - You design a test case based on this decision table. You have already defined the following preconditions and input data for your first test case: •The policy includes hospitalization, emergency services, and surgical procedures •The policy limit is $1,000,000 •The client is an active policyholder and has no history of fraudulent claims •The client’s claim regards rehabilitation and post-surgery care •The client has submitted all the required documentation Which columns of the decision table can be covered with this test case?"
+          "text": "A health insurance system decides whether to fully approve (F), partially approve (P), or reject (R) a claim based on various factors, according to the following decision table. See Attachment - You design a test case based on this decision table. You have already defined the following preconditions and input data for your first test case: •The policy includes hospitalization, emergency services, and surgical procedures •The policy limit is $1,000,000 •The client is an active policyholder and has no history of fraudulent claims •The client’s claim regards rehabilitation and post-surgery care •The client has submitted all the required documentation Which columns of the decision table can be covered with this test case?"
         }
       ],
       "options": [
@@ -23998,7 +23998,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which TWO are MOST helpful in structuring exploratory testing and facilitate its management? (Choose two.)"
+          "text": "Which TWO are MOST helpful in structuring exploratory testing and facilitate its management? (Choose two.)"
         }
       ],
       "options": [
@@ -24096,7 +24096,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which statement is correct about a criterion, “All smoke tests of the registering and logging features passed”?"
+          "text": "Which statement is correct about a criterion, “All smoke tests of the registering and logging features passed”?"
         }
       ],
       "options": [
@@ -24184,7 +24184,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Your team is developing a new functionality for an employee management system, a Simple Reporting feature. The team is tasked with estimating the test effort required to test this feature. The team used the standard three-point estimation method to provide the predicted effort. The team came up with the following estimates: •in the optimistic scenario, the testing can be done in 1 hour •in the most likely scenario, the testing can be done in 2 hours •in the worst-case scenario, the testing can be done in 9 hours What is the team's final estimation of the test effort?"
+          "text": "Your team is developing a new functionality for an employee management system, a Simple Reporting feature. The team is tasked with estimating the test effort required to test this feature. The team used the standard three-point estimation method to provide the predicted effort. The team came up with the following estimates: •in the optimistic scenario, the testing can be done in 1 hour •in the most likely scenario, the testing can be done in 2 hours •in the worst-case scenario, the testing can be done in 9 hours What is the team's final estimation of the test effort?"
         }
       ],
       "options": [
@@ -24273,7 +24273,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What risk characteristic can be calculated based on risk likelihood and risk impact?"
+          "text": "What risk characteristic can be calculated based on risk likelihood and risk impact?"
         }
       ],
       "options": [
@@ -24361,7 +24361,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which of the following is an example of a project risk?"
+          "text": "Which of the following is an example of a project risk?"
         }
       ],
       "options": [
@@ -24449,7 +24449,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ What is the purpose of the test progress report and the test completion report?"
+          "text": "What is the purpose of the test progress report and the test completion report?"
         }
       ],
       "options": [
@@ -24537,7 +24537,7 @@
       "stem": [
         {
           "kind": "paragraph",
-          "text": "CertyIQ Which practice can help testers in a more objective coverage assessment and prevent them from errors through greater consistency and repeatability?"
+          "text": "Which practice can help testers in a more objective coverage assessment and prevent them from errors through greater consistency and repeatability?"
         }
       ],
       "options": [

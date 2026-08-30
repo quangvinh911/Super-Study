@@ -14,7 +14,7 @@ from pathlib import Path
 
 import pdfplumber
 import pypdfium2 as pdfium
-from PIL import Image, ImageOps
+from PIL import Image, ImageDraw, ImageOps
 
 
 QUESTION_RE = re.compile(r"(?m)^Question:\s*(\d+)\b")
@@ -46,6 +46,89 @@ def compact(text: str) -> str:
 def content(text: str) -> list[dict[str, str]]:
     cleaned = compact(text)
     return [{"kind": "paragraph", "text": cleaned}]
+
+
+def explanation_content(text: str) -> list[dict[str, object]]:
+    """Preserve the answer-sheet hierarchy without allowing arbitrary HTML."""
+    cleaned_lines = [
+        compact(line)
+        for line in text.replace("\f", "\n").splitlines()
+        if compact(line) and compact(line).lower() != "certyiq"
+    ]
+    blocks: list[dict[str, object]] = []
+    paragraph_lines: list[str] = []
+
+    def flush_paragraph() -> None:
+        if not paragraph_lines:
+            return
+        paragraph = compact(" ".join(paragraph_lines))
+        paragraph_lines.clear()
+        # Option-by-option rationales in the source become separate paragraphs.
+        parts = re.split(
+            r"\s+(?=(?:Option\s+[A-E]|[A-E][.)])\s*[–—-]?\s+)",
+            paragraph,
+        )
+        blocks.extend(
+            {"kind": "paragraph", "text": part.strip()}
+            for part in parts
+            if part.strip()
+        )
+
+    for line in cleaned_lines:
+        normalized = line.rstrip(":").strip()
+        labeled_section = re.match(
+            r"^(Justification|Conclusion|References|Calculations?)"
+            r"(?:\s*[:–—-]\s*(.*)|\s*)$",
+            line,
+            flags=re.IGNORECASE,
+        )
+        if labeled_section:
+            flush_paragraph()
+            label = labeled_section.group(1)
+            blocks.append(
+                {
+                    "kind": "heading",
+                    "text": label[0].upper() + label[1:].lower(),
+                    "level": 4,
+                }
+            )
+            remainder = (labeled_section.group(2) or "").strip()
+            if remainder:
+                paragraph_lines.append(remainder)
+            continue
+        is_heading = (
+            (
+                len(normalized) <= 150
+                and re.match(
+                    r"^Why (?:option|the other option|the other options)\b",
+                    normalized,
+                    flags=re.IGNORECASE,
+                )
+                is not None
+            )
+        )
+        if is_heading:
+            flush_paragraph()
+            blocks.append({"kind": "heading", "text": normalized, "level": 4})
+        else:
+            paragraph_lines.append(line)
+
+    flush_paragraph()
+    return blocks or [
+        {
+            "kind": "paragraph",
+            "text": "No explanation was provided in the source PDF.",
+        }
+    ]
+
+
+def remove_source_brand(image: Image.Image) -> None:
+    """Mask the source-provider mark in the question header crop."""
+    draw = ImageDraw.Draw(image)
+    draw.rectangle(
+        (int(image.width * 0.82), 0, image.width, min(50, image.height)),
+        fill="#ffffff",
+    )
 
 
 def lines_for_page(page: pdfplumber.page.Page) -> list[tuple[float, float, str]]:
@@ -143,6 +226,8 @@ def save_evidence(
         if bottom > top + 2:
             question_parts.append(crop_page(document, page_index, top, bottom))
 
+    if question_parts:
+        remove_source_brand(question_parts[0])
     question_image = ImageOps.expand(stack(question_parts), border=2, fill="#c6d1cc")
     question_path = evidence_dir / f"q-{number:03d}.webp"
     question_image.save(question_path, "WEBP", quality=78, method=6)
@@ -210,11 +295,12 @@ def parse_question_block(number: int, block: str) -> tuple[str, dict[str, str], 
         raise ValueError(f"Question {number}: invalid option sequence {option_ids}")
 
     stem = question_part[: option_matches[0].start()].strip()
+    stem = re.sub(r"^\s*CertyIQ(?:\s+|$)", "", stem, count=1)
     options: dict[str, str] = {}
     for index, match in enumerate(option_matches):
         end = option_matches[index + 1].start() if index + 1 < len(option_matches) else len(question_part)
         options[match.group(1)] = compact(question_part[match.end() : end])
-    return compact(stem), options, raw_key, compact(explanation)
+    return compact(stem), options, raw_key, explanation
 
 
 def write_json(path: Path, payload: object) -> None:
@@ -331,12 +417,11 @@ def build(input_pdf: Path, output_dir: Path, evidence_dir: Path, render: bool) -
                     },
                 }
             )
-            explanation_text = explanation or "No explanation was provided in the source PDF."
             solutions_payload.append(
                 {
                     "questionId": question_id,
                     "correctOptionIds": correct_ids,
-                    "explanation": content(explanation_text),
+                    "explanation": explanation_content(explanation),
                     "references": [
                         {
                             "title": input_pdf.name,

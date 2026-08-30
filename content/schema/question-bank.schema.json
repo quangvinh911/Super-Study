@@ -28,6 +28,16 @@
         {
           "type": "object",
           "additionalProperties": false,
+          "required": ["kind", "text"],
+          "properties": {
+            "kind": { "const": "heading" },
+            "text": { "type": "string", "minLength": 1 },
+            "level": { "enum": [3, 4] }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
           "required": ["kind", "items"],
           "properties": {
             "kind": { "const": "list" },

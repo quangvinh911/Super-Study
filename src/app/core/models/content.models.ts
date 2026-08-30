@@ -3,6 +3,12 @@ export interface ParagraphBlock {
   readonly text: string;
 }
 
+export interface HeadingBlock {
+  readonly kind: 'heading';
+  readonly text: string;
+  readonly level?: 3 | 4;
+}
+
 export interface ListBlock {
   readonly kind: 'list';
   readonly items: readonly string[];
@@ -41,6 +47,7 @@ export interface ImageBlock {
  */
 export type ContentBlock =
   | ParagraphBlock
+  | HeadingBlock
   | ListBlock
   | TableBlock
   | CodeBlock

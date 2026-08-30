@@ -28,6 +28,7 @@ test('uses PDF questions with page evidence in practice mode', async ({ page }) 
 
   await expect(page.getByText(/Nguồn PDF · Q\d+/)).toBeVisible();
   await expect(page.getByText(/Ảnh câu hỏi gốc trong PDF/)).toBeVisible();
+  await expect(page.locator('.question-card .stem').getByText(/CertyIQ/)).toHaveCount(0);
 
   const options = page.locator('.options input');
   await options.first().check();
@@ -35,6 +36,10 @@ test('uses PDF questions with page evidence in practice mode', async ({ page }) 
     await options.nth(1).check();
   }
   await page.getByRole('button', { name: 'Kiểm tra' }).click();
+  const pdfSolution = page.locator('.pdf-solution');
+  await expect(pdfSolution.getByText('Answer:', { exact: true })).toBeVisible();
+  await expect(pdfSolution.locator('.pdf-solution__answer strong')).toHaveText(/[A-E]/);
+  await expect(pdfSolution.getByRole('heading', { name: 'Explanation:' })).toBeVisible();
   await expect(page.getByText(/Bằng chứng đáp án trong PDF/)).toBeVisible();
 });
 

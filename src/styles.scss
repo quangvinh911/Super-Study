@@ -546,6 +546,52 @@ pre {
   border-color: var(--color-success);
 }
 
+.pdf-solution {
+  overflow: clip;
+  color: var(--color-text);
+  background: #ffffff;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.pdf-solution__answer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  color: var(--color-ink);
+  background: var(--color-paper-deep);
+  border-block-end: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+}
+
+.pdf-solution__answer strong {
+  display: inline-grid;
+  min-width: 2rem;
+  min-height: 2rem;
+  place-items: center;
+  padding-inline: 0.45rem;
+  color: #ffffff;
+  background: var(--color-teal-dark);
+  border-radius: var(--radius-xs);
+}
+
+.pdf-solution__body {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.pdf-solution__body > h3 {
+  margin: 0;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
+
 .pdf-result-note {
   display: grid;
   gap: 0.75rem;

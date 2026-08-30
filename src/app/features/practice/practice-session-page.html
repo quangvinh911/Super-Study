@@ -113,9 +113,18 @@
           aria-live="polite"
         >
           <h2>{{ store.currentResponse()?.isCorrect ? 'Chính xác' : 'Chưa chính xác' }}</h2>
-          <app-content-blocks [blocks]="item.solution.explanation" />
 
           @if (item.question.sourceEvidence; as evidence) {
+            <div class="pdf-solution" lang="en">
+              <div class="pdf-solution__answer">
+                <span>Answer:</span>
+                <strong>{{ item.solution.correctOptionIds.join(', ') }}</strong>
+              </div>
+              <div class="pdf-solution__body">
+                <h3>Explanation:</h3>
+                <app-content-blocks [blocks]="item.solution.explanation" />
+              </div>
+            </div>
             @if (evidence.answerNote) {
               <p class="source-warning">{{ evidence.answerNote }}</p>
             }
@@ -127,6 +136,8 @@
                 loading="lazy"
               />
             </details>
+          } @else {
+            <app-content-blocks [blocks]="item.solution.explanation" />
           }
 
           @if (item.solution.references.length) {

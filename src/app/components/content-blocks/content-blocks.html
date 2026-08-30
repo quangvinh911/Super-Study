@@ -4,6 +4,13 @@
       @case ('paragraph') {
         <p>{{ block.text }}</p>
       }
+      @case ('heading') {
+        @if (block.level === 3) {
+          <h3>{{ block.text }}</h3>
+        } @else {
+          <h4>{{ block.text }}</h4>
+        }
+      }
       @case ('list') {
         @if (block.ordered) {
           <ol>
