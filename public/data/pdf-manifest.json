@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankVersion": "pdf-ctfl-v4-0-2026.08.30",
+  "publishedAt": "2026-08-30",
+  "syllabusVersion": "Source PDF; syllabus labels unavailable",
+  "language": "en",
+  "sourceKind": "privatePdf",
+  "questionCount": 278,
+  "solutionCount": 278,
+  "blueprint": [],
+  "files": {
+    "questions": "pdf-questions.json",
+    "solutions": "pdf-solutions.json"
+  }
+}

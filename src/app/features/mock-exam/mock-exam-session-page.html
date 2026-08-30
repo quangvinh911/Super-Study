@@ -28,8 +28,13 @@
     <div class="exam-grid">
       <section class="surface question-card">
         <div class="question-meta">
-          <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
-          <span class="chip">{{ item.question.classification.kLevel }}</span>
+          @if (item.question.sourceEvidence; as evidence) {
+            <span class="chip">Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</span>
+            <span class="muted">Trang {{ evidence.questionPages.join(', ') }}</span>
+          } @else {
+            <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
+            <span class="chip">{{ item.question.classification.kLevel }}</span>
+          }
           <button
             class="flag-button"
             type="button"
@@ -43,6 +48,17 @@
 
         <h2 #questionHeading class="question-heading" tabindex="-1">Question {{ store.progress().current }}</h2>
         <div class="stem"><app-content-blocks [blocks]="item.question.stem" /></div>
+
+        @if (item.question.sourceEvidence; as evidence) {
+          <details class="pdf-evidence">
+            <summary>Ảnh câu hỏi gốc trong PDF · trang {{ evidence.questionPages.join(', ') }}</summary>
+            <img
+              [src]="evidence.questionImage"
+              [alt]="'Bản chụp câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+              loading="lazy"
+            />
+          </details>
+        }
 
         <fieldset class="options">
           <legend>

@@ -51,10 +51,14 @@ export interface GenerateExamOptions {
 }
 
 export function isPublishableQuestion(question: Question): boolean {
-  return (
+  const publicQuestion =
     question.provenance.rightsStatus === 'cleared' &&
-    question.verification.answerStatus === 'verified'
-  );
+    question.verification.answerStatus === 'verified';
+  const privatePdfQuestion =
+    question.provenance.rightsStatus === 'privateUserProvided' &&
+    (question.verification.answerStatus === 'sourcePrinted' ||
+      question.verification.answerStatus === 'sourceAnomalyCorrected');
+  return publicQuestion || privatePdfQuestion;
 }
 
 function keyForCell(cell: Pick<BlueprintManifestCell, 'chapter' | 'kLevel'>): string {
@@ -151,6 +155,39 @@ export function generateCtflExam(
     ),
     solution: structuredCloneSafe(solutionByQuestion.get(question.id)!),
   }));
+}
+
+export function generateRandomExam(
+  questions: readonly Question[],
+  solutions: readonly Solution[],
+  options: { readonly seed: string | number; readonly count?: number },
+): SessionQuestionSnapshot[] {
+  const count = options.count ?? CTFL_EXAM_QUESTION_COUNT;
+  const solutionByQuestion = new Map(
+    solutions.map((solution) => [solution.questionId, solution]),
+  );
+  const eligible = questions.filter(
+    (question) => isPublishableQuestion(question) && solutionByQuestion.has(question.id),
+  );
+  if (eligible.length < count) {
+    throw new ExamInventoryError([
+      {
+        chapter: 0,
+        kLevel: 'source',
+        requiredBuckets: count,
+        availableBuckets: eligible.length,
+      },
+    ]);
+  }
+  return shuffleSeeded(eligible, `${options.seed}|random-question-order`)
+    .slice(0, count)
+    .map((question) => ({
+      question: cloneWithShuffledOptions(
+        question,
+        `${options.seed}|${question.id}|options`,
+      ),
+      solution: structuredCloneSafe(solutionByQuestion.get(question.id)!),
+    }));
 }
 
 export function hasOfficialCtflMatrix(

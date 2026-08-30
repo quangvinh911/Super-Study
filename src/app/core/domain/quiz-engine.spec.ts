@@ -4,6 +4,7 @@ import {
   ExamInventoryError,
   filterPracticeQuestions,
   generateCtflExam,
+  generateRandomExam,
   hasOfficialCtflMatrix,
   isExactSelectionCorrect,
   meetsCtflPassMark,
@@ -129,6 +130,36 @@ describe('seeded shuffle and CTFL generator', () => {
     expect(() =>
       generateCtflExam(reduced, bank.solutions, { seed: 'incomplete' }),
     ).toThrow(ExamInventoryError);
+  });
+
+  it('creates a deterministic 40-question exam from the private PDF bank', () => {
+    const bank = fullBank();
+    const pdfQuestions = bank.questions.map((question, index) => ({
+      ...question,
+      id: `PDF-Q-${String(index + 1).padStart(3, '0')}`,
+      shuffleOptions: false,
+      provenance: {
+        ...question.provenance,
+        kind: 'sourceExcerpt' as const,
+        rightsStatus: 'privateUserProvided' as const,
+      },
+      verification: {
+        ...question.verification,
+        answerStatus: 'sourcePrinted' as const,
+      },
+    }));
+    const pdfSolutions = pdfQuestions.map(
+      (question, index): Solution => ({
+        ...bank.solutions[index]!,
+        questionId: question.id,
+      }),
+    );
+    const first = generateRandomExam(pdfQuestions, pdfSolutions, { seed: 'pdf-7' });
+    const second = generateRandomExam(pdfQuestions, pdfSolutions, { seed: 'pdf-7' });
+
+    expect(first).toEqual(second);
+    expect(first).toHaveLength(40);
+    expect(new Set(first.map((item) => item.question.id)).size).toBe(40);
   });
 });
 

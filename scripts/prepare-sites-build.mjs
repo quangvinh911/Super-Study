@@ -12,6 +12,7 @@ await rm(serverOutput, { recursive: true, force: true });
 await mkdir(clientOutput, { recursive: true });
 await mkdir(serverOutput, { recursive: true });
 await cp(angularOutput, clientOutput, { recursive: true });
+await rm(resolve(root, 'dist/cloudflare'), { recursive: true, force: true });
 
 const worker = `const securityHeaders = {
   'X-Content-Type-Options': 'nosniff',

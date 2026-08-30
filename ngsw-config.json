@@ -24,7 +24,18 @@
       "resources": {
         "files": [
           "/data/*.json",
+          "!/pdf-evidence/**",
           "/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+        ]
+      }
+    },
+    {
+      "name": "pdf-evidence",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/pdf-evidence/*.webp"
         ]
       }
     }

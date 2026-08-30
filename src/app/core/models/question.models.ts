@@ -3,6 +3,7 @@ import { ContentBlock } from './content.models';
 export type Chapter = 1 | 2 | 3 | 4 | 5 | 6;
 export type KLevel = 'K1' | 'K2' | 'K3';
 export type InteractionKind = 'singleChoice' | 'multiSelect';
+export type QuestionBankSource = 'original' | 'pdf';
 
 export type QuestionStyleTag =
   | 'directKnowledge'
@@ -38,15 +39,31 @@ export interface QuestionClassification {
 }
 
 export interface Provenance {
-  readonly kind: 'original';
+  readonly kind: 'original' | 'sourceExcerpt';
   readonly authoringNote: string;
-  readonly rightsStatus: 'cleared' | 'pending' | 'restricted';
+  readonly rightsStatus: 'cleared' | 'pending' | 'restricted' | 'privateUserProvided';
+  readonly sourceDocument?: string;
+  readonly sourceQuestionNumber?: number;
 }
 
 export interface Verification {
-  readonly answerStatus: 'verified' | 'pending' | 'rejected';
+  readonly answerStatus:
+    | 'verified'
+    | 'pending'
+    | 'rejected'
+    | 'sourcePrinted'
+    | 'sourceAnomalyCorrected';
   readonly reviewedAgainst: string;
   readonly reviewedAt: string;
+}
+
+export interface SourceEvidence {
+  readonly questionImage: string;
+  readonly answerImage: string;
+  readonly questionPages: readonly number[];
+  readonly answerPages: readonly number[];
+  readonly rawAnswer: string;
+  readonly answerNote?: string | null;
 }
 
 export interface Question {
@@ -60,6 +77,7 @@ export interface Question {
   readonly shuffleOptions: boolean;
   readonly provenance: Provenance;
   readonly verification: Verification;
+  readonly sourceEvidence?: SourceEvidence;
   readonly variant?: 'A' | 'B';
 }
 
@@ -102,6 +120,7 @@ export interface QuestionBankManifest {
   readonly publishedAt: string;
   readonly syllabusVersion: string;
   readonly language: 'en';
+  readonly sourceKind?: 'original' | 'privatePdf';
   readonly questionCount: number;
   readonly solutionCount: number;
   readonly blueprint: readonly BlueprintManifestCell[];

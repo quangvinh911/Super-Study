@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@ang
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { QuestionBankService } from '../../core/data';
-import { LoadedQuestionBank } from '../../core/models';
+import { LoadedQuestionBank, QuestionBankSource } from '../../core/models';
 import { ProgressRepository } from '../../core/persistence';
 import { QuizSessionStore } from '../../core/state';
 
@@ -19,19 +19,33 @@ export class MockExamSetupPage implements OnInit {
   private readonly store = inject(QuizSessionStore);
   private readonly router = inject(Router);
 
-  protected readonly bank = signal<LoadedQuestionBank | null>(null);
+  protected readonly banks = signal<Readonly<Partial<Record<QuestionBankSource, LoadedQuestionBank>>>>({});
   protected readonly loading = signal(true);
   protected readonly starting = signal(false);
   protected readonly error = signal('');
   protected durationMinutes: 60 | 75 = 60;
+  protected bankSource: QuestionBankSource = 'original';
+
+  protected selectedBank(): LoadedQuestionBank | null {
+    return this.banks()[this.bankSource] ?? null;
+  }
+
+  protected isPdfSource(): boolean {
+    return this.bankSource === 'pdf';
+  }
 
   async ngOnInit(): Promise<void> {
     try {
-      const [bank, preferredDuration] = await Promise.all([
+      const [original, pdf, preferredDuration, preferredSource] = await Promise.all([
         this.bankService.load(),
+        this.bankService.load('/data/pdf-manifest.json'),
         this.repository.getSetting<60 | 75>('preferredExamDurationMinutes'),
+        this.repository.getSetting<QuestionBankSource>('lastQuestionBankSource'),
       ]);
-      this.bank.set(bank);
+      this.banks.set({ original, pdf });
+      if (preferredSource === 'original' || preferredSource === 'pdf') {
+        this.bankSource = preferredSource;
+      }
       if (preferredDuration === 60 || preferredDuration === 75) {
         this.durationMinutes = preferredDuration;
       }
@@ -43,7 +57,7 @@ export class MockExamSetupPage implements OnInit {
   }
 
   protected async start(): Promise<void> {
-    const bank = this.bank();
+    const bank = this.selectedBank();
     if (!bank || this.starting()) {
       return;
     }
@@ -52,14 +66,17 @@ export class MockExamSetupPage implements OnInit {
     try {
       const snapshot = await this.store.startExam({
         bankVersion: bank.manifest.bankVersion,
+        bankSource: this.bankSource,
         questions: bank.questions,
         solutions: bank.solutions,
         durationMinutes: this.durationMinutes,
+        generation: this.isPdfSource() ? 'random40' : 'blueprint',
       });
       await this.repository.setSetting(
         'preferredExamDurationMinutes',
         this.durationMinutes,
       );
+      await this.repository.setSetting('lastQuestionBankSource', this.bankSource);
       await this.router.navigate(['/mock-exam', snapshot.id]);
     } catch (cause) {
       const detail = cause instanceof Error ? cause.message : '';

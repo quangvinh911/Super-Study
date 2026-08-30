@@ -1,0 +1,21 @@
+{
+  "document": "ctfl-v4-0.pdf",
+  "purpose": "private-study-mode",
+  "containsExtractedText": true,
+  "containsPageEvidence": true,
+  "counts": {
+    "pages": 262,
+    "questions": 278,
+    "singleChoice": 276,
+    "multiSelect": 2,
+    "withExplanation": 265,
+    "questionEvidenceImages": 278,
+    "answerEvidenceImages": 278
+  },
+  "answerKeyCorrections": {
+    "38": { "printed": "U", "practice": "A" },
+    "39": { "printed": "U", "practice": "A" },
+    "47": { "printed": "U", "practice": "A" }
+  },
+  "publicationPolicy": "Owner-only study mode. Do not make the Site public without redistribution rights."
+}

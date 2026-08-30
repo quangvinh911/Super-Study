@@ -1,4 +1,4 @@
-import { Chapter, KLevel } from './question.models';
+import { Chapter, KLevel, QuestionBankSource } from './question.models';
 import {
   Bookmark,
   QuestionStat,
@@ -32,6 +32,7 @@ export interface Attempt {
   readonly sessionId: string;
   readonly mode: QuizMode;
   readonly bankVersion: string;
+  readonly bankSource?: QuestionBankSource;
   readonly seed: string;
   readonly startedAt: string;
   readonly completedAt: string;

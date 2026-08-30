@@ -38,9 +38,14 @@
 
     <article class="surface question-card">
       <div class="question-meta">
-        <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
-        <span class="chip">{{ item.question.classification.kLevel }}</span>
-        <span class="muted">{{ item.question.classification.learningObjective }}</span>
+        @if (item.question.sourceEvidence; as evidence) {
+          <span class="chip">Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</span>
+          <span class="muted">Trang {{ evidence.questionPages.join(', ') }}</span>
+        } @else {
+          <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
+          <span class="chip">{{ item.question.classification.kLevel }}</span>
+          <span class="muted">{{ item.question.classification.learningObjective }}</span>
+        }
       </div>
 
       <h1 #questionHeading class="question-heading" tabindex="-1">
@@ -50,6 +55,17 @@
       <div class="stem">
         <app-content-blocks [blocks]="item.question.stem" />
       </div>
+
+      @if (item.question.sourceEvidence; as evidence) {
+        <details class="pdf-evidence">
+          <summary>Ảnh câu hỏi gốc trong PDF · trang {{ evidence.questionPages.join(', ') }}</summary>
+          <img
+            [src]="evidence.questionImage"
+            [alt]="'Bản chụp câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+            loading="lazy"
+          />
+        </details>
+      }
 
       <fieldset class="options">
         <legend>
@@ -98,6 +114,20 @@
         >
           <h2>{{ store.currentResponse()?.isCorrect ? 'Chính xác' : 'Chưa chính xác' }}</h2>
           <app-content-blocks [blocks]="item.solution.explanation" />
+
+          @if (item.question.sourceEvidence; as evidence) {
+            @if (evidence.answerNote) {
+              <p class="source-warning">{{ evidence.answerNote }}</p>
+            }
+            <details class="pdf-evidence pdf-evidence--answer">
+              <summary>Bằng chứng đáp án trong PDF · trang {{ evidence.answerPages.join(', ') }}</summary>
+              <img
+                [src]="evidence.answerImage"
+                [alt]="'Bản chụp đáp án cho câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+                loading="lazy"
+              />
+            </details>
+          }
 
           @if (item.solution.references.length) {
             <details>

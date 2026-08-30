@@ -6,6 +6,7 @@ import {
   KLevel,
   LoadedQuestionBank,
   PracticeHistoryFilter,
+  QuestionBankSource,
   QuestionStyleTag,
 } from '../../core/models';
 import { QuestionBankService } from '../../core/data';
@@ -29,7 +30,7 @@ export class PracticeSetupPage implements OnInit {
   protected readonly loading = signal(true);
   protected readonly starting = signal(false);
   protected readonly error = signal('');
-  protected readonly bank = signal<LoadedQuestionBank | null>(null);
+  protected readonly banks = signal<Readonly<Partial<Record<QuestionBankSource, LoadedQuestionBank>>>>({});
   protected readonly chapters: readonly Chapter[] = [1, 2, 3, 4, 5, 6];
   protected readonly kLevels: readonly KLevel[] = ['K1', 'K2', 'K3'];
   protected readonly styles: readonly { value: QuestionStyleTag; label: string }[] = [
@@ -47,9 +48,18 @@ export class PracticeSetupPage implements OnInit {
   protected style: 'all' | QuestionStyleTag = 'all';
   protected history: 'all' | PracticeHistoryFilter = 'all';
   protected questionLimit = 10;
+  protected bankSource: QuestionBankSource = 'original';
+
+  protected selectedBank(): LoadedQuestionBank | null {
+    return this.banks()[this.bankSource] ?? null;
+  }
+
+  protected isPdfSource(): boolean {
+    return this.bankSource === 'pdf';
+  }
 
   protected availableLearningObjectives(): string[] {
-    const questions = this.bank()?.questions ?? [];
+    const questions = this.selectedBank()?.questions ?? [];
     return [
       ...new Set(
         questions
@@ -64,6 +74,9 @@ export class PracticeSetupPage implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const requestedHistory = this.route.snapshot.queryParamMap.get('history');
+    if (this.route.snapshot.queryParamMap.get('source') === 'pdf') {
+      this.bankSource = 'pdf';
+    }
     if (
       requestedHistory === 'unseen' ||
       requestedHistory === 'incorrect' ||
@@ -72,7 +85,11 @@ export class PracticeSetupPage implements OnInit {
       this.history = requestedHistory;
     }
     try {
-      this.bank.set(await this.bankService.load());
+      const [original, pdf] = await Promise.all([
+        this.bankService.load(),
+        this.bankService.load('/data/pdf-manifest.json'),
+      ]);
+      this.banks.set({ original, pdf });
     } catch {
       this.error.set('Không thể tải ngân hàng câu hỏi. Hãy thử tải lại trang.');
     } finally {
@@ -89,8 +106,15 @@ export class PracticeSetupPage implements OnInit {
     }
   }
 
+  protected sourceChanged(): void {
+    this.chapter = 'all';
+    this.learningObjective = 'all';
+    this.kLevel = 'all';
+    this.style = 'all';
+  }
+
   protected async start(): Promise<void> {
-    const bank = this.bank();
+    const bank = this.selectedBank();
     if (!bank || this.starting()) {
       return;
     }
@@ -103,14 +127,20 @@ export class PracticeSetupPage implements OnInit {
       ]);
       const snapshot = await this.store.startPractice({
         bankVersion: bank.manifest.bankVersion,
+        bankSource: this.bankSource,
         questions: bank.questions,
         solutions: bank.solutions,
         config: {
-          chapters: this.chapter === 'all' ? undefined : [this.chapter],
+          chapters:
+            this.isPdfSource() || this.chapter === 'all' ? undefined : [this.chapter],
           learningObjectives:
-            this.learningObjective === 'all' ? undefined : [this.learningObjective],
-          kLevels: this.kLevel === 'all' ? undefined : [this.kLevel],
-          styleTags: this.style === 'all' ? undefined : [this.style],
+            this.isPdfSource() || this.learningObjective === 'all'
+              ? undefined
+              : [this.learningObjective],
+          kLevels:
+            this.isPdfSource() || this.kLevel === 'all' ? undefined : [this.kLevel],
+          styleTags:
+            this.isPdfSource() || this.style === 'all' ? undefined : [this.style],
           history: this.history === 'all' ? undefined : [this.history],
           questionLimit: this.questionLimit,
           shuffleQuestions: true,
@@ -121,6 +151,7 @@ export class PracticeSetupPage implements OnInit {
         },
       });
       await this.repository.setSetting('lastPracticeConfig', snapshot.practiceConfig);
+      await this.repository.setSetting('lastQuestionBankSource', this.bankSource);
       await this.router.navigate(['/practice', snapshot.id]);
     } catch (cause) {
       const message = cause instanceof Error ? cause.message : '';

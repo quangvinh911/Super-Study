@@ -66,6 +66,13 @@
       </article>
     </section>
 
+    @if (currentAttempt.bankSource === 'pdf' || currentAttempt.bankVersion.startsWith('pdf-')) {
+      <section class="surface pdf-result-note" aria-labelledby="pdf-result-title">
+        <p class="eyebrow">Nguồn PDF</p>
+        <h2 id="pdf-result-title">Kết quả theo bộ câu hỏi trích xuất</h2>
+        <p>PDF không cung cấp chapter, Learning Objective hoặc K-level, nên phiên này không hiển thị phân tích theo syllabus. Mở từng câu bên dưới để xem ảnh bằng chứng câu hỏi và đáp án theo trang.</p>
+      </section>
+    } @else {
     <section class="analysis-grid" aria-labelledby="analysis-title">
       <div class="section-heading">
         <p class="eyebrow">Phân tích</p>
@@ -116,6 +123,7 @@
         </div>
       </article>
     </section>
+    }
 
     <section class="review-section" aria-labelledby="review-title">
       <div class="review-heading">
@@ -123,7 +131,7 @@
           <p class="eyebrow">Review</p>
           <h2 id="review-title">Xem lại từng câu</h2>
         </div>
-        <a class="button" routerLink="/practice" [queryParams]="{ history: 'incorrect' }">
+        <a class="button" routerLink="/practice" [queryParams]="{ history: 'incorrect', source: (currentAttempt.bankSource === 'pdf' || currentAttempt.bankVersion.startsWith('pdf-')) ? 'pdf' : 'original' }">
           Luyện lại câu sai
         </a>
       </div>
@@ -136,7 +144,11 @@
               <span class="review-item__number">{{ (index + 1).toString().padStart(2, '0') }}</span>
               <span class="review-item__summary">
                 <strong>Câu {{ index + 1 }}</strong>
-                <small>Chapter {{ item.question.classification.chapter }} · {{ item.question.classification.kLevel }}</small>
+                @if (item.question.sourceEvidence) {
+                  <small>Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</small>
+                } @else {
+                  <small>Chapter {{ item.question.classification.chapter }} · {{ item.question.classification.kLevel }}</small>
+                }
               </span>
               <span
                 class="status-pill"
@@ -151,6 +163,17 @@
               <div class="question-stem" lang="en">
                 <app-content-blocks [blocks]="item.question.stem" />
               </div>
+
+              @if (item.question.sourceEvidence; as evidence) {
+                <details class="pdf-evidence">
+                  <summary>Ảnh câu hỏi gốc trong PDF · trang {{ evidence.questionPages.join(', ') }}</summary>
+                  <img
+                    [src]="evidence.questionImage"
+                    [alt]="'Bản chụp câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+                    loading="lazy"
+                  />
+                </details>
+              }
 
               <ol class="review-options" type="A" lang="en">
                 @for (option of item.question.options; track option.id; let optionIndex = $index) {
@@ -177,6 +200,19 @@
               <section class="explanation" aria-label="Giải thích đáp án" lang="en">
                 <h3>Explanation</h3>
                 <app-content-blocks [blocks]="item.solution.explanation" />
+                @if (item.question.sourceEvidence; as evidence) {
+                  @if (evidence.answerNote) {
+                    <p class="source-warning">{{ evidence.answerNote }}</p>
+                  }
+                  <details class="pdf-evidence pdf-evidence--answer">
+                    <summary>Bằng chứng đáp án trong PDF · trang {{ evidence.answerPages.join(', ') }}</summary>
+                    <img
+                      [src]="evidence.answerImage"
+                      [alt]="'Bản chụp đáp án cho câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+                      loading="lazy"
+                    />
+                  </details>
+                }
                 @if (item.solution.references.length) {
                   <h4>Evidence</h4>
                   <ul class="reference-list">

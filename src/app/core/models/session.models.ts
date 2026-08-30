@@ -2,6 +2,7 @@ import {
   Chapter,
   KLevel,
   Question,
+  QuestionBankSource,
   QuestionStyleTag,
   Solution,
 } from './question.models';
@@ -46,6 +47,7 @@ export interface SessionSnapshot {
   readonly id: string;
   readonly mode: QuizMode;
   readonly bankVersion: string;
+  readonly bankSource?: QuestionBankSource;
   readonly seed: string;
   readonly status: SessionStatus;
   readonly createdAt: string;
@@ -62,6 +64,7 @@ export interface SessionSnapshot {
 
 export interface StartPracticeInput {
   readonly bankVersion: string;
+  readonly bankSource?: QuestionBankSource;
   readonly questions: readonly Question[];
   readonly solutions: readonly Solution[];
   readonly config?: PracticeConfig;
@@ -71,9 +74,11 @@ export interface StartPracticeInput {
 
 export interface StartExamInput {
   readonly bankVersion: string;
+  readonly bankSource?: QuestionBankSource;
   readonly questions: readonly Question[];
   readonly solutions: readonly Solution[];
   readonly durationMinutes: 60 | 75;
+  readonly generation?: 'blueprint' | 'random40';
   readonly seed?: string | number;
   readonly now?: Date;
 }

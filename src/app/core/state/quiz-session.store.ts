@@ -3,6 +3,7 @@ import {
   calculateAttemptResult,
   createPracticeQuestions,
   generateCtflExam,
+  generateRandomExam,
   scoreQuestion,
   validateSelection,
 } from '../domain';
@@ -176,6 +177,7 @@ export class QuizSessionStore implements OnDestroy {
       id,
       mode: 'practice',
       bankVersion: input.bankVersion,
+      bankSource: input.bankSource ?? 'original',
       seed,
       status: 'active',
       createdAt: timestamp,
@@ -196,7 +198,10 @@ export class QuizSessionStore implements OnDestroy {
     await this.detachCurrent();
     const id = identifier('exam');
     const seed = String(input.seed ?? id);
-    const questions = generateCtflExam(input.questions, input.solutions, { seed });
+    const questions =
+      input.generation === 'random40'
+        ? generateRandomExam(input.questions, input.solutions, { seed })
+        : generateCtflExam(input.questions, input.solutions, { seed });
     const now = input.now ?? new Date();
     const timestamp = now.toISOString();
     const snapshot: SessionSnapshot = {
@@ -204,6 +209,7 @@ export class QuizSessionStore implements OnDestroy {
       id,
       mode: 'exam',
       bankVersion: input.bankVersion,
+      bankSource: input.bankSource ?? 'original',
       seed,
       status: 'active',
       createdAt: timestamp,
@@ -497,6 +503,7 @@ export class QuizSessionStore implements OnDestroy {
       sessionId: snapshot.id,
       mode: snapshot.mode,
       bankVersion: snapshot.bankVersion,
+      bankSource: snapshot.bankSource ?? 'original',
       seed: snapshot.seed,
       startedAt: snapshot.startedAt,
       completedAt: completedAt.toISOString(),

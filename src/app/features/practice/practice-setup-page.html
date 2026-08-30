@@ -10,12 +10,32 @@
       <span class="spinner" aria-hidden="true"></span>
       Đang tải ngân hàng câu hỏi…
     </section>
-  } @else if (bank()) {
+  } @else if (selectedBank()) {
     <form class="surface setup-form" (ngSubmit)="start()">
+      <fieldset class="source-picker">
+        <legend>Nguồn câu hỏi</legend>
+        <div class="source-picker__grid">
+          <label class="source-option">
+            <input type="radio" name="bankSource" value="original" [(ngModel)]="bankSource" (ngModelChange)="sourceChanged()" />
+            <span><strong>Câu viết mới</strong><small>80 câu đã gắn chapter, LO và K-level</small></span>
+          </label>
+          <label class="source-option">
+            <input type="radio" name="bankSource" value="pdf" [(ngModel)]="bankSource" (ngModelChange)="sourceChanged()" />
+            <span><strong>Nguồn PDF</strong><small>278 câu trích xuất kèm ảnh bằng chứng theo trang</small></span>
+          </label>
+        </div>
+      </fieldset>
+
+      @if (isPdfSource()) {
+        <p class="source-notice" role="note">
+          Nội dung được trích từ PDF bạn cung cấp và chưa có nhãn chapter/LO/K-level. Chỉ dùng trong site riêng tư.
+        </p>
+      }
+
       <div class="form-grid">
         <div class="field">
           <label for="chapter">Chapter</label>
-          <select id="chapter" name="chapter" [(ngModel)]="chapter" (ngModelChange)="chapterChanged()">
+          <select id="chapter" name="chapter" [(ngModel)]="chapter" (ngModelChange)="chapterChanged()" [disabled]="isPdfSource()">
             <option value="all">Tất cả chapter</option>
             @for (item of chapters; track item) {
               <option [ngValue]="item">Chapter {{ item }}</option>
@@ -25,7 +45,7 @@
 
         <div class="field">
           <label for="learning-objective">Learning Objective</label>
-          <select id="learning-objective" name="learningObjective" [(ngModel)]="learningObjective">
+          <select id="learning-objective" name="learningObjective" [(ngModel)]="learningObjective" [disabled]="isPdfSource()">
             <option value="all">Tất cả Learning Objective</option>
             @for (item of availableLearningObjectives(); track item) {
               <option [value]="item">{{ item }}</option>
@@ -35,7 +55,7 @@
 
         <div class="field">
           <label for="k-level">K-level</label>
-          <select id="k-level" name="kLevel" [(ngModel)]="kLevel">
+          <select id="k-level" name="kLevel" [(ngModel)]="kLevel" [disabled]="isPdfSource()">
             <option value="all">Tất cả K-level</option>
             @for (item of kLevels; track item) {
               <option [value]="item">{{ item }}</option>
@@ -45,7 +65,7 @@
 
         <div class="field">
           <label for="style">Dạng câu hỏi</label>
-          <select id="style" name="style" [(ngModel)]="style">
+          <select id="style" name="style" [(ngModel)]="style" [disabled]="isPdfSource()">
             <option value="all">Tất cả dạng</option>
             @for (item of styles; track item.value) {
               <option [value]="item.value">{{ item.label }}</option>
@@ -69,13 +89,17 @@
             <option [ngValue]="10">10 câu</option>
             <option [ngValue]="20">20 câu</option>
             <option [ngValue]="40">40 câu</option>
+            <option [ngValue]="80">80 câu</option>
+            @if (isPdfSource()) {
+              <option [ngValue]="278">Toàn bộ 278 câu</option>
+            }
           </select>
         </div>
       </div>
 
       <div class="inventory" aria-label="Thông tin ngân hàng câu hỏi">
-        <strong>{{ bank()!.manifest.questionCount }}</strong>
-        <span>câu nguyên bản · phiên bản {{ bank()!.manifest.bankVersion }}</span>
+        <strong>{{ selectedBank()!.manifest.questionCount }}</strong>
+        <span>{{ isPdfSource() ? 'câu từ PDF' : 'câu viết mới' }} · phiên bản {{ selectedBank()!.manifest.bankVersion }}</span>
       </div>
 
       @if (error()) {
