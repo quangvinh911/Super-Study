@@ -70,7 +70,7 @@ export class MockExamSetupPage implements OnInit {
         questions: bank.questions,
         solutions: bank.solutions,
         durationMinutes: this.durationMinutes,
-        generation: this.isPdfSource() ? 'random40' : 'blueprint',
+        generation: 'blueprint',
       });
       await this.repository.setSetting(
         'preferredExamDurationMinutes',

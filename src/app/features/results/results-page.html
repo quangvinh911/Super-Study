@@ -145,7 +145,9 @@
               <span class="review-item__summary">
                 <strong>Câu {{ index + 1 }}</strong>
                 @if (item.question.sourceEvidence) {
-                  <small>Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</small>
+                  <small>
+                    Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }} · Chapter {{ item.question.classification.chapter }} · {{ item.question.classification.kLevel }} · {{ item.question.classification.learningObjective }}
+                  </small>
                 } @else {
                   <small>Chapter {{ item.question.classification.chapter }} · {{ item.question.classification.kLevel }}</small>
                 }

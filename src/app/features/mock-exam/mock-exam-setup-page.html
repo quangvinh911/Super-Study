@@ -16,7 +16,7 @@
       </dl>
       <p class="note">
         @if (isPdfSource()) {
-          40 câu được lấy ngẫu nhiên từ 278 câu trong PDF. Vì tài liệu không có nhãn syllabus, mode này không cam kết đúng ma trận chapter/K-level.
+          40 câu được lấy từ 278 câu PDF theo ma trận chapter/K-level CTFL. Các nhãn được đối chiếu theo chủ đề vì PDF không cung cấp metadata syllabus.
         } @else {
           40 câu theo đúng ma trận CTFL. Bạn có thể chuyển câu tự do, đánh dấu câu cần xem lại và nộp sớm.
         }
@@ -32,7 +32,7 @@
         </label>
         <label class="source-option">
           <input type="radio" name="bankSource" value="pdf" [(ngModel)]="bankSource" />
-          <span><strong>Nguồn PDF</strong><small>Đề ngẫu nhiên, có ảnh bằng chứng</small></span>
+          <span><strong>Nguồn PDF</strong><small>Đề theo ma trận, có ảnh bằng chứng</small></span>
         </label>
       </fieldset>
 

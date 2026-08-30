@@ -40,6 +40,9 @@
       <div class="question-meta">
         @if (item.question.sourceEvidence; as evidence) {
           <span class="chip">Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</span>
+          <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
+          <span class="chip">{{ item.question.classification.kLevel }}</span>
+          <span class="chip">{{ item.question.classification.learningObjective }}</span>
           <span class="muted">Trang {{ evidence.questionPages.join(', ') }}</span>
         } @else {
           <span class="chip">Chapter {{ item.question.classification.chapter }}</span>

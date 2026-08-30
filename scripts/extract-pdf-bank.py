@@ -21,6 +21,21 @@ QUESTION_RE = re.compile(r"(?m)^Question:\s*(\d+)\b")
 ANSWER_RE = re.compile(r"(?m)^Answer:\s*([A-EU]{1,2})\s*$")
 OPTION_RE = re.compile(r"(?m)^([A-E])\.\s+(?=\S)")
 INVALID_KEYS = {38: "A", 39: "A", 47: "A"}
+CTFL_EXAM_BLUEPRINT = [
+    {"chapter": 1, "kLevel": "K1", "count": 2},
+    {"chapter": 1, "kLevel": "K2", "count": 6},
+    {"chapter": 2, "kLevel": "K1", "count": 2},
+    {"chapter": 2, "kLevel": "K2", "count": 4},
+    {"chapter": 3, "kLevel": "K1", "count": 2},
+    {"chapter": 3, "kLevel": "K2", "count": 2},
+    {"chapter": 4, "kLevel": "K2", "count": 6},
+    {"chapter": 4, "kLevel": "K3", "count": 5},
+    {"chapter": 5, "kLevel": "K1", "count": 1},
+    {"chapter": 5, "kLevel": "K2", "count": 5},
+    {"chapter": 5, "kLevel": "K3", "count": 3},
+    {"chapter": 6, "kLevel": "K1", "count": 1},
+    {"chapter": 6, "kLevel": "K2", "count": 1},
+]
 
 
 @dataclass(frozen=True)
@@ -309,9 +324,45 @@ def write_json(path: Path, payload: object) -> None:
     )
 
 
-def build(input_pdf: Path, output_dir: Path, evidence_dir: Path, render: bool) -> None:
+def load_classification(
+    classification_path: Path,
+) -> tuple[dict[int, str], dict[str, dict[str, object]]]:
+    payload = json.loads(classification_path.read_text(encoding="utf-8"))
+    catalog = payload.get("catalog", {})
+    assignments = payload.get("assignments", {})
+    by_question: dict[int, str] = {}
+    for learning_objective, question_numbers in assignments.items():
+        if learning_objective not in catalog:
+            raise ValueError(
+                f"Classification references unknown learning objective {learning_objective}"
+            )
+        for number in question_numbers:
+            if number in by_question:
+                raise ValueError(f"Question {number}: duplicate syllabus classification")
+            by_question[number] = learning_objective
+
+    expected = set(range(1, 279))
+    if set(by_question) != expected:
+        missing = sorted(expected - set(by_question))
+        extra = sorted(set(by_question) - expected)
+        raise ValueError(
+            f"Classification must cover questions 1..278; missing={missing}, extra={extra}"
+        )
+    return by_question, catalog
+
+
+def build(
+    input_pdf: Path,
+    output_dir: Path,
+    evidence_dir: Path,
+    render: bool,
+    classification_path: Path,
+) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     evidence_dir.mkdir(parents=True, exist_ok=True)
+    classification_by_question, classification_catalog = load_classification(
+        classification_path
+    )
     with pdfplumber.open(input_pdf) as opened:
         pages = list(opened.pages)
         page_texts = [
@@ -368,6 +419,8 @@ def build(input_pdf: Path, output_dir: Path, evidence_dir: Path, render: bool) -
                 total_evidence_bytes += (evidence_dir / f"a-{number:03d}.webp").stat().st_size
 
             question_id = f"PDF-Q-{number:03d}"
+            learning_objective = classification_by_question[number]
+            syllabus_label = classification_catalog[learning_objective]
             questions_payload.append(
                 {
                     "id": question_id,
@@ -383,11 +436,11 @@ def build(input_pdf: Path, output_dir: Path, evidence_dir: Path, render: bool) -
                         "requiredSelections": len(correct_ids),
                     },
                     "classification": {
-                        "chapter": 1,
-                        "section": "Source PDF - unclassified",
-                        "learningObjective": "SOURCE-PDF",
-                        "blueprintBucket": question_id,
-                        "kLevel": "K1",
+                        "chapter": syllabus_label["chapter"],
+                        "section": syllabus_label["section"],
+                        "learningObjective": learning_objective,
+                        "blueprintBucket": f"PDF-{learning_objective}-Q{number:03d}",
+                        "kLevel": syllabus_label["kLevel"],
                         "styleTags": infer_style_tags(stem),
                     },
                     "shuffleOptions": False,
@@ -400,6 +453,7 @@ def build(input_pdf: Path, output_dir: Path, evidence_dir: Path, render: bool) -
                     },
                     "verification": {
                         "answerStatus": "sourceAnomalyCorrected" if number in INVALID_KEYS else "sourcePrinted",
+                        "classificationStatus": "topicMappedAgainstCtflV4.0.1",
                         "reviewedAgainst": input_pdf.name,
                         "reviewedAt": "2026-08-30",
                     },
@@ -432,17 +486,17 @@ def build(input_pdf: Path, output_dir: Path, evidence_dir: Path, render: bool) -
                 }
             )
 
-    bank_version = "pdf-ctfl-v4-0-2026.08.30"
+    bank_version = "pdf-ctfl-v4-0-2026.08.30.2"
     manifest = {
         "schemaVersion": "1.0.0",
         "bankVersion": bank_version,
         "publishedAt": "2026-08-30",
-        "syllabusVersion": "Source PDF; syllabus labels unavailable",
+        "syllabusVersion": "ISTQB CTFL v4.0.1; topic-mapped labels",
         "language": "en",
         "sourceKind": "privatePdf",
         "questionCount": len(questions_payload),
         "solutionCount": len(solutions_payload),
-        "blueprint": [],
+        "blueprint": CTFL_EXAM_BLUEPRINT,
         "files": {
             "questions": "pdf-questions.json",
             "solutions": "pdf-solutions.json",
@@ -475,9 +529,20 @@ def main() -> None:
     parser.add_argument("input_pdf", type=Path)
     parser.add_argument("--output-dir", type=Path, default=Path("public/data"))
     parser.add_argument("--evidence-dir", type=Path, default=Path("public/pdf-evidence"))
+    parser.add_argument(
+        "--classification",
+        type=Path,
+        default=Path("content/pdf-question-classification.json"),
+    )
     parser.add_argument("--skip-evidence", action="store_true")
     args = parser.parse_args()
-    build(args.input_pdf, args.output_dir, args.evidence_dir, not args.skip_evidence)
+    build(
+        args.input_pdf,
+        args.output_dir,
+        args.evidence_dir,
+        not args.skip_evidence,
+        args.classification,
+    )
 
 
 if __name__ == "__main__":

@@ -53,6 +53,7 @@ export interface Verification {
     | 'rejected'
     | 'sourcePrinted'
     | 'sourceAnomalyCorrected';
+  readonly classificationStatus?: 'topicMappedAgainstCtflV4.0.1';
   readonly reviewedAgainst: string;
   readonly reviewedAt: string;
 }

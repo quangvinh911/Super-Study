@@ -132,15 +132,13 @@ export class PracticeSetupPage implements OnInit {
         solutions: bank.solutions,
         config: {
           chapters:
-            this.isPdfSource() || this.chapter === 'all' ? undefined : [this.chapter],
+            this.chapter === 'all' ? undefined : [this.chapter],
           learningObjectives:
-            this.isPdfSource() || this.learningObjective === 'all'
-              ? undefined
-              : [this.learningObjective],
+            this.learningObjective === 'all' ? undefined : [this.learningObjective],
           kLevels:
-            this.isPdfSource() || this.kLevel === 'all' ? undefined : [this.kLevel],
+            this.kLevel === 'all' ? undefined : [this.kLevel],
           styleTags:
-            this.isPdfSource() || this.style === 'all' ? undefined : [this.style],
+            this.style === 'all' ? undefined : [this.style],
           history: this.history === 'all' ? undefined : [this.history],
           questionLimit: this.questionLimit,
           shuffleQuestions: true,

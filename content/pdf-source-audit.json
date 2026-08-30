@@ -17,5 +17,12 @@
     "39": { "printed": "U", "practice": "A" },
     "47": { "printed": "U", "practice": "A" }
   },
+  "syllabusClassification": {
+    "status": "topic-mapped",
+    "syllabus": "ISTQB CTFL v4.0.1",
+    "questionsLabeled": 278,
+    "sourceProvidedLabels": false,
+    "note": "Chapter, Learning Objective and K-level were inferred from question topics and are not metadata printed in the source PDF."
+  },
   "publicationPolicy": "Owner-only study mode. Do not make the Site public without redistribution rights."
 }

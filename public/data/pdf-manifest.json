@@ -1,13 +1,27 @@
 {
   "schemaVersion": "1.0.0",
-  "bankVersion": "pdf-ctfl-v4-0-2026.08.30",
+  "bankVersion": "pdf-ctfl-v4-0-2026.08.30.2",
   "publishedAt": "2026-08-30",
-  "syllabusVersion": "Source PDF; syllabus labels unavailable",
+  "syllabusVersion": "ISTQB CTFL v4.0.1; topic-mapped labels",
   "language": "en",
   "sourceKind": "privatePdf",
   "questionCount": 278,
   "solutionCount": 278,
-  "blueprint": [],
+  "blueprint": [
+    { "chapter": 1, "kLevel": "K1", "count": 2 },
+    { "chapter": 1, "kLevel": "K2", "count": 6 },
+    { "chapter": 2, "kLevel": "K1", "count": 2 },
+    { "chapter": 2, "kLevel": "K2", "count": 4 },
+    { "chapter": 3, "kLevel": "K1", "count": 2 },
+    { "chapter": 3, "kLevel": "K2", "count": 2 },
+    { "chapter": 4, "kLevel": "K2", "count": 6 },
+    { "chapter": 4, "kLevel": "K3", "count": 5 },
+    { "chapter": 5, "kLevel": "K1", "count": 1 },
+    { "chapter": 5, "kLevel": "K2", "count": 5 },
+    { "chapter": 5, "kLevel": "K3", "count": 3 },
+    { "chapter": 6, "kLevel": "K1", "count": 1 },
+    { "chapter": 6, "kLevel": "K2", "count": 1 }
+  ],
   "files": {
     "questions": "pdf-questions.json",
     "solutions": "pdf-solutions.json"

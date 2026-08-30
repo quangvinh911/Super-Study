@@ -21,21 +21,21 @@
           </label>
           <label class="source-option">
             <input type="radio" name="bankSource" value="pdf" [(ngModel)]="bankSource" (ngModelChange)="sourceChanged()" />
-            <span><strong>Nguồn PDF</strong><small>278 câu trích xuất kèm ảnh bằng chứng theo trang</small></span>
+            <span><strong>Nguồn PDF</strong><small>278 câu đã gắn chapter, LO, K-level và ảnh bằng chứng</small></span>
           </label>
         </div>
       </fieldset>
 
       @if (isPdfSource()) {
         <p class="source-notice" role="note">
-          Nội dung được trích từ PDF bạn cung cấp và chưa có nhãn chapter/LO/K-level. Chỉ dùng trong site riêng tư.
+          Nhãn chapter/LO/K-level được đối chiếu theo chủ đề với CTFL v4.0.1 vì PDF không cung cấp metadata này. Chỉ dùng trong site riêng tư.
         </p>
       }
 
       <div class="form-grid">
         <div class="field">
           <label for="chapter">Chapter</label>
-          <select id="chapter" name="chapter" [(ngModel)]="chapter" (ngModelChange)="chapterChanged()" [disabled]="isPdfSource()">
+          <select id="chapter" name="chapter" [(ngModel)]="chapter" (ngModelChange)="chapterChanged()">
             <option value="all">Tất cả chapter</option>
             @for (item of chapters; track item) {
               <option [ngValue]="item">Chapter {{ item }}</option>
@@ -45,7 +45,7 @@
 
         <div class="field">
           <label for="learning-objective">Learning Objective</label>
-          <select id="learning-objective" name="learningObjective" [(ngModel)]="learningObjective" [disabled]="isPdfSource()">
+          <select id="learning-objective" name="learningObjective" [(ngModel)]="learningObjective">
             <option value="all">Tất cả Learning Objective</option>
             @for (item of availableLearningObjectives(); track item) {
               <option [value]="item">{{ item }}</option>
@@ -55,7 +55,7 @@
 
         <div class="field">
           <label for="k-level">K-level</label>
-          <select id="k-level" name="kLevel" [(ngModel)]="kLevel" [disabled]="isPdfSource()">
+          <select id="k-level" name="kLevel" [(ngModel)]="kLevel">
             <option value="all">Tất cả K-level</option>
             @for (item of kLevels; track item) {
               <option [value]="item">{{ item }}</option>
@@ -65,7 +65,7 @@
 
         <div class="field">
           <label for="style">Dạng câu hỏi</label>
-          <select id="style" name="style" [(ngModel)]="style" [disabled]="isPdfSource()">
+          <select id="style" name="style" [(ngModel)]="style">
             <option value="all">Tất cả dạng</option>
             @for (item of styles; track item.value) {
               <option [value]="item.value">{{ item.label }}</option>

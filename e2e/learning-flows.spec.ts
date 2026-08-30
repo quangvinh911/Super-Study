@@ -24,9 +24,17 @@ test('uses PDF questions with page evidence in practice mode', async ({ page }) 
   await page.goto('/practice');
   await page.locator('input[name="bankSource"][value="pdf"]').check();
   await expect(page.getByText('278', { exact: true })).toBeVisible();
+  await expect(page.locator('#chapter')).toBeEnabled();
+  await expect(page.locator('#learning-objective')).toBeEnabled();
+  await expect(page.locator('#k-level')).toBeEnabled();
+  await page.locator('#chapter').selectOption({ label: 'Chapter 6' });
+  await page.locator('#k-level').selectOption('K1');
   await page.getByRole('button', { name: 'Bắt đầu luyện' }).click();
 
   await expect(page.getByText(/Nguồn PDF · Q\d+/)).toBeVisible();
+  await expect(page.getByText('Chapter 6', { exact: true })).toBeVisible();
+  await expect(page.getByText('K1', { exact: true })).toBeVisible();
+  await expect(page.getByText('FL-6.2.1', { exact: true })).toBeVisible();
   await expect(page.getByText(/Ảnh câu hỏi gốc trong PDF/)).toBeVisible();
   await expect(page.locator('.question-card .stem').getByText(/CertyIQ/)).toHaveCount(0);
 
@@ -65,6 +73,9 @@ test('creates a 40-question mock exam from the PDF bank', async ({ page }) => {
 
   await expect(page.getByRole('heading', { name: 'Question 1 of 40' })).toBeVisible();
   await expect(page.getByText(/Nguồn PDF · Q\d+/)).toBeVisible();
+  await expect(page.getByText(/Chapter [1-6]/)).toBeVisible();
+  await expect(page.getByText(/K[1-3]/)).toBeVisible();
+  await expect(page.getByText(/FL-[1-6]\./)).toBeVisible();
   await expect(page.getByText(/Ảnh câu hỏi gốc trong PDF/)).toBeVisible();
   await expect(page.getByText(/Bằng chứng đáp án trong PDF/)).toHaveCount(0);
 });
