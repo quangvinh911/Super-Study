@@ -1,0 +1,322 @@
+chapter: 1
+questions:
+  - id: "CTFL-C1-K1-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which statement describes a typical objective of testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "To prove that the test object can never fail" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "To find defects and reduce the risk of failures" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "To correct every defect found in the source code" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "To guarantee that all user expectations are documented" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.1 What is Testing?", learningObjective: "FL-1.1.1", blueprintBucket: "C1-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: &original { kind: "original", authoringNote: "Independently written for this practice bank without copying source questions.", rightsStatus: "cleared" }
+    verification: &verified { answerStatus: "verified", reviewedAgainst: "ISTQB CTFL Syllabus v4.0.1", reviewedAt: "2026-08-29", reviewer: "CTFL content review" }
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "Testing can reveal defects and provide information that reduces product risk; it cannot prove that failure is impossible or itself fix defects." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K1-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which is a recognized test objective?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Providing stakeholders with information for release decisions" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Replacing quality assurance across the organization" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Demonstrating that no additional tests could be designed" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Making developers responsible for every test activity" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.1 What is Testing?", learningObjective: "FL-1.1.1", blueprintBucket: "C1-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "A central objective of testing is to provide reliable information so stakeholders can make informed decisions about quality and release risk." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K1-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which testing objective concerns contractual or regulatory obligations?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Validating that applicable requirements have been met" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Removing the need for stakeholder acceptance" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Confirming that developers followed one coding style" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Predicting the exact number of production incidents" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.1 What is Testing?", learningObjective: "FL-1.1.1", blueprintBucket: "C1-K1-02", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Testing may be performed to verify compliance with contractual, legal, or regulatory requirements." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K1-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which TWO are typical objectives of testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Causing failures so that defects can be discovered" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Proving that every possible input has been exercised" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Fixing defects before developers see them" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Confirming that the test object satisfies specified requirements" }] }
+      - { id: "E", content: [{ kind: "paragraph", text: "Guaranteeing a zero-risk release" }] }
+    interaction: { kind: "multiSelect", requiredSelections: 2 }
+    classification: { chapter: 1, section: "1.1 What is Testing?", learningObjective: "FL-1.1.1", blueprintBucket: "C1-K1-02", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A", "D"]
+      explanation: [{ kind: "paragraph", text: "Tests can trigger failures that expose defects and can confirm conformance to requirements. Exhaustive proof, defect correction, and zero-risk guarantees are not testing objectives." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A tester runs a test and observes an incorrect tax total. A developer then locates and repairs the faulty calculation. Which activity is debugging?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Designing the tax test" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Observing the incorrect total" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Locating and repairing the faulty calculation" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Reporting the original result" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.1 What is Testing?", learningObjective: "FL-1.1.2", blueprintBucket: "C1-K2-01", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["C"]
+      explanation: [{ kind: "paragraph", text: "Dynamic testing caused and observed the failure. Debugging comprises finding the defect, analyzing it, and fixing it." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.1.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "After a programmer changes code to remove a defect, what testing activity most directly follows the debugging work?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Confirmation testing of the fix" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Root-cause correction in the requirements process" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Source-code debugging by the test manager" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Cancellation of all remaining regression tests" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.1 What is Testing?", learningObjective: "FL-1.1.2", blueprintBucket: "C1-K2-01", kLevel: "K2", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Once debugging changes the code, confirmation testing checks that the original failure has been resolved." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.1.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "An analyst misunderstands a discount rule and writes the wrong requirement. A developer implements it exactly, and customers later receive incorrect prices. Which sequence is correct?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Failure, root cause, defect, error" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Error, defect, defect, failure" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Defect, failure, error, root cause" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Root cause, failure, error, defect" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.2 Why is Testing Necessary?", learningObjective: "FL-1.2.3", blueprintBucket: "C1-K2-02", kLevel: "K2", styleTags: ["scenario", "ordering"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "The analyst makes an error, creating a requirement defect. That defect leads to a code defect and eventually an observable pricing failure." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.2.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A mobile app closes when a user uploads an empty file because a null check is missing. What is the app closing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "A human error" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "A root cause" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "A defect" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "A failure" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.2 Why is Testing Necessary?", learningObjective: "FL-1.2.3", blueprintBucket: "C1-K2-02", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["D"]
+      explanation: [{ kind: "paragraph", text: "The missing check is a defect. The externally observable app closure during execution is a failure." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.2.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-03-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A company improves its review process to prevent ambiguous requirements and also executes system tests. How should these activities be classified?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Both are debugging" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Process improvement is quality assurance; system testing is quality control" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Process improvement is testing; system testing is quality assurance only" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Both are exclusively project management" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.2 Why is Testing Necessary?", learningObjective: "FL-1.2.2", blueprintBucket: "C1-K2-03", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "Quality assurance is process-oriented and preventive. Testing is product-oriented quality control that evaluates the test object." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.2.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-03-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Why can testing support quality assurance even though the two are not identical?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Test results can reveal process weaknesses that quality assurance can address" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Testing owns every organizational quality policy" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Quality assurance begins only after all tests pass" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Both terms mean correcting source-code defects" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.2 Why is Testing Necessary?", learningObjective: "FL-1.2.2", blueprintBucket: "C1-K2-03", kLevel: "K2", styleTags: ["directKnowledge", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Testing supplies evidence about products and may expose weaknesses in development processes, giving quality assurance useful improvement input." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.2.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-04-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A team has fixed many defects, yet testing keeps finding new ones in the same small module while other modules receive little attention. Which testing principle is most relevant?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Tests wear out" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Defects cluster together" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Absence-of-defects fallacy" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Exhaustive testing is possible" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.3 Testing Principles", learningObjective: "FL-1.3.1", blueprintBucket: "C1-K2-04", kLevel: "K2", styleTags: ["scenario", "MOST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "Defect clustering means a relatively small number of components often contain most defects or cause most operational failures." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.3.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-04-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "An online shop passes all specified tests, but users reject it because checkout is too confusing. Which principle explains this outcome?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Early testing saves time and money" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Testing is context dependent" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Absence of errors is a fallacy" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Defects cluster together" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.3 Testing Principles", learningObjective: "FL-1.3.1", blueprintBucket: "C1-K2-04", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["C"]
+      explanation: [{ kind: "paragraph", text: "Finding and fixing specified defects does not help if the product does not fulfill user needs and business goals; this is the absence-of-errors fallacy." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.3.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-05-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which sequence best reflects the logical flow of the test process?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Completion, execution, analysis, planning" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Planning, analysis, design, implementation, execution, completion" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Design, debugging, planning, acceptance, completion" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Execution, planning, implementation, analysis, design" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.4 Test Activities, Testware and Test Roles", learningObjective: "FL-1.4.1", blueprintBucket: "C1-K2-05", kLevel: "K2", styleTags: ["ordering", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "The conceptual flow moves from planning through analysis, design, implementation, execution, and completion, with monitoring and control operating throughout." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.4.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-05-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A tester identifies testable features, defines test conditions, and prioritizes them using risk. Which test activity is being performed?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Test analysis" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Test implementation" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Test execution" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Test completion" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.4 Test Activities, Testware and Test Roles", learningObjective: "FL-1.4.1", blueprintBucket: "C1-K2-05", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Test analysis determines what to test by examining the test basis and identifying and prioritizing test conditions." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.4.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-06-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A cross-functional team asks testers to collaborate on acceptance criteria while retaining responsibility for specialist test work. Which approach does this illustrate?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "The whole-team approach" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Complete test independence" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Defect clustering" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Exhaustive testing" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.5 Essential Skills and Good Practices in Testing", learningObjective: "FL-1.5.1", blueprintBucket: "C1-K2-06", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "The whole-team approach makes quality a shared responsibility while allowing team members with testing expertise to perform specialist activities." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.5.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C1-K2-06-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A safety-critical change was created and unit-tested by one developer. Which additional review arrangement provides the greatest independence?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "The same developer reviews the change tomorrow" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Another developer on the same team reviews it" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "A qualified tester from an external organization reviews it" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "The author runs the same unit tests again" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 1, section: "1.5 Essential Skills and Good Practices in Testing", learningObjective: "FL-1.5.2", blueprintBucket: "C1-K2-06", kLevel: "K2", styleTags: ["scenario", "MOST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["C"]
+      explanation: [{ kind: "paragraph", text: "An external qualified tester is organizationally separate from the author and therefore offers the highest independence among these choices." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-1.5.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]

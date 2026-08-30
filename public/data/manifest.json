@@ -1,0 +1,686 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankVersion": "2026.08.29.1",
+  "publishedAt": "2026-08-29",
+  "title": "CTFL Practice Original Question Bank",
+  "language": "en",
+  "syllabusVersion": "4.0.1",
+  "questionCount": 80,
+  "solutionCount": 80,
+  "blueprint": [
+    {
+      "chapter": 1,
+      "kLevel": "K1",
+      "count": 2
+    },
+    {
+      "chapter": 1,
+      "kLevel": "K2",
+      "count": 6
+    },
+    {
+      "chapter": 1,
+      "kLevel": "K3",
+      "count": 0
+    },
+    {
+      "chapter": 2,
+      "kLevel": "K1",
+      "count": 2
+    },
+    {
+      "chapter": 2,
+      "kLevel": "K2",
+      "count": 4
+    },
+    {
+      "chapter": 2,
+      "kLevel": "K3",
+      "count": 0
+    },
+    {
+      "chapter": 3,
+      "kLevel": "K1",
+      "count": 2
+    },
+    {
+      "chapter": 3,
+      "kLevel": "K2",
+      "count": 2
+    },
+    {
+      "chapter": 3,
+      "kLevel": "K3",
+      "count": 0
+    },
+    {
+      "chapter": 4,
+      "kLevel": "K1",
+      "count": 0
+    },
+    {
+      "chapter": 4,
+      "kLevel": "K2",
+      "count": 6
+    },
+    {
+      "chapter": 4,
+      "kLevel": "K3",
+      "count": 5
+    },
+    {
+      "chapter": 5,
+      "kLevel": "K1",
+      "count": 1
+    },
+    {
+      "chapter": 5,
+      "kLevel": "K2",
+      "count": 5
+    },
+    {
+      "chapter": 5,
+      "kLevel": "K3",
+      "count": 3
+    },
+    {
+      "chapter": 6,
+      "kLevel": "K1",
+      "count": 1
+    },
+    {
+      "chapter": 6,
+      "kLevel": "K2",
+      "count": 1
+    },
+    {
+      "chapter": 6,
+      "kLevel": "K3",
+      "count": 0
+    }
+  ],
+  "syllabus": {
+    "name": "ISTQB Certified Tester Foundation Level Syllabus",
+    "version": "4.0.1",
+    "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+  },
+  "license": {
+    "use": "Public, non-commercial practice",
+    "notice": "All questions and explanations are original. ISTQB and CertyIQ do not sponsor or endorse this question bank."
+  },
+  "exam": {
+    "questionCount": 40,
+    "passScore": 26,
+    "durationsMinutes": [
+      60,
+      75
+    ],
+    "blueprint": [
+      {
+        "chapter": 1,
+        "kLevel": "K1",
+        "count": 2
+      },
+      {
+        "chapter": 1,
+        "kLevel": "K2",
+        "count": 6
+      },
+      {
+        "chapter": 1,
+        "kLevel": "K3",
+        "count": 0
+      },
+      {
+        "chapter": 2,
+        "kLevel": "K1",
+        "count": 2
+      },
+      {
+        "chapter": 2,
+        "kLevel": "K2",
+        "count": 4
+      },
+      {
+        "chapter": 2,
+        "kLevel": "K3",
+        "count": 0
+      },
+      {
+        "chapter": 3,
+        "kLevel": "K1",
+        "count": 2
+      },
+      {
+        "chapter": 3,
+        "kLevel": "K2",
+        "count": 2
+      },
+      {
+        "chapter": 3,
+        "kLevel": "K3",
+        "count": 0
+      },
+      {
+        "chapter": 4,
+        "kLevel": "K1",
+        "count": 0
+      },
+      {
+        "chapter": 4,
+        "kLevel": "K2",
+        "count": 6
+      },
+      {
+        "chapter": 4,
+        "kLevel": "K3",
+        "count": 5
+      },
+      {
+        "chapter": 5,
+        "kLevel": "K1",
+        "count": 1
+      },
+      {
+        "chapter": 5,
+        "kLevel": "K2",
+        "count": 5
+      },
+      {
+        "chapter": 5,
+        "kLevel": "K3",
+        "count": 3
+      },
+      {
+        "chapter": 6,
+        "kLevel": "K1",
+        "count": 1
+      },
+      {
+        "chapter": 6,
+        "kLevel": "K2",
+        "count": 1
+      },
+      {
+        "chapter": 6,
+        "kLevel": "K3",
+        "count": 0
+      }
+    ]
+  },
+  "inventory": {
+    "totalQuestions": 80,
+    "totalBlueprintBuckets": 40,
+    "variantsPerBucket": 2,
+    "byChapter": {
+      "1": 16,
+      "2": 12,
+      "3": 8,
+      "4": 22,
+      "5": 18,
+      "6": 4
+    },
+    "byKLevel": {
+      "K1": 16,
+      "K2": 48,
+      "K3": 16
+    },
+    "byInteraction": {
+      "singleChoice": 78,
+      "multiSelect": 2
+    },
+    "buckets": [
+      {
+        "bucket": "C1-K1-01",
+        "chapter": 1,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K1-01-A",
+          "CTFL-C1-K1-01-B"
+        ]
+      },
+      {
+        "bucket": "C1-K1-02",
+        "chapter": 1,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K1-02-A",
+          "CTFL-C1-K1-02-B"
+        ]
+      },
+      {
+        "bucket": "C1-K2-01",
+        "chapter": 1,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K2-01-A",
+          "CTFL-C1-K2-01-B"
+        ]
+      },
+      {
+        "bucket": "C1-K2-02",
+        "chapter": 1,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K2-02-A",
+          "CTFL-C1-K2-02-B"
+        ]
+      },
+      {
+        "bucket": "C1-K2-03",
+        "chapter": 1,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K2-03-A",
+          "CTFL-C1-K2-03-B"
+        ]
+      },
+      {
+        "bucket": "C1-K2-04",
+        "chapter": 1,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K2-04-A",
+          "CTFL-C1-K2-04-B"
+        ]
+      },
+      {
+        "bucket": "C1-K2-05",
+        "chapter": 1,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K2-05-A",
+          "CTFL-C1-K2-05-B"
+        ]
+      },
+      {
+        "bucket": "C1-K2-06",
+        "chapter": 1,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C1-K2-06-A",
+          "CTFL-C1-K2-06-B"
+        ]
+      },
+      {
+        "bucket": "C2-K1-01",
+        "chapter": 2,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C2-K1-01-A",
+          "CTFL-C2-K1-01-B"
+        ]
+      },
+      {
+        "bucket": "C2-K1-02",
+        "chapter": 2,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C2-K1-02-A",
+          "CTFL-C2-K1-02-B"
+        ]
+      },
+      {
+        "bucket": "C2-K2-01",
+        "chapter": 2,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C2-K2-01-A",
+          "CTFL-C2-K2-01-B"
+        ]
+      },
+      {
+        "bucket": "C2-K2-02",
+        "chapter": 2,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C2-K2-02-A",
+          "CTFL-C2-K2-02-B"
+        ]
+      },
+      {
+        "bucket": "C2-K2-03",
+        "chapter": 2,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C2-K2-03-A",
+          "CTFL-C2-K2-03-B"
+        ]
+      },
+      {
+        "bucket": "C2-K2-04",
+        "chapter": 2,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C2-K2-04-A",
+          "CTFL-C2-K2-04-B"
+        ]
+      },
+      {
+        "bucket": "C3-K1-01",
+        "chapter": 3,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C3-K1-01-A",
+          "CTFL-C3-K1-01-B"
+        ]
+      },
+      {
+        "bucket": "C3-K1-02",
+        "chapter": 3,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C3-K1-02-A",
+          "CTFL-C3-K1-02-B"
+        ]
+      },
+      {
+        "bucket": "C3-K2-01",
+        "chapter": 3,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C3-K2-01-A",
+          "CTFL-C3-K2-01-B"
+        ]
+      },
+      {
+        "bucket": "C3-K2-02",
+        "chapter": 3,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C3-K2-02-A",
+          "CTFL-C3-K2-02-B"
+        ]
+      },
+      {
+        "bucket": "C4-K2-01",
+        "chapter": 4,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K2-01-A",
+          "CTFL-C4-K2-01-B"
+        ]
+      },
+      {
+        "bucket": "C4-K2-02",
+        "chapter": 4,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K2-02-A",
+          "CTFL-C4-K2-02-B"
+        ]
+      },
+      {
+        "bucket": "C4-K2-03",
+        "chapter": 4,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K2-03-A",
+          "CTFL-C4-K2-03-B"
+        ]
+      },
+      {
+        "bucket": "C4-K2-04",
+        "chapter": 4,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K2-04-A",
+          "CTFL-C4-K2-04-B"
+        ]
+      },
+      {
+        "bucket": "C4-K2-05",
+        "chapter": 4,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K2-05-A",
+          "CTFL-C4-K2-05-B"
+        ]
+      },
+      {
+        "bucket": "C4-K2-06",
+        "chapter": 4,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K2-06-A",
+          "CTFL-C4-K2-06-B"
+        ]
+      },
+      {
+        "bucket": "C4-K3-01",
+        "chapter": 4,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K3-01-A",
+          "CTFL-C4-K3-01-B"
+        ]
+      },
+      {
+        "bucket": "C4-K3-02",
+        "chapter": 4,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K3-02-A",
+          "CTFL-C4-K3-02-B"
+        ]
+      },
+      {
+        "bucket": "C4-K3-03",
+        "chapter": 4,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K3-03-A",
+          "CTFL-C4-K3-03-B"
+        ]
+      },
+      {
+        "bucket": "C4-K3-04",
+        "chapter": 4,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K3-04-A",
+          "CTFL-C4-K3-04-B"
+        ]
+      },
+      {
+        "bucket": "C4-K3-05",
+        "chapter": 4,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C4-K3-05-A",
+          "CTFL-C4-K3-05-B"
+        ]
+      },
+      {
+        "bucket": "C5-K1-01",
+        "chapter": 5,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K1-01-A",
+          "CTFL-C5-K1-01-B"
+        ]
+      },
+      {
+        "bucket": "C5-K2-01",
+        "chapter": 5,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K2-01-A",
+          "CTFL-C5-K2-01-B"
+        ]
+      },
+      {
+        "bucket": "C5-K2-02",
+        "chapter": 5,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K2-02-A",
+          "CTFL-C5-K2-02-B"
+        ]
+      },
+      {
+        "bucket": "C5-K2-03",
+        "chapter": 5,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K2-03-A",
+          "CTFL-C5-K2-03-B"
+        ]
+      },
+      {
+        "bucket": "C5-K2-04",
+        "chapter": 5,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K2-04-A",
+          "CTFL-C5-K2-04-B"
+        ]
+      },
+      {
+        "bucket": "C5-K2-05",
+        "chapter": 5,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K2-05-A",
+          "CTFL-C5-K2-05-B"
+        ]
+      },
+      {
+        "bucket": "C5-K3-01",
+        "chapter": 5,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K3-01-A",
+          "CTFL-C5-K3-01-B"
+        ]
+      },
+      {
+        "bucket": "C5-K3-02",
+        "chapter": 5,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K3-02-A",
+          "CTFL-C5-K3-02-B"
+        ]
+      },
+      {
+        "bucket": "C5-K3-03",
+        "chapter": 5,
+        "kLevel": "K3",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C5-K3-03-A",
+          "CTFL-C5-K3-03-B"
+        ]
+      },
+      {
+        "bucket": "C6-K1-01",
+        "chapter": 6,
+        "kLevel": "K1",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C6-K1-01-A",
+          "CTFL-C6-K1-01-B"
+        ]
+      },
+      {
+        "bucket": "C6-K2-01",
+        "chapter": 6,
+        "kLevel": "K2",
+        "variantsRequired": 2,
+        "questionIds": [
+          "CTFL-C6-K2-01-A",
+          "CTFL-C6-K2-01-B"
+        ]
+      }
+    ]
+  },
+  "files": {
+    "questions": "questions.json",
+    "solutions": "solutions.json"
+  },
+  "integrity": {
+    "questionsSha256": "c35f81dc3bae989800c9b9fb2e6bfa32a67596484a73f8e2c75af06bc9e1cb40",
+    "solutionsSha256": "53dd99440ba7d4db32dc0a2e6bb04ff505cb8fc03f53f304b90ce510589c9d72"
+  },
+  "sourceAudit": {
+    "document": "ctfl-v4-0.pdf",
+    "purpose": "research-only",
+    "containsExtractedText": false,
+    "counts": {
+      "pages": 262,
+      "questions": 278,
+      "singleChoice": 276,
+      "multiSelect": 2,
+      "withExplanation": 265,
+      "tableOrDiagramDependentMinimum": 23
+    },
+    "answerKeyCounts": {
+      "A": 61,
+      "B": 75,
+      "C": 74,
+      "D": 63,
+      "U": 3,
+      "BE": 1,
+      "BD": 1
+    },
+    "anomalies": {
+      "invalidKey": [
+        38,
+        39,
+        47
+      ],
+      "possibleDuplicate": [
+        [
+          10,
+          41
+        ]
+      ],
+      "conflictingDuplicate": [
+        [
+          10,
+          41
+        ]
+      ],
+      "missingExplanationCount": 13
+    },
+    "publicationPolicy": "No source question, option, explanation, image, table, or logo is included in the public bank."
+  }
+}

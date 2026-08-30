@@ -1,0 +1,53 @@
+{
+  "name": "ctfl-practice",
+  "version": "1.0.0",
+  "description": "A privacy-first CTFL 4.0 practice and mock exam PWA.",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "content:build": "node scripts/build-content.mjs",
+    "content:check": "node scripts/build-content.mjs --check",
+    "build": "pnpm run content:build && ng build",
+    "build:cf": "pnpm run content:build && ng build --output-path dist/cloudflare",
+    "build:sites": "pnpm run build:cf && node scripts/prepare-sites-build.mjs",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:content": "vitest run scripts/build-content.test.mjs",
+    "test:ci": "pnpm run content:check && ng test --watch=false",
+    "test:e2e": "playwright test",
+    "test:pwa": "pnpm run build:cf && playwright test --config playwright.pwa.config.ts"
+  },
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "dependencies": {
+    "@angular/common": "22.1.4",
+    "@angular/compiler": "22.1.4",
+    "@angular/core": "22.1.4",
+    "@angular/forms": "22.1.4",
+    "@angular/platform-browser": "22.1.4",
+    "@angular/router": "22.1.4",
+    "@angular/service-worker": "22.1.4",
+    "idb": "8.0.3",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "22.1.6",
+    "@angular/cli": "22.1.6",
+    "@angular/compiler-cli": "22.1.4",
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.62.1",
+    "ajv": "8.20.0",
+    "fake-indexeddb": "6.2.5",
+    "jsdom": "^28.0.0",
+    "prettier": "^3.8.1",
+    "serve": "14.2.5",
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.8",
+    "yaml": "2.9.0"
+  },
+  "engines": {
+    "node": "24.19.0",
+    "pnpm": "11.19.0"
+  }
+}

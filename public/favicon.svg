@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CTFL Practice">
+  <rect width="64" height="64" rx="16" fill="#102c3a"/>
+  <path d="M17 18h30v7H36v24h-8V25H17z" fill="#f5f1e8"/>
+  <circle cx="47" cy="47" r="8" fill="#20a39e"/>
+  <path d="m43 47 3 3 5-7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

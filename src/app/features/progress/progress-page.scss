@@ -1,0 +1,209 @@
+.progress-page,
+.section-block,
+.data-tools {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.progress-header {
+  align-items: end;
+}
+
+.progress-header > div:first-child {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.progress-header p {
+  margin: 0;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.metric-card {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: var(--color-paper-strong);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.metric-card span {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.metric-card strong {
+  color: var(--color-ink);
+  font-size: var(--text-xl);
+}
+
+.section-heading {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.session-list,
+.history-list,
+.two-column {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.session-card,
+.history-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.session-card > div,
+.history-card > div {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.session-card h3,
+.session-card p,
+.history-card h3,
+.history-card p {
+  margin: 0;
+}
+
+.session-card p,
+.history-card p {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.weak-list,
+.bookmark-panel {
+  display: grid;
+  gap: 0;
+}
+
+.weak-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.weak-row:last-child {
+  border: 0;
+}
+
+.weak-row > div {
+  display: grid;
+}
+
+.weak-row span,
+.bookmark-panel li span {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.weak-row .accuracy {
+  color: var(--color-coral-dark);
+  font-weight: 850;
+}
+
+.bookmark-panel ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.bookmark-panel li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block-end: 0.5rem;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.bookmark-panel p,
+.empty-inline {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.notice {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.notice--success {
+  color: var(--color-success);
+  background: var(--color-success-wash);
+}
+
+.notice--error {
+  color: var(--color-danger);
+  background: var(--color-danger-wash);
+}
+
+.data-tools p {
+  max-width: var(--measure);
+  margin: 0.5rem 0 0;
+  color: var(--color-text-muted);
+}
+
+.import-controls {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 23rem;
+}
+
+.file-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.file-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.danger-button {
+  color: var(--color-danger);
+  background: var(--color-paper-strong);
+  border-color: var(--color-danger);
+}
+
+.danger-button:hover {
+  color: var(--color-paper-strong);
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+@media (min-width: 48rem) {
+  .progress-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .history-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .two-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

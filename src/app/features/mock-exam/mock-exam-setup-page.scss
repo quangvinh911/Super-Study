@@ -1,0 +1,96 @@
+.exam-layout,
+.rules,
+.start-panel,
+.start-panel fieldset {
+  display: grid;
+  gap: 1rem;
+}
+
+.rules dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.rules dl div {
+  padding: 0.9rem 0;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.rules dt {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.rules dd {
+  margin: 0.2rem 0 0;
+  color: var(--color-ink);
+  font-weight: 850;
+}
+
+.note {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.start-panel fieldset legend {
+  margin-block-end: 0.7rem;
+  color: var(--color-ink);
+  font-size: var(--text-lg);
+  font-weight: 800;
+}
+
+.duration-option {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem;
+  background: var(--color-paper-strong);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.duration-option:has(input:checked) {
+  background: var(--color-teal-wash);
+  border-color: var(--color-teal);
+}
+
+.duration-option span {
+  display: grid;
+}
+
+.duration-option small {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.ready,
+.error {
+  margin: 0;
+  padding: 0.8rem 0.9rem;
+  border-radius: var(--radius-sm);
+}
+
+.ready {
+  color: var(--color-success);
+  background: var(--color-success-wash);
+}
+
+.error {
+  color: var(--color-danger);
+  background: var(--color-danger-wash);
+}
+
+.quiet-link {
+  justify-self: start;
+  font-size: var(--text-sm);
+}
+
+@media (min-width: 48rem) {
+  .exam-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    align-items: start;
+  }
+}

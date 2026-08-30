@@ -1,0 +1,1608 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankVersion": "2026.08.29.1",
+  "solutions": [
+    {
+      "questionId": "CTFL-C1-K1-01-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Testing can reveal defects and provide information that reduces product risk; it cannot prove that failure is impossible or itself fix defects."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K1-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "A central objective of testing is to provide reliable information so stakeholders can make informed decisions about quality and release risk."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K1-02-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Testing may be performed to verify compliance with contractual, legal, or regulatory requirements."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K1-02-B",
+      "correctOptionIds": [
+        "A",
+        "D"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Tests can trigger failures that expose defects and can confirm conformance to requirements. Exhaustive proof, defect correction, and zero-risk guarantees are not testing objectives."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-01-A",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Dynamic testing caused and observed the failure. Debugging comprises finding the defect, analyzing it, and fixing it."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.1.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Once debugging changes the code, confirmation testing checks that the original failure has been resolved."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.1.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-02-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The analyst makes an error, creating a requirement defect. That defect leads to a code defect and eventually an observable pricing failure."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-02-B",
+      "correctOptionIds": [
+        "D"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The missing check is a defect. The externally observable app closure during execution is a failure."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-03-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Quality assurance is process-oriented and preventive. Testing is product-oriented quality control that evaluates the test object."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.2.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-03-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Testing supplies evidence about products and may expose weaknesses in development processes, giving quality assurance useful improvement input."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.2.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-04-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Defect clustering means a relatively small number of components often contain most defects or cause most operational failures."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.3.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-04-B",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Finding and fixing specified defects does not help if the product does not fulfill user needs and business goals; this is the absence-of-errors fallacy."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.3.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-05-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The conceptual flow moves from planning through analysis, design, implementation, execution, and completion, with monitoring and control operating throughout."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.4.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-05-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Test analysis determines what to test by examining the test basis and identifying and prioritizing test conditions."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.4.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-06-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The whole-team approach makes quality a shared responsibility while allowing team members with testing expertise to perform specialist activities."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.5.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C1-K2-06-B",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "An external qualified tester is organizationally separate from the author and therefore offers the highest independence among these choices."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-1.5.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K1-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Sequential, iterative, incremental, and agile approaches are lifecycle models; the other choices are test concepts or techniques."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K1-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Incremental development delivers the product in a sequence of functional additions rather than as one final delivery."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K1-02-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Changes to an operational environment, including platform upgrades and migrations, are common triggers for maintenance testing."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.3.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K1-02-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Retirement may require testing migration, archiving, long retention periods, and later retrieval of stored data."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.3.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "A sequential model provides stable work products that can support early test analysis and corresponding test levels, often aligned through the V-model."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Iterative and incremental delivery requires repeated testing and frequent regression feedback; automation helps keep that feedback fast."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-02-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The red-green-refactor cycle centered on small code-level tests is test-driven development."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.1.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-02-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Automated pipeline checks give rapid feedback about changes and support frequent, reliable delivery, a key DevOps benefit."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.1.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-03-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The focus is on interfaces and interactions between two integrated components, which characterizes component integration testing."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-03-B",
+      "correctOptionIds": [
+        "D"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Acceptance testing evaluates readiness and fitness for users' business needs, often with business representatives involved."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-04-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The focused check confirms the original defect is fixed; the broader suites look for unintended side effects and are regression testing."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C2-K2-04-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Regression testing checks that a change has not adversely affected previously working behavior, including dependent applications."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-2.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K1-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Documents such as requirements, designs, code, test plans, and test cases can be evaluated without executing the software."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K1-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Static analysis tools can inspect source code and other machine-readable work products without executing them."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K1-02-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "A walkthrough is normally led by the author and may use scenarios, dry runs, or a peer-group discussion."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.2.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K1-02-B",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Inspection is the most formal review type, with defined roles, a documented process, and metric collection."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.2.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K2-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Static testing can identify defects before they propagate into design and code, reducing the cost and delay of later rework."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.1.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K2-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "A missing requirement can be detected by reviewing the specification; the other defects require observing runtime behavior."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.1.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K2-02-A",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The moderator facilitates the review, supports effective communication, manages time, and helps maintain a safe discussion environment."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C3-K2-02-B",
+      "correctOptionIds": [
+        "A",
+        "D"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "During individual review, each reviewer studies assigned material and records anomalies, recommendations, and questions. Selection and distribution occur during initiation; discussion and exit decisions occur later."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-3.2.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Equivalence partitions group values expected to receive equivalent processing, allowing a representative to test the shared behavior."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Boundary value analysis targets values on and next to boundaries because implementation mistakes are common at partition edges."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-02-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Decision tables show combinations of conditions and their resulting actions, making complex business rules systematic and visible."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-02-B",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "State transition testing models behavior in response to events, including how the current state changes the result."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-03-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Exercising every branch necessarily executes every reachable statement, so 100% branch coverage subsumes 100% statement coverage."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.3.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-03-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Coverage measurements identify unexercised structural elements, which can prompt additional tests and reveal gaps in the suite."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.3.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-04-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Error guessing uses tester knowledge and experience of likely errors, defects, and failures to devise targeted tests."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.4.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-04-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The selection is driven by knowledge of a recurring date-handling failure, which is the defining basis of error guessing."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.4.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-05-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Exploratory testing integrates learning, test design, and execution; session-based testing can provide time-boxed structure and reporting."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.4.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-05-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "A checklist captures experience, standards, and known concerns in a reusable form while still allowing the tester judgment in applying each item."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.4.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-06-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The Given/When/Then form expresses a precondition, action, and observable expected result and is a scenario-oriented acceptance criterion."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.5.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K2-06-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "ATDD builds shared understanding through examples and acceptance tests created collaboratively before the solution is implemented."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.5.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The partitions are below 18, 18 through 65, and above 65. Values 17, 40, and 70 represent each one."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "One value is needed from each partition. The values 1, 5, and 12 kg cover the low, middle, and high partitions respectively."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-02-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "For each boundary, 2-value BVA selects the boundary value and the closest value in the adjacent partition: 99/100 and 999/1000."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-02-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "3-value BVA takes the boundary and both adjacent values: 0, 1, 2 around the lower boundary and 19, 20, 21 around the upper boundary."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-03-A",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Being signed in is mandatory. A signed-out user is denied even when the document is public and the user would otherwise be its owner."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-03-B",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Two Boolean conditions have 2 squared, or four, combinations. Since no rule can be collapsed, each column requires a test."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-04-A",
+      "correctOptionIds": [
+        "D"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Closed is terminal by definition and therefore cannot transition back to Active."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-04-B",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Add reaches HasItems and Checkout reaches the final CheckedOut state. Remove then has no defined outgoing transition and is invalid."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.2.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-05-A",
+      "correctOptionIds": [
+        "D"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "With the condition true, all four numbered statements execute, so coverage is 4 divided by 4, or 100%."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.3.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C4-K3-05-B",
+      "correctOptionIds": [
+        "D"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The first test takes the true outcome of both decisions and the second takes both false outcomes, exercising all four branches."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-4.3.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K1-01-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Testers add value during planning by helping make work items clear, testable, and supported by useful acceptance criteria."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K1-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "During release and iteration planning, testers contribute information about scope, risks, dependencies, and the effort needed for testing."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "A test plan communicates the objectives, scope, resources, schedule, responsibilities, risks, and selected test approach."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Scope, responsibilities, resources, and schedule are core test-planning information and belong in the test plan."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-02-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Entry criteria are preconditions for beginning; exit criteria support a decision that sufficient completion conditions have been met."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-02-B",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Completion of planned priority tests and an acceptable remaining-defect state are measurable conditions for finishing system testing."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-03-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Product risks relate to quality characteristics and possible product failures, while project risks threaten planning, staffing, schedule, or delivery."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.2.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-03-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Risk-based testing uses assessed risk to decide scope, priority, techniques, effort, coverage, and the order of test activities."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.2.3",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-04-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Tracking planned, executed, passed, failed, and blocked tests provides evidence of execution progress and outstanding work."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.3.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-04-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "A management audience may need trends and residual risks, while a technical audience may need detailed blockers and defect information."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.3.2",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-05-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Configuration management enables traceable, reproducible testing by controlling the identities and versions of test objects, testware, and environments."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.4.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K2-05-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Specific context, steps, and observed versus expected behavior allow recipients to reproduce, analyze, classify, and resolve the defect."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.5.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K3-01-A",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The mean is (18 + 24 + 21) / 3 = 21 person-days. Historical estimates remain assumptions and should be checked for comparability."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K3-01-B",
+      "correctOptionIds": [
+        "B"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The weighted estimate is (4 + 4 × 7 + 10) / 6 = 42 / 6 = 7 days."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K3-02-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "The prerequisite T3 must precede the critical-risk test T1. The medium-risk T4 follows, and the cosmetic low-risk T2 is last."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.5",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K3-02-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "With capacity defined by test count and no dependencies, the two high-risk tests receive priority over medium- and low-risk tests."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.1.5",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K3-03-A",
+      "correctOptionIds": [
+        "C"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Using the stated model, risk level is 4 × 5 = 20. The scale and interpretation should be agreed by the stakeholders."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C5-K3-03-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Risk mitigation through targeted, early testing can reduce likelihood, expose failures, and provide information about the remaining risk."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-5.2.4",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C6-K1-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Test data tools help generate, acquire, anonymize, or arrange the data needed to exercise selected test conditions."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-6.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C6-K1-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Test management tools support planning, monitoring, traceability, testware organization, and reporting across the test process."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-6.1.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C6-K2-01-A",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Automation can execute repeatable checks quickly and consistently, improving feedback frequency, while still requiring maintenance and human interpretation."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-6.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    },
+    {
+      "questionId": "CTFL-C6-K2-01-B",
+      "correctOptionIds": [
+        "A"
+      ],
+      "explanation": [
+        {
+          "kind": "paragraph",
+          "text": "Automating unstable interfaces can create high maintenance costs. Tool selection and expected benefits should include total ownership effort, not execution speed alone."
+        }
+      ],
+      "references": [
+        {
+          "title": "ISTQB Certified Tester Foundation Level Syllabus",
+          "version": "4.0.1",
+          "locator": "FL-6.2.1",
+          "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+        }
+      ]
+    }
+  ]
+}

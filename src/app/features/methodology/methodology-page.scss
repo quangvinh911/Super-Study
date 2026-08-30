@@ -1,0 +1,19 @@
+:host { display: block; }
+.document-page { max-width: 72rem; margin-inline: auto; padding-block: clamp(2rem, 5vw, 5rem); }
+header { max-width: 58rem; padding-bottom: clamp(2.4rem, 5vw, 4.5rem); }
+.kicker, .section-number { color: var(--color-coral-dark); font: 700 .72rem/1.2 var(--font-mono); letter-spacing: .13em; text-transform: uppercase; }
+h1 { margin: .8rem 0 1.2rem; font: 750 clamp(2.5rem, 6vw, 5rem)/.98 var(--font-display); letter-spacing: -.05em; }
+.summary { color: var(--muted); font-size: 1.15rem; line-height: 1.7; max-width: 64ch; }
+section { display: grid; grid-template-columns: 5rem 1fr; gap: 1.5rem; padding: 2.5rem 0; border-top: 1px solid var(--line); }
+section > div { max-width: 52rem; }
+h2 { margin: 0 0 1rem; font: 750 clamp(1.5rem, 3vw, 2.2rem)/1.1 var(--font-display); }
+p, li { color: var(--muted); line-height: 1.75; }
+li + li { margin-top: .55rem; }
+.blueprint-table { overflow-x: auto; margin-top: 1.5rem; border: 1px solid var(--line-strong); border-radius: var(--radius-md); }
+table { width: 100%; border-collapse: collapse; min-width: 34rem; background: var(--paper); }
+th, td { padding: .85rem 1rem; text-align: center; border-bottom: 1px solid var(--line); }
+thead { background: var(--ink); color: var(--paper); }
+tbody th { color: var(--ink); }
+.resource-list { padding: 0; list-style: none; }
+.resource-list a { display: flex; justify-content: space-between; gap: 1rem; color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: .2em; padding-block: .5rem; }
+@media (max-width: 620px) { section { grid-template-columns: 1fr; gap: .65rem; } }

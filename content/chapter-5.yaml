@@ -1,0 +1,361 @@
+chapter: 5
+questions:
+  - id: "CTFL-C5-K1-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which planning activity benefits directly from tester participation?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Selecting the company's accounting policy" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Identifying testable acceptance criteria for backlog items" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Approving employee holiday requests" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Choosing the office lease" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.2", blueprintBucket: "C5-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: &original { kind: "original", authoringNote: "Independently written for this practice bank without copying source questions.", rightsStatus: "cleared" }
+    verification: &verified { answerStatus: "verified", reviewedAgainst: "ISTQB CTFL Syllabus v4.0.1", reviewedAt: "2026-08-29", reviewer: "CTFL content review" }
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "Testers add value during planning by helping make work items clear, testable, and supported by useful acceptance criteria." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K1-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "At which event can a tester help the team understand the testing effort for upcoming work?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Release or iteration planning" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Payroll reconciliation" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Office safety inspection" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Supplier contract renewal" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.2", blueprintBucket: "C5-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "During release and iteration planning, testers contribute information about scope, risks, dependencies, and the effort needed for testing." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "What is the primary purpose of a test plan?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "To document objectives, resources, processes, and the approach for the test effort" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "To replace all project plans and product requirements" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "To guarantee that no defects will reach production" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "To record only the final list of detected defects" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.1", blueprintBucket: "C5-K2-01", kLevel: "K2", styleTags: ["directKnowledge", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "A test plan communicates the objectives, scope, resources, schedule, responsibilities, risks, and selected test approach." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A stakeholder wants to know which features are in test scope, who will test them, and when testing will finish. Which work product should provide this information?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "A test plan" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "A single defect report" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "A source-code style guide" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "A user password policy" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.1", blueprintBucket: "C5-K2-01", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Scope, responsibilities, resources, and schedule are core test-planning information and belong in the test plan." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "What is the difference between entry criteria and exit criteria?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Entry criteria define conditions to start an activity; exit criteria define conditions to declare it complete" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Entry criteria apply only to developers; exit criteria apply only to testers" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Entry criteria describe defects; exit criteria describe requirements" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "There is no practical difference between them" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.3", blueprintBucket: "C5-K2-02", kLevel: "K2", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Entry criteria are preconditions for beginning; exit criteria support a decision that sufficient completion conditions have been met." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which is an example of an exit criterion for system testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "The test environment is available" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "All planned high-priority tests have run and no critical defect remains open" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Testers have received access credentials" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "The first test case has been designed" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.3", blueprintBucket: "C5-K2-02", kLevel: "K2", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "Completion of planned priority tests and an acceptable remaining-defect state are measurable conditions for finishing system testing." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-03-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which statement correctly distinguishes product risk from project risk?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Product risk concerns possible poor quality of the product; project risk threatens the project's ability to deliver" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Product risk affects only schedules; project risk affects only software behavior" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Product risk is always financial; project risk is always technical" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "The terms are synonyms" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.2 Risk Management", learningObjective: "FL-5.2.2", blueprintBucket: "C5-K2-03", kLevel: "K2", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Product risks relate to quality characteristics and possible product failures, while project risks threaten planning, staffing, schedule, or delivery." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.2.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-03-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "How should the results of product risk analysis influence testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Higher-risk areas should generally receive earlier and more intensive testing" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "All areas must receive identical test effort regardless of risk" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Only low-risk areas should be tested because they are easier" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Risk analysis should be hidden from test planning" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.2 Risk Management", learningObjective: "FL-5.2.3", blueprintBucket: "C5-K2-03", kLevel: "K2", styleTags: ["directKnowledge", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Risk-based testing uses assessed risk to decide scope, priority, techniques, effort, coverage, and the order of test activities." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.2.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-04-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which metric is useful for monitoring test execution progress?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Number of planned tests executed and their outcomes" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Number of chairs in the project room" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Length of the product name" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Age of the company logo" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.3 Test Monitoring, Test Control and Test Completion", learningObjective: "FL-5.3.1", blueprintBucket: "C5-K2-04", kLevel: "K2", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Tracking planned, executed, passed, failed, and blocked tests provides evidence of execution progress and outstanding work." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.3.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-04-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Why should a test report be adapted to its audience?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Different stakeholders need different levels of detail and information for their decisions" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "The underlying facts may be changed for each stakeholder" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Only testers are allowed to understand test status" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Audience-specific reports remove the need for metrics" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.3 Test Monitoring, Test Control and Test Completion", learningObjective: "FL-5.3.2", blueprintBucket: "C5-K2-04", kLevel: "K2", styleTags: ["directKnowledge", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "A management audience may need trends and residual risks, while a technical audience may need detailed blockers and defect information." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.3.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-05-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "How does configuration management support testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "It identifies and controls versions of testware, test objects, and related items" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "It decides every expected result without requirements" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "It makes regression testing unnecessary" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "It guarantees that environments never fail" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.4 Configuration Management", learningObjective: "FL-5.4.1", blueprintBucket: "C5-K2-05", kLevel: "K2", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Configuration management enables traceable, reproducible testing by controlling the identities and versions of test objects, testware, and environments." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.4.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K2-05-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which information makes a defect report most useful for investigation?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "A clear title, environment, reproducible steps, expected result, and actual result" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Only the statement that the product is broken" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "The tester's preferred programming language" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "A list of unrelated defects from another product" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.5 Defect Management", learningObjective: "FL-5.5.1", blueprintBucket: "C5-K2-05", kLevel: "K2", styleTags: ["directKnowledge", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Specific context, steps, and observed versus expected behavior allow recipients to reproduce, analyze, classify, and resolve the defect." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.5.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K3-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Three earlier, comparable test cycles required 18, 24, and 21 person-days. Using the arithmetic mean as a simple estimate, what is the estimate for the next cycle?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "18 person-days" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "21 person-days" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "24 person-days" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "63 person-days" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.4", blueprintBucket: "C5-K3-01", kLevel: "K3", styleTags: ["calculation"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "The mean is (18 + 24 + 21) / 3 = 21 person-days. Historical estimates remain assumptions and should be checked for comparability." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.4", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K3-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A team uses three-point estimation with optimistic 4 days, most likely 7 days, and pessimistic 10 days. Using E = (optimistic + 4 × most likely + pessimistic) / 6, what is E?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "6 days" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "7 days" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "8 days" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "21 days" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.4", blueprintBucket: "C5-K3-01", kLevel: "K3", styleTags: ["calculation"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "The weighted estimate is (4 + 4 × 7 + 10) / 6 = 42 / 6 = 7 days." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.4", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K3-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Four tests are ready. T1 covers a critical payment risk, T2 covers a cosmetic low-risk issue, T3 must run before T1, and T4 covers a medium risk with no dependency. Which order best applies dependency and risk-based prioritization?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "T3, T1, T4, T2" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "T1, T3, T2, T4" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "T2, T4, T1, T3" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "T4, T2, T3, T1" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.5", blueprintBucket: "C5-K3-02", kLevel: "K3", styleTags: ["scenario", "ordering", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "The prerequisite T3 must precede the critical-risk test T1. The medium-risk T4 follows, and the cosmetic low-risk T2 is last." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.5", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K3-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A build has time for only two tests. Test A has high risk and takes 20 minutes; B has low risk and takes 5; C has high risk and takes 10; D has medium risk and takes 10. No dependencies exist. Which pair best follows risk-based prioritization?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "A and C" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "B and D" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "A and B" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "C and D" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.1 Test Planning", learningObjective: "FL-5.1.5", blueprintBucket: "C5-K3-02", kLevel: "K3", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "With capacity defined by test count and no dependencies, the two high-risk tests receive priority over medium- and low-risk tests." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.1.5", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K3-03-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A product risk has likelihood 4 and impact 5 on five-point scales. If risk level is calculated as likelihood × impact, what is the risk level?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "9" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "10" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "20" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "25" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.2 Risk Management", learningObjective: "FL-5.2.1", blueprintBucket: "C5-K3-03", kLevel: "K3", styleTags: ["calculation"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["C"]
+      explanation: [{ kind: "paragraph", text: "Using the stated model, risk level is 4 × 5 = 20. The scale and interpretation should be agreed by the stakeholders." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.2.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C5-K3-03-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A team identifies a high risk that incorrect tax rounding could charge customers too much. Which test response best addresses this product risk?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Add focused boundary and calculation tests, review results early, and track residual risk" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Remove all tax tests so failures cannot be observed" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Test only the visual color of the checkout page" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Wait until after release before discussing the risk" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 5, section: "5.2 Risk Management", learningObjective: "FL-5.2.4", blueprintBucket: "C5-K3-03", kLevel: "K3", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Risk mitigation through targeted, early testing can reduce likelihood, expose failures, and provide information about the remaining risk." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-5.2.4", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]

@@ -1,0 +1,143 @@
+<div class="page progress-page">
+  <header class="page-header progress-header">
+    <div>
+      <p class="eyebrow">Dữ liệu trên thiết bị</p>
+      <h1>Tiến độ học tập</h1>
+      <p>Lịch sử, điểm yếu và bookmark chỉ được lưu trong trình duyệt này.</p>
+    </div>
+    <div class="cluster">
+      <a class="button" routerLink="/practice">Luyện tập</a>
+      <a class="button button--secondary" routerLink="/mock-exam">Thi thử</a>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <p class="surface" aria-live="polite">Đang đọc tiến độ…</p>
+  } @else {
+    @if (message()) {
+      <p class="notice notice--success" role="status">{{ message() }}</p>
+    }
+    @if (error()) {
+      <p class="notice notice--error" role="alert">{{ error() }}</p>
+    }
+
+    <section class="metric-grid" aria-label="Tổng quan tiến độ">
+      <article class="metric-card"><span>Lượt trả lời</span><strong>{{ totalAnswered() }}</strong></article>
+      <article class="metric-card"><span>Độ chính xác</span><strong>{{ accuracy() }}%</strong></article>
+      <article class="metric-card"><span>Phiên hoàn thành</span><strong>{{ attempts().length }}</strong></article>
+      <article class="metric-card"><span>Bookmark</span><strong>{{ bookmarks().length }}</strong></article>
+    </section>
+
+    @if (activeSessions().length) {
+      <section class="section-block" aria-labelledby="active-title">
+        <div class="section-heading">
+          <p class="eyebrow">Tiếp tục</p>
+          <h2 id="active-title">Phiên đang làm</h2>
+        </div>
+        <div class="session-list">
+          @for (session of activeSessions(); track session.id) {
+            <article class="surface session-card">
+              <div>
+                <span class="status-pill">{{ session.mode === 'exam' ? 'Thi thử' : 'Luyện tập' }}</span>
+                <h3>{{ session.questions.length }} câu · đang ở câu {{ session.currentIndex + 1 }}</h3>
+                <p>Cập nhật {{ formatDate(session.updatedAt) }}</p>
+              </div>
+              <a class="button" [routerLink]="resumeLink(session)">Tiếp tục</a>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    <section class="two-column section-block">
+      <div aria-labelledby="weak-title">
+        <div class="section-heading">
+          <p class="eyebrow">Ưu tiên ôn tập</p>
+          <h2 id="weak-title">Câu cần củng cố</h2>
+        </div>
+        @if (weakQuestions().length) {
+          <div class="surface weak-list">
+            @for (item of weakQuestions(); track item.questionId + item.revision) {
+              <div class="weak-row">
+                <div><strong>{{ item.questionId }}</strong><span>{{ item.incorrectCount }} lần sai / {{ item.seenCount }} lượt</span></div>
+                <span class="accuracy">{{ questionAccuracy(item) }}%</span>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="surface empty-inline">
+            <p>Chưa có câu trả lời sai để phân tích.</p>
+            <a routerLink="/practice">Bắt đầu một phiên luyện tập</a>
+          </div>
+        }
+      </div>
+
+      <div aria-labelledby="bookmark-title">
+        <div class="section-heading">
+          <p class="eyebrow">Để xem lại</p>
+          <h2 id="bookmark-title">Bookmark</h2>
+        </div>
+        <div class="surface bookmark-panel">
+          @if (bookmarks().length) {
+            <ul>
+              @for (bookmark of bookmarks(); track bookmark.questionId) {
+                <li><strong>{{ bookmark.questionId }}</strong><span>revision {{ bookmark.revision }}</span></li>
+              }
+            </ul>
+            <a class="button button--secondary" routerLink="/practice" [queryParams]="{ history: 'bookmarked' }">Luyện câu đã đánh dấu</a>
+          } @else {
+            <p>Chưa có bookmark. Bạn có thể đánh dấu câu ngay trong chế độ luyện tập.</p>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="history-title">
+      <div class="section-heading">
+        <p class="eyebrow">Lịch sử</p>
+        <h2 id="history-title">Các phiên đã hoàn thành</h2>
+      </div>
+      @if (attempts().length) {
+        <div class="history-list">
+          @for (attempt of attempts(); track attempt.id) {
+            <article class="surface history-card">
+              <div>
+                <span class="status-pill" [class.status-pill--success]="attempt.result.passed" [class.status-pill--danger]="!attempt.result.passed">
+                  {{ attempt.mode === 'exam' ? (attempt.result.passed ? 'Đạt' : 'Chưa đạt') : 'Luyện tập' }}
+                </span>
+                <h3>{{ attempt.result.score }}/{{ attempt.result.total }} · {{ attempt.result.percent }}%</h3>
+                <p>{{ formatDate(attempt.completedAt) }} · bank {{ attempt.bankVersion }}</p>
+              </div>
+              <a class="button button--secondary" [routerLink]="['/results', attempt.id]">Xem lại</a>
+            </article>
+          }
+        </div>
+      } @else {
+        <p class="surface empty-inline">Chưa có phiên hoàn thành.</p>
+      }
+    </section>
+
+    <section class="surface data-tools" aria-labelledby="data-title">
+      <div>
+        <p class="eyebrow">Quyền kiểm soát dữ liệu</p>
+        <h2 id="data-title">Sao lưu hoặc xoá dữ liệu</h2>
+        <p>Export tạo tệp JSON có cả snapshot câu hỏi để kết quả cũ không đổi khi ngân hàng được cập nhật.</p>
+      </div>
+      <div class="import-controls">
+        <label for="import-mode">Cách nhập dữ liệu</label>
+        <select id="import-mode" [value]="importMode" (change)="importMode = $any($event.target).value">
+          <option value="merge">Gộp với dữ liệu hiện tại</option>
+          <option value="replace">Thay thế dữ liệu hiện tại</option>
+        </select>
+      </div>
+      <div class="cluster">
+        <button class="button" type="button" [disabled]="busy()" (click)="exportData()">Export JSON</button>
+        <label class="button button--secondary file-button">
+          Import JSON
+          <input type="file" accept="application/json,.json" [disabled]="busy()" (change)="importData($event)" />
+        </label>
+        <button class="button danger-button" type="button" [disabled]="busy()" (click)="resetData()">Reset dữ liệu</button>
+      </div>
+    </section>
+  }
+</div>

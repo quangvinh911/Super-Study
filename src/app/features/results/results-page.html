@@ -1,0 +1,207 @@
+<div class="page results-page">
+  @if (loading()) {
+    <section class="surface loading-panel" aria-live="polite">
+      <p>Đang tải kết quả…</p>
+    </section>
+  } @else if (errorMessage()) {
+    <section class="surface empty-state" aria-labelledby="result-error-title">
+      <p class="eyebrow">Không có dữ liệu</p>
+      <h1 id="result-error-title">Chưa thể mở kết quả</h1>
+      <p>{{ errorMessage() }}</p>
+      <div class="cluster">
+        <a class="button" routerLink="/progress">Xem tiến độ</a>
+        <a class="button button--secondary" routerLink="/">Về trang chủ</a>
+      </div>
+    </section>
+  } @else if (attempt(); as currentAttempt) {
+    <header class="result-hero" [class.result-hero--passed]="currentAttempt.result.passed">
+      <div class="result-hero__copy">
+        <p class="eyebrow">
+          {{ currentAttempt.mode === 'exam' ? 'Mock exam' : 'Practice session' }}
+        </p>
+        <h1>
+          {{ currentAttempt.result.passed ? 'Đã đạt mục tiêu' : 'Chưa đạt mốc 65%' }}
+        </h1>
+        <p>
+          {{ currentAttempt.result.passed
+            ? 'Bạn đã vượt qua ngưỡng tham chiếu. Hãy xem lại từng câu để củng cố kiến thức.'
+            : 'Hãy xem phần phân tích bên dưới và luyện lại các câu chưa đúng.' }}
+        </p>
+        <div class="cluster">
+          <span
+            class="status-pill"
+            [class.status-pill--success]="currentAttempt.result.passed"
+            [class.status-pill--danger]="!currentAttempt.result.passed"
+          >
+            {{ currentAttempt.result.passed ? 'Đạt' : 'Chưa đạt' }}
+          </span>
+          <span class="result-meta">Hoàn thành {{ formatDate(currentAttempt.completedAt) }}</span>
+        </div>
+      </div>
+
+      <div class="score-card" aria-label="Điểm số">
+        <span class="score-card__label">Điểm</span>
+        <strong>{{ currentAttempt.result.score }}<span>/{{ currentAttempt.result.total }}</span></strong>
+        <span>{{ currentAttempt.result.percent }}%</span>
+        <small>Mốc đạt: {{ currentAttempt.result.passMark }}/{{ currentAttempt.result.total }}</small>
+      </div>
+    </header>
+
+    <section class="metric-grid" aria-label="Tóm tắt phiên">
+      <article class="metric-card">
+        <span>Đã trả lời</span>
+        <strong>{{ currentAttempt.result.answered }}/{{ currentAttempt.result.total }}</strong>
+      </article>
+      <article class="metric-card">
+        <span>Đúng</span>
+        <strong>{{ currentAttempt.result.score }}</strong>
+      </article>
+      <article class="metric-card">
+        <span>Thời gian</span>
+        <strong>{{ formatDuration(currentAttempt.durationSeconds) }}</strong>
+      </article>
+      <article class="metric-card">
+        <span>Ngân hàng</span>
+        <strong>v{{ currentAttempt.bankVersion }}</strong>
+      </article>
+    </section>
+
+    <section class="analysis-grid" aria-labelledby="analysis-title">
+      <div class="section-heading">
+        <p class="eyebrow">Phân tích</p>
+        <h2 id="analysis-title">Kết quả theo phạm vi kiến thức</h2>
+      </div>
+
+      <article class="surface breakdown-card">
+        <h3>Theo chapter</h3>
+        <div class="table-scroll" tabindex="0">
+          <table>
+            <caption class="sr-only">Điểm theo chapter</caption>
+            <thead>
+              <tr><th scope="col">Chapter</th><th scope="col">Đúng</th><th scope="col">Đã làm</th><th scope="col">Tỷ lệ</th></tr>
+            </thead>
+            <tbody>
+              @for (row of currentAttempt.result.byChapter; track row.key) {
+                <tr>
+                  <th scope="row">Chapter {{ row.key }}</th>
+                  <td>{{ row.correct }}/{{ row.total }}</td>
+                  <td>{{ row.answered }}/{{ row.total }}</td>
+                  <td>{{ row.percent }}%</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="surface breakdown-card">
+        <h3>Theo K-level</h3>
+        <div class="table-scroll" tabindex="0">
+          <table>
+            <caption class="sr-only">Điểm theo K-level</caption>
+            <thead>
+              <tr><th scope="col">K-level</th><th scope="col">Đúng</th><th scope="col">Đã làm</th><th scope="col">Tỷ lệ</th></tr>
+            </thead>
+            <tbody>
+              @for (row of currentAttempt.result.byKLevel; track row.key) {
+                <tr>
+                  <th scope="row">{{ row.key }}</th>
+                  <td>{{ row.correct }}/{{ row.total }}</td>
+                  <td>{{ row.answered }}/{{ row.total }}</td>
+                  <td>{{ row.percent }}%</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="review-section" aria-labelledby="review-title">
+      <div class="review-heading">
+        <div>
+          <p class="eyebrow">Review</p>
+          <h2 id="review-title">Xem lại từng câu</h2>
+        </div>
+        <a class="button" routerLink="/practice" [queryParams]="{ history: 'incorrect' }">
+          Luyện lại câu sai
+        </a>
+      </div>
+
+      <div class="review-list">
+        @for (item of currentAttempt.questions; track trackItem($index, item); let index = $index) {
+          @let response = responseFor(currentAttempt, item);
+          <details class="review-item">
+            <summary>
+              <span class="review-item__number">{{ (index + 1).toString().padStart(2, '0') }}</span>
+              <span class="review-item__summary">
+                <strong>Câu {{ index + 1 }}</strong>
+                <small>Chapter {{ item.question.classification.chapter }} · {{ item.question.classification.kLevel }}</small>
+              </span>
+              <span
+                class="status-pill"
+                [class.status-pill--success]="isQuestionCorrect(item, response)"
+                [class.status-pill--danger]="!isQuestionCorrect(item, response)"
+              >
+                {{ isQuestionCorrect(item, response) ? 'Đúng' : (response ? 'Sai' : 'Chưa trả lời') }}
+              </span>
+            </summary>
+
+            <div class="review-item__body">
+              <div class="question-stem" lang="en">
+                <app-content-blocks [blocks]="item.question.stem" />
+              </div>
+
+              <ol class="review-options" type="A" lang="en">
+                @for (option of item.question.options; track option.id; let optionIndex = $index) {
+                  <li
+                    class="review-option"
+                    [class]="optionStateClass(item, response, option.id)"
+                  >
+                    <span class="review-option__letter" aria-hidden="true">{{ optionLabel(optionIndex) }}</span>
+                    <div class="review-option__content">
+                      <app-content-blocks [blocks]="option.content" />
+                      <div class="review-option__states">
+                        @if (isSelected(response, option.id)) {
+                          <span class="tag">Bạn đã chọn</span>
+                        }
+                        @if (isCorrectOption(item, option.id)) {
+                          <span class="tag tag--correct">Đáp án đúng</span>
+                        }
+                      </div>
+                    </div>
+                  </li>
+                }
+              </ol>
+
+              <section class="explanation" aria-label="Giải thích đáp án" lang="en">
+                <h3>Explanation</h3>
+                <app-content-blocks [blocks]="item.solution.explanation" />
+                @if (item.solution.references.length) {
+                  <h4>Evidence</h4>
+                  <ul class="reference-list">
+                    @for (reference of item.solution.references; track reference.title + reference.locator) {
+                      <li>
+                        @if (reference.url) {
+                          <a [href]="reference.url" target="_blank" rel="noopener noreferrer">{{ reference.title }}</a>
+                        } @else {
+                          <span>{{ reference.title }}</span>
+                        }
+                        — {{ reference.version }}, {{ reference.locator }}
+                      </li>
+                    }
+                  </ul>
+                }
+              </section>
+            </div>
+          </details>
+        }
+      </div>
+    </section>
+
+    <nav class="result-actions" aria-label="Bước tiếp theo">
+      <a class="button" routerLink="/mock-exam">Làm đề thi mới</a>
+      <a class="button button--secondary" routerLink="/progress">Xem toàn bộ tiến độ</a>
+    </nav>
+  }
+</div>

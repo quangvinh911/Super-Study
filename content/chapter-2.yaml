@@ -1,0 +1,241 @@
+chapter: 2
+questions:
+  - id: "CTFL-C2-K1-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which is a software development lifecycle model mentioned in the CTFL syllabus?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Sequential development" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Defect clustering" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Boundary value analysis" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Error guessing" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.1 Testing in the Context of a Software Development Lifecycle", learningObjective: "FL-2.1.1", blueprintBucket: "C2-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: &original { kind: "original", authoringNote: "Independently written for this practice bank without copying source questions.", rightsStatus: "cleared" }
+    verification: &verified { answerStatus: "verified", reviewedAgainst: "ISTQB CTFL Syllabus v4.0.1", reviewedAt: "2026-08-29", reviewer: "CTFL content review" }
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Sequential, iterative, incremental, and agile approaches are lifecycle models; the other choices are test concepts or techniques." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K1-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "What term describes a lifecycle in which a system is delivered through a series of growing functional increments?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Incremental development" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Static analysis" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Big-bang integration" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Confirmation testing" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.1 Testing in the Context of a Software Development Lifecycle", learningObjective: "FL-2.1.1", blueprintBucket: "C2-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Incremental development delivers the product in a sequence of functional additions rather than as one final delivery." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K1-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which event commonly triggers maintenance testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "A production platform upgrade" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Creation of the first project charter" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Hiring an additional tester" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Completion of an unrelated product review" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.3 Maintenance Testing", learningObjective: "FL-2.3.1", blueprintBucket: "C2-K1-02", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Changes to an operational environment, including platform upgrades and migrations, are common triggers for maintenance testing." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.3.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K1-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which is an example of maintenance testing following retirement of a system?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Testing data archiving and retrieval" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Unit testing its first prototype" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Reviewing a proposed business case" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Selecting a development lifecycle" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.3 Maintenance Testing", learningObjective: "FL-2.3.1", blueprintBucket: "C2-K1-02", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Retirement may require testing migration, archiving, long retention periods, and later retrieval of stored data." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.3.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A project uses a sequential lifecycle with formal requirement and design baselines. Which test approach best fits this context?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Plan corresponding test levels early and derive tests from each work product" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Delay all test analysis until executable code is complete" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Use only exploratory testing because documents are available" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Combine every test level into one unstructured activity" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.1 Testing in the Context of a Software Development Lifecycle", learningObjective: "FL-2.1.1", blueprintBucket: "C2-K2-01", kLevel: "K2", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "A sequential model provides stable work products that can support early test analysis and corresponding test levels, often aligned through the V-model." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A team delivers a usable increment every two weeks and changes priorities frequently. What is the most appropriate effect on testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Testing is repeated within each iteration and regression automation becomes valuable" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "All dynamic testing waits until the final release" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Test planning is performed only once and never revised" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Only component testing is needed for small increments" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.1 Testing in the Context of a Software Development Lifecycle", learningObjective: "FL-2.1.1", blueprintBucket: "C2-K2-01", kLevel: "K2", styleTags: ["scenario", "MOST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Iterative and incremental delivery requires repeated testing and frequent regression feedback; automation helps keep that feedback fast." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Before implementing a story, a developer writes a small automated test, sees it fail, writes enough code to pass, and then refactors. Which approach is this?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Acceptance test-driven development" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Test-driven development" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Behavior-driven development" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Big-bang integration" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.1 Testing in the Context of a Software Development Lifecycle", learningObjective: "FL-2.1.3", blueprintBucket: "C2-K2-02", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "The red-green-refactor cycle centered on small code-level tests is test-driven development." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.1.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "How can DevOps most directly improve test feedback?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "By running automated checks in a continuous delivery pipeline" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "By removing testers from product teams" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "By prohibiting tests in production-like environments" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "By deferring regression testing to quarterly releases" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.1 Testing in the Context of a Software Development Lifecycle", learningObjective: "FL-2.1.4", blueprintBucket: "C2-K2-02", kLevel: "K2", styleTags: ["directKnowledge", "MOST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Automated pipeline checks give rapid feedback about changes and support frequent, reliable delivery, a key DevOps benefit." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.1.4", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-03-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A test checks communication between an order service and a payment service while replacing the external bank with a stub. Which test level is the best match?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Component testing" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Component integration testing" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "System testing" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Acceptance testing" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.2 Test Levels and Test Types", learningObjective: "FL-2.2.1", blueprintBucket: "C2-K2-03", kLevel: "K2", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "The focus is on interfaces and interactions between two integrated components, which characterizes component integration testing." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.2.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-03-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A business representative checks whether a completed reservation system supports real booking workflows. Which test level is primarily involved?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Component testing" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Component integration testing" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "System integration testing" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Acceptance testing" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.2 Test Levels and Test Types", learningObjective: "FL-2.2.1", blueprintBucket: "C2-K2-03", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["D"]
+      explanation: [{ kind: "paragraph", text: "Acceptance testing evaluates readiness and fitness for users' business needs, often with business representatives involved." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.2.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-04-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A defect caused invoices to omit a tax line. After the fix, a tester first checks that the tax line appears, then runs invoice and reporting suites. What are these activities?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Regression testing followed by confirmation testing" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Confirmation testing followed by regression testing" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Acceptance testing followed by static testing" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Debugging followed by component testing" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.2 Test Levels and Test Types", learningObjective: "FL-2.2.3", blueprintBucket: "C2-K2-04", kLevel: "K2", styleTags: ["scenario", "ordering"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "The focused check confirms the original defect is fixed; the broader suites look for unintended side effects and are regression testing." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.2.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C2-K2-04-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A maintenance release changes a shared authentication library. Why should regression tests cover applications that did not request new features?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "The shared change may have introduced unintended effects in unchanged applications" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Regression testing proves the library contains no remaining defects" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Every unchanged application must be debugged after a release" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Confirmation testing is forbidden during maintenance" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 2, section: "2.2 Test Levels and Test Types", learningObjective: "FL-2.2.3", blueprintBucket: "C2-K2-04", kLevel: "K2", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Regression testing checks that a change has not adversely affected previously working behavior, including dependent applications." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-2.2.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]

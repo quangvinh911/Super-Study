@@ -1,0 +1,57 @@
+schemaVersion: "1.0.0"
+bankVersion: "2026.08.29.1"
+publishedAt: "2026-08-29"
+title: "CTFL Practice Original Question Bank"
+language: "en"
+syllabus:
+  name: "ISTQB Certified Tester Foundation Level Syllabus"
+  version: "4.0.1"
+  url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+license:
+  use: "Public, non-commercial practice"
+  notice: "All questions and explanations are original. ISTQB and CertyIQ do not sponsor or endorse this question bank."
+expectedQuestionCount: 80
+questionsPerExam: 40
+passScore: 26
+durationsMinutes: [60, 75]
+blueprint:
+  - { bucket: "C1-K1-01", chapter: 1, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C1-K1-02", chapter: 1, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C1-K2-01", chapter: 1, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C1-K2-02", chapter: 1, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C1-K2-03", chapter: 1, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C1-K2-04", chapter: 1, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C1-K2-05", chapter: 1, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C1-K2-06", chapter: 1, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C2-K1-01", chapter: 2, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C2-K1-02", chapter: 2, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C2-K2-01", chapter: 2, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C2-K2-02", chapter: 2, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C2-K2-03", chapter: 2, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C2-K2-04", chapter: 2, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C3-K1-01", chapter: 3, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C3-K1-02", chapter: 3, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C3-K2-01", chapter: 3, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C3-K2-02", chapter: 3, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C4-K2-01", chapter: 4, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C4-K2-02", chapter: 4, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C4-K2-03", chapter: 4, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C4-K2-04", chapter: 4, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C4-K2-05", chapter: 4, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C4-K2-06", chapter: 4, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C4-K3-01", chapter: 4, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C4-K3-02", chapter: 4, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C4-K3-03", chapter: 4, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C4-K3-04", chapter: 4, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C4-K3-05", chapter: 4, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C5-K1-01", chapter: 5, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C5-K2-01", chapter: 5, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C5-K2-02", chapter: 5, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C5-K2-03", chapter: 5, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C5-K2-04", chapter: 5, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C5-K2-05", chapter: 5, kLevel: "K2", variantsRequired: 2 }
+  - { bucket: "C5-K3-01", chapter: 5, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C5-K3-02", chapter: 5, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C5-K3-03", chapter: 5, kLevel: "K3", variantsRequired: 2 }
+  - { bucket: "C6-K1-01", chapter: 6, kLevel: "K1", variantsRequired: 2 }
+  - { bucket: "C6-K2-01", chapter: 6, kLevel: "K2", variantsRequired: 2 }

@@ -1,0 +1,162 @@
+chapter: 3
+questions:
+  - id: "CTFL-C3-K1-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which work product can be examined by static testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "A requirements specification" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Only an executing binary" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Only live production traffic" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Only a completed system" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 3, section: "3.1 Static Testing Basics", learningObjective: "FL-3.1.1", blueprintBucket: "C3-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: &original { kind: "original", authoringNote: "Independently written for this practice bank without copying source questions.", rightsStatus: "cleared" }
+    verification: &verified { answerStatus: "verified", reviewedAgainst: "ISTQB CTFL Syllabus v4.0.1", reviewedAt: "2026-08-29", reviewer: "CTFL content review" }
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Documents such as requirements, designs, code, test plans, and test cases can be evaluated without executing the software." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C3-K1-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which artifact is suitable for static analysis by a tool?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Source code" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "A user's emotional response" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "An observed response time under load" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "A physical power interruption" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 3, section: "3.1 Static Testing Basics", learningObjective: "FL-3.1.1", blueprintBucket: "C3-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Static analysis tools can inspect source code and other machine-readable work products without executing them." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C3-K1-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which review type is led by the author and often uses scenarios or dry runs?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Informal review" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Walkthrough" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Technical review" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Inspection" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 3, section: "3.2 Feedback and Review Process", learningObjective: "FL-3.2.4", blueprintBucket: "C3-K1-02", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["B"]
+      explanation: [{ kind: "paragraph", text: "A walkthrough is normally led by the author and may use scenarios, dry runs, or a peer-group discussion." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.2.4", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C3-K1-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which review type is the most formal and collects metrics to improve both the product and the review process?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Informal review" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Walkthrough" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Inspection" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Pair programming" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 3, section: "3.2 Feedback and Review Process", learningObjective: "FL-3.2.4", blueprintBucket: "C3-K1-02", kLevel: "K1", styleTags: ["directKnowledge", "MOST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["C"]
+      explanation: [{ kind: "paragraph", text: "Inspection is the most formal review type, with defined roles, a documented process, and metric collection." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.2.4", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C3-K2-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A review discovers that two requirements contradict each other before coding begins. What is the main advantage over finding the issue during system testing?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "The defect can be removed earlier with less rework" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "The review proves all requirements are correct" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Dynamic testing is no longer necessary" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "The contradiction automatically becomes source code" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 3, section: "3.1 Static Testing Basics", learningObjective: "FL-3.1.2", blueprintBucket: "C3-K2-01", kLevel: "K2", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Static testing can identify defects before they propagate into design and code, reducing the cost and delay of later rework." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.1.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C3-K2-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which defect is more likely to be found by static testing than by executing the software?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "A missing requirement in a specification" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "A response time that exceeds two seconds under peak load" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "A crash caused only by a particular operating system" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "An incorrect total displayed for a specific input" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 3, section: "3.1 Static Testing Basics", learningObjective: "FL-3.1.3", blueprintBucket: "C3-K2-01", kLevel: "K2", styleTags: ["directKnowledge", "MOST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "A missing requirement can be detected by reviewing the specification; the other defects require observing runtime behavior." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.1.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C3-K2-02-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "During a formal review, who is responsible for ensuring that review meetings run effectively and participants can speak freely?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Author" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Manager" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Moderator" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Scribe" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 3, section: "3.2 Feedback and Review Process", learningObjective: "FL-3.2.3", blueprintBucket: "C3-K2-02", kLevel: "K2", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["C"]
+      explanation: [{ kind: "paragraph", text: "The moderator facilitates the review, supports effective communication, manages time, and helps maintain a safe discussion environment." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.2.3", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C3-K2-02-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which TWO actions belong to individual review rather than review initiation or communication and analysis?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Examining the work product and noting potential anomalies" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Selecting reviewers and distributing the work product" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Discussing whether a reported anomaly is a defect" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Recording questions raised while reading assigned sections" }] }
+      - { id: "E", content: [{ kind: "paragraph", text: "Deciding whether the review exit criteria have been met" }] }
+    interaction: { kind: "multiSelect", requiredSelections: 2 }
+    classification: { chapter: 3, section: "3.2 Feedback and Review Process", learningObjective: "FL-3.2.2", blueprintBucket: "C3-K2-02", kLevel: "K2", styleTags: ["statementEvaluation"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A", "D"]
+      explanation: [{ kind: "paragraph", text: "During individual review, each reviewer studies assigned material and records anomalies, recommendations, and questions. Selection and distribution occur during initiation; discussion and exit decisions occur later." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-3.2.2", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]

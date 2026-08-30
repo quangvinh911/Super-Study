@@ -1,0 +1,99 @@
+<div class="page page--compact">
+  <header class="page-header">
+    <p class="eyebrow">Luyện theo mục tiêu</p>
+    <h1>Tạo phiên luyện tập</h1>
+    <p>Chọn đúng phần bạn cần củng cố. Đáp án và giải thích chỉ xuất hiện sau khi bạn bấm “Kiểm tra”.</p>
+  </header>
+
+  @if (loading()) {
+    <section class="surface loading" aria-live="polite">
+      <span class="spinner" aria-hidden="true"></span>
+      Đang tải ngân hàng câu hỏi…
+    </section>
+  } @else if (bank()) {
+    <form class="surface setup-form" (ngSubmit)="start()">
+      <div class="form-grid">
+        <div class="field">
+          <label for="chapter">Chapter</label>
+          <select id="chapter" name="chapter" [(ngModel)]="chapter" (ngModelChange)="chapterChanged()">
+            <option value="all">Tất cả chapter</option>
+            @for (item of chapters; track item) {
+              <option [ngValue]="item">Chapter {{ item }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="learning-objective">Learning Objective</label>
+          <select id="learning-objective" name="learningObjective" [(ngModel)]="learningObjective">
+            <option value="all">Tất cả Learning Objective</option>
+            @for (item of availableLearningObjectives(); track item) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="k-level">K-level</label>
+          <select id="k-level" name="kLevel" [(ngModel)]="kLevel">
+            <option value="all">Tất cả K-level</option>
+            @for (item of kLevels; track item) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="style">Dạng câu hỏi</label>
+          <select id="style" name="style" [(ngModel)]="style">
+            <option value="all">Tất cả dạng</option>
+            @for (item of styles; track item.value) {
+              <option [value]="item.value">{{ item.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="history">Theo lịch sử</label>
+          <select id="history" name="history" [(ngModel)]="history">
+            <option value="all">Tất cả câu phù hợp</option>
+            <option value="unseen">Chưa từng làm</option>
+            <option value="incorrect">Từng trả lời sai</option>
+            <option value="bookmarked">Đã đánh dấu</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="question-limit">Số câu</label>
+          <select id="question-limit" name="questionLimit" [(ngModel)]="questionLimit">
+            <option [ngValue]="10">10 câu</option>
+            <option [ngValue]="20">20 câu</option>
+            <option [ngValue]="40">40 câu</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="inventory" aria-label="Thông tin ngân hàng câu hỏi">
+        <strong>{{ bank()!.manifest.questionCount }}</strong>
+        <span>câu nguyên bản · phiên bản {{ bank()!.manifest.bankVersion }}</span>
+      </div>
+
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
+      <div class="cluster actions">
+        <button class="button" type="submit" [disabled]="starting()">
+          {{ starting() ? 'Đang chuẩn bị…' : 'Bắt đầu luyện' }}
+        </button>
+        <a class="button button--secondary" routerLink="/progress">Xem tiến độ</a>
+      </div>
+    </form>
+  } @else {
+    <section class="surface error-state">
+      <h2>Chưa tải được dữ liệu</h2>
+      <p>{{ error() }}</p>
+      <button class="button" type="button" (click)="ngOnInit()">Thử lại</button>
+    </section>
+  }
+</div>

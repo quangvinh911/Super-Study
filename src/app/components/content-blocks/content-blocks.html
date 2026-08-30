@@ -1,0 +1,63 @@
+<div class="content-blocks">
+  @for (block of blocks(); track $index) {
+    @switch (block.kind) {
+      @case ('paragraph') {
+        <p>{{ block.text }}</p>
+      }
+      @case ('list') {
+        @if (block.ordered) {
+          <ol>
+            @for (item of block.items; track $index) {
+              <li>{{ item }}</li>
+            }
+          </ol>
+        } @else {
+          <ul>
+            @for (item of block.items; track $index) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        }
+      }
+      @case ('table') {
+        <div class="table-scroll" tabindex="0" role="region" [attr.aria-label]="block.caption">
+          <table>
+            <caption>{{ block.caption }}</caption>
+            <thead>
+              <tr>
+                @for (header of block.headers; track $index) {
+                  <th scope="col">{{ header }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of block.rows; track $index) {
+                <tr>
+                  @for (cell of row; track $index) {
+                    <td>{{ cell }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+      @case ('code') {
+        <pre><code [attr.data-language]="block.language">{{ block.text }}</code></pre>
+      }
+      @case ('formula') {
+        <div class="formula" role="math" [attr.aria-label]="block.accessibleText ?? block.text">
+          {{ block.text }}
+        </div>
+      }
+      @case ('image') {
+        <figure>
+          <img [src]="block.src" [alt]="block.alt" loading="lazy" />
+          @if (block.caption) {
+            <figcaption>{{ block.caption }}</figcaption>
+          }
+        </figure>
+      }
+    }
+  }
+</div>

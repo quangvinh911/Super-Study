@@ -1,0 +1,81 @@
+chapter: 6
+questions:
+  - id: "CTFL-C6-K1-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which test activity can be supported by a test data preparation tool?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Creating input records with required characteristics" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Negotiating the office rental contract" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Hiring every member of the project team" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Defining the organization's legal structure" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 6, section: "6.1 Tool Support for Testing", learningObjective: "FL-6.1.1", blueprintBucket: "C6-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: &original { kind: "original", authoringNote: "Independently written for this practice bank without copying source questions.", rightsStatus: "cleared" }
+    verification: &verified { answerStatus: "verified", reviewedAgainst: "ISTQB CTFL Syllabus v4.0.1", reviewedAt: "2026-08-29", reviewer: "CTFL content review" }
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Test data tools help generate, acquire, anonymize, or arrange the data needed to exercise selected test conditions." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-6.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C6-K1-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "Which type of tool records test cases, execution status, and traceability to requirements?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Test management tool" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Image editor" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Payroll calculator" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Room booking tool" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 6, section: "6.1 Tool Support for Testing", learningObjective: "FL-6.1.1", blueprintBucket: "C6-K1-01", kLevel: "K1", styleTags: ["directKnowledge"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Test management tools support planning, monitoring, traceability, testware organization, and reporting across the test process." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-6.1.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C6-K2-01-A"
+    revision: 1
+    variant: "A"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A regression suite is stable, repeated for every build, and takes many hours manually. What is a likely benefit of appropriate test automation?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Faster, repeatable execution with more timely feedback" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Guaranteed detection of every possible defect" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Permanent removal of test maintenance" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "No further need for human analysis" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 6, section: "6.2 Benefits and Risks of Test Automation", learningObjective: "FL-6.2.1", blueprintBucket: "C6-K2-01", kLevel: "K2", styleTags: ["scenario", "BEST"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Automation can execute repeatable checks quickly and consistently, improving feedback frequency, while still requiring maintenance and human interpretation." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-6.2.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]
+
+  - id: "CTFL-C6-K2-01-B"
+    revision: 1
+    variant: "B"
+    language: "en"
+    stem: [{ kind: "paragraph", text: "A team automates checks for a user interface that changes every week. Maintenance effort becomes greater than the saved execution time. Which automation risk is illustrated?" }]
+    options:
+      - { id: "A", content: [{ kind: "paragraph", text: "Unrealistic expectations about maintainability and return on investment" }] }
+      - { id: "B", content: [{ kind: "paragraph", text: "Too much independence between testing and development" }] }
+      - { id: "C", content: [{ kind: "paragraph", text: "Excessive use of static testing" }] }
+      - { id: "D", content: [{ kind: "paragraph", text: "Insufficient product risk identification only" }] }
+    interaction: { kind: "singleChoice", requiredSelections: 1 }
+    classification: { chapter: 6, section: "6.2 Benefits and Risks of Test Automation", learningObjective: "FL-6.2.1", blueprintBucket: "C6-K2-01", kLevel: "K2", styleTags: ["scenario"] }
+    shuffleOptions: true
+    provenance: *original
+    verification: *verified
+    solution:
+      correctOptionIds: ["A"]
+      explanation: [{ kind: "paragraph", text: "Automating unstable interfaces can create high maintenance costs. Tool selection and expected benefits should include total ownership effort, not execution speed alone." }]
+      references: [{ title: "ISTQB Certified Tester Foundation Level Syllabus", version: "4.0.1", locator: "FL-6.2.1", url: "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" }]

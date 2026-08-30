@@ -1,0 +1,29 @@
+{
+  "document": "ctfl-v4-0.pdf",
+  "purpose": "research-only",
+  "containsExtractedText": false,
+  "counts": {
+    "pages": 262,
+    "questions": 278,
+    "singleChoice": 276,
+    "multiSelect": 2,
+    "withExplanation": 265,
+    "tableOrDiagramDependentMinimum": 23
+  },
+  "answerKeyCounts": {
+    "A": 61,
+    "B": 75,
+    "C": 74,
+    "D": 63,
+    "U": 3,
+    "BE": 1,
+    "BD": 1
+  },
+  "anomalies": {
+    "invalidKey": [38, 39, 47],
+    "possibleDuplicate": [[10, 41]],
+    "conflictingDuplicate": [[10, 41]],
+    "missingExplanationCount": 13
+  },
+  "publicationPolicy": "No source question, option, explanation, image, table, or logo is included in the public bank."
+}

@@ -1,0 +1,140 @@
+<div class="page exam-page">
+  @if (loading()) {
+    <p class="surface" aria-live="polite">Đang khôi phục bài thi…</p>
+  } @else if (error()) {
+    <section class="surface empty-state">
+      <p class="eyebrow">Không thể tiếp tục</p>
+      <h1>Bài thi không khả dụng</h1>
+      <p>{{ error() }}</p>
+      <a class="button" routerLink="/mock-exam">Tạo đề thi mới</a>
+    </section>
+  } @else if (store.currentQuestion(); as item) {
+    <header class="exam-header">
+      <div>
+        <p class="eyebrow">Thi thử · 40 câu</p>
+        <h1>Question {{ store.progress().current }} of {{ store.progress().total }}</h1>
+      </div>
+      <div
+        class="timer"
+        [class.timer--urgent]="isUrgent()"
+        role="timer"
+        aria-label="Thời gian còn lại"
+      >
+        <span>Còn lại</span>
+        <strong>{{ formatTime(store.remainingMs()) }}</strong>
+      </div>
+    </header>
+
+    <div class="exam-grid">
+      <section class="surface question-card">
+        <div class="question-meta">
+          <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
+          <span class="chip">{{ item.question.classification.kLevel }}</span>
+          <button
+            class="flag-button"
+            type="button"
+            [attr.aria-pressed]="store.currentResponse()?.flagged"
+            (click)="toggleFlag()"
+          >
+            <span aria-hidden="true">⚑</span>
+            {{ store.currentResponse()?.flagged ? 'Đã đánh dấu' : 'Xem lại sau' }}
+          </button>
+        </div>
+
+        <h2 #questionHeading class="question-heading" tabindex="-1">Question {{ store.progress().current }}</h2>
+        <div class="stem"><app-content-blocks [blocks]="item.question.stem" /></div>
+
+        <fieldset class="options">
+          <legend>
+            @if (item.question.interaction.kind === 'multiSelect') {
+              Select exactly {{ item.question.interaction.requiredSelections }} answers.
+            } @else {
+              Select one answer.
+            }
+          </legend>
+          @for (option of item.question.options; track option.id; let optionIndex = $index) {
+            <label class="option" [class.option--selected]="isSelected(option.id)">
+              <input
+                #optionInput
+                [type]="item.question.interaction.kind === 'singleChoice' ? 'radio' : 'checkbox'"
+                [name]="'answer-' + item.question.id"
+                [checked]="isSelected(option.id)"
+                [disabled]="optionDisabled(option.id)"
+                (change)="selectOption(option.id, optionInput.checked)"
+              />
+              <span class="option-letter" aria-hidden="true">{{ 'ABCDE'[optionIndex] }}</span>
+              <span class="option-content"><app-content-blocks [blocks]="option.content" /></span>
+            </label>
+          }
+        </fieldset>
+
+        @if (selectionMessage()) {
+          <p class="selection-message" role="alert">{{ selectionMessage() }}</p>
+        }
+
+        <nav class="question-actions" aria-label="Điều hướng tuần tự">
+          <button
+            class="button button--secondary"
+            type="button"
+            [disabled]="store.snapshot()!.currentIndex === 0"
+            (click)="previous()"
+          >
+            Câu trước
+          </button>
+          <button
+            class="button"
+            type="button"
+            [disabled]="store.snapshot()!.currentIndex === store.snapshot()!.questions.length - 1"
+            (click)="next()"
+          >
+            Câu tiếp
+          </button>
+        </nav>
+      </section>
+
+      <aside class="surface navigator" aria-labelledby="question-navigator-title">
+        <div class="navigator-heading">
+          <h2 id="question-navigator-title">Danh sách câu</h2>
+          <span>{{ store.unansweredCount() }} chưa trả lời</span>
+        </div>
+        <div class="navigator-grid">
+          @for (entry of store.snapshot()!.questions; track entry.question.id; let questionIndex = $index) {
+            <button
+              [class]="navigatorClass(questionIndex, entry.question.id)"
+              type="button"
+              [attr.aria-current]="store.snapshot()!.currentIndex === questionIndex ? 'step' : null"
+              [attr.aria-label]="'Đến câu ' + (questionIndex + 1) + (responseFor(entry.question.id)?.flagged ? ', đã đánh dấu' : '')"
+              (click)="goTo(questionIndex)"
+            >
+              {{ questionIndex + 1 }}
+              @if (responseFor(entry.question.id)?.flagged) {
+                <span class="flag-mark" aria-hidden="true"></span>
+              }
+            </button>
+          }
+        </div>
+        <div class="legend" aria-label="Chú giải">
+          <span><i class="legend-dot legend-dot--answered"></i>Đã trả lời</span>
+          <span><i class="legend-dot legend-dot--flagged"></i>Đánh dấu</span>
+        </div>
+        <button class="button button--coral submit-button" type="button" [disabled]="submitting()" (click)="submit()">
+          {{ submitting() ? 'Đang nộp…' : 'Nộp bài' }}
+        </button>
+      </aside>
+    </div>
+
+    <p class="sr-only" aria-live="assertive">{{ warning() }}</p>
+    @if (warning()) {
+      <div class="time-warning" role="status">
+        <span aria-hidden="true">!</span>
+        {{ warning() }}
+        <button type="button" aria-label="Đóng cảnh báo thời gian" (click)="warning.set('')">×</button>
+      </div>
+    }
+    @if (store.persistenceError()) {
+      <p class="persistence-warning" role="alert">
+        Không thể lưu bài thi hoặc phiên đang được dùng ở tab khác. Dừng thao tác và kiểm tra tab còn lại.
+      </p>
+    }
+  }
+</div>

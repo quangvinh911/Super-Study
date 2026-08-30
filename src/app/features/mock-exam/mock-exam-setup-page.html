@@ -1,0 +1,49 @@
+<div class="page page--compact">
+  <header class="page-header">
+    <p class="eyebrow">Mô phỏng kỳ thi</p>
+    <h1>Thi thử CTFL</h1>
+    <p>40 câu được tạo theo đúng ma trận chapter và K-level. Đáp án chỉ hiển thị sau khi nộp bài hoặc hết giờ.</p>
+  </header>
+
+  <section class="exam-layout">
+    <div class="surface rules">
+      <h2>Cấu trúc bài thi</h2>
+      <dl>
+        <div><dt>Số câu</dt><dd>40</dd></div>
+        <div><dt>Điểm đạt</dt><dd>26 / 40</dd></div>
+        <div><dt>Chấm điểm</dt><dd>1 điểm mỗi câu</dd></div>
+        <div><dt>Multi-select</dt><dd>Không có điểm từng phần</dd></div>
+      </dl>
+      <p class="note">Bạn có thể chuyển câu tự do, đánh dấu câu cần xem lại và nộp sớm. Bài tự nộp khi đồng hồ về 00:00.</p>
+    </div>
+
+    <form class="surface start-panel" (ngSubmit)="start()">
+      <fieldset>
+        <legend>Chọn thời gian</legend>
+        <label class="duration-option">
+          <input type="radio" name="duration" [value]="60" [(ngModel)]="durationMinutes" />
+          <span><strong>60 phút</strong><small>Thời gian tiêu chuẩn</small></span>
+        </label>
+        <label class="duration-option">
+          <input type="radio" name="duration" [value]="75" [(ngModel)]="durationMinutes" />
+          <span><strong>75 phút</strong><small>Mô phỏng hỗ trợ non-native</small></span>
+        </label>
+      </fieldset>
+
+      @if (loading()) {
+        <p aria-live="polite">Đang kiểm tra ngân hàng câu hỏi…</p>
+      } @else if (bank()) {
+        <p class="ready"><span aria-hidden="true">✓</span> Sẵn sàng tạo đề từ {{ bank()!.manifest.questionCount }} câu đã kiểm định.</p>
+      }
+
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
+      <button class="button button--coral" type="submit" [disabled]="loading() || !bank() || starting()">
+        {{ starting() ? 'Đang tạo đề…' : 'Bắt đầu thi thử' }}
+      </button>
+      <a class="quiet-link" routerLink="/methodology">Xem phương pháp xây dựng ngân hàng câu hỏi</a>
+    </form>
+  </section>
+</div>
