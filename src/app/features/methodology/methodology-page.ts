@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CertificateContext } from '../../certificates/certificate-context';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-methodology-page',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './methodology-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MethodologyPage {}
+export class MethodologyPage {
+  protected readonly certificate = inject(CertificateContext);
+}

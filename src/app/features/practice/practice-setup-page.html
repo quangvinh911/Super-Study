@@ -1,8 +1,10 @@
 <div class="page page--compact">
   <header class="page-header">
-    <p class="eyebrow">Luyện theo mục tiêu</p>
+    <p class="eyebrow">{{ certificate.name }} · Luyện theo mục tiêu</p>
     <h1>Tạo phiên luyện tập</h1>
-    <p>Chọn đúng phần bạn cần củng cố. Đáp án và giải thích chỉ xuất hiện sau khi bạn bấm “Kiểm tra”.</p>
+    <p>
+      Chọn đúng phần bạn cần củng cố. Đáp án và giải thích chỉ xuất hiện sau khi bạn bấm “Kiểm tra”.
+    </p>
   </header>
 
   @if (loading()) {
@@ -15,64 +17,92 @@
       <fieldset class="source-picker">
         <legend>Nguồn câu hỏi</legend>
         <div class="source-picker__grid">
-          <label class="source-option">
-            <input type="radio" name="bankSource" value="original" [(ngModel)]="bankSource" (ngModelChange)="sourceChanged()" />
-            <span><strong>Câu viết mới</strong><small>80 câu đã gắn chapter, LO và K-level</small></span>
-          </label>
-          <label class="source-option">
-            <input type="radio" name="bankSource" value="pdf" [(ngModel)]="bankSource" (ngModelChange)="sourceChanged()" />
-            <span><strong>Nguồn PDF</strong><small>278 câu đã gắn chapter, LO, K-level và ảnh bằng chứng</small></span>
-          </label>
+          @for (source of certificate.definition.banks; track source.id) {
+            <label class="source-option">
+              <input
+                type="radio"
+                name="bankSource"
+                [value]="source.id"
+                [(ngModel)]="bankSource"
+                (ngModelChange)="sourceChanged()"
+              />
+              <span
+                ><strong>{{ source.label }}</strong
+                ><small>{{ source.description }}</small></span
+              >
+            </label>
+          }
         </div>
       </fieldset>
 
       @if (isPdfSource()) {
         <p class="source-notice" role="note">
-          Nhãn chapter/LO/K-level được đối chiếu theo chủ đề với CTFL v4.0.1 vì PDF không cung cấp metadata này. Chỉ dùng trong site riêng tư.
+          Nhãn chapter/LO/K-level được đối chiếu theo chủ đề với CTFL v4.0.1 vì PDF không cung cấp
+          metadata này. Chỉ dùng trong site riêng tư.
         </p>
       }
 
       <div class="form-grid">
-        <div class="field">
-          <label for="chapter">Chapter</label>
-          <select id="chapter" name="chapter" [(ngModel)]="chapter" (ngModelChange)="chapterChanged()">
-            <option value="all">Tất cả chapter</option>
-            @for (item of chapters; track item) {
-              <option [ngValue]="item">Chapter {{ item }}</option>
-            }
-          </select>
-        </div>
+        @if (certificate.isSyllabus) {
+          <div class="field">
+            <label for="chapter">Chapter</label>
+            <select
+              id="chapter"
+              name="chapter"
+              [(ngModel)]="chapter"
+              (ngModelChange)="chapterChanged()"
+            >
+              <option value="all">Tất cả chapter</option>
+              @for (item of chapters; track item) {
+                <option [ngValue]="item">Chapter {{ item }}</option>
+              }
+            </select>
+          </div>
 
-        <div class="field">
-          <label for="learning-objective">Learning Objective</label>
-          <select id="learning-objective" name="learningObjective" [(ngModel)]="learningObjective">
-            <option value="all">Tất cả Learning Objective</option>
-            @for (item of availableLearningObjectives(); track item) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </div>
+          <div class="field">
+            <label for="learning-objective">Learning Objective</label>
+            <select
+              id="learning-objective"
+              name="learningObjective"
+              [(ngModel)]="learningObjective"
+            >
+              <option value="all">Tất cả Learning Objective</option>
+              @for (item of availableLearningObjectives(); track item) {
+                <option [value]="item">{{ item }}</option>
+              }
+            </select>
+          </div>
 
-        <div class="field">
-          <label for="k-level">K-level</label>
-          <select id="k-level" name="kLevel" [(ngModel)]="kLevel">
-            <option value="all">Tất cả K-level</option>
-            @for (item of kLevels; track item) {
-              <option [value]="item">{{ item }}</option>
-            }
-          </select>
-        </div>
+          <div class="field">
+            <label for="k-level">K-level</label>
+            <select id="k-level" name="kLevel" [(ngModel)]="kLevel">
+              <option value="all">Tất cả K-level</option>
+              @for (item of kLevels; track item) {
+                <option [value]="item">{{ item }}</option>
+              }
+            </select>
+          </div>
 
-        <div class="field">
-          <label for="style">Dạng câu hỏi</label>
-          <select id="style" name="style" [(ngModel)]="style">
-            <option value="all">Tất cả dạng</option>
-            @for (item of styles; track item.value) {
-              <option [value]="item.value">{{ item.label }}</option>
-            }
-          </select>
-        </div>
-
+          <div class="field">
+            <label for="style">Dạng câu hỏi</label>
+            <select id="style" name="style" [(ngModel)]="style">
+              <option value="all">Tất cả dạng</option>
+              @for (item of styles; track item.value) {
+                <option [value]="item.value">{{ item.label }}</option>
+              }
+            </select>
+          </div>
+        } @else {
+          <div class="field">
+            <label for="part">Phần thi</label>
+            <select id="part" name="part" [(ngModel)]="section">
+              <option value="all">Tất cả Part</option>
+              @for (part of certificate.topics; track part.id) {
+                <option [value]="part.id">{{ part.label }}</option>
+              }
+            </select>
+          </div>
+        }
         <div class="field">
           <label for="history">Theo lịch sử</label>
           <select id="history" name="history" [(ngModel)]="history">
@@ -99,18 +129,37 @@
 
       <div class="inventory" aria-label="Thông tin ngân hàng câu hỏi">
         <strong>{{ selectedBank()!.manifest.questionCount }}</strong>
-        <span>{{ isPdfSource() ? 'câu từ PDF' : 'câu viết mới' }} · phiên bản {{ selectedBank()!.manifest.bankVersion }}</span>
+        <span
+          >câu hỏi {{ certificate.name }} · phiên bản
+          {{ selectedBank()!.manifest.bankVersion }}</span
+        >
       </div>
+
+      @if (!selectedBank()!.questions.length) {
+        <section class="empty-bank" role="status">
+          <h2>Chưa có bộ đề {{ certificate.name }}</h2>
+          <p>
+            Bộ đề sẽ được bổ sung sau. Khi có câu hỏi, bạn có thể luyện theo Part, xem giải thích và
+            lưu tiến độ tại đây.
+          </p>
+        </section>
+      }
 
       @if (error()) {
         <p class="error" role="alert">{{ error() }}</p>
       }
 
       <div class="cluster actions">
-        <button class="button" type="submit" [disabled]="starting()">
+        <button
+          class="button"
+          type="submit"
+          [disabled]="starting() || !selectedBank()!.questions.length"
+        >
           {{ starting() ? 'Đang chuẩn bị…' : 'Bắt đầu luyện' }}
         </button>
-        <a class="button button--secondary" routerLink="/progress">Xem tiến độ</a>
+        <a class="button button--secondary" [routerLink]="certificate.link('progress')"
+          >Xem tiến độ</a
+        >
       </div>
     </form>
   } @else {

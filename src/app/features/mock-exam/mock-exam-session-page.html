@@ -6,12 +6,20 @@
       <p class="eyebrow">Không thể tiếp tục</p>
       <h1>Bài thi không khả dụng</h1>
       <p>{{ error() }}</p>
-      <a class="button" routerLink="/mock-exam">Tạo đề thi mới</a>
+      <a class="button" [routerLink]="certificate.link('mock-exam')">Tạo đề thi mới</a>
+    </section>
+  } @else if (store.isComplete()) {
+    <section class="surface" role="status">
+      <h1>Đang lưu kết quả…</h1>
+      <p>Bài thi đã kết thúc. Kết quả sẽ hiển thị sau khi lưu xong.</p>
     </section>
   } @else if (store.currentQuestion(); as item) {
     <header class="exam-header">
       <div>
-        <p class="eyebrow">Thi thử · 40 câu</p>
+        <p class="eyebrow">Thi thử {{ certificate.name }} · {{ store.progress().total }} câu</p>
+        @if (store.activeExamSection(); as section) {
+          <p role="status">Phần {{ section.label }} · {{ section.durationMinutes }} phút</p>
+        }
         <h1>Question {{ store.progress().current }} of {{ store.progress().total }}</h1>
       </div>
       <div
@@ -20,7 +28,7 @@
         role="timer"
         aria-label="Thời gian còn lại"
       >
-        <span>Còn lại</span>
+        <span>{{ store.activeExamSection()?.label ?? 'Còn lại' }}</span>
         <strong>{{ formatTime(store.remainingMs()) }}</strong>
       </div>
     </header>
@@ -29,14 +37,13 @@
       <section class="surface question-card">
         <div class="question-meta">
           @if (item.question.sourceEvidence; as evidence) {
-            <span class="chip">Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</span>
-            <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
-            <span class="chip">{{ item.question.classification.kLevel }}</span>
-            <span class="chip">{{ item.question.classification.learningObjective }}</span>
+            <span class="chip"
+              >Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</span
+            >
+            <span class="chip">{{ certificate.questionLabel(item.question) }}</span>
             <span class="muted">Trang {{ evidence.questionPages.join(', ') }}</span>
           } @else {
-            <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
-            <span class="chip">{{ item.question.classification.kLevel }}</span>
+            <span class="chip">{{ certificate.questionLabel(item.question) }}</span>
           }
           <button
             class="flag-button"
@@ -49,15 +56,26 @@
           </button>
         </div>
 
-        <h2 #questionHeading class="question-heading" tabindex="-1">Question {{ store.progress().current }}</h2>
+        <h2 #questionHeading class="question-heading" tabindex="-1">
+          Question {{ store.progress().current }}
+        </h2>
+        @if (item.question.stimulus; as stimulus) {
+          <section class="shared-stimulus" aria-label="Nội dung dùng chung" lang="en">
+            <app-content-blocks [blocks]="stimulus.content" />
+          </section>
+        }
         <div class="stem"><app-content-blocks [blocks]="item.question.stem" /></div>
 
         @if (item.question.sourceEvidence; as evidence) {
           <details class="pdf-evidence">
-            <summary>Ảnh câu hỏi gốc trong PDF · trang {{ evidence.questionPages.join(', ') }}</summary>
+            <summary>
+              Ảnh câu hỏi gốc trong PDF · trang {{ evidence.questionPages.join(', ') }}
+            </summary>
             <img
               [src]="evidence.questionImage"
-              [alt]="'Bản chụp câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+              [alt]="
+                'Bản chụp câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'
+              "
               loading="lazy"
             />
           </details>
@@ -95,7 +113,7 @@
           <button
             class="button button--secondary"
             type="button"
-            [disabled]="store.snapshot()!.currentIndex === 0"
+            [disabled]="!store.canNavigateTo(store.snapshot()!.currentIndex - 1)"
             (click)="previous()"
           >
             Câu trước
@@ -103,7 +121,7 @@
           <button
             class="button"
             type="button"
-            [disabled]="store.snapshot()!.currentIndex === store.snapshot()!.questions.length - 1"
+            [disabled]="!store.canNavigateTo(store.snapshot()!.currentIndex + 1)"
             (click)="next()"
           >
             Câu tiếp
@@ -117,12 +135,21 @@
           <span>{{ store.unansweredCount() }} chưa trả lời</span>
         </div>
         <div class="navigator-grid">
-          @for (entry of store.snapshot()!.questions; track entry.question.id; let questionIndex = $index) {
+          @for (
+            entry of store.snapshot()!.questions;
+            track entry.question.id;
+            let questionIndex = $index
+          ) {
             <button
               [class]="navigatorClass(questionIndex, entry.question.id)"
+              [disabled]="!store.canNavigateTo(questionIndex)"
               type="button"
               [attr.aria-current]="store.snapshot()!.currentIndex === questionIndex ? 'step' : null"
-              [attr.aria-label]="'Đến câu ' + (questionIndex + 1) + (responseFor(entry.question.id)?.flagged ? ', đã đánh dấu' : '')"
+              [attr.aria-label]="
+                'Đến câu ' +
+                (questionIndex + 1) +
+                (responseFor(entry.question.id)?.flagged ? ', đã đánh dấu' : '')
+              "
               (click)="goTo(questionIndex)"
             >
               {{ questionIndex + 1 }}
@@ -136,7 +163,12 @@
           <span><i class="legend-dot legend-dot--answered"></i>Đã trả lời</span>
           <span><i class="legend-dot legend-dot--flagged"></i>Đánh dấu</span>
         </div>
-        <button class="button button--coral submit-button" type="button" [disabled]="submitting()" (click)="submit()">
+        <button
+          class="button button--coral submit-button"
+          type="button"
+          [disabled]="submitting()"
+          (click)="submit()"
+        >
           {{ submitting() ? 'Đang nộp…' : 'Nộp bài' }}
         </button>
       </aside>
@@ -147,12 +179,15 @@
       <div class="time-warning" role="status">
         <span aria-hidden="true">!</span>
         {{ warning() }}
-        <button type="button" aria-label="Đóng cảnh báo thời gian" (click)="warning.set('')">×</button>
+        <button type="button" aria-label="Đóng cảnh báo thời gian" (click)="warning.set('')">
+          ×
+        </button>
       </div>
     }
     @if (store.persistenceError()) {
       <p class="persistence-warning" role="alert">
-        Không thể lưu bài thi hoặc phiên đang được dùng ở tab khác. Dừng thao tác và kiểm tra tab còn lại.
+        Không thể lưu bài thi hoặc phiên đang được dùng ở tab khác. Dừng thao tác và kiểm tra tab
+        còn lại.
       </p>
     }
   }

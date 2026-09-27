@@ -1,63 +1,223 @@
-<div class="document-page">
-  <header>
-    <p class="kicker">Methodology · v1.0</p>
-    <h1>Nội dung có nguồn gốc rõ ràng, tiến độ thuộc về bạn.</h1>
-    <p class="summary">CTFL Practice là công cụ học tập độc lập, phi thương mại và không được ISTQB® hay CertyIQ tài trợ, chứng nhận hoặc xác nhận.</p>
-  </header>
+@if (certificate.isSyllabus) {
+  <div class="document-page">
+    <header>
+      <p class="kicker">Methodology · v1.0</p>
+      <h1>Nội dung có nguồn gốc rõ ràng, tiến độ thuộc về bạn.</h1>
+      <p class="summary">
+        CTFL Practice là công cụ học tập độc lập, phi thương mại và không được ISTQB® hay CertyIQ
+        tài trợ, chứng nhận hoặc xác nhận.
+      </p>
+    </header>
 
-  <section aria-labelledby="content-policy">
-    <span class="section-number">01</span>
-    <div>
-      <h2 id="content-policy">Chính sách nội dung</h2>
-      <p>Ứng dụng có hai nguồn tách biệt: 80 câu viết mới dựa trên Learning Objective của CTFL v4.0.1, và 278 câu trích xuất từ PDF do chủ site cung cấp để học riêng. Mode “Nguồn PDF” kèm ảnh bằng chứng theo trang; chapter, Learning Objective và K-level được đối chiếu thủ công theo chủ đề vì các nhãn này không có trong PDF nguồn.</p>
-      <ul>
-        <li>Mỗi câu có chapter, Learning Objective, K-level và blueprint bucket.</li>
-        <li>Đáp án và giải thích phải được kiểm định trước khi xuất bản.</li>
-        <li>Nội dung/ảnh từ PDF chỉ dành cho site riêng tư; không chuyển site sang public nếu chưa có quyền tái xuất bản.</li>
-        <li>Câu 38, 39 và 47 in khóa <code>U</code>; ứng dụng chuẩn hóa thành A theo phần giải thích và vẫn hiển thị ảnh nguồn để đối chiếu.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section aria-labelledby="exam-shape">
-    <span class="section-number">02</span>
-    <div>
-      <h2 id="exam-shape">Cấu trúc thi thử</h2>
-      <p>Đề mô phỏng gồm 40 câu, mỗi câu một điểm, đạt từ 26 điểm. Cả hai mode dùng ma trận chapter/K-level bên dưới; với “Nguồn PDF”, ma trận dựa trên nhãn chủ đề đã đối chiếu và không phải metadata chính thức từ tài liệu nguồn. Thời gian là 60 hoặc 75 phút.</p>
-      <div class="blueprint-table" tabindex="0" aria-label="Phân bố câu hỏi theo chapter và K-level">
-        <table>
-          <thead><tr><th>Chapter</th><th>K1</th><th>K2</th><th>K3</th><th>Total</th></tr></thead>
-          <tbody>
-            <tr><th>1</th><td>2</td><td>6</td><td>0</td><td>8</td></tr>
-            <tr><th>2</th><td>2</td><td>4</td><td>0</td><td>6</td></tr>
-            <tr><th>3</th><td>2</td><td>2</td><td>0</td><td>4</td></tr>
-            <tr><th>4</th><td>0</td><td>6</td><td>5</td><td>11</td></tr>
-            <tr><th>5</th><td>1</td><td>5</td><td>3</td><td>9</td></tr>
-            <tr><th>6</th><td>1</td><td>1</td><td>0</td><td>2</td></tr>
-          </tbody>
-        </table>
+    <section aria-labelledby="content-policy">
+      <span class="section-number">01</span>
+      <div>
+        <h2 id="content-policy">Chính sách nội dung</h2>
+        <p>
+          Ứng dụng có hai nguồn tách biệt: 80 câu viết mới dựa trên Learning Objective của CTFL
+          v4.0.1, và 278 câu trích xuất từ PDF do chủ site cung cấp để học riêng. Mode “Nguồn PDF”
+          kèm ảnh bằng chứng theo trang; chapter, Learning Objective và K-level được đối chiếu thủ
+          công theo chủ đề vì các nhãn này không có trong PDF nguồn.
+        </p>
+        <ul>
+          <li>Mỗi câu có chapter, Learning Objective, K-level và blueprint bucket.</li>
+          <li>Đáp án và giải thích phải được kiểm định trước khi xuất bản.</li>
+          <li>
+            Nội dung/ảnh từ PDF chỉ dành cho site riêng tư; không chuyển site sang public nếu chưa
+            có quyền tái xuất bản.
+          </li>
+          <li>
+            Câu 38, 39 và 47 in khóa <code>U</code>; ứng dụng chuẩn hóa thành A theo phần giải thích
+            và vẫn hiển thị ảnh nguồn để đối chiếu.
+          </li>
+        </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section aria-labelledby="privacy-policy">
-    <span class="section-number">03</span>
-    <div>
-      <h2 id="privacy-policy">Quyền riêng tư và lưu trữ</h2>
-      <p>Ứng dụng không có tài khoản, không thu thập analytics và không gửi câu trả lời lên máy chủ. Session, lịch sử, bookmark và thống kê được lưu bằng IndexedDB trên thiết bị. Bạn có thể xuất, nhập hoặc xóa dữ liệu bất kỳ lúc nào trong trang Tiến độ.</p>
-      <p>Xóa dữ liệu trình duyệt sẽ xóa tiến độ nếu bạn chưa xuất bản sao lưu.</p>
-    </div>
-  </section>
+    <section aria-labelledby="exam-shape">
+      <span class="section-number">02</span>
+      <div>
+        <h2 id="exam-shape">Cấu trúc thi thử</h2>
+        <p>
+          Đề mô phỏng gồm 40 câu, mỗi câu một điểm, đạt từ 26 điểm. Cả hai mode dùng ma trận
+          chapter/K-level bên dưới; với “Nguồn PDF”, ma trận dựa trên nhãn chủ đề đã đối chiếu và
+          không phải metadata chính thức từ tài liệu nguồn. Thời gian là 60 hoặc 75 phút.
+        </p>
+        <div
+          class="blueprint-table"
+          tabindex="0"
+          aria-label="Phân bố câu hỏi theo chapter và K-level"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>Chapter</th>
+                <th>K1</th>
+                <th>K2</th>
+                <th>K3</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>1</th>
+                <td>2</td>
+                <td>6</td>
+                <td>0</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <th>4</th>
+                <td>0</td>
+                <td>6</td>
+                <td>5</td>
+                <td>11</td>
+              </tr>
+              <tr>
+                <th>5</th>
+                <td>1</td>
+                <td>5</td>
+                <td>3</td>
+                <td>9</td>
+              </tr>
+              <tr>
+                <th>6</th>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
-  <section aria-labelledby="official-resources">
-    <span class="section-number">04</span>
-    <div>
-      <h2 id="official-resources">Nguồn chính thức</h2>
-      <ul class="resource-list">
-        <li><a href="https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" target="_blank" rel="noreferrer">ISTQB Certified Tester Foundation Level v4.0 <span aria-hidden="true">↗</span></a></li>
-        <li><a href="https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf" target="_blank" rel="noreferrer">CTFL Syllabus v4.0.1 <span aria-hidden="true">↗</span></a></li>
-        <li><a href="https://glossary.istqb.org/" target="_blank" rel="noreferrer">ISTQB Glossary <span aria-hidden="true">↗</span></a></li>
-      </ul>
-    </div>
-  </section>
-</div>
+    <section aria-labelledby="privacy-policy">
+      <span class="section-number">03</span>
+      <div>
+        <h2 id="privacy-policy">Quyền riêng tư và lưu trữ</h2>
+        <p>
+          Ứng dụng không có tài khoản, không thu thập analytics và không gửi câu trả lời lên máy
+          chủ. Session, lịch sử, bookmark và thống kê được lưu bằng IndexedDB trên thiết bị. Bạn có
+          thể xuất, nhập hoặc xóa dữ liệu bất kỳ lúc nào trong trang Tiến độ.
+        </p>
+        <p>Xóa dữ liệu trình duyệt sẽ xóa tiến độ nếu bạn chưa xuất bản sao lưu.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="official-resources">
+      <span class="section-number">04</span>
+      <div>
+        <h2 id="official-resources">Nguồn chính thức</h2>
+        <ul class="resource-list">
+          <li>
+            <a
+              href="https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+              target="_blank"
+              rel="noreferrer"
+              >ISTQB Certified Tester Foundation Level v4.0 <span aria-hidden="true">↗</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf"
+              target="_blank"
+              rel="noreferrer"
+              >CTFL Syllabus v4.0.1 <span aria-hidden="true">↗</span></a
+            >
+          </li>
+          <li>
+            <a href="https://glossary.istqb.org/" target="_blank" rel="noreferrer"
+              >ISTQB Glossary <span aria-hidden="true">↗</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+} @else {
+  <div class="document-page">
+    <header>
+      <p class="kicker">{{ certificate.name }} · Nguồn và phương pháp</p>
+      <h1>Luyện tập theo cấu trúc {{ certificate.definition.exam.label }}</h1>
+      <p class="summary">
+        Công cụ học tập độc lập. Không liên kết hoặc được chứng thực bởi tổ chức cấp chứng chỉ.
+      </p>
+    </header>
+    <section>
+      <span class="section-number">01</span>
+      <div>
+        <h2>Nội dung luyện tập</h2>
+        <p>
+          Bộ đề {{ certificate.name }} sẽ được bổ sung sau. Ngân hàng hiện chưa có câu hỏi; nút bắt
+          đầu chỉ mở khi có dữ liệu phù hợp.
+        </p>
+        <p>
+          Phần Listening hỗ trợ audio và hình ảnh. Phần Reading hỗ trợ bài đọc dùng chung cho nhiều
+          câu. Các câu trong cùng đề giữ nguyên thứ tự Part và nhóm bài.
+        </p>
+      </div>
+    </section>
+    <section>
+      <span class="section-number">02</span>
+      <div>
+        <h2>Luyện tập và thi thử</h2>
+        <p>
+          Luyện tập cho phép chọn từng Part và xem giải thích sau khi kiểm tra. Thi thử gồm
+          {{ certificate.definition.exam.questionCount }} câu, chỉ hiện đáp án sau khi nộp bài hoặc
+          hết giờ.
+        </p>
+        <p>
+          Listening có 45 phút, Reading có 75 phút. Khi chuyển phần, các câu của phần trước được
+          khóa. Audio có nút phát để luyện tập; đây không phải môi trường tổ chức kỳ thi chính thức.
+        </p>
+        <p>
+          Kết quả hiển thị số câu đúng và tỷ lệ đúng theo Part. Không tự quy đổi sang thang điểm
+          TOEIC 10–990 hoặc gán đạt/trượt.
+        </p>
+      </div>
+    </section>
+    <section>
+      <span class="section-number">03</span>
+      <div>
+        <h2>Quyền riêng tư và dữ liệu</h2>
+        <p>
+          Không tài khoản, không analytics. Phiên làm bài, lịch sử và bookmark được lưu trên thiết
+          bị, tách biệt với các chứng chỉ khác. Export/import và reset chỉ áp dụng cho chứng chỉ
+          đang chọn.
+        </p>
+        <p>Câu hỏi đã tải có thể dùng ngoại tuyến. Audio cần được tải trước khi mất mạng.</p>
+      </div>
+    </section>
+    <section>
+      <span class="section-number">04</span>
+      <div>
+        <h2>Tham khảo cấu trúc chính thức</h2>
+        <ul>
+          @for (reference of certificate.definition.references; track reference.url) {
+            <li>
+              <a [href]="reference.url" target="_blank" rel="noopener noreferrer">{{
+                reference.title
+              }}</a>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+  </div>
+}

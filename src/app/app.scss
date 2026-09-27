@@ -374,3 +374,23 @@
     forced-color-adjust: none;
   }
 }
+.certificate-switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-paper);
+}
+.certificate-switcher select {
+  padding: 0.5rem;
+  max-width: 12rem;
+  border: 1px solid #b4c4c3;
+  border-radius: 0.5rem;
+  background: white;
+  color: #162e32;
+}
+@media (max-width: 1100px) {
+  .local-save-note {
+    display: none;
+  }
+}

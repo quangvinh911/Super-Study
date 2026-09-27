@@ -29,7 +29,11 @@
       @case ('table') {
         <div class="table-scroll" tabindex="0" role="region" [attr.aria-label]="block.caption">
           <table>
-            <caption>{{ block.caption }}</caption>
+            <caption>
+              {{
+                block.caption
+              }}
+            </caption>
             <thead>
               <tr>
                 @for (header of block.headers; track $index) {
@@ -63,6 +67,14 @@
           @if (block.caption) {
             <figcaption>{{ block.caption }}</figcaption>
           }
+        </figure>
+      }
+      @case ('audio') {
+        <figure>
+          <figcaption>{{ block.label }}</figcaption>
+          <audio controls preload="none" [src]="block.src" [attr.aria-label]="block.label">
+            Trình duyệt không hỗ trợ phát audio.
+          </audio>
         </figure>
       }
     }

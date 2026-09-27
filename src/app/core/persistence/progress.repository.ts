@@ -1,4 +1,6 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { CERTIFICATE } from '../../certificates/certificate-context';
+import { CTFL } from '../../certificates/registry';
 import { DBSchema, IDBPDatabase, openDB } from 'idb';
 import {
   Attempt,
@@ -6,15 +8,15 @@ import {
   ProgressExport,
   QuestionStat,
   SessionSnapshot,
+  CertificateDefinition,
 } from '../models';
 
-export const PROGRESS_DATABASE_NAME = new InjectionToken<string>(
-  'CTFL progress database name',
-  { factory: () => 'ctfl-practice' },
-);
+export const PROGRESS_DATABASE_NAME = new InjectionToken<string>('CTFL progress database name', {
+  factory: () => 'ctfl-practice',
+});
 
 const DATABASE_VERSION = 1;
-const EXPORT_FORMAT = 'ctfl-practice-progress' as const;
+const EXPORT_FORMAT = 'certificate-practice-progress' as const;
 const SESSION_LOCK_PREFIX = 'session-lock:';
 
 interface SettingRecord {
@@ -69,6 +71,26 @@ function clone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }
 
+function nextQuestionStat(
+  previous: QuestionStat | undefined,
+  questionId: string,
+  revision: number,
+  correct: boolean,
+  answeredAt: string,
+): QuestionStat {
+  return {
+    questionId,
+    revision,
+    seenCount: (previous?.seenCount ?? 0) + 1,
+    correctCount: (previous?.correctCount ?? 0) + (correct ? 1 : 0),
+    incorrectCount: (previous?.incorrectCount ?? 0) + (correct ? 0 : 1),
+    currentCorrectStreak: correct ? (previous?.currentCorrectStreak ?? 0) + 1 : 0,
+    lastCorrect: correct,
+    lastAnsweredAt: answeredAt,
+    updatedAt: answeredAt,
+  };
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -88,21 +110,241 @@ export class InvalidProgressExportError extends Error {
   }
 }
 
-function validateProgressExport(value: unknown): ProgressExport {
+function validDate(value: unknown): boolean {
+  return typeof value === 'string' && Number.isFinite(Date.parse(value));
+}
+
+function nonnegativeInteger(value: unknown): boolean {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0;
+}
+
+function validScoringPolicy(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    (value['kind'] === 'raw' ||
+      (value['kind'] === 'threshold' &&
+        typeof value['passPercent'] === 'number' &&
+        value['passPercent'] >= 0 &&
+        value['passPercent'] <= 100))
+  );
+}
+
+function validateSnapshotRecord(
+  record: Record<string, unknown>,
+  kind: 'activeSessions' | 'attempts',
+): void {
+  const fail = (): never => {
+    throw new InvalidProgressExportError('Session or attempt data is malformed.');
+  };
+  if (record['scoringPolicy'] !== undefined && !validScoringPolicy(record['scoringPolicy'])) fail();
+  if (
+    !['practice', 'exam'].includes(String(record['mode'])) ||
+    typeof record['bankVersion'] !== 'string' ||
+    typeof record['seed'] !== 'string' ||
+    !validDate(record['startedAt']) ||
+    !isRecord(record['responses'])
+  )
+    fail();
+  const questions = record['questions'] as Record<string, unknown>[];
+  if (!questions.length) fail();
+  const ids = new Set<string>();
+  for (const item of questions) {
+    const question = item['question'];
+    const solution = item['solution'];
+    if (!isRecord(question) || !isRecord(solution)) fail();
+    const q = question as Record<string, unknown>;
+    const s = solution as Record<string, unknown>;
+    if (
+      typeof q['id'] !== 'string' ||
+      ids.has(q['id']) ||
+      !nonnegativeInteger(q['revision']) ||
+      !Array.isArray(q['stem']) ||
+      !Array.isArray(q['options']) ||
+      !isRecord(q['classification']) ||
+      typeof q['classification']['section'] !== 'string' ||
+      !isRecord(q['interaction']) ||
+      !isRecord(q['provenance']) ||
+      !isRecord(q['verification'])
+    )
+      fail();
+    const id = q['id'] as string;
+    ids.add(id);
+    const optionIds = (q['options'] as unknown[]).map((option) =>
+      isRecord(option) && typeof option['id'] === 'string' && Array.isArray(option['content'])
+        ? option['id']
+        : null,
+    );
+    if (
+      optionIds.length < 2 ||
+      optionIds.includes(null) ||
+      new Set(optionIds).size !== optionIds.length ||
+      s['questionId'] !== id ||
+      !Array.isArray(s['correctOptionIds']) ||
+      !s['correctOptionIds'].length ||
+      !s['correctOptionIds'].every((option) => optionIds.includes(option)) ||
+      !Array.isArray(s['explanation']) ||
+      !Array.isArray(s['references'])
+    )
+      fail();
+    const response = (record['responses'] as Record<string, unknown>)[id];
+    if (
+      !isRecord(response) ||
+      response['questionId'] !== id ||
+      !Array.isArray(response['selectedOptionIds']) ||
+      !response['selectedOptionIds'].every((option) => optionIds.includes(option)) ||
+      typeof response['checked'] !== 'boolean' ||
+      typeof response['flagged'] !== 'boolean'
+    )
+      fail();
+  }
+  if (kind === 'activeSessions') {
+    if (
+      record['schemaVersion'] !== 1 ||
+      !['active', 'completed', 'expired'].includes(String(record['status'])) ||
+      !validDate(record['createdAt']) ||
+      !validDate(record['updatedAt']) ||
+      !nonnegativeInteger(record['currentIndex']) ||
+      Number(record['currentIndex']) >= questions.length
+    )
+      fail();
+    if (
+      record['mode'] === 'exam' &&
+      (!validDate(record['deadlineAt']) ||
+        !nonnegativeInteger(record['durationMinutes']) ||
+        Number(record['durationMinutes']) === 0)
+    )
+      fail();
+  } else {
+    const result = record['result'];
+    if (
+      typeof record['sessionId'] !== 'string' ||
+      !validDate(record['completedAt']) ||
+      !nonnegativeInteger(record['durationSeconds']) ||
+      !['submitted', 'expired'].includes(String(record['completionReason'])) ||
+      !isRecord(result)
+    )
+      fail();
+    const r = result as Record<string, unknown>;
+    if (
+      !nonnegativeInteger(r['score']) ||
+      r['total'] !== questions.length ||
+      !nonnegativeInteger(r['answered']) ||
+      Number(r['answered']) > questions.length ||
+      Number(r['score']) > questions.length ||
+      typeof r['percent'] !== 'number' ||
+      !Number.isFinite(r['percent']) ||
+      r['percent'] < 0 ||
+      r['percent'] > 100 ||
+      !(r['passed'] === null || typeof r['passed'] === 'boolean') ||
+      !(r['passMark'] === null || nonnegativeInteger(r['passMark']))
+    )
+      fail();
+    for (const key of ['byChapter', 'byKLevel', 'bySection']) {
+      if (key === 'bySection' && r[key] === undefined) continue;
+      if (
+        !Array.isArray(r[key]) ||
+        !(r[key] as unknown[]).every(
+          (row) =>
+            isRecord(row) &&
+            ['string', 'number'].includes(typeof row['key']) &&
+            ['total', 'correct', 'answered'].every((field) => nonnegativeInteger(row[field])) &&
+            typeof row['percent'] === 'number' &&
+            Number.isFinite(row['percent']),
+        )
+      )
+        fail();
+    }
+  }
+  const exam = record['examDefinition'];
+  if (record['mode'] === 'exam' && (record['certificateId'] ?? 'ctfl') !== 'ctfl' && !exam) fail();
+  if (exam !== undefined) {
+    if (
+      !isRecord(exam) ||
+      !Array.isArray(exam['durations']) ||
+      !exam['durations'].every((value) => typeof value === 'number' && value > 0) ||
+      !nonnegativeInteger(exam['questionCount']) ||
+      typeof exam['label'] !== 'string' ||
+      !isRecord(exam['scoring'])
+    )
+      fail();
+    const definition = exam as Record<string, unknown>;
+    const scoring = definition['scoring'] as Record<string, unknown>;
+    if (!validScoringPolicy(scoring)) fail();
+    if (
+      definition['sections'] !== undefined &&
+      (!Array.isArray(definition['sections']) ||
+        !definition['sections'].every(
+          (section) =>
+            isRecord(section) &&
+            typeof section['label'] === 'string' &&
+            typeof section['durationMinutes'] === 'number' &&
+            section['durationMinutes'] > 0 &&
+            Array.isArray(section['parts']) &&
+            section['parts'].every(
+              (part) =>
+                isRecord(part) &&
+                typeof part['id'] === 'string' &&
+                nonnegativeInteger(part['count']),
+            ),
+        ))
+    )
+      fail();
+  }
+}
+
+function validateProgressExport(value: unknown, certificateId: string): ProgressExport {
   if (!isRecord(value)) {
     throw new InvalidProgressExportError('Progress import must be a JSON object.');
   }
-  if (value['format'] !== EXPORT_FORMAT || value['schemaVersion'] !== 1) {
+  const legacy = value['format'] === 'ctfl-practice-progress' && value['schemaVersion'] === 1;
+  if (!legacy && (value['format'] !== EXPORT_FORMAT || value['schemaVersion'] !== 2)) {
     throw new InvalidProgressExportError('Unsupported progress export format or version.');
   }
-  for (const field of [
-    'activeSessions',
-    'attempts',
-    'questionStats',
-    'bookmarks',
-  ] as const) {
+  if ((legacy ? 'ctfl' : value['certificateId']) !== certificateId) {
+    throw new InvalidProgressExportError('This export belongs to a different certificate.');
+  }
+  for (const field of ['activeSessions', 'attempts', 'questionStats', 'bookmarks'] as const) {
     if (!Array.isArray(value[field])) {
       throw new InvalidProgressExportError(`Progress field "${field}" must be an array.`);
+    }
+    for (const record of value[field] as unknown[]) {
+      if (!isRecord(record)) throw new InvalidProgressExportError('Invalid progress record.');
+      if (field === 'activeSessions' || field === 'attempts') {
+        if (
+          (record['certificateId'] ?? 'ctfl') !== certificateId ||
+          typeof record['id'] !== 'string' ||
+          !Array.isArray(record['questions'])
+        ) {
+          throw new InvalidProgressExportError(
+            'Session belongs to a different certificate or is malformed.',
+          );
+        }
+        for (const item of record['questions']) {
+          if (
+            !isRecord(item) ||
+            !isRecord(item['question']) ||
+            (item['question']['certificateId'] ?? 'ctfl') !== certificateId
+          ) {
+            throw new InvalidProgressExportError('Question belongs to a different certificate.');
+          }
+        }
+        validateSnapshotRecord(record, field);
+      } else if (
+        typeof record['questionId'] !== 'string' ||
+        !Number.isInteger(record['revision'])
+      ) {
+        throw new InvalidProgressExportError('Invalid question progress record.');
+      } else if (
+        field === 'questionStats' &&
+        (!['seenCount', 'correctCount', 'incorrectCount', 'currentCorrectStreak'].every((key) =>
+          nonnegativeInteger(record[key]),
+        ) ||
+          !validDate(record['updatedAt']))
+      ) {
+        throw new InvalidProgressExportError('Invalid question counters.');
+      } else if (field === 'bookmarks' && !validDate(record['createdAt'])) {
+        throw new InvalidProgressExportError('Invalid bookmark timestamp.');
+      }
     }
   }
   if (!isRecord(value['settings']) || typeof value['exportedAt'] !== 'string') {
@@ -113,9 +355,15 @@ function validateProgressExport(value: unknown): ProgressExport {
 
 @Injectable({ providedIn: 'root' })
 export class ProgressRepository {
+  readonly certificateId: string;
   private databasePromise?: Promise<IDBPDatabase<CtflDatabase>>;
 
-  constructor(@Inject(PROGRESS_DATABASE_NAME) private readonly databaseName: string) {}
+  constructor(
+    @Inject(PROGRESS_DATABASE_NAME) private readonly databaseName: string,
+    @Optional() @Inject(CERTIFICATE) certificate: CertificateDefinition = CTFL,
+  ) {
+    this.certificateId = (certificate ?? CTFL).id;
+  }
 
   private database(): Promise<IDBPDatabase<CtflDatabase>> {
     this.databasePromise ??= openDB<CtflDatabase>(this.databaseName, DATABASE_VERSION, {
@@ -145,6 +393,7 @@ export class ProgressRepository {
   }
 
   async saveActiveSession(snapshot: SessionSnapshot): Promise<void> {
+    this.assertCertificate(snapshot);
     const database = await this.database();
     await database.put('activeSessions', clone(snapshot));
   }
@@ -167,16 +416,42 @@ export class ProgressRepository {
   }
 
   async saveAttempt(attempt: Attempt): Promise<void> {
+    this.assertCertificate(attempt);
     const database = await this.database();
     await database.put('attempts', clone(attempt));
   }
 
   /** Atomically replaces an active session with its immutable attempt record. */
   async completeSession(attempt: Attempt): Promise<void> {
+    this.assertCertificate(attempt);
     const database = await this.database();
-    const transaction = database.transaction(['activeSessions', 'attempts'], 'readwrite');
+    const transaction = database.transaction(
+      ['activeSessions', 'attempts', 'questionStats'],
+      'readwrite',
+    );
+    if (await transaction.objectStore('attempts').get(attempt.id)) {
+      await transaction.done;
+      return;
+    }
     await transaction.objectStore('attempts').put(clone(attempt));
     await transaction.objectStore('activeSessions').delete(attempt.sessionId);
+    if (attempt.mode === 'exam') {
+      const stats = transaction.objectStore('questionStats');
+      await Promise.all(
+        attempt.questions.map(async ({ question }) => {
+          const previous = await stats.get([question.id, question.revision]);
+          await stats.put(
+            nextQuestionStat(
+              previous,
+              question.id,
+              question.revision,
+              attempt.responses[question.id]?.isCorrect ?? false,
+              attempt.completedAt,
+            ),
+          );
+        }),
+      );
+    }
     await transaction.done;
   }
 
@@ -192,10 +467,7 @@ export class ProgressRepository {
     return attempts.reverse().map(clone);
   }
 
-  async getQuestionStat(
-    questionId: string,
-    revision: number,
-  ): Promise<QuestionStat | undefined> {
+  async getQuestionStat(questionId: string, revision: number): Promise<QuestionStat | undefined> {
     const database = await this.database();
     const stat = await database.get('questionStats', [questionId, revision]);
     return stat ? clone(stat) : undefined;
@@ -227,17 +499,7 @@ export class ProgressRepository {
     const transaction = database.transaction('questionStats', 'readwrite');
     const store = transaction.objectStore('questionStats');
     const previous = await store.get([questionId, revision]);
-    const stat: QuestionStat = {
-      questionId,
-      revision,
-      seenCount: (previous?.seenCount ?? 0) + 1,
-      correctCount: (previous?.correctCount ?? 0) + (correct ? 1 : 0),
-      incorrectCount: (previous?.incorrectCount ?? 0) + (correct ? 0 : 1),
-      currentCorrectStreak: correct ? (previous?.currentCorrectStreak ?? 0) + 1 : 0,
-      lastCorrect: correct,
-      lastAnsweredAt: answeredAt,
-      updatedAt: answeredAt,
-    };
+    const stat = nextQuestionStat(previous, questionId, revision, correct, answeredAt);
     await store.put(stat);
     await transaction.done;
     return clone(stat);
@@ -260,9 +522,7 @@ export class ProgressRepository {
 
   async listBookmarks(): Promise<Bookmark[]> {
     const database = await this.database();
-    return (await database.getAllFromIndex('bookmarks', 'by-created-at'))
-      .reverse()
-      .map(clone);
+    return (await database.getAllFromIndex('bookmarks', 'by-created-at')).reverse().map(clone);
   }
 
   async toggleBookmark(
@@ -348,14 +608,13 @@ export class ProgressRepository {
   async exportProgress(now = new Date()): Promise<ProgressExport> {
     const database = await this.database();
     const transaction = database.transaction(STORE_NAMES, 'readonly');
-    const [activeSessions, attempts, questionStats, bookmarks, settingRecords] =
-      await Promise.all([
-        transaction.objectStore('activeSessions').getAll(),
-        transaction.objectStore('attempts').getAll(),
-        transaction.objectStore('questionStats').getAll(),
-        transaction.objectStore('bookmarks').getAll(),
-        transaction.objectStore('settings').getAll(),
-      ]);
+    const [activeSessions, attempts, questionStats, bookmarks, settingRecords] = await Promise.all([
+      transaction.objectStore('activeSessions').getAll(),
+      transaction.objectStore('attempts').getAll(),
+      transaction.objectStore('questionStats').getAll(),
+      transaction.objectStore('bookmarks').getAll(),
+      transaction.objectStore('settings').getAll(),
+    ]);
     await transaction.done;
     const settings = Object.fromEntries(
       settingRecords
@@ -364,7 +623,8 @@ export class ProgressRepository {
     );
     return {
       format: EXPORT_FORMAT,
-      schemaVersion: 1,
+      schemaVersion: 2,
+      certificateId: this.certificateId,
       exportedAt: now.toISOString(),
       activeSessions: activeSessions.map(clone),
       attempts: attempts.map(clone),
@@ -378,14 +638,12 @@ export class ProgressRepository {
     input: unknown,
     mode: 'merge' | 'replace' = 'merge',
   ): Promise<ProgressExport> {
-    const progress = validateProgressExport(input);
+    const progress = validateProgressExport(input, this.certificateId);
     const database = await this.database();
     const transaction = database.transaction(STORE_NAMES, 'readwrite');
 
     if (mode === 'replace') {
-      await Promise.all(
-        STORE_NAMES.map((name) => transaction.objectStore(name).clear()),
-      );
+      await Promise.all(STORE_NAMES.map((name) => transaction.objectStore(name).clear()));
     }
 
     for (const session of progress.activeSessions) {
@@ -420,6 +678,10 @@ export class ProgressRepository {
     return clone(progress);
   }
 
+  validateImport(input: unknown): void {
+    validateProgressExport(input, this.certificateId);
+  }
+
   async reset(): Promise<void> {
     const database = await this.database();
     const transaction = database.transaction(STORE_NAMES, 'readwrite');
@@ -430,5 +692,11 @@ export class ProgressRepository {
   close(): void {
     void this.databasePromise?.then((database) => database.close());
     this.databasePromise = undefined;
+  }
+
+  private assertCertificate(record: { readonly certificateId?: string }): void {
+    if ((record.certificateId ?? 'ctfl') !== this.certificateId) {
+      throw new Error('Cannot save progress for another certificate.');
+    }
   }
 }

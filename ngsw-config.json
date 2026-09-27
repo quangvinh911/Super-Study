@@ -24,19 +24,24 @@
       "resources": {
         "files": [
           "/data/*.json",
+          "/data/**/*.json",
           "!/pdf-evidence/**",
           "/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
       }
     },
     {
+      "name": "exam-audio",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": { "files": ["/audio/**"] }
+    },
+    {
       "name": "pdf-evidence",
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": [
-          "/pdf-evidence/*.webp"
-        ]
+        "files": ["/pdf-evidence/*.webp"]
       }
     }
   ]

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CERTIFICATES } from '../../certificates/registry';
 
 @Component({
   selector: 'app-home-page',
@@ -8,4 +9,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage {}
+export class HomePage {
+  protected readonly certificates = CERTIFICATES;
+}

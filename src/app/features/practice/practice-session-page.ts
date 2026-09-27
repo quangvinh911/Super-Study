@@ -1,3 +1,4 @@
+import { CertificateContext } from '../../certificates/certificate-context';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,6 +21,7 @@ import { QuizSessionStore } from '../../core/state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PracticeSessionPage implements OnInit {
+  protected readonly certificate = inject(CertificateContext);
   @ViewChild('questionHeading') private questionHeading?: ElementRef<HTMLElement>;
 
   protected readonly store = inject(QuizSessionStore);
@@ -36,15 +38,11 @@ export class PracticeSessionPage implements OnInit {
   async ngOnInit(): Promise<void> {
     const sessionId = this.route.snapshot.paramMap.get('sessionId');
     if (!sessionId) {
-      await this.router.navigate(['/practice']);
+      await this.router.navigate(this.certificate.link('practice'));
       return;
     }
     try {
-      const current = this.store.snapshot();
-      const restored =
-        current?.id === sessionId && current.status === 'active'
-          ? true
-          : await this.store.restore(sessionId);
+      const restored = await this.store.restore(sessionId);
       if (!restored || this.store.snapshot()?.mode !== 'practice') {
         this.error.set('Phiên luyện tập này không còn hoạt động hoặc không tồn tại.');
         return;
@@ -120,9 +118,7 @@ export class PracticeSessionPage implements OnInit {
     if (!question) {
       return;
     }
-    this.bookmarked.set(
-      await this.repository.toggleBookmark(question.id, question.revision),
-    );
+    this.bookmarked.set(await this.repository.toggleBookmark(question.id, question.revision));
   }
 
   protected goTo(index: number): void {
@@ -160,7 +156,7 @@ export class PracticeSessionPage implements OnInit {
     try {
       const attempt = await this.store.submit();
       if (attempt) {
-        await this.router.navigate(['/results', attempt.id]);
+        await this.router.navigate(this.certificate.link('results', attempt.id));
       }
     } finally {
       this.submitting.set(false);

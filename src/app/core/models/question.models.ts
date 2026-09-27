@@ -3,9 +3,10 @@ import { ContentBlock } from './content.models';
 export type Chapter = 1 | 2 | 3 | 4 | 5 | 6;
 export type KLevel = 'K1' | 'K2' | 'K3';
 export type InteractionKind = 'singleChoice' | 'multiSelect';
-export type QuestionBankSource = 'original' | 'pdf';
+export type QuestionBankSource = string;
 
 export type QuestionStyleTag =
+  | (string & {})
   | 'directKnowledge'
   | 'scenario'
   | 'statementEvaluation'
@@ -30,11 +31,11 @@ export interface QuestionInteraction {
 }
 
 export interface QuestionClassification {
-  readonly chapter: Chapter;
+  readonly chapter?: Chapter;
   readonly section: string;
-  readonly learningObjective: string;
-  readonly blueprintBucket: string;
-  readonly kLevel: KLevel;
+  readonly learningObjective?: string;
+  readonly blueprintBucket?: string;
+  readonly kLevel?: KLevel;
   readonly styleTags: readonly QuestionStyleTag[];
 }
 
@@ -48,11 +49,7 @@ export interface Provenance {
 
 export interface Verification {
   readonly answerStatus:
-    | 'verified'
-    | 'pending'
-    | 'rejected'
-    | 'sourcePrinted'
-    | 'sourceAnomalyCorrected';
+    'verified' | 'pending' | 'rejected' | 'sourcePrinted' | 'sourceAnomalyCorrected';
   readonly classificationStatus?: 'topicMappedAgainstCtflV4.0.1';
   readonly reviewedAgainst: string;
   readonly reviewedAt: string;
@@ -68,6 +65,11 @@ export interface SourceEvidence {
 }
 
 export interface Question {
+  readonly certificateId?: string;
+  /** A complete authored exam form; never mix passages/audio across forms. */
+  readonly formId?: string;
+  readonly order?: number;
+  readonly stimulus?: { readonly id: string; readonly content: readonly ContentBlock[] };
   readonly id: string;
   readonly revision: number;
   readonly language: 'en';
@@ -116,6 +118,7 @@ export interface BlueprintManifestCell {
 }
 
 export interface QuestionBankManifest {
+  readonly certificateId?: string;
   readonly schemaVersion: string;
   readonly bankVersion: string;
   readonly publishedAt: string;

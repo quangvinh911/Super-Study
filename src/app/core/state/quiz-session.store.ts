@@ -2,7 +2,6 @@ import { computed, Injectable, OnDestroy, signal } from '@angular/core';
 import {
   calculateAttemptResult,
   createPracticeQuestions,
-  generateCtflExam,
   generateRandomExam,
   scoreQuestion,
   validateSelection,
@@ -16,6 +15,8 @@ import {
   StartPracticeInput,
 } from '../models';
 import { ProgressRepository } from '../persistence';
+import { generateExam } from '../domain/exam-generator';
+import { CTFL } from '../../certificates/registry';
 
 const LEASE_TTL_MS = 15_000;
 const LEASE_RENEW_EVERY_TICKS = 5;
@@ -24,6 +25,7 @@ const WARNING_MINUTES = [1, 5, 10] as const;
 export type DeadlineWarningMinutes = (typeof WARNING_MINUTES)[number];
 
 export interface DeadlineHooks {
+  readonly onSectionChange?: () => void;
   readonly onWarning?: (minutesRemaining: DeadlineWarningMinutes) => void;
   readonly onAutoSubmit?: (attempt: Attempt) => void;
 }
@@ -108,6 +110,10 @@ export class QuizSessionStore implements OnDestroy {
   readonly remainingMs = this.remainingMsState.asReadonly();
   readonly deadlineWarning = this.deadlineWarningState.asReadonly();
   readonly lastAttempt = this.lastAttemptState.asReadonly();
+  readonly activeExamSection = computed(() => {
+    const snapshot = this.snapshotState();
+    return snapshot?.examDefinition?.sections?.[snapshot.sectionIndex ?? 0];
+  });
   readonly persistenceError = this.persistenceErrorState.asReadonly();
 
   readonly currentQuestion = computed(() => {
@@ -135,8 +141,7 @@ export class QuizSessionStore implements OnDestroy {
       return 0;
     }
     return snapshot.questions.filter(
-      ({ question }) =>
-        (snapshot.responses[question.id]?.selectedOptionIds.length ?? 0) === 0,
+      ({ question }) => (snapshot.responses[question.id]?.selectedOptionIds.length ?? 0) === 0,
     ).length;
   });
 
@@ -149,6 +154,7 @@ export class QuizSessionStore implements OnDestroy {
   private hooks: DeadlineHooks = {};
   private warned = new Set<DeadlineWarningMinutes>();
   private submitPromise?: Promise<Attempt | null>;
+  private lifecycleQueue: Promise<unknown> = Promise.resolve();
 
   constructor(private readonly repository: ProgressRepository) {}
 
@@ -156,7 +162,12 @@ export class QuizSessionStore implements OnDestroy {
     this.hooks = hooks;
   }
 
-  async startPractice(input: StartPracticeInput): Promise<SessionSnapshot> {
+  startPractice(input: StartPracticeInput): Promise<SessionSnapshot> {
+    return this.lifecycle(() => this.performStartPractice(input));
+  }
+
+  private async performStartPractice(input: StartPracticeInput): Promise<SessionSnapshot> {
+    this.assertCertificate(input.certificateId, input.questions);
     await this.detachCurrent();
     const id = identifier('practice');
     const seed = String(input.config?.seed ?? id);
@@ -174,8 +185,13 @@ export class QuizSessionStore implements OnDestroy {
     const timestamp = now.toISOString();
     const snapshot: SessionSnapshot = {
       schemaVersion: 1,
+      certificateId: input.certificateId ?? 'ctfl',
       id,
       mode: 'practice',
+      scoringPolicy: clone(
+        input.scoringPolicy ??
+          ((input.certificateId ?? 'ctfl') === 'ctfl' ? CTFL.exam.scoring : { kind: 'raw' }),
+      ),
       bankVersion: input.bankVersion,
       bankSource: input.bankSource ?? 'original',
       seed,
@@ -194,20 +210,31 @@ export class QuizSessionStore implements OnDestroy {
     return immutable(snapshot);
   }
 
-  async startExam(input: StartExamInput): Promise<SessionSnapshot> {
+  startExam(input: StartExamInput): Promise<SessionSnapshot> {
+    return this.lifecycle(() => this.performStartExam(input));
+  }
+
+  private async performStartExam(input: StartExamInput): Promise<SessionSnapshot> {
+    this.assertCertificate(input.certificateId, input.questions);
+    const exam = input.examDefinition ?? CTFL.exam;
+    if (!exam.durations.includes(input.durationMinutes)) throw new Error('Invalid exam duration.');
     await this.detachCurrent();
     const id = identifier('exam');
     const seed = String(input.seed ?? id);
     const questions =
-      input.generation === 'random40'
+      !input.examDefinition && input.generation === 'random40'
         ? generateRandomExam(input.questions, input.solutions, { seed })
-        : generateCtflExam(input.questions, input.solutions, { seed });
+        : generateExam(input.questions, input.solutions, exam, seed);
     const now = input.now ?? new Date();
     const timestamp = now.toISOString();
     const snapshot: SessionSnapshot = {
       schemaVersion: 1,
       id,
       mode: 'exam',
+      certificateId: input.certificateId ?? 'ctfl',
+      examDefinition: clone(exam),
+      scoringPolicy: clone(exam.scoring),
+      sectionIndex: 0,
       bankVersion: input.bankVersion,
       bankSource: input.bankSource ?? 'original',
       seed,
@@ -232,7 +259,11 @@ export class QuizSessionStore implements OnDestroy {
     return immutable(snapshot);
   }
 
-  async restore(sessionId: string): Promise<boolean> {
+  restore(sessionId: string): Promise<boolean> {
+    return this.lifecycle(() => this.performRestore(sessionId));
+  }
+
+  private async performRestore(sessionId: string): Promise<boolean> {
     await this.detachCurrent();
     const snapshot = await this.repository.getActiveSession(sessionId);
     if (!snapshot || snapshot.status !== 'active') {
@@ -240,11 +271,7 @@ export class QuizSessionStore implements OnDestroy {
     }
     if (
       snapshot.mode === 'exam' &&
-      !(await this.repository.acquireSessionLease(
-        snapshot.id,
-        this.ownerId,
-        LEASE_TTL_MS,
-      ))
+      !(await this.repository.acquireSessionLease(snapshot.id, this.ownerId, LEASE_TTL_MS))
     ) {
       throw new SessionLockedError(snapshot.id);
     }
@@ -334,9 +361,22 @@ export class QuizSessionStore implements OnDestroy {
     return correct;
   }
 
+  canNavigateTo(index: number): boolean {
+    const snapshot = this.snapshotState();
+    if (!snapshot || index < 0 || index >= snapshot.questions.length) return false;
+    const sections = snapshot.examDefinition?.sections;
+    if (!sections?.length) return true;
+    const current = snapshot.sectionIndex ?? 0;
+    const start = sections
+      .slice(0, current)
+      .reduce((sum, section) => sum + section.parts.reduce((n, part) => n + part.count, 0), 0);
+    const count = sections[current]!.parts.reduce((sum, part) => sum + part.count, 0);
+    return index >= start && index < start + count;
+  }
+
   goTo(index: number): void {
     const snapshot = this.requireEditable();
-    if (!Number.isInteger(index) || index < 0 || index >= snapshot.questions.length) {
+    if (!Number.isInteger(index) || !this.canNavigateTo(index)) {
       return;
     }
     this.updateSnapshot(snapshot, { currentIndex: index });
@@ -377,17 +417,36 @@ export class QuizSessionStore implements OnDestroy {
     if (!snapshot || snapshot.status !== 'active' || snapshot.mode !== 'exam') {
       return null;
     }
-    const remaining = Math.max(
-      0,
-      new Date(snapshot.deadlineAt!).getTime() - now.getTime(),
-    );
-    this.remainingMsState.set(remaining);
+    const remaining = Math.max(0, new Date(snapshot.deadlineAt!).getTime() - now.getTime());
     if (remaining === 0) {
+      this.remainingMsState.set(0);
       return this.submit('expired');
     }
+    let sectionRemaining = remaining;
+    const sections = snapshot.examDefinition?.sections;
+    if (sections?.length) {
+      let end = new Date(snapshot.startedAt).getTime();
+      let startIndex = 0;
+      for (let index = 0; index < sections.length; index++) {
+        const section = sections[index]!;
+        end += section.durationMinutes * 60_000;
+        if (now.getTime() < end) {
+          sectionRemaining = end - now.getTime();
+          if (snapshot.sectionIndex !== index) {
+            this.updateSnapshot(snapshot, { sectionIndex: index, currentIndex: startIndex });
+            this.warned.clear();
+            this.deadlineWarningState.set(null);
+            this.hooks.onSectionChange?.();
+          }
+          break;
+        }
+        startIndex += section.parts.reduce((sum, part) => sum + part.count, 0);
+      }
+    }
+    this.remainingMsState.set(sectionRemaining);
 
     const warning = WARNING_MINUTES.find(
-      (minutes) => remaining <= minutes * 60_000 && !this.warned.has(minutes),
+      (minutes) => sectionRemaining <= minutes * 60_000 && !this.warned.has(minutes),
     );
     if (warning !== undefined) {
       this.warned.add(warning);
@@ -401,10 +460,12 @@ export class QuizSessionStore implements OnDestroy {
     await this.persistenceQueue;
   }
 
-  async close(): Promise<void> {
-    await this.detachCurrent();
-    this.snapshotState.set(null);
-    this.remainingMsState.set(null);
+  close(): Promise<void> {
+    return this.lifecycle(async () => {
+      await this.detachCurrent();
+      this.snapshotState.set(null);
+      this.remainingMsState.set(null);
+    });
   }
 
   ngOnDestroy(): void {
@@ -445,10 +506,7 @@ export class QuizSessionStore implements OnDestroy {
     });
   }
 
-  private updateSnapshot(
-    snapshot: SessionSnapshot,
-    changes: Partial<SessionSnapshot>,
-  ): void {
+  private updateSnapshot(snapshot: SessionSnapshot, changes: Partial<SessionSnapshot>): void {
     const next: SessionSnapshot = {
       ...snapshot,
       ...changes,
@@ -461,17 +519,13 @@ export class QuizSessionStore implements OnDestroy {
 
   private enqueuePersistence(snapshot: SessionSnapshot): void {
     const copy = clone(snapshot);
-    const operation = this.persistenceQueue.then(() =>
-      this.repository.saveActiveSession(copy),
-    );
+    const operation = this.persistenceQueue.then(() => this.repository.saveActiveSession(copy));
     this.persistenceQueue = operation.catch((error: unknown) => {
       this.persistenceErrorState.set(error);
     });
   }
 
-  private async performSubmit(
-    reason: 'submitted' | 'expired',
-  ): Promise<Attempt | null> {
+  private async performSubmit(reason: 'submitted' | 'expired'): Promise<Attempt | null> {
     const snapshot = this.snapshotState();
     if (!snapshot || snapshot.status !== 'active') {
       return this.lastAttemptState();
@@ -499,6 +553,9 @@ export class QuizSessionStore implements OnDestroy {
       responses,
     };
     const attempt: Attempt = {
+      certificateId: snapshot.certificateId ?? 'ctfl',
+      examDefinition: snapshot.examDefinition,
+      scoringPolicy: snapshot.scoringPolicy,
       id: snapshot.id,
       sessionId: snapshot.id,
       mode: snapshot.mode,
@@ -509,14 +566,20 @@ export class QuizSessionStore implements OnDestroy {
       completedAt: completedAt.toISOString(),
       durationSeconds: Math.max(
         0,
-        Math.round(
-          (completedAt.getTime() - new Date(snapshot.startedAt).getTime()) / 1000,
-        ),
+        Math.round((completedAt.getTime() - new Date(snapshot.startedAt).getTime()) / 1000),
       ),
       completionReason: reason,
       questions: clone(snapshot.questions),
       responses,
-      result: calculateAttemptResult(snapshot.questions, responses),
+      result: calculateAttemptResult(
+        snapshot.questions,
+        responses,
+        snapshot.scoringPolicy ??
+          snapshot.examDefinition?.scoring ??
+          (snapshot.certificateId && snapshot.certificateId !== 'ctfl'
+            ? { kind: 'raw' }
+            : CTFL.exam.scoring),
+      ),
     };
     this.snapshotState.set(immutable(completedSnapshot));
     this.lastAttemptState.set(immutable(attempt));
@@ -524,17 +587,6 @@ export class QuizSessionStore implements OnDestroy {
 
     await this.repository.completeSession(attempt);
     if (snapshot.mode === 'exam') {
-      await Promise.all(
-        snapshot.questions.map((item) => {
-          const response = responses[item.question.id]!;
-          return this.repository.recordQuestionResult(
-            item.question.id,
-            item.question.revision,
-            response.isCorrect ?? false,
-            completedAt.toISOString(),
-          );
-        }),
-      );
       await this.repository.releaseSessionLease(snapshot.id, this.ownerId);
       this.ownsLease = false;
     }
@@ -587,11 +639,31 @@ export class QuizSessionStore implements OnDestroy {
 
   private async detachCurrent(): Promise<void> {
     this.stopMonitoring();
+    await this.submitPromise;
     await this.flushPersistence();
     const snapshot = this.snapshotState();
     if (snapshot?.mode === 'exam' && snapshot.status === 'active' && this.ownsLease) {
       await this.repository.releaseSessionLease(snapshot.id, this.ownerId);
     }
     this.ownsLease = true;
+  }
+
+  private assertCertificate(
+    certificateId: string | undefined,
+    questions: readonly import('../models').Question[],
+  ): void {
+    const id = certificateId ?? 'ctfl';
+    if (
+      id !== this.repository.certificateId ||
+      questions.some((question) => (question.certificateId ?? 'ctfl') !== id)
+    ) {
+      throw new Error('Questions and progress must belong to the same certificate.');
+    }
+  }
+
+  private lifecycle<T>(operation: () => Promise<T>): Promise<T> {
+    const pending = this.lifecycleQueue.then(operation);
+    this.lifecycleQueue = pending.catch(() => undefined);
+    return pending;
   }
 }

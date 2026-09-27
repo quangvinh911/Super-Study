@@ -1,79 +1,30 @@
-<div class="home-shell">
-  <section class="intro-panel" aria-labelledby="home-title">
-    <div class="eyebrow"><span aria-hidden="true">●</span> CTFL 4.0.1 · Study workspace</div>
-    <div class="intro-grid">
-      <div>
-        <h1 id="home-title">Học đúng trọng tâm.<br /><span>Thi thử đúng cấu trúc.</span></h1>
-        <p class="lede">
-          Chọn câu viết mới đã kiểm định theo syllabus hoặc luyện 278 câu trích từ PDF
-          kèm ảnh bằng chứng. Tiến độ được lưu hoàn toàn trên thiết bị của bạn.
-        </p>
-        <div class="primary-actions">
-          <a class="button button--primary" routerLink="/practice">Bắt đầu luyện tập</a>
-          <a class="button button--secondary" routerLink="/mock-exam">Thi thử 40 câu</a>
+<div class="page certificate-catalog">
+  <header class="page-header">
+    <p class="eyebrow">Không gian luyện thi</p>
+    <h1>Bạn muốn luyện chứng chỉ nào?</h1>
+    <p>
+      Luyện theo chủ đề, làm đề thi thử và xem lại câu sai. Tiến độ được lưu riêng cho từng chứng
+      chỉ trên thiết bị này.
+    </p>
+  </header>
+  <section class="certificate-grid" aria-label="Chứng chỉ">
+    @for (certificate of certificates; track certificate.id) {
+      <article
+        class="surface certificate-card"
+        [class.certificate-card--toeic]="certificate.id === 'toeic'"
+      >
+        <p class="eyebrow">{{ certificate.subtitle }}</p>
+        <h2>{{ certificate.name }}</h2>
+        <p>{{ certificate.description }}</p>
+        <div class="certificate-facts">
+          <span>{{ certificate.exam.questionCount }} câu / đề</span
+          ><span>{{ certificate.exam.durations[0] }} phút</span>
         </div>
-      </div>
-
-      <aside class="exam-card" aria-label="Thông số đề thi CTFL">
-        <div class="exam-card__head">
-          <span>Exam blueprint</span>
-          <span class="status-pill">Official shape</span>
-        </div>
-        <strong class="exam-card__number">40</strong>
-        <span class="exam-card__label">câu hỏi · 60 phút</span>
-        <div class="exam-card__rule" aria-hidden="true"></div>
-        <dl>
-          <div><dt>Điểm đạt</dt><dd>26 / 40</dd></div>
-          <div><dt>K-level</dt><dd>K1 · K2 · K3</dd></div>
-          <div><dt>Câu viết mới</dt><dd>80 câu</dd></div>
-          <div><dt>Nguồn PDF</dt><dd>278 câu</dd></div>
-        </dl>
-      </aside>
-    </div>
+        <a class="button" [routerLink]="['/certificates', certificate.id]"
+          >Mở {{ certificate.name }}</a
+        >
+      </article>
+    }
   </section>
-
-  <section class="quick-grid" aria-labelledby="quick-title">
-    <div class="section-heading">
-      <p class="eyebrow">Chọn cách học</p>
-      <h2 id="quick-title">Một phiên ngắn cũng tạo tiến bộ.</h2>
-    </div>
-
-    <div class="path-grid">
-      <a class="path-card path-card--teal" routerLink="/practice">
-        <span class="path-card__index">01</span>
-        <div>
-          <p class="path-card__meta">Practice mode</p>
-          <h3>Luyện theo chủ đề</h3>
-          <p>Chọn nguồn câu hỏi, luyện theo bộ lọc và xem bằng chứng PDF sau khi kiểm tra.</p>
-        </div>
-        <span class="path-card__arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a class="path-card path-card--coral" routerLink="/mock-exam">
-        <span class="path-card__index">02</span>
-        <div>
-          <p class="path-card__meta">Mock exam</p>
-          <h3>Mô phỏng kỳ thi</h3>
-          <p>Chọn đề theo blueprint hoặc 40 câu ngẫu nhiên từ PDF, có timer và xem lại.</p>
-        </div>
-        <span class="path-card__arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a class="path-card path-card--ink" routerLink="/progress">
-        <span class="path-card__index">03</span>
-        <div>
-          <p class="path-card__meta">Local progress</p>
-          <h3>Ôn lại điểm yếu</h3>
-          <p>Theo dõi câu sai, bookmark và lịch sử ngay trên trình duyệt, không cần tài khoản.</p>
-        </div>
-        <span class="path-card__arrow" aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="principles" aria-label="Cam kết sản phẩm">
-    <article><span>01</span><h3>Private by design</h3><p>Không tài khoản, không analytics, không gửi tiến độ lên máy chủ.</p></article>
-    <article><span>02</span><h3>Evidence first</h3><p>Câu từ PDF có ảnh câu hỏi và đáp án theo trang; các khóa nguồn bất thường được ghi chú rõ.</p></article>
-    <article><span>03</span><h3>Offline ready</h3><p>Sau lần tải đầu, bạn có thể tiếp tục luyện ngay cả khi mất mạng.</p></article>
-  </section>
+  <p class="catalog-note">IELTS và AWS sẽ được bổ sung sau.</p>
 </div>

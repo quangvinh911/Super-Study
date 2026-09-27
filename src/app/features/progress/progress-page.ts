@@ -1,7 +1,9 @@
+import { CertificateContext } from '../../certificates/certificate-context';
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Attempt, Bookmark, QuestionStat, SessionSnapshot } from '../../core/models';
 import { ProgressRepository } from '../../core/persistence';
+import { QuizSessionStore } from '../../core/state';
 
 @Component({
   selector: 'app-progress-page',
@@ -11,7 +13,9 @@ import { ProgressRepository } from '../../core/persistence';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressPage implements OnInit {
+  protected readonly certificate = inject(CertificateContext);
   private readonly repository = inject(ProgressRepository);
+  private readonly store = inject(QuizSessionStore);
 
   protected readonly loading = signal(true);
   protected readonly busy = signal(false);
@@ -56,7 +60,7 @@ export class ProgressPage implements OnInit {
   }
 
   protected resumeLink(session: SessionSnapshot): readonly string[] {
-    return [session.mode === 'exam' ? '/mock-exam' : '/practice', session.id];
+    return this.certificate.link(session.mode === 'exam' ? 'mock-exam' : 'practice', session.id);
   }
 
   protected formatDate(value: string): string {
@@ -76,7 +80,7 @@ export class ProgressPage implements OnInit {
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement('a');
       anchor.href = url;
-      anchor.download = `ctfl-practice-progress-${new Date().toISOString().slice(0, 10)}.json`;
+      anchor.download = `${this.certificate.id}-practice-progress-${new Date().toISOString().slice(0, 10)}.json`;
       anchor.click();
       URL.revokeObjectURL(url);
       this.message.set('Đã xuất bản sao dữ liệu học tập.');
@@ -95,6 +99,8 @@ export class ProgressPage implements OnInit {
     this.clearStatus();
     try {
       const data = JSON.parse(await file.text()) as unknown;
+      this.repository.validateImport(data);
+      await this.store.close();
       await this.repository.importProgress(data, this.importMode);
       await this.reload(false);
       this.message.set(
@@ -103,7 +109,9 @@ export class ProgressPage implements OnInit {
           : 'Đã gộp dữ liệu từ bản sao.',
       );
     } catch {
-      this.error.set('Tệp không phải bản sao CTFL Practice hợp lệ. Dữ liệu hiện tại không thay đổi.');
+      this.error.set(
+        `Tệp không phải bản sao ${this.certificate.name} hợp lệ hoặc thuộc chứng chỉ khác. Dữ liệu hiện tại không thay đổi.`,
+      );
     } finally {
       input.value = '';
       this.busy.set(false);
@@ -113,7 +121,7 @@ export class ProgressPage implements OnInit {
   protected async resetData(): Promise<void> {
     if (
       !globalThis.confirm(
-        'Xoá toàn bộ phiên đang làm, lịch sử, thống kê và bookmark trên trình duyệt này? Hành động này không thể hoàn tác nếu chưa xuất bản sao.',
+        `Xoá toàn bộ phiên đang làm, lịch sử, thống kê và bookmark của ${this.certificate.name} trên trình duyệt này? Hành động này không thể hoàn tác nếu chưa xuất bản sao.`,
       )
     ) {
       return;
@@ -121,11 +129,12 @@ export class ProgressPage implements OnInit {
     this.busy.set(true);
     this.clearStatus();
     try {
+      await this.store.close();
       await this.repository.reset();
       await this.reload(false);
-      this.message.set('Đã xoá toàn bộ dữ liệu học tập trên thiết bị này.');
+      this.message.set(`Đã xoá dữ liệu học tập ${this.certificate.name} trên thiết bị này.`);
     } catch {
-      this.error.set('Không thể xoá dữ liệu. Hãy đóng các tab CTFL Practice khác rồi thử lại.');
+      this.error.set('Không thể xoá dữ liệu. Hãy đóng các tab luyện thi khác rồi thử lại.');
     } finally {
       this.busy.set(false);
     }

@@ -6,7 +6,7 @@
       <p class="eyebrow">Không thể tiếp tục</p>
       <h1>Phiên luyện tập không khả dụng</h1>
       <p>{{ error() }}</p>
-      <a class="button" routerLink="/practice">Tạo phiên mới</a>
+      <a class="button" [routerLink]="certificate.link('practice')">Tạo phiên mới</a>
     </section>
   } @else if (store.currentQuestion(); as item) {
     <header class="quiz-toolbar" aria-label="Tiến độ phiên luyện tập">
@@ -40,14 +40,16 @@
       <div class="question-meta">
         @if (item.question.sourceEvidence; as evidence) {
           <span class="chip">Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }}</span>
-          <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
-          <span class="chip">{{ item.question.classification.kLevel }}</span>
-          <span class="chip">{{ item.question.classification.learningObjective }}</span>
+          @if (certificate.isSyllabus) {
+            <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
+            <span class="chip">{{ item.question.classification.kLevel }}</span>
+            <span class="chip">{{ item.question.classification.learningObjective }}</span>
+          } @else {
+            <span class="chip">{{ certificate.questionLabel(item.question) }}</span>
+          }
           <span class="muted">Trang {{ evidence.questionPages.join(', ') }}</span>
         } @else {
-          <span class="chip">Chapter {{ item.question.classification.chapter }}</span>
-          <span class="chip">{{ item.question.classification.kLevel }}</span>
-          <span class="muted">{{ item.question.classification.learningObjective }}</span>
+          <span class="chip">{{ certificate.questionLabel(item.question) }}</span>
         }
       </div>
 
@@ -56,15 +58,24 @@
       </h1>
 
       <div class="stem">
+        @if (item.question.stimulus; as stimulus) {
+          <section class="shared-stimulus" aria-label="Nội dung dùng chung" lang="en">
+            <app-content-blocks [blocks]="stimulus.content" />
+          </section>
+        }
         <app-content-blocks [blocks]="item.question.stem" />
       </div>
 
       @if (item.question.sourceEvidence; as evidence) {
         <details class="pdf-evidence">
-          <summary>Ảnh câu hỏi gốc trong PDF · trang {{ evidence.questionPages.join(', ') }}</summary>
+          <summary>
+            Ảnh câu hỏi gốc trong PDF · trang {{ evidence.questionPages.join(', ') }}
+          </summary>
           <img
             [src]="evidence.questionImage"
-            [alt]="'Bản chụp câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+            [alt]="
+              'Bản chụp câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'
+            "
             loading="lazy"
           />
         </details>
@@ -132,10 +143,16 @@
               <p class="source-warning">{{ evidence.answerNote }}</p>
             }
             <details class="pdf-evidence pdf-evidence--answer">
-              <summary>Bằng chứng đáp án trong PDF · trang {{ evidence.answerPages.join(', ') }}</summary>
+              <summary>
+                Bằng chứng đáp án trong PDF · trang {{ evidence.answerPages.join(', ') }}
+              </summary>
               <img
                 [src]="evidence.answerImage"
-                [alt]="'Bản chụp đáp án cho câu hỏi ' + item.question.provenance.sourceQuestionNumber + ' trong PDF'"
+                [alt]="
+                  'Bản chụp đáp án cho câu hỏi ' +
+                  item.question.provenance.sourceQuestionNumber +
+                  ' trong PDF'
+                "
                 loading="lazy"
               />
             </details>
@@ -147,7 +164,10 @@
             <details>
               <summary>Nguồn kiểm chứng</summary>
               <ul>
-                @for (reference of item.solution.references; track reference.title + reference.locator) {
+                @for (
+                  reference of item.solution.references;
+                  track reference.title + reference.locator
+                ) {
                   <li>
                     @if (reference.url) {
                       <a [href]="reference.url" target="_blank" rel="noopener noreferrer">
@@ -178,7 +198,12 @@
       @if (store.snapshot()!.currentIndex < store.snapshot()!.questions.length - 1) {
         <button class="button" type="button" (click)="next()">Câu tiếp</button>
       } @else {
-        <button class="button button--coral" type="button" [disabled]="submitting()" (click)="finish()">
+        <button
+          class="button button--coral"
+          type="button"
+          [disabled]="submitting()"
+          (click)="finish()"
+        >
           {{ submitting() ? 'Đang lưu…' : 'Hoàn thành' }}
         </button>
       }

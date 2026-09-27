@@ -1,4 +1,5 @@
 import { Chapter, KLevel, QuestionBankSource } from './question.models';
+import { ExamDefinition, ScoringPolicy } from './certificate.models';
 import {
   Bookmark,
   QuestionStat,
@@ -21,13 +22,17 @@ export interface AttemptResult {
   readonly total: number;
   readonly answered: number;
   readonly percent: number;
-  readonly passMark: number;
-  readonly passed: boolean;
+  readonly passMark: number | null;
+  readonly passed: boolean | null;
+  readonly bySection?: readonly ResultBreakdownItem<string>[];
   readonly byChapter: readonly ResultBreakdownItem<Chapter>[];
   readonly byKLevel: readonly ResultBreakdownItem<KLevel>[];
 }
 
 export interface Attempt {
+  readonly scoringPolicy?: ScoringPolicy;
+  readonly certificateId?: string;
+  readonly examDefinition?: ExamDefinition;
   readonly id: string;
   readonly sessionId: string;
   readonly mode: QuizMode;
@@ -44,7 +49,7 @@ export interface Attempt {
 }
 
 export interface LearningSettings {
-  readonly preferredExamDurationMinutes: 60 | 75;
+  readonly preferredExamDurationMinutes: number;
   readonly lastPracticeConfig?: unknown;
 }
 
@@ -54,8 +59,9 @@ export interface UiPreferences {
 }
 
 export interface ProgressExport {
-  readonly format: 'ctfl-practice-progress';
-  readonly schemaVersion: 1;
+  readonly format: 'ctfl-practice-progress' | 'certificate-practice-progress';
+  readonly schemaVersion: 1 | 2;
+  readonly certificateId?: string;
   readonly exportedAt: string;
   readonly activeSessions: readonly SessionSnapshot[];
   readonly attempts: readonly Attempt[];

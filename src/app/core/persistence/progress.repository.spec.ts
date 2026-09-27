@@ -1,17 +1,8 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { calculateAttemptResult } from '../domain';
-import {
-  Attempt,
-  Question,
-  SessionQuestionSnapshot,
-  SessionSnapshot,
-  Solution,
-} from '../models';
-import {
-  InvalidProgressExportError,
-  ProgressRepository,
-} from './progress.repository';
+import { Attempt, Question, SessionQuestionSnapshot, SessionSnapshot, Solution } from '../models';
+import { InvalidProgressExportError, ProgressRepository } from './progress.repository';
 
 function fixtureItem(): SessionQuestionSnapshot {
   const question: Question = {
@@ -48,9 +39,7 @@ function fixtureItem(): SessionQuestionSnapshot {
     questionId: question.id,
     correctOptionIds: ['A'],
     explanation: [{ kind: 'paragraph', text: 'Because A.' }],
-    references: [
-      { title: 'Syllabus', version: '4.0.1', locator: 'FL-1.1.1' },
-    ],
+    references: [{ title: 'Syllabus', version: '4.0.1', locator: 'FL-1.1.1' }],
   };
   return { question, solution };
 }
@@ -122,18 +111,8 @@ describe('ProgressRepository', () => {
   });
 
   it('tracks revision-aware stats and bookmarks', async () => {
-    await repository.recordQuestionResult(
-      'Q-1',
-      1,
-      false,
-      '2026-08-29T00:00:00.000Z',
-    );
-    const stat = await repository.recordQuestionResult(
-      'Q-1',
-      1,
-      true,
-      '2026-08-29T00:01:00.000Z',
-    );
+    await repository.recordQuestionResult('Q-1', 1, false, '2026-08-29T00:00:00.000Z');
+    const stat = await repository.recordQuestionResult('Q-1', 1, true, '2026-08-29T00:01:00.000Z');
     expect(stat).toMatchObject({
       seenCount: 2,
       correctCount: 1,
@@ -150,12 +129,11 @@ describe('ProgressRepository', () => {
   it('round-trips a versioned export and rejects an unknown format', async () => {
     await repository.saveActiveSession(fixtureSession());
     await repository.setSetting('exam-duration', 75);
-    const exported = await repository.exportProgress(
-      new Date('2026-08-29T12:00:00.000Z'),
-    );
+    const exported = await repository.exportProgress(new Date('2026-08-29T12:00:00.000Z'));
     expect(exported).toMatchObject({
-      format: 'ctfl-practice-progress',
-      schemaVersion: 1,
+      format: 'certificate-practice-progress',
+      schemaVersion: 2,
+      certificateId: 'ctfl',
       settings: { 'exam-duration': 75 },
     });
 
@@ -165,7 +143,7 @@ describe('ProgressRepository', () => {
     expect(await repository.getActiveSession('session-1')).toEqual(fixtureSession());
 
     await expect(
-      repository.importProgress({ ...exported, schemaVersion: 2 }),
+      repository.importProgress({ ...exported, schemaVersion: 99 }),
     ).rejects.toBeInstanceOf(InvalidProgressExportError);
   });
 
@@ -173,14 +151,8 @@ describe('ProgressRepository', () => {
     const databaseName = `ctfl-lock-${Date.now()}-${Math.random()}`;
     const first = new ProgressRepository(databaseName);
     const second = new ProgressRepository(databaseName);
-    expect(await first.acquireSessionLease('exam-1', 'tab-a', 1000, 10_000)).toBe(
-      true,
-    );
-    expect(await second.acquireSessionLease('exam-1', 'tab-b', 1000, 10_500)).toBe(
-      false,
-    );
-    expect(await second.acquireSessionLease('exam-1', 'tab-b', 1000, 11_001)).toBe(
-      true,
-    );
+    expect(await first.acquireSessionLease('exam-1', 'tab-a', 1000, 10_000)).toBe(true);
+    expect(await second.acquireSessionLease('exam-1', 'tab-b', 1000, 10_500)).toBe(false);
+    expect(await second.acquireSessionLease('exam-1', 'tab-b', 1000, 11_001)).toBe(true);
   });
 });

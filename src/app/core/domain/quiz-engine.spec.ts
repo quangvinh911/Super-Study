@@ -10,18 +10,9 @@ import {
   meetsCtflPassMark,
   shuffleSeeded,
 } from './index';
-import {
-  BlueprintManifestCell,
-  Question,
-  QuestionStat,
-  Solution,
-} from '../models';
+import { BlueprintManifestCell, Question, QuestionStat, Solution } from '../models';
 
-function questionFor(
-  cell: BlueprintManifestCell,
-  slot: number,
-  variant: 'A' | 'B',
-): Question {
+function questionFor(cell: BlueprintManifestCell, slot: number, variant: 'A' | 'B'): Question {
   const bucket = `CH${cell.chapter}-${cell.kLevel}-${String(slot).padStart(2, '0')}`;
   return {
     id: `${bucket}-${variant}`,
@@ -65,20 +56,18 @@ function fullBank(): { questions: Question[]; solutions: Solution[] } {
       questionFor(cell, slot + 1, 'B'),
     ]).flat(),
   );
-  const solutions = questions.map(
-    (question): Solution => ({
-      questionId: question.id,
-      correctOptionIds: ['A'],
-      explanation: [{ kind: 'paragraph', text: 'A is correct.' }],
-      references: [
-        {
-          title: 'CTFL syllabus',
-          version: '4.0.1',
-          locator: question.classification.learningObjective,
-        },
-      ],
-    }),
-  );
+  const solutions = questions.map((question): Solution => ({
+    questionId: question.id,
+    correctOptionIds: ['A'],
+    explanation: [{ kind: 'paragraph', text: 'A is correct.' }],
+    references: [
+      {
+        title: 'CTFL syllabus',
+        version: '4.0.1',
+        locator: question.classification.learningObjective!,
+      },
+    ],
+  }));
   return { questions, solutions };
 }
 
@@ -112,9 +101,9 @@ describe('seeded shuffle and CTFL generator', () => {
     expect(first).toEqual(second);
     expect(first).toHaveLength(40);
     expect(new Set(first.map((item) => item.question.id)).size).toBe(40);
-    expect(
-      new Set(first.map((item) => item.question.classification.blueprintBucket)).size,
-    ).toBe(40);
+    expect(new Set(first.map((item) => item.question.classification.blueprintBucket)).size).toBe(
+      40,
+    );
     expect(hasOfficialCtflMatrix(first.map((item) => item.question))).toBe(true);
   });
 
@@ -122,14 +111,11 @@ describe('seeded shuffle and CTFL generator', () => {
     const bank = fullBank();
     const reduced = bank.questions.filter(
       (question) =>
-        !(
-          question.classification.chapter === 6 &&
-          question.classification.kLevel === 'K2'
-        ),
+        !(question.classification.chapter === 6 && question.classification.kLevel === 'K2'),
     );
-    expect(() =>
-      generateCtflExam(reduced, bank.solutions, { seed: 'incomplete' }),
-    ).toThrow(ExamInventoryError);
+    expect(() => generateCtflExam(reduced, bank.solutions, { seed: 'incomplete' })).toThrow(
+      ExamInventoryError,
+    );
   });
 
   it('creates a deterministic 40-question exam from the private PDF bank', () => {
@@ -148,12 +134,10 @@ describe('seeded shuffle and CTFL generator', () => {
         answerStatus: 'sourcePrinted' as const,
       },
     }));
-    const pdfSolutions = pdfQuestions.map(
-      (question, index): Solution => ({
-        ...bank.solutions[index]!,
-        questionId: question.id,
-      }),
-    );
+    const pdfSolutions = pdfQuestions.map((question, index): Solution => ({
+      ...bank.solutions[index]!,
+      questionId: question.id,
+    }));
     const first = generateRandomExam(pdfQuestions, pdfSolutions, { seed: 'pdf-7' });
     const second = generateRandomExam(pdfQuestions, pdfSolutions, { seed: 'pdf-7' });
 
@@ -166,9 +150,7 @@ describe('seeded shuffle and CTFL generator', () => {
 describe('practice filtering', () => {
   it('ANDs classification filters and ORs selected history states', () => {
     const bank = fullBank();
-    const chapterOne = bank.questions.filter(
-      (question) => question.classification.chapter === 1,
-    );
+    const chapterOne = bank.questions.filter((question) => question.classification.chapter === 1);
     const wrong = chapterOne[0]!;
     const bookmarked = chapterOne[1]!;
     const wrongStat: QuestionStat = {

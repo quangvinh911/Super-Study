@@ -1,9 +1,4 @@
-import {
-  BlueprintManifestCell,
-  Question,
-  SessionQuestionSnapshot,
-  Solution,
-} from '../models';
+import { BlueprintManifestCell, Question, SessionQuestionSnapshot, Solution } from '../models';
 import { shuffleSeeded } from './random';
 
 export const CTFL_EXAM_BLUEPRINT: readonly BlueprintManifestCell[] = Object.freeze([
@@ -61,7 +56,7 @@ export function isPublishableQuestion(question: Question): boolean {
   return publicQuestion || privatePdfQuestion;
 }
 
-function keyForCell(cell: Pick<BlueprintManifestCell, 'chapter' | 'kLevel'>): string {
+function keyForCell(cell: { readonly chapter?: number; readonly kLevel?: string }): string {
   return `${cell.chapter}:${cell.kLevel}`;
 }
 
@@ -71,9 +66,7 @@ function cloneWithShuffledOptions(question: Question, seed: string): Question {
   }
   return {
     ...structuredCloneSafe(question),
-    options: shuffleSeeded(question.options, seed).map((option) =>
-      structuredCloneSafe(option),
-    ),
+    options: shuffleSeeded(question.options, seed).map((option) => structuredCloneSafe(option)),
   };
 }
 
@@ -94,9 +87,7 @@ export function generateCtflExam(
   options: GenerateExamOptions,
 ): SessionQuestionSnapshot[] {
   const blueprint = options.blueprint ?? CTFL_EXAM_BLUEPRINT;
-  const solutionByQuestion = new Map(
-    solutions.map((solution) => [solution.questionId, solution]),
-  );
+  const solutionByQuestion = new Map(solutions.map((solution) => [solution.questionId, solution]));
   const eligible = questions.filter(
     (question) => isPublishableQuestion(question) && solutionByQuestion.has(question.id),
   );
@@ -111,6 +102,7 @@ export function generateCtflExam(
     const byBucket = new Map<string, Question[]>();
     for (const candidate of candidates) {
       const bucket = candidate.classification.blueprintBucket;
+      if (!bucket) continue;
       byBucket.set(bucket, [...(byBucket.get(bucket) ?? []), candidate]);
     }
 
@@ -130,10 +122,7 @@ export function generateCtflExam(
     ).slice(0, cell.count);
     for (const bucketId of bucketIds) {
       const variants = byBucket.get(bucketId)!;
-      const picked = shuffleSeeded(
-        variants,
-        `${options.seed}|${bucketId}|variant`,
-      )[0]!;
+      const picked = shuffleSeeded(variants, `${options.seed}|${bucketId}|variant`)[0]!;
       selected.push(picked);
     }
   }
@@ -149,10 +138,7 @@ export function generateCtflExam(
   }
 
   return ordered.map((question) => ({
-    question: cloneWithShuffledOptions(
-      question,
-      `${options.seed}|${question.id}|options`,
-    ),
+    question: cloneWithShuffledOptions(question, `${options.seed}|${question.id}|options`),
     solution: structuredCloneSafe(solutionByQuestion.get(question.id)!),
   }));
 }
@@ -163,9 +149,7 @@ export function generateRandomExam(
   options: { readonly seed: string | number; readonly count?: number },
 ): SessionQuestionSnapshot[] {
   const count = options.count ?? CTFL_EXAM_QUESTION_COUNT;
-  const solutionByQuestion = new Map(
-    solutions.map((solution) => [solution.questionId, solution]),
-  );
+  const solutionByQuestion = new Map(solutions.map((solution) => [solution.questionId, solution]));
   const eligible = questions.filter(
     (question) => isPublishableQuestion(question) && solutionByQuestion.has(question.id),
   );
@@ -182,10 +166,7 @@ export function generateRandomExam(
   return shuffleSeeded(eligible, `${options.seed}|random-question-order`)
     .slice(0, count)
     .map((question) => ({
-      question: cloneWithShuffledOptions(
-        question,
-        `${options.seed}|${question.id}|options`,
-      ),
+      question: cloneWithShuffledOptions(question, `${options.seed}|${question.id}|options`),
       solution: structuredCloneSafe(solutionByQuestion.get(question.id)!),
     }));
 }
@@ -198,8 +179,7 @@ export function hasOfficialCtflMatrix(
   }
   return CTFL_EXAM_BLUEPRINT.every(
     (cell) =>
-      questions.filter(
-        (question) => keyForCell(question.classification) === keyForCell(cell),
-      ).length === cell.count,
+      questions.filter((question) => keyForCell(question.classification) === keyForCell(cell))
+        .length === cell.count,
   );
 }

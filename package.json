@@ -1,7 +1,7 @@
 {
   "name": "ctfl-practice",
   "version": "1.0.0",
-  "description": "A privacy-first CTFL 4.0 practice and mock exam PWA.",
+  "description": "A privacy-first multi-certificate practice and mock exam PWA for CTFL and TOEIC.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,7 +12,7 @@
     "build:sites": "pnpm run build:cf && node scripts/prepare-sites-build.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:content": "vitest run scripts/build-content.test.mjs",
+    "test:content": "vitest run scripts",
     "test:ci": "pnpm run content:check && ng test --watch=false",
     "test:e2e": "playwright test",
     "test:pwa": "pnpm run build:cf && playwright test --config playwright.pwa.config.ts"

@@ -21,5 +21,10 @@ test('restores an active practice session while offline after first synchronizat
   await page.reload();
   await expect(page).toHaveURL(sessionUrl);
   await expect(page.getByRole('heading', { name: 'Question 1' })).toBeVisible();
+  await page.goto('/certificates/toeic/practice');
+  await expect(page.getByRole('heading', { name: 'Chưa có bộ đề TOEIC' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Bắt đầu luyện', exact: true })).toBeDisabled();
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Chưa có bộ đề TOEIC' })).toBeVisible();
   await context.setOffline(false);
 });

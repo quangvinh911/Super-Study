@@ -5,8 +5,9 @@ import {
   ResultBreakdownItem,
   SessionQuestionSnapshot,
   SessionResponse,
+  ScoringPolicy,
 } from '../models';
-import { meetsCtflPassMark, scoreQuestion } from './scoring';
+import { scoreQuestion } from './scoring';
 
 function percent(correct: number, total: number): number {
   return total === 0 ? 0 : Math.round((correct / total) * 1000) / 10;
@@ -15,11 +16,12 @@ function percent(correct: number, total: number): number {
 function breakdown<T extends string | number>(
   questions: readonly SessionQuestionSnapshot[],
   responses: Readonly<Record<string, SessionResponse>>,
-  keyOf: (item: SessionQuestionSnapshot) => T,
+  keyOf: (item: SessionQuestionSnapshot) => T | undefined,
 ): ResultBreakdownItem<T>[] {
   const groups = new Map<T, SessionQuestionSnapshot[]>();
   for (const item of questions) {
     const key = keyOf(item);
+    if (key === undefined) continue;
     groups.set(key, [...(groups.get(key) ?? []), item]);
   }
   return [...groups.entries()]
@@ -44,6 +46,7 @@ function breakdown<T extends string | number>(
 export function calculateAttemptResult(
   questions: readonly SessionQuestionSnapshot[],
   responses: Readonly<Record<string, SessionResponse>>,
+  scoring: ScoringPolicy = { kind: 'threshold', passPercent: 65 },
 ): AttemptResult {
   const total = questions.length;
   const answered = questions.filter(
@@ -52,14 +55,16 @@ export function calculateAttemptResult(
   const score = questions.filter((item) =>
     scoreQuestion(item.solution, responses[item.question.id]),
   ).length;
-  const passMark = total === 40 ? 26 : Math.ceil(total * 0.65);
+  const passMark =
+    scoring.kind === 'threshold' ? Math.ceil((total * scoring.passPercent) / 100) : null;
   return {
     score,
     total,
     answered,
     percent: percent(score, total),
     passMark,
-    passed: meetsCtflPassMark(score, total),
+    passed: passMark === null ? null : total > 0 && score >= passMark,
+    bySection: breakdown(questions, responses, (item) => item.question.classification.section),
     byChapter: breakdown<Chapter>(
       questions,
       responses,

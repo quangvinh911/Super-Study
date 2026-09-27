@@ -46,20 +46,18 @@ function examBank(): { questions: Question[]; solutions: Solution[] } {
       }),
     ).flat(),
   );
-  const solutions = questions.map(
-    (question): Solution => ({
-      questionId: question.id,
-      correctOptionIds: ['A'],
-      explanation: [{ kind: 'paragraph', text: 'A is correct.' }],
-      references: [
-        {
-          title: 'CTFL syllabus',
-          version: '4.0.1',
-          locator: question.classification.learningObjective,
-        },
-      ],
-    }),
-  );
+  const solutions = questions.map((question): Solution => ({
+    questionId: question.id,
+    correctOptionIds: ['A'],
+    explanation: [{ kind: 'paragraph', text: 'A is correct.' }],
+    references: [
+      {
+        title: 'CTFL syllabus',
+        version: '4.0.1',
+        locator: question.classification.learningObjective!,
+      },
+    ],
+  }));
   return { questions, solutions };
 }
 

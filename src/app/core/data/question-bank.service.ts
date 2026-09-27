@@ -43,9 +43,7 @@ async function fetchJson(url: string): Promise<unknown> {
     });
   }
   if (!response.ok) {
-    throw new QuestionBankLoadError(
-      `Question-bank request failed (${response.status}): ${url}`,
-    );
+    throw new QuestionBankLoadError(`Question-bank request failed (${response.status}): ${url}`);
   }
   try {
     return (await response.json()) as unknown;
@@ -100,7 +98,7 @@ function parseSolutionEnvelope(value: unknown): SolutionEnvelope {
 export class QuestionBankService {
   private readonly cache = new Map<string, Promise<LoadedQuestionBank>>();
 
-  load(manifestUrl = '/data/manifest.json'): Promise<LoadedQuestionBank> {
+  load(manifestUrl = '/data/manifest.json', certificateId = 'ctfl'): Promise<LoadedQuestionBank> {
     let pending = this.cache.get(manifestUrl);
     if (!pending) {
       pending = this.loadUncached(manifestUrl).catch((error: unknown) => {
@@ -109,7 +107,15 @@ export class QuestionBankService {
       });
       this.cache.set(manifestUrl, pending);
     }
-    return pending.then(clone);
+    return pending.then((bank) => {
+      if (
+        (bank.manifest.certificateId ?? 'ctfl') !== certificateId ||
+        bank.questions.some((question) => (question.certificateId ?? 'ctfl') !== certificateId)
+      ) {
+        throw new QuestionBankLoadError('Question bank belongs to a different certificate.');
+      }
+      return clone(bank);
+    });
   }
 
   clearCache(): void {
@@ -119,12 +125,8 @@ export class QuestionBankService {
   private async loadUncached(manifestUrl: string): Promise<LoadedQuestionBank> {
     const manifest = parseManifest(await fetchJson(manifestUrl));
     const [questionEnvelope, solutionEnvelope] = await Promise.all([
-      fetchJson(resolveFileUrl(manifestUrl, manifest.files.questions)).then(
-        parseQuestionEnvelope,
-      ),
-      fetchJson(resolveFileUrl(manifestUrl, manifest.files.solutions)).then(
-        parseSolutionEnvelope,
-      ),
+      fetchJson(resolveFileUrl(manifestUrl, manifest.files.questions)).then(parseQuestionEnvelope),
+      fetchJson(resolveFileUrl(manifestUrl, manifest.files.solutions)).then(parseSolutionEnvelope),
     ]);
 
     if (
@@ -141,9 +143,7 @@ export class QuestionBankService {
     }
 
     const ids = new Set(questionEnvelope.questions.map((question) => question.id));
-    const solutionIds = new Set(
-      solutionEnvelope.solutions.map((solution) => solution.questionId),
-    );
+    const solutionIds = new Set(solutionEnvelope.solutions.map((solution) => solution.questionId));
     if (
       ids.size !== questionEnvelope.questions.length ||
       solutionIds.size !== solutionEnvelope.solutions.length ||

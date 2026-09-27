@@ -22,7 +22,7 @@ test('starts a practice session and reveals feedback only after checking', async
 
 test('uses PDF questions with page evidence in practice mode', async ({ page }) => {
   await page.goto('/practice');
-  await page.locator('input[name="bankSource"][value="pdf"]').check();
+  await page.getByRole('radio', { name: /Nguồn PDF/ }).check();
   await expect(page.getByText('278', { exact: true })).toBeVisible();
   await expect(page.locator('#chapter')).toBeEnabled();
   await expect(page.locator('#learning-objective')).toBeEnabled();
@@ -67,7 +67,7 @@ test('creates a 40-question mock exam and restores it after refresh', async ({ p
 
 test('creates a 40-question mock exam from the PDF bank', async ({ page }) => {
   await page.goto('/mock-exam');
-  await page.locator('input[name="bankSource"][value="pdf"]').check();
+  await page.getByRole('radio', { name: /Nguồn PDF/ }).check();
   await expect(page.getByText(/Sẵn sàng tạo đề từ 278 câu trong PDF/)).toBeVisible();
   await page.getByRole('button', { name: 'Bắt đầu thi thử' }).click();
 
@@ -90,7 +90,9 @@ test('submits a practice session and manages its local progress data', async ({ 
   page.once('dialog', (dialog) => dialog.accept());
   await page.getByRole('button', { name: 'Hoàn thành' }).click();
   await expect(page).toHaveURL(/\/results\//);
-  await expect(page.getByRole('heading', { name: /Đã đạt mục tiêu|Chưa đạt mốc 65%/ })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: /Đã đạt mục tiêu|Chưa đạt mục tiêu/ }),
+  ).toBeVisible();
 
   await page.getByRole('link', { name: 'Xem toàn bộ tiến độ' }).click();
   await expect(page.getByRole('heading', { name: 'Các phiên đã hoàn thành' })).toBeVisible();
@@ -102,7 +104,7 @@ test('submits a practice session and manages its local progress data', async ({ 
 
   page.once('dialog', (dialog) => dialog.accept());
   await page.getByRole('button', { name: 'Reset dữ liệu' }).click();
-  await expect(page.getByText('Đã xoá toàn bộ dữ liệu học tập trên thiết bị này.')).toBeVisible();
+  await expect(page.getByText('Đã xoá dữ liệu học tập CTFL trên thiết bị này.')).toBeVisible();
   await expect(page.getByText('Chưa có phiên hoàn thành.')).toBeVisible();
 });
 
@@ -115,9 +117,10 @@ for (const [name, route] of [
 ] as const) {
   test(`${name} has no serious or critical axe violations`, async ({ page }) => {
     await page.goto(route);
+    await expect(page.locator('main h1')).toBeVisible();
     const results = await new AxeBuilder({ page }).analyze();
-    const material = results.violations.filter((violation) =>
-      violation.impact === 'serious' || violation.impact === 'critical',
+    const material = results.violations.filter(
+      (violation) => violation.impact === 'serious' || violation.impact === 'critical',
     );
     expect(material).toEqual([]);
   });

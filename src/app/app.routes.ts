@@ -1,10 +1,15 @@
 import { Routes } from '@angular/router';
+import { CERTIFICATES } from './certificates/registry';
+import { CERTIFICATE, CertificateContext } from './certificates/certificate-context';
+import { CertificateShell } from './certificates/certificate-shell';
+import { PROGRESS_DATABASE_NAME, ProgressRepository } from './core/persistence/progress.repository';
+import { QuizSessionStore } from './core/state';
 
-export const routes: Routes = [
+const learningRoutes: Routes = [
   {
     path: '',
-    title: 'CTFL Practice - Trang chủ',
-    loadComponent: () => import('./features/home/home-page').then((m) => m.HomePage),
+    pathMatch: 'full',
+    loadComponent: () => import('./features/home/certificate-page').then((m) => m.CertificatePage),
   },
   {
     path: 'practice',
@@ -28,21 +33,17 @@ export const routes: Routes = [
     path: 'mock-exam/:sessionId',
     title: 'Bài thi thử - CTFL Practice',
     loadComponent: () =>
-      import('./features/mock-exam/mock-exam-session-page').then(
-        (m) => m.MockExamSessionPage,
-      ),
+      import('./features/mock-exam/mock-exam-session-page').then((m) => m.MockExamSessionPage),
   },
   {
     path: 'results/:sessionId',
     title: 'Kết quả - CTFL Practice',
-    loadComponent: () =>
-      import('./features/results/results-page').then((m) => m.ResultsPage),
+    loadComponent: () => import('./features/results/results-page').then((m) => m.ResultsPage),
   },
   {
     path: 'progress',
     title: 'Tiến độ - CTFL Practice',
-    loadComponent: () =>
-      import('./features/progress/progress-page').then((m) => m.ProgressPage),
+    loadComponent: () => import('./features/progress/progress-page').then((m) => m.ProgressPage),
   },
   {
     path: 'methodology',
@@ -50,5 +51,47 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/methodology/methodology-page').then((m) => m.MethodologyPage),
   },
+];
+
+export const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    title: 'Certificate Practice · Chọn chứng chỉ',
+    loadComponent: () => import('./features/home/home-page').then((m) => m.HomePage),
+  },
+  ...CERTIFICATES.map((certificate) => ({
+    path: `certificates/${certificate.id}`,
+    component: CertificateShell,
+    providers: [
+      { provide: CERTIFICATE, useValue: certificate },
+      {
+        provide: PROGRESS_DATABASE_NAME,
+        useValue:
+          certificate.id === 'ctfl' ? 'ctfl-practice' : `certificate-practice:${certificate.id}`,
+      },
+      CertificateContext,
+      ProgressRepository,
+      QuizSessionStore,
+    ],
+    children: learningRoutes.map((route) => ({
+      ...route,
+      title: `${certificate.name} · Certificate Practice`,
+    })),
+  })),
+  // Preserve old CTFL bookmarks and session links.
+  ...[
+    'practice/:sessionId',
+    'mock-exam/:sessionId',
+    'results/:sessionId',
+    'practice',
+    'mock-exam',
+    'progress',
+    'methodology',
+  ].map((path) => ({
+    path,
+    pathMatch: 'full' as const,
+    redirectTo: `certificates/ctfl/${path}`,
+  })),
   { path: '**', redirectTo: '' },
 ];

@@ -1,7 +1,7 @@
 {
-  "name": "CTFL Practice",
-  "short_name": "CTFL",
-  "description": "Luyện tập và thi thử CTFL 4.0 theo blueprint chính thức.",
+  "name": "Certificate Practice",
+  "short_name": "Practice",
+  "description": "Luyện tập và thi thử CTFL, TOEIC với tiến độ riêng cho từng chứng chỉ.",
   "lang": "vi",
   "categories": ["education", "productivity"],
   "theme_color": "#102c3a",

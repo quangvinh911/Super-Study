@@ -6,6 +6,7 @@ import {
   QuestionStyleTag,
   Solution,
 } from './question.models';
+import { ExamDefinition, ScoringPolicy } from './certificate.models';
 
 export type QuizMode = 'practice' | 'exam';
 export type SessionStatus = 'active' | 'completed' | 'expired';
@@ -43,6 +44,10 @@ export interface SessionResponse {
  * attempts therefore remain reproducible after a question-bank update.
  */
 export interface SessionSnapshot {
+  readonly scoringPolicy?: ScoringPolicy;
+  readonly certificateId?: string;
+  readonly examDefinition?: ExamDefinition;
+  readonly sectionIndex?: number;
   readonly schemaVersion: 1;
   readonly id: string;
   readonly mode: QuizMode;
@@ -55,7 +60,7 @@ export interface SessionSnapshot {
   readonly updatedAt: string;
   readonly completedAt?: string;
   readonly deadlineAt?: string;
-  readonly durationMinutes?: 60 | 75;
+  readonly durationMinutes?: number;
   readonly currentIndex: number;
   readonly questions: readonly SessionQuestionSnapshot[];
   readonly responses: Readonly<Record<string, SessionResponse>>;
@@ -63,6 +68,8 @@ export interface SessionSnapshot {
 }
 
 export interface StartPracticeInput {
+  readonly scoringPolicy?: ScoringPolicy;
+  readonly certificateId?: string;
   readonly bankVersion: string;
   readonly bankSource?: QuestionBankSource;
   readonly questions: readonly Question[];
@@ -73,11 +80,13 @@ export interface StartPracticeInput {
 }
 
 export interface StartExamInput {
+  readonly certificateId?: string;
+  readonly examDefinition?: ExamDefinition;
   readonly bankVersion: string;
   readonly bankSource?: QuestionBankSource;
   readonly questions: readonly Question[];
   readonly solutions: readonly Solution[];
-  readonly durationMinutes: 60 | 75;
+  readonly durationMinutes: number;
   readonly generation?: 'blueprint' | 'random40';
   readonly seed?: string | number;
   readonly now?: Date;

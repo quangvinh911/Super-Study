@@ -1,3 +1,4 @@
+import { CertificateContext } from '../../certificates/certificate-context';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -22,6 +23,7 @@ import { QuizSessionStore, SessionLockedError } from '../../core/state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MockExamSessionPage implements OnInit, OnDestroy {
+  protected readonly certificate = inject(CertificateContext);
   @ViewChild('questionHeading') private questionHeading?: ElementRef<HTMLElement>;
 
   protected readonly store = inject(QuizSessionStore);
@@ -37,25 +39,23 @@ export class MockExamSessionPage implements OnInit, OnDestroy {
   async ngOnInit(): Promise<void> {
     const sessionId = this.route.snapshot.paramMap.get('sessionId');
     if (!sessionId) {
-      await this.router.navigate(['/mock-exam']);
+      await this.router.navigate(this.certificate.link('mock-exam'));
       return;
     }
 
     this.store.setDeadlineHooks({
+      onSectionChange: () => this.warning.set(''),
       onWarning: (minutes) =>
         this.warning.set(`Còn ${minutes} phút. Hãy kiểm tra các câu đã đánh dấu và chưa trả lời.`),
-      onAutoSubmit: (attempt) => void this.router.navigate(['/results', attempt.id]),
+      onAutoSubmit: (attempt) =>
+        void this.router.navigate(this.certificate.link('results', attempt.id)),
     });
 
     try {
-      const current = this.store.snapshot();
-      const restored =
-        current?.id === sessionId && current.status === 'active'
-          ? true
-          : await this.store.restore(sessionId);
+      const restored = await this.store.restore(sessionId);
       const attempt = this.store.lastAttempt();
       if (attempt) {
-        await this.router.navigate(['/results', attempt.id]);
+        await this.router.navigate(this.certificate.link('results', attempt.id));
         return;
       }
       if (!restored || this.store.snapshot()?.mode !== 'exam') {
@@ -170,7 +170,7 @@ export class MockExamSessionPage implements OnInit, OnDestroy {
     try {
       const attempt = await this.store.submit();
       if (attempt) {
-        await this.router.navigate(['/results', attempt.id]);
+        await this.router.navigate(this.certificate.link('results', attempt.id));
       }
     } finally {
       this.submitting.set(false);

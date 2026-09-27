@@ -1,3 +1,4 @@
+import { CertificateContext } from '../../certificates/certificate-context';
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -21,6 +22,7 @@ import { QuizSessionStore } from '../../core/state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PracticeSetupPage implements OnInit {
+  protected readonly certificate = inject(CertificateContext);
   private readonly bankService = inject(QuestionBankService);
   private readonly repository = inject(ProgressRepository);
   private readonly store = inject(QuizSessionStore);
@@ -30,7 +32,9 @@ export class PracticeSetupPage implements OnInit {
   protected readonly loading = signal(true);
   protected readonly starting = signal(false);
   protected readonly error = signal('');
-  protected readonly banks = signal<Readonly<Partial<Record<QuestionBankSource, LoadedQuestionBank>>>>({});
+  protected readonly banks = signal<
+    Readonly<Partial<Record<QuestionBankSource, LoadedQuestionBank>>>
+  >({});
   protected readonly chapters: readonly Chapter[] = [1, 2, 3, 4, 5, 6];
   protected readonly kLevels: readonly KLevel[] = ['K1', 'K2', 'K3'];
   protected readonly styles: readonly { value: QuestionStyleTag; label: string }[] = [
@@ -45,10 +49,11 @@ export class PracticeSetupPage implements OnInit {
   protected chapter: 'all' | Chapter = 'all';
   protected kLevel: 'all' | KLevel = 'all';
   protected learningObjective = 'all';
+  protected section = 'all';
   protected style: 'all' | QuestionStyleTag = 'all';
   protected history: 'all' | PracticeHistoryFilter = 'all';
   protected questionLimit = 10;
-  protected bankSource: QuestionBankSource = 'original';
+  protected bankSource: QuestionBankSource = this.certificate.definition.banks[0]!.id;
 
   protected selectedBank(): LoadedQuestionBank | null {
     return this.banks()[this.bankSource] ?? null;
@@ -67,14 +72,20 @@ export class PracticeSetupPage implements OnInit {
             (question) =>
               this.chapter === 'all' || question.classification.chapter === this.chapter,
           )
-          .map((question) => question.classification.learningObjective),
+          .map((question) => question.classification.learningObjective)
+          .filter((objective): objective is string => Boolean(objective)),
       ),
     ].sort();
   }
 
   async ngOnInit(): Promise<void> {
+    this.loading.set(true);
+    this.error.set('');
     const requestedHistory = this.route.snapshot.queryParamMap.get('history');
-    if (this.route.snapshot.queryParamMap.get('source') === 'pdf') {
+    if (
+      this.route.snapshot.queryParamMap.get('source') === 'pdf' &&
+      this.certificate.definition.banks.some((bank) => bank.id === 'pdf')
+    ) {
       this.bankSource = 'pdf';
     }
     if (
@@ -85,11 +96,13 @@ export class PracticeSetupPage implements OnInit {
       this.history = requestedHistory;
     }
     try {
-      const [original, pdf] = await Promise.all([
-        this.bankService.load(),
-        this.bankService.load('/data/pdf-manifest.json'),
-      ]);
-      this.banks.set({ original, pdf });
+      const entries = await Promise.all(
+        this.certificate.definition.banks.map(
+          async (bank) =>
+            [bank.id, await this.bankService.load(bank.manifestUrl, this.certificate.id)] as const,
+        ),
+      );
+      this.banks.set(Object.fromEntries(entries));
     } catch {
       this.error.set('Không thể tải ngân hàng câu hỏi. Hãy thử tải lại trang.');
     } finally {
@@ -115,7 +128,7 @@ export class PracticeSetupPage implements OnInit {
 
   protected async start(): Promise<void> {
     const bank = this.selectedBank();
-    if (!bank || this.starting()) {
+    if (!bank?.questions.length || this.starting()) {
       return;
     }
     this.starting.set(true);
@@ -126,19 +139,19 @@ export class PracticeSetupPage implements OnInit {
         this.repository.listBookmarks(),
       ]);
       const snapshot = await this.store.startPractice({
+        certificateId: this.certificate.id,
+        scoringPolicy: this.certificate.definition.exam.scoring,
         bankVersion: bank.manifest.bankVersion,
         bankSource: this.bankSource,
         questions: bank.questions,
         solutions: bank.solutions,
         config: {
-          chapters:
-            this.chapter === 'all' ? undefined : [this.chapter],
+          sections: this.section === 'all' ? undefined : [this.section],
+          chapters: this.chapter === 'all' ? undefined : [this.chapter],
           learningObjectives:
             this.learningObjective === 'all' ? undefined : [this.learningObjective],
-          kLevels:
-            this.kLevel === 'all' ? undefined : [this.kLevel],
-          styleTags:
-            this.style === 'all' ? undefined : [this.style],
+          kLevels: this.kLevel === 'all' ? undefined : [this.kLevel],
+          styleTags: this.style === 'all' ? undefined : [this.style],
           history: this.history === 'all' ? undefined : [this.history],
           questionLimit: this.questionLimit,
           shuffleQuestions: true,
@@ -150,7 +163,7 @@ export class PracticeSetupPage implements OnInit {
       });
       await this.repository.setSetting('lastPracticeConfig', snapshot.practiceConfig);
       await this.repository.setSetting('lastQuestionBankSource', this.bankSource);
-      await this.router.navigate(['/practice', snapshot.id]);
+      await this.router.navigate(this.certificate.link('practice', snapshot.id));
     } catch (cause) {
       const message = cause instanceof Error ? cause.message : '';
       this.error.set(

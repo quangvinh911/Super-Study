@@ -1,11 +1,8 @@
+import { CertificateContext } from '../../certificates/certificate-context';
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContentBlocks } from '../../components/content-blocks/content-blocks';
-import {
-  Attempt,
-  SessionQuestionSnapshot,
-  SessionResponse,
-} from '../../core/models';
+import { Attempt, SessionQuestionSnapshot, SessionResponse } from '../../core/models';
 import { ProgressRepository } from '../../core/persistence/progress.repository';
 
 @Component({
@@ -16,6 +13,7 @@ import { ProgressRepository } from '../../core/persistence/progress.repository';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultsPage implements OnInit {
+  protected readonly certificate = inject(CertificateContext);
   private readonly route = inject(ActivatedRoute);
   private readonly progressRepository = inject(ProgressRepository);
 
@@ -25,8 +23,7 @@ export class ResultsPage implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const attemptId =
-      this.route.snapshot.paramMap.get('sessionId') ??
-      this.route.snapshot.paramMap.get('id');
+      this.route.snapshot.paramMap.get('sessionId') ?? this.route.snapshot.paramMap.get('id');
 
     if (!attemptId) {
       this.errorMessage.set('Đường dẫn kết quả không hợp lệ.');
@@ -50,10 +47,7 @@ export class ResultsPage implements OnInit {
     }
   }
 
-  responseFor(
-    attempt: Attempt,
-    item: SessionQuestionSnapshot,
-  ): SessionResponse | undefined {
+  responseFor(attempt: Attempt, item: SessionQuestionSnapshot): SessionResponse | undefined {
     return attempt.responses[item.question.id];
   }
 
@@ -65,10 +59,7 @@ export class ResultsPage implements OnInit {
     return item.solution.correctOptionIds.includes(optionId);
   }
 
-  isQuestionCorrect(
-    item: SessionQuestionSnapshot,
-    response: SessionResponse | undefined,
-  ): boolean {
+  isQuestionCorrect(item: SessionQuestionSnapshot, response: SessionResponse | undefined): boolean {
     if (!response) {
       return false;
     }

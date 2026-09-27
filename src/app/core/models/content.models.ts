@@ -41,6 +41,12 @@ export interface ImageBlock {
   readonly caption?: string;
 }
 
+export interface AudioBlock {
+  readonly kind: 'audio';
+  readonly src: string;
+  readonly label: string;
+}
+
 /**
  * Deliberately excludes arbitrary HTML. Every bank entry can be rendered using
  * trusted Angular templates without bypassing sanitization.
@@ -52,4 +58,5 @@ export type ContentBlock =
   | TableBlock
   | CodeBlock
   | FormulaBlock
-  | ImageBlock;
+  | ImageBlock
+  | AudioBlock;

@@ -1,6 +1,10 @@
-# CTFL Practice
+# Certificate Practice
 
-Ứng dụng Angular 22 để luyện tập và thi thử CTFL v4.0.1. Giao diện tiếng Việt, câu hỏi tiếng Anh, không tài khoản/backend/analytics; tiến độ được lưu trong IndexedDB và app shell + ngân hàng câu hỏi hoạt động offline sau lần tải đầu.
+Ứng dụng Angular 22 để luyện tập và thi thử nhiều chứng chỉ. Hiện có CTFL v4.0.1 và không gian TOEIC Listening & Reading đang chờ bộ đề. Giao diện tiếng Việt, câu hỏi tiếng Anh; tiến độ của mỗi chứng chỉ lưu riêng trong IndexedDB, không tài khoản/backend/analytics.
+
+Trang chủ chọn chứng chỉ; mọi luồng dùng chung tại `/certificates/<id>/practice`, `/mock-exam`, `/progress` và `/methodology`. Link CTFL cũ và dữ liệu đã lưu vẫn hoạt động. TOEIC có bộ lọc Part, audio/bài đọc chung, cấu trúc 200 câu với 45/75 phút và kết quả raw theo Part; chưa mở bài làm khi ngân hàng rỗng.
+
+Xem [kiến trúc, cách bổ sung bộ đề TOEIC và chứng chỉ mới](docs/adding-certificates.md). IELTS/AWS chưa có bộ đề hoặc adapter chuyên biệt.
 
 Ngân hàng v1 gồm 80 câu viết mới đã gắn chapter, Learning Objective, K-level và 40 blueprint bucket. Site riêng tư còn có mode PDF với 278 câu trích xuất từ tài liệu người dùng cung cấp, kèm 278 ảnh câu hỏi và 278 ảnh đáp án theo trang. Không chuyển mode PDF sang phát hành công khai nếu chưa có quyền tái xuất bản.
 

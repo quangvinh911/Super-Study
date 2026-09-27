@@ -5,7 +5,7 @@
     <div class="utility-bar">
       <div class="shell-container utility-bar__inner">
         <p class="utility-bar__context">
-          <span class="utility-bar__edition">CTFL v4.0.1</span>
+          <span class="utility-bar__edition">{{ activeCertificate()?.name ?? 'Chứng chỉ' }}</span>
           <span aria-hidden="true">·</span>
           <span>Học theo nhịp của bạn</span>
         </p>
@@ -23,11 +23,16 @@
     </div>
 
     <div class="shell-container header-row">
-      <a class="brand" routerLink="/" (click)="closeMenu()" aria-label="CTFL Practice — Trang chủ">
-        <span class="brand__mark" aria-hidden="true">CT</span>
+      <a
+        class="brand"
+        routerLink="/"
+        (click)="closeMenu()"
+        aria-label="Certificate Practice — Trang chủ"
+      >
+        <span class="brand__mark" aria-hidden="true">CP</span>
         <span class="brand__copy">
-          <strong>CTFL Practice</strong>
-          <span>Phòng luyện kiểm thử</span>
+          <strong>Certificate Practice</strong>
+          <span>Không gian luyện thi</span>
         </span>
       </a>
 
@@ -59,10 +64,10 @@
           ariaCurrentWhenActive="page"
           (click)="closeMenu()"
         >
-          Trang chủ
+          Chứng chỉ
         </a>
         <a
-          routerLink="/practice"
+          [routerLink]="link('practice')"
           routerLinkActive="primary-navigation__link--active"
           ariaCurrentWhenActive="page"
           (click)="closeMenu()"
@@ -70,7 +75,7 @@
           Luyện tập
         </a>
         <a
-          routerLink="/mock-exam"
+          [routerLink]="link('mock-exam')"
           routerLinkActive="primary-navigation__link--active"
           ariaCurrentWhenActive="page"
           (click)="closeMenu()"
@@ -78,7 +83,7 @@
           Thi thử
         </a>
         <a
-          routerLink="/progress"
+          [routerLink]="link('progress')"
           routerLinkActive="primary-navigation__link--active"
           ariaCurrentWhenActive="page"
           (click)="closeMenu()"
@@ -86,7 +91,7 @@
           Tiến độ
         </a>
         <a
-          routerLink="/methodology"
+          [routerLink]="link('methodology')"
           routerLinkActive="primary-navigation__link--active"
           ariaCurrentWhenActive="page"
           (click)="closeMenu()"
@@ -95,6 +100,19 @@
         </a>
       </nav>
 
+      <label class="certificate-switcher">
+        <span>Chứng chỉ</span>
+        <select
+          aria-label="Chọn chứng chỉ"
+          [value]="activeCertificate()?.id ?? ''"
+          (change)="switchCertificate($any($event.target).value)"
+        >
+          <option value="" disabled>Chọn chứng chỉ</option>
+          @for (certificate of certificates; track certificate.id) {
+            <option [value]="certificate.id">{{ certificate.name }}</option>
+          }
+        </select>
+      </label>
       <div class="local-save-note" title="Tiến độ được lưu cục bộ trên trình duyệt này">
         <span class="local-save-note__icon" aria-hidden="true">✓</span>
         <span>Lưu trên thiết bị</span>
@@ -110,26 +128,25 @@
     <div class="shell-container footer-grid">
       <div class="footer-brand">
         <div class="footer-brand__title">
-          <span class="brand__mark brand__mark--small" aria-hidden="true">CT</span>
-          <strong>CTFL Practice</strong>
+          <span class="brand__mark brand__mark--small" aria-hidden="true">CP</span>
+          <strong>Certificate Practice</strong>
         </div>
         <p>Một công cụ ôn tập phi thương mại, ưu tiên học chủ động và quyền riêng tư.</p>
       </div>
 
       <nav class="footer-navigation" aria-label="Điều hướng cuối trang">
-        <a routerLink="/practice">Luyện tập</a>
-        <a routerLink="/mock-exam">Thi thử</a>
-        <a routerLink="/progress">Dữ liệu học tập</a>
-        <a routerLink="/methodology">Nguồn &amp; phương pháp</a>
+        <a [routerLink]="link('practice')">Luyện tập</a>
+        <a [routerLink]="link('mock-exam')">Thi thử</a>
+        <a [routerLink]="link('progress')">Dữ liệu học tập</a>
+        <a [routerLink]="link('methodology')">Nguồn &amp; phương pháp</a>
       </nav>
 
       <div class="footer-disclaimer">
         <p>
-          Không liên kết hoặc được chứng thực bởi
-          <span lang="en">ISTQB®</span> hay <span lang="en">CertyIQ</span>. Nội dung luyện tập được
-          biên soạn độc lập.
+          Không liên kết hoặc được chứng thực bởi các tổ chức cấp chứng chỉ. Đây là công cụ luyện
+          tập độc lập.
         </p>
-        <p>© {{ currentYear }} CTFL Practice</p>
+        <p>© {{ currentYear }} Certificate Practice</p>
       </div>
     </div>
   </footer>

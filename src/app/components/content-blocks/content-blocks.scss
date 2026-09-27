@@ -90,3 +90,9 @@ figcaption {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
+audio {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  margin-block: 0.75rem;
+}
