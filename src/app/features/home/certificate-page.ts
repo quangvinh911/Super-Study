@@ -46,6 +46,14 @@ import { SessionSnapshot } from '../../core/models';
         </section>
       }
       <section class="certificate-grid" aria-label="Chọn cách học">
+        @if (certificate.id === 'toeic') {
+          <article class="surface certificate-card certificate-card--toeic">
+            <p class="eyebrow">Học ngữ pháp</p>
+            <h2>16 bài theo lộ trình</h2>
+            <p>Quy tắc ngắn, ví dụ trong công việc, sơ đồ và câu tự kiểm tra cho Part 5–6.</p>
+            <a class="button" [routerLink]="certificate.link('grammar')">Mở thư viện ngữ pháp</a>
+          </article>
+        }
         <article class="surface certificate-card">
           <p class="eyebrow">Luyện tập</p>
           <h2>Ôn theo chủ đề</h2>

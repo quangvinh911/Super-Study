@@ -53,6 +53,19 @@ const learningRoutes: Routes = [
   },
 ];
 
+const toeicGrammarRoutes: Routes = [
+  {
+    path: 'grammar',
+    loadComponent: () =>
+      import('./features/grammar/grammar-overview-page').then((m) => m.GrammarOverviewPage),
+  },
+  {
+    path: 'grammar/:slug',
+    loadComponent: () =>
+      import('./features/grammar/grammar-lesson-page').then((m) => m.GrammarLessonPage),
+  },
+];
+
 export const routes: Routes = [
   {
     path: '',
@@ -74,10 +87,12 @@ export const routes: Routes = [
       ProgressRepository,
       QuizSessionStore,
     ],
-    children: learningRoutes.map((route) => ({
-      ...route,
-      title: `${certificate.name} · Certificate Practice`,
-    })),
+    children: [...learningRoutes, ...(certificate.id === 'toeic' ? toeicGrammarRoutes : [])].map(
+      (route) => ({
+        ...route,
+        title: `${certificate.name} · Certificate Practice`,
+      }),
+    ),
   })),
   // Preserve old CTFL bookmarks and session links.
   ...[
