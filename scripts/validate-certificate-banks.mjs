@@ -101,6 +101,9 @@ export async function validateCertificateBanks(rootDir) {
         ...solution.explanation,
         ...Object.values(solution.optionRationales ?? {}).flat(),
       ];
+      if (question.sourceQuestionImage) {
+        blocks.push({ kind: 'image', src: question.sourceQuestionImage.src });
+      }
       for (const block of blocks) {
         if (block.kind !== 'audio' && block.kind !== 'image') continue;
         if (!block.src.startsWith('/') || block.src.startsWith('//'))

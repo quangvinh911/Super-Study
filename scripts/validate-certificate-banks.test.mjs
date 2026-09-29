@@ -73,4 +73,10 @@ describe('additional certificate bank validation', () => {
     await bank.write();
     await expect(validateCertificateBanks(bank.root)).rejects.toThrow(/missing media/);
   });
+  it('requires a local question evidence image', async () => {
+    const bank = await fixture();
+    bank.question.sourceQuestionImage = { src: '/pdf-evidence/missing.webp', page: 4 };
+    await bank.write();
+    await expect(validateCertificateBanks(bank.root)).rejects.toThrow(/missing media/);
+  });
 });

@@ -25,8 +25,8 @@
         "files": [
           "/data/*.json",
           "/data/**/*.json",
-          "!/pdf-evidence/**",
-          "/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+          "/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)",
+          "!/pdf-evidence/**"
         ]
       }
     },

@@ -395,6 +395,21 @@
           "type": "integer",
           "minimum": 1
         },
+        "sourceQuestionImage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["src", "page"],
+          "properties": {
+            "src": {
+              "type": "string",
+              "pattern": "^/pdf-evidence/[a-z0-9-]+\\.webp$"
+            },
+            "page": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
         "stimulus": {
           "type": "object",
           "additionalProperties": false,

@@ -64,6 +64,11 @@ export interface SourceEvidence {
   readonly answerNote?: string | null;
 }
 
+export interface SourceQuestionImage {
+  readonly src: string;
+  readonly page: number;
+}
+
 export interface Question {
   readonly certificateId?: string;
   /** A complete authored exam form; never mix passages/audio across forms. */
@@ -81,6 +86,7 @@ export interface Question {
   readonly provenance: Provenance;
   readonly verification: Verification;
   readonly sourceEvidence?: SourceEvidence;
+  readonly sourceQuestionImage?: SourceQuestionImage;
   readonly variant?: 'A' | 'B';
 }
 

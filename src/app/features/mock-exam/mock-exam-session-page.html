@@ -57,7 +57,7 @@
         </div>
 
         <h2 #questionHeading class="question-heading" tabindex="-1">
-          Question {{ store.progress().current }}
+          Question {{ item.question.order ?? store.progress().current }}
         </h2>
         @if (item.question.stimulus; as stimulus) {
           <section class="shared-stimulus" aria-label="Nội dung dùng chung" lang="en">

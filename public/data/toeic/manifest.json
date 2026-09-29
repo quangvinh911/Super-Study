@@ -1,12 +1,15 @@
 {
   "schemaVersion": "1.0.0",
-  "bankVersion": "toeic-0.1.0",
+  "bankVersion": "toeic-sources-1.0.0",
   "certificateId": "toeic",
-  "publishedAt": "2026-09-27",
+  "publishedAt": "2026-09-29",
   "syllabusVersion": "TOEIC Listening & Reading",
   "language": "en",
-  "questionCount": 0,
-  "solutionCount": 0,
+  "questionCount": 1977,
+  "solutionCount": 1977,
   "blueprint": [],
-  "files": { "questions": "questions.json", "solutions": "solutions.json" }
+  "files": {
+    "questions": "questions.json",
+    "solutions": "solutions.json"
+  }
 }

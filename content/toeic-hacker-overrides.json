@@ -1,0 +1,116 @@
+{
+  "missingGroups": [
+    [4, 191, 195, 113],
+    [8, 196, 200, 231],
+    [9, 176, 180, 252],
+    [10, 163, 164, 276],
+    [10, 191, 195, 287]
+  ],
+  "optionCorrections": {
+    "2-104": { "D": "convincingly" },
+    "2-125": { "D": "will be storing" },
+    "3-104": { "D": "demonstrating" },
+    "5-125": { "D": "during" },
+    "6-104": { "D": "herself" },
+    "7-120": { "D": "collection" },
+    "8-104": { "D": "whatever" },
+    "9-104": { "D": "himself" },
+    "10-124": { "D": "in front of" }
+  },
+  "stemCorrections": {
+    "4-175": "At 3:59, what does Ms. Stone mean when she writes, \"I'm on it\"?",
+    "5-157": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"This is because the relocation is expected to create 150 additional jobs for the residents of Haverford.\"",
+    "5-171": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"And for those with dietary restrictions, we offer an array of options.\""
+  },
+  "items": {
+    "2-175": {
+      "stem": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"If you're uncertain about your layout and design skills, you don't have to do it at all.\"",
+      "options": { "A": "[1]", "B": "[2]", "C": "[3]", "D": "[4]" },
+      "page": 48, "box": [305, 205, 580, 355]
+    },
+    "4-136": {
+      "options": { "A": "explore", "B": "exist", "C": "unveil", "D": "resume" },
+      "page": 93, "box": [75, 555, 300, 665]
+    },
+    "5-143": {
+      "options": { "A": "Beside", "B": "Following", "C": "Among", "D": "About" },
+      "page": 124, "box": [70, 565, 305, 665]
+    },
+    "5-174": {
+      "stem": "What is NOT indicated about Everything Video?",
+      "options": {
+        "A": "It has a Web site where customers can rent games and videos.",
+        "B": "It purchases some items from its customers.",
+        "C": "It is offering a special promotion at its San Diego store.",
+        "D": "It provides store credit for use at various branches."
+      },
+      "page": 135, "box": [320, 100, 590, 260]
+    },
+    "5-175": {
+      "stem": "The word \"shift\" in paragraph 2, line 3, is closest in meaning to",
+      "options": { "A": "period", "B": "relocation", "C": "swipe", "D": "change" },
+      "page": 135, "box": [320, 255, 590, 400]
+    },
+    "6-136": {
+      "options": { "A": "Owing to", "B": "As if", "C": "Whereas", "D": "Because" },
+      "page": 151, "box": [70, 505, 305, 625]
+    },
+    "9-141": {
+      "options": { "A": "design", "B": "location", "C": "merchandise", "D": "dimension" },
+      "page": 239, "box": [315, 425, 570, 510]
+    },
+    "9-142": {
+      "options": { "A": "Meanwhile", "B": "Fortunately", "C": "Therefore", "D": "Regardless" },
+      "page": 239, "box": [315, 505, 570, 590]
+    },
+    "9-143": {
+      "options": { "A": "will vote", "B": "are voting", "C": "have been voting", "D": "voted" },
+      "page": 240, "box": [70, 425, 320, 505]
+    },
+    "9-144": {
+      "options": { "A": "supportive", "B": "support", "C": "supportable", "D": "supports" },
+      "page": 240, "box": [70, 495, 320, 575]
+    },
+    "9-145": {
+      "options": { "A": "looked over", "B": "paid for", "C": "fixed up", "D": "shut down" },
+      "page": 240, "box": [70, 565, 320, 650]
+    },
+    "10-131": {
+      "options": { "A": "buying", "B": "cleaning", "C": "furnishing", "D": "decorating" },
+      "page": 266, "box": [60, 500, 320, 580]
+    },
+    "10-132": {
+      "options": {
+        "A": "You may join the crew by sending in your application.",
+        "B": "We also sell a wide range of cleaning products.",
+        "C": "Wimberley's does all the tiresome jobs that you don't have the time for.",
+        "D": "Our service schedule will be posted online once we resume operations."
+      },
+      "page": 266, "box": [60, 565, 320, 745]
+    },
+    "10-137": {
+      "options": { "A": "enclose", "B": "fill", "C": "obstruct", "D": "secure" },
+      "page": 267, "box": [315, 560, 570, 635]
+    },
+    "10-138": {
+      "options": { "A": "lists", "B": "listing", "C": "listed", "D": "to list" },
+      "page": 267, "box": [315, 630, 570, 710]
+    },
+    "10-139": {
+      "options": { "A": "supposition", "B": "allocation", "C": "competition", "D": "entry" },
+      "page": 268, "box": [60, 500, 320, 580]
+    },
+    "10-140": {
+      "options": { "A": "Likewise", "B": "Nonetheless", "C": "Therefore", "D": "Henceforth" },
+      "page": 268, "box": [60, 565, 320, 650]
+    },
+    "10-145": {
+      "options": { "A": "outline", "B": "drawing", "C": "certificate", "D": "assistant" },
+      "page": 269, "box": [315, 380, 570, 455]
+    },
+    "10-146": {
+      "options": { "A": "Prior to", "B": "During", "C": "Despite", "D": "Up until" },
+      "page": 269, "box": [315, 445, 570, 520]
+    }
+  }
+}

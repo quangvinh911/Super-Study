@@ -41,7 +41,7 @@ export const CERTIFICATES: readonly CertificateDefinition[] = [
     id: 'toeic',
     name: 'TOEIC',
     subtitle: 'Listening & Reading',
-    description: 'Luyện từng Part và thi thử Listening & Reading. Bộ đề sẽ được bổ sung sau.',
+    description: 'Luyện TOEIC Reading theo từng Part; đề Listening sẽ được bổ sung sau.',
     taxonomy: 'sections',
     banks: [
       {

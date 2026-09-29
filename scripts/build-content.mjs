@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv';
 import { parse as parseYaml } from 'yaml';
 import { validateCertificateBanks } from './validate-certificate-banks.mjs';
+import { buildToeic } from './build-toeic.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_ROOT = resolve(SCRIPT_DIR, '..');
@@ -355,6 +356,7 @@ async function atomicWrite(path, contents) {
 }
 
 export async function buildContent({ rootDir = DEFAULT_ROOT, write = true } = {}) {
+  await buildToeic(rootDir, { write });
   await validateCertificateBanks(rootDir);
   const documents = await loadAuthoringDocuments(rootDir);
   const artifacts = compileFromDocuments(documents);

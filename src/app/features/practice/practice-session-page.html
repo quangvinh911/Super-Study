@@ -54,7 +54,7 @@
       </div>
 
       <h1 #questionHeading class="question-heading" tabindex="-1">
-        Question {{ store.progress().current }}
+        Question {{ item.question.order ?? store.progress().current }}
       </h1>
 
       <div class="stem">
@@ -158,6 +158,19 @@
             </details>
           } @else {
             <app-content-blocks [blocks]="item.solution.explanation" />
+          }
+
+          @if (item.question.sourceQuestionImage; as sourceImage) {
+            <details class="pdf-evidence">
+              <summary>
+                Ảnh gốc câu {{ item.question.order }} · trang {{ sourceImage.page }}
+              </summary>
+              <img
+                [src]="sourceImage.src"
+                [alt]="'Bản chụp riêng câu ' + item.question.order + ' và bốn lựa chọn trong PDF'"
+                loading="lazy"
+              />
+            </details>
           }
 
           @if (item.solution.references.length) {
