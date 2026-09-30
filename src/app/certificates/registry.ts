@@ -7,6 +7,8 @@ export const CERTIFICATES: readonly CertificateDefinition[] = [
     name: 'CTFL',
     subtitle: 'ISTQB Foundation Level · v4.0.1',
     description: 'Luyện kiến thức kiểm thử theo chapter, Learning Objective và K-level.',
+    catalogGroup: 'professional',
+    catalogHighlights: ['Luyện theo Chapter', 'Thi thử CTFL'],
     taxonomy: 'syllabus',
     banks: [
       {
@@ -41,14 +43,29 @@ export const CERTIFICATES: readonly CertificateDefinition[] = [
     id: 'toeic',
     name: 'TOEIC',
     subtitle: 'Listening & Reading',
-    description: 'Luyện từng Part và thi thử Listening & Reading. Bộ đề sẽ được bổ sung sau.',
+    description: 'Luyện TOEIC Reading theo từng Part; đề Listening sẽ được bổ sung sau.',
+    catalogGroup: 'language',
+    catalogHighlights: ['Ngữ pháp', 'Luyện Reading'],
+    learningResources: [
+      {
+        label: 'Ngữ pháp',
+        path: 'grammar',
+        description: '16 bài học, ví dụ công việc và câu tự kiểm tra cho Part 5–6.',
+      },
+    ],
     taxonomy: 'sections',
     banks: [
       {
-        id: 'original',
-        label: 'Bộ đề TOEIC',
-        description: 'Listening & Reading · Part 1–7',
-        manifestUrl: '/data/toeic/manifest.json',
+        id: 'hacker',
+        label: 'Hacker TOEIC',
+        description: '1.000 câu · 10 đề Reading Part 5–7',
+        manifestUrl: '/data/toeic/hacker-manifest.json',
+      },
+      {
+        id: 'jimmy',
+        label: 'Jim’s TOEIC (Jimmy)',
+        description: '977 câu Reading · Part 5–7',
+        manifestUrl: '/data/toeic/jimmy-manifest.json',
       },
     ],
     exam: {

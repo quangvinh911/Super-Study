@@ -1,0 +1,184 @@
+<div class="page grammar-page grammar-page--lesson">
+  @if (lesson(); as current) {
+    <nav class="grammar-breadcrumb" aria-label="Đường dẫn">
+      <a routerLink="/certificates/toeic">TOEIC</a>
+      <span aria-hidden="true">/</span>
+      <a routerLink="/certificates/toeic/grammar">Ngữ pháp</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ current.title }}</span>
+    </nav>
+    <header class="grammar-lesson-header">
+      <p class="eyebrow">
+        {{ current.stage }} · Bài {{ index() + 1 }}/{{ lessonCount }} ·
+        {{ current.part === 'part-5' ? 'Part 5' : 'Part 6' }}
+      </p>
+      <h1>{{ current.title }}</h1>
+      <p>{{ current.summary }}</p>
+      <div class="grammar-goal"><strong>Sau bài này:</strong> {{ current.goal }}</div>
+    </header>
+
+    <div class="grammar-lesson-layout">
+      <article class="grammar-article">
+        <section aria-labelledby="rules-heading">
+          <p class="eyebrow">01 · Học nhanh</p>
+          <h2 id="rules-heading">Cấu trúc / Quy tắc</h2>
+
+          <div class="grammar-learning-card surface">
+            <div class="grammar-rules">
+              @for (rule of current.rules; track rule.label) {
+                <article class="grammar-rule">
+                  <h3>{{ rule.label }}</h3>
+                  <p class="grammar-formula-label">Công thức:</p>
+                  <p class="grammar-pattern">
+                    <strong>{{ rule.pattern }}</strong>
+                  </p>
+                  <p class="grammar-rule__use">
+                    @for (line of ruleUseLines(rule.use); track line) {
+                      <span class="grammar-rule__use-line">{{ line }}</span>
+                    }
+                  </p>
+                  @if (examplesForRule(current, rule.label); as examples) {
+                    @if (examples.length > 0) {
+                      <div class="grammar-examples">
+                        <p class="grammar-examples__label">Ví dụ:</p>
+                        <ul class="grammar-examples__list">
+                          @for (example of examples; track example.english) {
+                            <li class="grammar-example">
+                              <p class="grammar-example__sentence">
+                                <strong lang="en">{{ example.english }}</strong>
+                              </p>
+                              <p class="grammar-example__translation">
+                                <span aria-hidden="true">→</span>
+                                <em>{{ example.vietnamese }}</em>
+                              </p>
+                            </li>
+                          }
+                        </ul>
+                      </div>
+                    }
+                  }
+                </article>
+              }
+            </div>
+
+            <aside class="grammar-trap"><strong>Dễ nhầm:</strong> {{ current.trap }}</aside>
+          </div>
+        </section>
+
+        <section aria-labelledby="checks-heading">
+          <p class="eyebrow">02 · Luyện tập</p>
+          <h2 id="checks-heading">Thực hành trắc nghiệm</h2>
+          <p>
+            Làm lần lượt từ câu dễ đến câu khó. Chọn một đáp án rồi bấm “Kiểm tra”; bạn có thể làm
+            lại từng câu.
+          </p>
+          @for (check of current.checks; track $index; let questionIndex = $index) {
+            <fieldset class="grammar-check surface">
+              <legend>
+                <span class="grammar-check__meta">
+                  Câu {{ questionIndex + 1 }} · {{ difficultyLabels[questionIndex] }}
+                </span>
+                <span lang="en">{{ check.prompt }}</span>
+              </legend>
+              <div class="grammar-check__options">
+                @for (option of check.options; track $index; let optionIndex = $index) {
+                  <label>
+                    <input
+                      type="radio"
+                      [name]="'grammar-check-' + questionIndex"
+                      [checked]="selectedAnswers()[questionIndex] === optionIndex"
+                      [disabled]="checkedAnswers()[questionIndex]"
+                      (change)="selectAnswer(questionIndex, optionIndex)"
+                    />
+                    <span lang="en">{{ option }}</span>
+                  </label>
+                }
+              </div>
+              @if (checkedAnswers()[questionIndex]) {
+                <p
+                  class="grammar-check__feedback"
+                  [class.grammar-check__feedback--correct]="
+                    selectedAnswers()[questionIndex] === check.answer
+                  "
+                  role="status"
+                >
+                  <strong>{{
+                    selectedAnswers()[questionIndex] === check.answer ? 'Đúng rồi.' : 'Chưa đúng.'
+                  }}</strong>
+                  {{ check.explanation }}
+                </p>
+                <button
+                  class="button button--secondary"
+                  type="button"
+                  (click)="retry(questionIndex)"
+                >
+                  Làm lại câu này
+                </button>
+              } @else {
+                <button
+                  class="button"
+                  type="button"
+                  [disabled]="selectedAnswers()[questionIndex] === undefined"
+                  (click)="checkAnswer(questionIndex)"
+                >
+                  Kiểm tra
+                </button>
+              }
+            </fieldset>
+          }
+
+          <div class="grammar-practice surface">
+            <h3>Luyện thêm theo dạng TOEIC</h3>
+            <p>
+              Tiếp tục với bài luyện {{ current.part === 'part-5' ? 'Part 5' : 'Part 6' }}. Bạn có
+              thể đổi Part hoặc số câu trước khi bắt đầu.
+            </p>
+            <a
+              class="button"
+              [routerLink]="['/certificates/toeic/practice']"
+              [queryParams]="{ part: current.part }"
+              >Luyện {{ current.part === 'part-5' ? 'Part 5' : 'Part 6' }}</a
+            >
+          </div>
+        </section>
+
+        <nav class="grammar-neighbors" aria-label="Bài học liền kề">
+          @if (previous(); as previousLesson) {
+            <a [routerLink]="['/certificates/toeic/grammar', previousLesson.slug]"
+              >← {{ previousLesson.title }}</a
+            >
+          } @else {
+            <span></span>
+          }
+          @if (next(); as nextLesson) {
+            <a [routerLink]="['/certificates/toeic/grammar', nextLesson.slug]"
+              >{{ nextLesson.title }} →</a
+            >
+          }
+        </nav>
+      </article>
+      <aside class="grammar-sidebar surface" aria-label="Trong bài này">
+        <strong>Trong bài này</strong>
+        <ol>
+          <li>
+            <a [href]="'/certificates/toeic/grammar/' + current.slug + '#rules-heading'"
+              >Cấu trúc / Quy tắc</a
+            >
+          </li>
+          <li>
+            <a [href]="'/certificates/toeic/grammar/' + current.slug + '#checks-heading'"
+              >Thực hành trắc nghiệm</a
+            >
+          </li>
+        </ol>
+        <a routerLink="/certificates/toeic/grammar">Xem mọi bài học</a>
+      </aside>
+    </div>
+  } @else {
+    <div class="grammar-not-found surface" role="status">
+      <h1>Không tìm thấy bài học</h1>
+      <p>Đường dẫn này chưa có trong thư viện ngữ pháp TOEIC.</p>
+      <a class="button" routerLink="/certificates/toeic/grammar">Xem lộ trình</a>
+    </div>
+  }
+</div>

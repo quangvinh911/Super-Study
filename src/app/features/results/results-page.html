@@ -218,9 +218,11 @@
           @let response = responseFor(currentAttempt, item);
           <details class="review-item">
             <summary>
-              <span class="review-item__number">{{ (index + 1).toString().padStart(2, '0') }}</span>
+              <span class="review-item__number">{{
+                (item.question.order ?? index + 1).toString().padStart(2, '0')
+              }}</span>
               <span class="review-item__summary">
-                <strong>Câu {{ index + 1 }}</strong>
+                <strong>Câu {{ item.question.order ?? index + 1 }}</strong>
                 @if (item.question.sourceEvidence) {
                   <small>
                     Nguồn PDF · Q{{ item.question.provenance.sourceQuestionNumber }} ·
@@ -258,6 +260,21 @@
                       'Bản chụp câu hỏi ' +
                       item.question.provenance.sourceQuestionNumber +
                       ' trong PDF'
+                    "
+                    loading="lazy"
+                  />
+                </details>
+              }
+
+              @if (item.question.sourceQuestionImage; as sourceImage) {
+                <details class="pdf-evidence">
+                  <summary>
+                    Ảnh gốc câu {{ item.question.order }} · trang {{ sourceImage.page }}
+                  </summary>
+                  <img
+                    [src]="sourceImage.src"
+                    [alt]="
+                      'Bản chụp riêng câu ' + item.question.order + ' và bốn lựa chọn trong PDF'
                     "
                     loading="lazy"
                   />

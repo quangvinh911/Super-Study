@@ -31,6 +31,13 @@ export interface CertificateDefinition {
   readonly name: string;
   readonly subtitle: string;
   readonly description: string;
+  readonly catalogGroup: 'language' | 'professional';
+  readonly catalogHighlights: readonly string[];
+  readonly learningResources?: readonly {
+    readonly label: string;
+    readonly path: string;
+    readonly description: string;
+  }[];
   readonly taxonomy: 'syllabus' | 'sections';
   readonly topics?: readonly { readonly id: string; readonly label: string }[];
   readonly banks: readonly {

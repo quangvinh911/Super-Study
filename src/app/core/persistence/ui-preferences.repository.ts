@@ -33,6 +33,8 @@ export class UiPreferencesRepository {
           typeof parsed.reducedMotion === 'boolean'
             ? parsed.reducedMotion
             : DEFAULT_PREFERENCES.reducedMotion,
+        recentCertificateId:
+          typeof parsed.recentCertificateId === 'string' ? parsed.recentCertificateId : undefined,
       };
     } catch {
       return DEFAULT_PREFERENCES;
@@ -40,7 +42,11 @@ export class UiPreferencesRepository {
   }
 
   save(preferences: UiPreferences): void {
-    storage()?.setItem(STORAGE_KEY, JSON.stringify(preferences));
+    try {
+      storage()?.setItem(STORAGE_KEY, JSON.stringify(preferences));
+    } catch {
+      // Remembering a recent certificate is optional when browser storage is unavailable.
+    }
   }
 
   clear(): void {

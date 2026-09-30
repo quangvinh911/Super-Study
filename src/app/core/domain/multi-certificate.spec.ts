@@ -26,6 +26,19 @@ afterEach(async () => {
 });
 
 describe('certificate exam policies', () => {
+  it('exposes Hacker and Jimmy as separate TOEIC banks', () => {
+    expect(toeic.banks).toEqual([
+      expect.objectContaining({
+        id: 'hacker',
+        manifestUrl: '/data/toeic/hacker-manifest.json',
+      }),
+      expect.objectContaining({
+        id: 'jimmy',
+        manifestUrl: '/data/toeic/jimmy-manifest.json',
+      }),
+    ]);
+  });
+
   it('uses one complete form, preserving parts, shared stimuli, options and seed', () => {
     const a = toeicFixture('form-a');
     const b = toeicFixture('form-b');

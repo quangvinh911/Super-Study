@@ -1,0 +1,4 @@
+interface:
+  display_name: "Certificate Quality"
+  short_description: "Test exam integrity, accessibility and offline use"
+  default_prompt: "Use $certificate-quality to verify this change with focused regression tests and report any unverified acceptance criteria."

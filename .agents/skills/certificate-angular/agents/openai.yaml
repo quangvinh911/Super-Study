@@ -1,0 +1,4 @@
+interface:
+  display_name: "Certificate Angular"
+  short_description: "Build shared Angular certificate practice features"
+  default_prompt: "Use $certificate-angular to implement this feature while preserving certificate isolation and existing learner progress."

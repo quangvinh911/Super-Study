@@ -1,0 +1,4 @@
+interface:
+  display_name: "Certificate Content"
+  short_description: "Validate question banks, taxonomy and exam forms"
+  default_prompt: "Use $certificate-content to add and validate these questions with accurate taxonomy, evidence and certificate-specific exam rules."

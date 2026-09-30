@@ -1,0 +1,205 @@
+{
+  "missingGroups": [
+    [4, 191, 195, 113],
+    [8, 196, 200, 231],
+    [9, 176, 180, 252],
+    [10, 163, 164, 276],
+    [10, 191, 195, 287]
+  ],
+  "optionCorrections": {
+    "2-104": { "D": "convincingly" },
+    "2-125": { "D": "will be storing" },
+    "3-104": { "D": "demonstrating" },
+    "5-125": { "D": "during" },
+    "6-104": { "D": "herself" },
+    "6-125": { "D": "which" },
+    "7-120": { "D": "collection" },
+    "8-104": { "D": "whatever" },
+    "9-104": { "D": "himself" },
+    "10-124": { "D": "in front of" }
+  },
+  "stemCorrections": {
+    "2-101": "According to Picton Daily News, only ______ damage to the area occurred during the tropical storm.",
+    "2-102": "The employees at Barneveld Inc. are encouraged to build teamwork by assisting ______ on various projects.",
+    "2-103": "Some marketing team members from Game-Tekno will be traveling to Tokyo ______ the branch opening to finalize preparations.",
+    "2-104": "The seminar speaker offered some ______ arguments in favor of natural medications and remedies.",
+    "2-106": "An old building in the Brickford neighborhood will be demolished and ______ a luxury apartment.",
+    "2-107": "After he was appointed sales manager, Bill Haskell achieved improved ______ between the staff in the sales and marketing departments.",
+    "2-110": "Codex Corporation showed a great deal of ______ about Ms. Khan's recent medical issues and gave her an extended leave.",
+    "2-112": "The Parker Fairground off Taylor Street is the perfect place for families and friends ______ during the summer.",
+    "2-122": "Included in the lease is a strict ______ requiring tenants to pay for any damages caused to the property.",
+    "2-128": "Most participants have found Bucksmith Capital's internship program ______ because it provides them with relevant banking experience.",
+    "3-103": "Ms. Bedford was chosen to represent Centraine because of her considerable ______ in mergers and acquisitions.",
+    "3-105": "Members who renew their newspaper subscription at least one month prior to its ______ will receive a 5 percent discount.",
+    "3-106": "Lorasoft's customer service agents are instructed to handle minor requests ______ before forwarding calls directly to the technical support team.",
+    "3-108": "Scientists employed by Fluent Pharmaceuticals spend most of their time ______ medications to treat diabetes.",
+    "3-111": "Had Mr. Shriver booked his vacation package further in advance, he ______ a much lower price.",
+    "3-112": "Most of the conference participants arrived an hour ago, but the keynote speaker is ______ on his way.",
+    "3-116": "Automat CEO Sergei Rostov's speech on trends in the high-tech industry drew an audience consisting mostly of ______ entrepreneurs.",
+    "3-119": "The cast was interviewed by the press ______ the first performance of the play Father Simon.",
+    "3-130": "Providing senior managers with incentive-based compensation is a ______ solution to their declining productivity.",
+    "4-102": "Mayberry Research Institute offers staff ______ which include dental coverage and a pension plan.",
+    "4-103": "Arranging an appointment to see Dr. Menard one month in advance is ______ due to her busy schedule.",
+    "4-106": "AEG Co. is looking for sales associates who demonstrate excellent communication skills and an ability to work in a ______ manner.",
+    "4-110": "Transport officials are still unsure of ______ caused Train 580 to break down earlier this morning.",
+    "4-118": "The client was never in his office ______ many times Ms. Baxter tried to call him.",
+    "4-119": "LocerTech's primary goal is to be as ______ as possible to customer inquiries.",
+    "4-122": "Under the finance minister's leadership, corporations recovered quickly from last year's losses and then began making substantial ______.",
+    "4-125": "Shoppers looking for high-quality electronics at low prices will find a ______ selection at the new NorvelTech store.",
+    "4-130": "______ to be the best in the city, the Melise Restaurant is booked for the next six months.",
+    "4-175": "At 3:59, what does Ms. Stone mean when she writes, \"I'm on it\"?",
+    "5-103": "Eugene Rivera, who negotiated an agreement between the two firms, reported that the details would be settled ______ the next several days.",
+    "5-113": "Ms. Mitchell is looking for an apartment ______ a train station so that she will not need to commute by car.",
+    "5-114": "Immediately after ordering a new office desk online, Mr. Perez was issued ______ of the transaction.",
+    "5-117": "The candidates for the job opening have ______ experiences and career objectives despite all having worked in the same field.",
+    "5-120": "MediaCore's customers will have digital ______ to dozens of publications by the end of the month.",
+    "5-124": "Wheelpoint's new line of tires performs ______ under the most hazardous road conditions.",
+    "5-157": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"This is because the relocation is expected to create 150 additional jobs for the residents of Haverford.\"",
+    "5-171": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"And for those with dietary restrictions, we offer an array of options.\"",
+    "6-107": "Zoo-Croft Fashion's corporate income and expense documents were delivered to the outside accountant to get an unbiased financial ______.",
+    "6-111": "After three months of intense negotiations, ______ for the construction of new power plants were signed.",
+    "6-112": "Reviews of the Mardison Hotel chain's updated business centers are ______ positive.",
+    "6-114": "Mr. Henry gave his staff additional training on the new office policy, but several of them were still ______.",
+    "6-125": "The sequel to last year's film Galactic Express made $400 million worldwide, ______ is more than the first movie earned.",
+    "6-129": "The machinery in Templex's factory has become so outdated that funds have been ______ to purchase new ones.",
+    "6-130": "The manager did his best to make decisions that took the finance division members' suggestions into ______.",
+    "7-117": "Schilling Investors Group has not ______ found a suitable candidate to replace Mr. Macmillan, who resigned two weeks ago.",
+    "7-124": "Airport officials have announced that more ______ security checks will be adopted to eliminate any potential threats.",
+    "7-126": "Customers who subscribe to Travelog's online magazine will receive discounts ______ their subscriptions are for six months or a year.",
+    "8-102": "Sommerland Shopping Mall is situated ______ ten minutes away from the downtown area.",
+    "8-103": "All airlines are required by law to keep inflatable life jackets located ______ passenger seats in case there is an emergency.",
+    "8-105": "After Benton Enterprises adopted the ______ of allowing its staff to work flexible hours, productivity began to rise.",
+    "8-107": "The display coordinator's role is to ensure that everything sold in the store is arranged ______ to look appealing to customers.",
+    "8-110": "Mary Rose was asked to join the information access team because she ______ to similar projects previously.",
+    "8-121": "Ms. Wilson left behind a career in law to ______ her dream of running a bed-and-breakfast in Tuscany.",
+    "8-122": "The staff in charge of writing press releases should get all facts ______ thoroughly before sending an announcement to the media.",
+    "8-124": "A top competitor withdrew from the international tennis tournament due to a ______ injury.",
+    "9-101": "Food manufacturers are responsible for ______ the safety requirements set by the government.",
+    "9-105": "People who donate more than $50 to the Children's Cancer Group will receive a ______ T-shirt.",
+    "9-107": "The Grenville Heritage Museum ______ visitors from taking any photos or videos of the exhibition pieces.",
+    "9-109": "Reyman Steel is building a new warehouse ______ the street from its main manufacturing plant.",
+    "9-112": "The federal government abandoned a plan to build a pipeline through Alton City due to overwhelming public ______.",
+    "9-121": "Attending the shareholders' meeting takes ______ for the president of Goodman Company despite his hectic work schedule.",
+    "9-126": "All Swift-Dent electronic toothbrushes are ______ warranty for a year from the time they are purchased.",
+    "9-129": "Patrick Jolson will be interviewed ______ three other promising candidates for the position of research and development head.",
+    "10-102": "The reporter forecasted sunny weather ______ the Midwestern region for tomorrow.",
+    "10-106": "Athlete Tim Ferguson has made a ______ recovery from his injuries and will be able to play in his team's next match.",
+    "10-111": "Extra staff were called in from nearby branches to help plant crews ______ production deadlines for an unexpected order.",
+    "10-115": "Torres Architecture, the agency that planned the Steadman Tower, won an award from Building Life Global for its ______ design.",
+    "10-117": "The Cottonwood Gallery guarantees that ______ of the items it sells is an original and comes with an official certificate of authenticity.",
+    "10-118": "If Jennifer hits all of her sales targets for the next quarter, there is a good chance she will ______.",
+    "10-123": "Mr. Conrad posted advertisements on several recruitment sites, including the ______ regarding salaries and benefits.",
+    "10-127": "Sunny River Vacations endeavors to satisfy every customer by personalizing travel details to ensure that each trip is ______.",
+    "10-129": "Ms. Jacobs' managerial style is democratic ______ she includes her staff in the decision-making process."
+  },
+  "items": {
+    "2-175": {
+      "stem": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"If you're uncertain about your layout and design skills, you don't have to do it at all.\"",
+      "options": { "A": "[1]", "B": "[2]", "C": "[3]", "D": "[4]" },
+      "page": 48,
+      "box": [305, 205, 580, 355]
+    },
+    "4-136": {
+      "options": { "A": "explore", "B": "exist", "C": "unveil", "D": "resume" },
+      "page": 93,
+      "box": [75, 555, 300, 665]
+    },
+    "5-143": {
+      "options": { "A": "Beside", "B": "Following", "C": "Among", "D": "About" },
+      "page": 124,
+      "box": [70, 565, 305, 665]
+    },
+    "5-174": {
+      "stem": "What is NOT indicated about Everything Video?",
+      "options": {
+        "A": "It has a Web site where customers can rent games and videos.",
+        "B": "It purchases some items from its customers.",
+        "C": "It is offering a special promotion at its San Diego store.",
+        "D": "It provides store credit for use at various branches."
+      },
+      "page": 135,
+      "box": [320, 100, 590, 260]
+    },
+    "5-175": {
+      "stem": "The word \"shift\" in paragraph 2, line 3, is closest in meaning to",
+      "options": { "A": "period", "B": "relocation", "C": "swipe", "D": "change" },
+      "page": 135,
+      "box": [320, 255, 590, 400]
+    },
+    "6-136": {
+      "options": { "A": "Owing to", "B": "As if", "C": "Whereas", "D": "Because" },
+      "page": 151,
+      "box": [70, 505, 305, 625]
+    },
+    "9-141": {
+      "options": { "A": "design", "B": "location", "C": "merchandise", "D": "dimension" },
+      "page": 239,
+      "box": [315, 425, 570, 510]
+    },
+    "9-142": {
+      "options": { "A": "Meanwhile", "B": "Fortunately", "C": "Therefore", "D": "Regardless" },
+      "page": 239,
+      "box": [315, 505, 570, 590]
+    },
+    "9-143": {
+      "options": { "A": "will vote", "B": "are voting", "C": "have been voting", "D": "voted" },
+      "page": 240,
+      "box": [70, 425, 320, 505]
+    },
+    "9-144": {
+      "options": { "A": "supportive", "B": "support", "C": "supportable", "D": "supports" },
+      "page": 240,
+      "box": [70, 495, 320, 575]
+    },
+    "9-145": {
+      "options": { "A": "looked over", "B": "paid for", "C": "fixed up", "D": "shut down" },
+      "page": 240,
+      "box": [70, 565, 320, 650]
+    },
+    "10-131": {
+      "options": { "A": "buying", "B": "cleaning", "C": "furnishing", "D": "decorating" },
+      "page": 266,
+      "box": [60, 500, 320, 580]
+    },
+    "10-132": {
+      "options": {
+        "A": "You may join the crew by sending in your application.",
+        "B": "We also sell a wide range of cleaning products.",
+        "C": "Wimberley's does all the tiresome jobs that you don't have the time for.",
+        "D": "Our service schedule will be posted online once we resume operations."
+      },
+      "page": 266,
+      "box": [60, 565, 320, 745]
+    },
+    "10-137": {
+      "options": { "A": "enclose", "B": "fill", "C": "obstruct", "D": "secure" },
+      "page": 267,
+      "box": [315, 560, 570, 635]
+    },
+    "10-138": {
+      "options": { "A": "lists", "B": "listing", "C": "listed", "D": "to list" },
+      "page": 267,
+      "box": [315, 630, 570, 710]
+    },
+    "10-139": {
+      "options": { "A": "supposition", "B": "allocation", "C": "competition", "D": "entry" },
+      "page": 268,
+      "box": [60, 500, 320, 580]
+    },
+    "10-140": {
+      "options": { "A": "Likewise", "B": "Nonetheless", "C": "Therefore", "D": "Henceforth" },
+      "page": 268,
+      "box": [60, 565, 320, 650]
+    },
+    "10-145": {
+      "options": { "A": "outline", "B": "drawing", "C": "certificate", "D": "assistant" },
+      "page": 269,
+      "box": [315, 380, 570, 455]
+    },
+    "10-146": {
+      "options": { "A": "Prior to", "B": "During", "C": "Despite", "D": "Up until" },
+      "page": 269,
+      "box": [315, 445, 570, 520]
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Certificate Coding Standards'
+  short_description: 'Keep Angular and TypeScript code simple and readable'
+  default_prompt: 'Use $certificate-coding-standards to implement or review this change with readable code and only the abstractions it needs.'

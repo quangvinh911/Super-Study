@@ -82,6 +82,13 @@ export class PracticeSetupPage implements OnInit {
     this.loading.set(true);
     this.error.set('');
     const requestedHistory = this.route.snapshot.queryParamMap.get('history');
+    const requestedPart = this.route.snapshot.queryParamMap.get('part');
+    if (
+      this.certificate.id === 'toeic' &&
+      (requestedPart === 'part-5' || requestedPart === 'part-6')
+    ) {
+      this.section = requestedPart;
+    }
     if (
       this.route.snapshot.queryParamMap.get('source') === 'pdf' &&
       this.certificate.definition.banks.some((bank) => bank.id === 'pdf')
@@ -103,6 +110,9 @@ export class PracticeSetupPage implements OnInit {
         ),
       );
       this.banks.set(Object.fromEntries(entries));
+      if (this.history !== 'all') {
+        await this.start();
+      }
     } catch {
       this.error.set('Không thể tải ngân hàng câu hỏi. Hãy thử tải lại trang.');
     } finally {
@@ -168,7 +178,7 @@ export class PracticeSetupPage implements OnInit {
       const message = cause instanceof Error ? cause.message : '';
       this.error.set(
         message.includes('match the practice filters')
-          ? 'Không có đủ câu hỏi phù hợp với bộ lọc này. Hãy nới bộ lọc và thử lại.'
+          ? 'Không có câu hỏi phù hợp với bộ lọc này. Hãy đổi bộ lọc và thử lại.'
           : 'Không thể bắt đầu phiên luyện tập. Hãy thử lại.',
       );
     } finally {
