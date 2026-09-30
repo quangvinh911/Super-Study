@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankVersion": "toeic-jimmy-reading-1.0.0",
+  "certificateId": "toeic",
+  "publishedAt": "2026-09-29",
+  "syllabusVersion": "TOEIC Listening & Reading",
+  "language": "en",
+  "questionCount": 977,
+  "solutionCount": 977,
+  "blueprint": [],
+  "files": {
+    "questions": "jimmy-questions.json",
+    "solutions": "jimmy-solutions.json"
+  }
+}

@@ -1,0 +1,314 @@
+.certificate-overview {
+  padding-block: 1.5rem 2.5rem;
+}
+
+.overview-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 1.75rem;
+}
+
+.overview-kicker {
+  margin: 0 0 0.3rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.overview-heading h1 {
+  font-size: clamp(2rem, 3vw, 2.7rem);
+}
+
+.overview-subtitle {
+  margin: 0.45rem 0 0;
+  color: var(--color-text-muted);
+}
+
+.overview-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0;
+  font-size: var(--text-sm);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.study-focus {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10rem;
+  gap: 2rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  color: #f7faf6;
+  background: #164f4b;
+  border: 1px solid #164f4b;
+  border-radius: 1.2rem;
+  box-shadow: 0 12px 28px rgb(22 79 75 / 12%);
+}
+
+.study-focus__content {
+  min-width: 0;
+}
+
+.study-focus__label {
+  margin: 0 0 0.65rem;
+  color: #c2e3d8;
+  font-size: var(--text-sm);
+  font-weight: 750;
+}
+
+.study-focus h2 {
+  max-width: 20ch;
+  color: inherit;
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  line-height: 1.25;
+}
+
+.study-focus__content > p:not(.study-focus__label) {
+  max-width: 46ch;
+  margin: 0.9rem 0 1.4rem;
+  color: #d3e7e0;
+  line-height: 1.65;
+}
+
+.study-focus .study-focus__button {
+  gap: 1.1rem;
+  color: #163b37;
+  background: #f5edda;
+  border-color: #f5edda;
+  box-shadow: none;
+}
+
+.study-focus .study-focus__button:hover {
+  background: #fffdf7;
+  border-color: #fffdf7;
+}
+
+.study-focus__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-inline-start: 1.5rem;
+  border-inline-start: 1px solid rgb(255 255 255 / 18%);
+  text-align: center;
+  color: #d3e7e0;
+  font-size: var(--text-sm);
+}
+
+.study-focus__symbol {
+  color: #c2e3d8;
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-block-end: 0.7rem;
+}
+
+.study-focus__aside strong {
+  color: #fffdf7;
+  font-size: 2rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.study-focus__aside p {
+  margin: 0;
+}
+
+.overview-error {
+  margin-block: 1rem;
+}
+
+.study-options,
+.review-section {
+  margin-block-start: 2rem;
+}
+
+.overview-section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 0.9rem;
+}
+
+.overview-section-heading h2 {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.overview-section-heading > span {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.study-options__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.study-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.35rem;
+  background: var(--color-paper-strong);
+  border: 1px solid var(--color-border);
+  border-radius: 0.9rem;
+}
+
+.study-card__icon {
+  flex: 0 0 2.5rem;
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  color: var(--color-coral-dark);
+  background: var(--color-coral-wash);
+  border-radius: 0.7rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.study-card--exam .study-card__icon {
+  color: var(--color-teal-dark);
+  background: var(--color-teal-wash);
+  font-size: 1.45rem;
+}
+
+.study-card__copy {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.study-card h3 {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.study-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+}
+
+.study-card a {
+  width: fit-content;
+  padding-block: 0.2rem;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+
+.study-card__status {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.review-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.review-shortcuts a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 0;
+  color: var(--color-ink);
+  border-block: 1px solid var(--color-border);
+  text-decoration: none;
+}
+
+.review-shortcuts a:hover {
+  color: var(--color-teal-dark);
+  background: var(--color-teal-wash);
+}
+
+.review-shortcuts strong,
+.review-shortcuts small {
+  display: block;
+}
+
+.review-shortcuts strong {
+  font-size: var(--text-sm);
+}
+
+.review-shortcuts small {
+  margin-block-start: 0.2rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.review-shortcuts__icon {
+  flex: 0 0 1.5rem;
+  font-size: 1.5rem;
+  color: var(--color-teal);
+}
+
+.review-shortcuts__arrow {
+  margin-inline-start: auto;
+  padding-inline-end: 0.5rem;
+}
+
+.overview-footnote {
+  margin-block-start: 1.75rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.overview-footnote p {
+  margin-block-end: 0.35rem;
+}
+
+@media (max-width: 680px) {
+  .study-focus {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .study-focus__aside {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    padding: 1rem 0 0;
+    border-inline-start: 0;
+    border-block-start: 1px solid rgb(255 255 255 / 18%);
+    text-align: start;
+  }
+
+  .study-focus__symbol {
+    display: none;
+  }
+
+  .study-focus__aside strong {
+    font-size: 1rem;
+  }
+
+  .overview-heading {
+    align-items: flex-start;
+  }
+
+  .overview-progress {
+    max-width: 6rem;
+  }
+
+  .review-shortcuts {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .review-shortcuts a + a {
+    border-block-start: 0;
+  }
+
+  .overview-section-heading > span {
+    display: none;
+  }
+}

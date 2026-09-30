@@ -1,27 +1,7 @@
 <a class="skip-link" href="#main-content">Chuyển đến nội dung chính</a>
 
-<div class="site-shell" lang="vi">
+<div class="site-shell" [class.site-shell--focus]="isFocusLayout()" lang="vi">
   <header class="site-header">
-    <div class="utility-bar">
-      <div class="shell-container utility-bar__inner">
-        <p class="utility-bar__context">
-          <span class="utility-bar__edition">{{ activeCertificate()?.name ?? 'Chứng chỉ' }}</span>
-          <span aria-hidden="true">·</span>
-          <span>Học theo nhịp của bạn</span>
-        </p>
-
-        <p
-          class="connection-status"
-          [class.connection-status--offline]="!isOnline()"
-          role="status"
-          aria-live="polite"
-        >
-          <span class="connection-status__dot" aria-hidden="true"></span>
-          {{ isOnline() ? 'Đang trực tuyến' : 'Đang ngoại tuyến' }}
-        </p>
-      </div>
-    </div>
-
     <div class="shell-container header-row">
       <a
         class="brand"
@@ -36,118 +16,184 @@
         </span>
       </a>
 
-      <button
-        class="menu-toggle"
-        type="button"
-        [attr.aria-expanded]="isMenuOpen()"
-        aria-controls="primary-navigation"
-        (click)="toggleMenu()"
-      >
-        <span class="menu-toggle__icon" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
+      @if (activeCertificate(); as certificate) {
+        <span class="header-context">{{ certificate.name }}</span>
+      }
+
+      <div class="header-actions">
+        <span
+          class="connection-status"
+          [class.connection-status--offline]="!isOnline()"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="connection-status__dot" aria-hidden="true"></span>
+          <span class="connection-status__label">{{
+            isOnline() ? 'Trực tuyến' : 'Ngoại tuyến'
+          }}</span>
         </span>
-        <span>Menu</span>
-      </button>
-
-      <nav
-        id="primary-navigation"
-        class="primary-navigation"
-        [class.primary-navigation--open]="isMenuOpen()"
-        aria-label="Điều hướng chính"
-      >
-        <a
-          routerLink="/"
-          routerLinkActive="primary-navigation__link--active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          ariaCurrentWhenActive="page"
-          (click)="closeMenu()"
-        >
-          Chứng chỉ
-        </a>
-        <a
-          [routerLink]="link('practice')"
-          routerLinkActive="primary-navigation__link--active"
-          ariaCurrentWhenActive="page"
-          (click)="closeMenu()"
-        >
-          Luyện tập
-        </a>
-        <a
-          [routerLink]="link('mock-exam')"
-          routerLinkActive="primary-navigation__link--active"
-          ariaCurrentWhenActive="page"
-          (click)="closeMenu()"
-        >
-          Thi thử
-        </a>
-        <a
-          [routerLink]="link('progress')"
-          routerLinkActive="primary-navigation__link--active"
-          ariaCurrentWhenActive="page"
-          (click)="closeMenu()"
-        >
-          Tiến độ
-        </a>
-        <a
-          [routerLink]="link('methodology')"
-          routerLinkActive="primary-navigation__link--active"
-          ariaCurrentWhenActive="page"
-          (click)="closeMenu()"
-        >
-          Phương pháp
-        </a>
-      </nav>
-
-      <label class="certificate-switcher">
-        <span>Chứng chỉ</span>
-        <select
-          aria-label="Chọn chứng chỉ"
-          [value]="activeCertificate()?.id ?? ''"
-          (change)="switchCertificate($any($event.target).value)"
-        >
-          <option value="" disabled>Chọn chứng chỉ</option>
-          @for (certificate of certificates; track certificate.id) {
-            <option [value]="certificate.id">{{ certificate.name }}</option>
-          }
-        </select>
-      </label>
-      <div class="local-save-note" title="Tiến độ được lưu cục bộ trên trình duyệt này">
-        <span class="local-save-note__icon" aria-hidden="true">✓</span>
-        <span>Lưu trên thiết bị</span>
+        @if (isFocusLayout()) {
+          <a class="focus-exit" [routerLink]="link()">← Tổng quan</a>
+        } @else if (activeCertificate()) {
+          <button
+            #menuButton
+            class="menu-toggle"
+            type="button"
+            [attr.aria-expanded]="isMenuOpen()"
+            aria-controls="certificate-navigation"
+            (click)="toggleMenu()"
+          >
+            <span class="menu-toggle__icon" aria-hidden="true"
+              ><span></span><span></span><span></span
+            ></span>
+            <span>Menu</span>
+          </button>
+        }
       </div>
     </div>
   </header>
 
-  <main id="main-content" class="site-main" tabindex="-1">
-    <router-outlet />
-  </main>
+  <div
+    class="content-layout shell-container"
+    [class.content-layout--workspace]="activeCertificate() && !isFocusLayout()"
+  >
+    @if (activeCertificate(); as certificate) {
+      @if (!isFocusLayout()) {
+        @if (isMenuOpen()) {
+          <button
+            class="sidebar-scrim"
+            type="button"
+            aria-label="Đóng menu"
+            (click)="closeMenu(true)"
+          ></button>
+        }
+        <aside
+          id="certificate-navigation"
+          class="workspace-sidebar"
+          [class.workspace-sidebar--open]="isMenuOpen()"
+          aria-label="Không gian học"
+        >
+          <div class="workspace-sidebar__heading">
+            <p class="eyebrow">Không gian học</p>
+            <label for="certificate-switcher">Chứng chỉ</label>
+            <select
+              #certificateSelect
+              id="certificate-switcher"
+              (change)="switchCertificate(certificateSelect.value)"
+            >
+              @for (item of certificates; track item.id) {
+                <option [value]="item.id" [selected]="item.id === certificate.id">
+                  {{ item.name }}
+                </option>
+              }
+            </select>
+            <a class="all-certificates-link" routerLink="/" (click)="closeMenu()"
+              >← Tất cả chứng chỉ</a
+            >
+          </div>
 
-  <footer class="site-footer">
-    <div class="shell-container footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand__title">
-          <span class="brand__mark brand__mark--small" aria-hidden="true">CP</span>
-          <strong>Certificate Practice</strong>
-        </div>
-        <p>Một công cụ ôn tập phi thương mại, ưu tiên học chủ động và quyền riêng tư.</p>
-      </div>
+          <nav class="workspace-nav" aria-label="Trong chứng chỉ">
+            <a
+              [routerLink]="link()"
+              routerLinkActive="workspace-nav__link--active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >Tổng quan</a
+            >
 
-      <nav class="footer-navigation" aria-label="Điều hướng cuối trang">
-        <a [routerLink]="link('practice')">Luyện tập</a>
-        <a [routerLink]="link('mock-exam')">Thi thử</a>
-        <a [routerLink]="link('progress')">Dữ liệu học tập</a>
-        <a [routerLink]="link('methodology')">Nguồn &amp; phương pháp</a>
-      </nav>
+            @if (certificate.learningResources?.length) {
+              <details class="workspace-nav__knowledge" [open]="isKnowledgeRoute()">
+                <summary>Kiến thức</summary>
+                <div class="workspace-nav__subitems">
+                  @for (resource of certificate.learningResources; track resource.path) {
+                    <a
+                      [routerLink]="link(resource.path)"
+                      routerLinkActive="workspace-nav__link--active"
+                      ariaCurrentWhenActive="page"
+                      (click)="closeMenu()"
+                      >{{ resource.label }}</a
+                    >
+                  }
+                </div>
+              </details>
+            }
 
-      <div class="footer-disclaimer">
+            <a
+              [routerLink]="link('practice')"
+              routerLinkActive="workspace-nav__link--active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >Luyện tập</a
+            >
+            <a
+              [routerLink]="link('mock-exam')"
+              routerLinkActive="workspace-nav__link--active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >Thi thử</a
+            >
+            <a
+              [routerLink]="link('progress')"
+              routerLinkActive="workspace-nav__link--active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >Tiến độ</a
+            >
+            <div class="workspace-nav__secondary">
+              <a
+                [routerLink]="link('methodology')"
+                routerLinkActive="workspace-nav__link--active"
+                ariaCurrentWhenActive="page"
+                (click)="closeMenu()"
+                >Hướng dẫn &amp; nguồn</a
+              >
+            </div>
+          </nav>
+          <p class="workspace-sidebar__note">Tiến độ được lưu trên thiết bị này.</p>
+        </aside>
+      }
+    }
+
+    <main id="main-content" class="site-main" tabindex="-1">
+      @if (activeCertificate(); as certificate) {
+        @if (!isFocusLayout()) {
+          <nav class="breadcrumbs" aria-label="Đường dẫn trang">
+            <a routerLink="/">Chứng chỉ</a>
+            <span aria-hidden="true">/</span>
+            @if (section()) {
+              <a [routerLink]="link()">{{ certificate.name }}</a>
+              <span aria-hidden="true">/</span>
+              @if (isKnowledgeRoute()) {
+                <span>Kiến thức</span>
+                <span aria-hidden="true">/</span>
+              }
+              @if (lessonBreadcrumb(); as lesson) {
+                <a [routerLink]="link(section())">{{ sectionLabel() }}</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">{{ lesson }}</span>
+              } @else {
+                <span aria-current="page">{{ sectionLabel() }}</span>
+              }
+            } @else {
+              <span aria-current="page">{{ certificate.name }}</span>
+            }
+          </nav>
+        }
+      }
+      <router-outlet />
+    </main>
+  </div>
+
+  @if (!isFocusLayout()) {
+    <footer class="site-footer">
+      <div class="shell-container footer-row">
         <p>
-          Không liên kết hoặc được chứng thực bởi các tổ chức cấp chứng chỉ. Đây là công cụ luyện
-          tập độc lập.
+          © {{ currentYear }} Certificate Practice · Công cụ luyện tập độc lập, không liên kết với
+          tổ chức cấp chứng chỉ.
         </p>
-        <p>© {{ currentYear }} Certificate Practice</p>
+        <a routerLink="/">Tất cả chứng chỉ</a>
       </div>
-    </div>
-  </footer>
+    </footer>
+  }
 </div>

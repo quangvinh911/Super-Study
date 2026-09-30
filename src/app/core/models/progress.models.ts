@@ -56,6 +56,7 @@ export interface LearningSettings {
 export interface UiPreferences {
   readonly theme: 'light' | 'dark' | 'system';
   readonly reducedMotion: boolean;
+  readonly recentCertificateId?: string;
 }
 
 export interface ProgressExport {

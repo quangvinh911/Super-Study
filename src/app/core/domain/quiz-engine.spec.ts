@@ -175,4 +175,28 @@ describe('practice filtering', () => {
     );
     expect(filtered.map((question) => question.id)).toEqual([wrong.id, bookmarked.id]);
   });
+
+  it('includes questions answered incorrectly before a later correct answer', () => {
+    const bank = fullBank();
+    const previouslyIncorrect = bank.questions[0]!;
+    const recoveredStat: QuestionStat = {
+      questionId: previouslyIncorrect.id,
+      revision: 1,
+      seenCount: 2,
+      correctCount: 1,
+      incorrectCount: 1,
+      currentCorrectStreak: 1,
+      lastCorrect: true,
+      lastAnsweredAt: '2026-08-30T00:00:00.000Z',
+      updatedAt: '2026-08-30T00:00:00.000Z',
+    };
+
+    const filtered = filterPracticeQuestions(
+      bank.questions,
+      { history: ['incorrect'] },
+      { stats: new Map([[previouslyIncorrect.id, recoveredStat]]) },
+    );
+
+    expect(filtered.map((question) => question.id)).toEqual([previouslyIncorrect.id]);
+  });
 });

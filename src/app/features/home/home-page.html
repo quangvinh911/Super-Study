@@ -1,30 +1,68 @@
 <div class="page certificate-catalog">
   <header class="page-header">
     <p class="eyebrow">Không gian luyện thi</p>
-    <h1>Bạn muốn luyện chứng chỉ nào?</h1>
+    <h1>Chọn mục tiêu học của bạn</h1>
     <p>
-      Luyện theo chủ đề, làm đề thi thử và xem lại câu sai. Tiến độ được lưu riêng cho từng chứng
-      chỉ trên thiết bị này.
+      Học kiến thức, luyện câu hỏi và theo dõi tiến độ trong từng chứng chỉ. Dữ liệu được lưu riêng
+      trên thiết bị này.
     </p>
   </header>
-  <section class="certificate-grid" aria-label="Chứng chỉ">
-    @for (certificate of certificates; track certificate.id) {
-      <article
-        class="surface certificate-card"
-        [class.certificate-card--toeic]="certificate.id === 'toeic'"
-      >
-        <p class="eyebrow">{{ certificate.subtitle }}</p>
-        <h2>{{ certificate.name }}</h2>
-        <p>{{ certificate.description }}</p>
-        <div class="certificate-facts">
-          <span>{{ certificate.exam.questionCount }} câu / đề</span
-          ><span>{{ certificate.exam.durations[0] }} phút</span>
-        </div>
-        <a class="button" [routerLink]="['/certificates', certificate.id]"
-          >Mở {{ certificate.name }}</a
-        >
-      </article>
-    }
+
+  @if (recentCertificate; as recent) {
+    <section class="recent-certificate surface" aria-labelledby="recent-title">
+      <div>
+        <p class="eyebrow">Học tiếp</p>
+        <h2 id="recent-title">Quay lại {{ recent.name }}</h2>
+        <p>{{ recent.description }}</p>
+      </div>
+      <a class="button" [routerLink]="['/certificates', recent.id]">Mở {{ recent.name }}</a>
+    </section>
+  }
+
+  <section class="catalog-group" aria-labelledby="language-title">
+    <div class="catalog-group__heading">
+      <p class="eyebrow">Khám phá</p>
+      <h2 id="language-title">Ngoại ngữ</h2>
+    </div>
+    <div class="certificate-grid">
+      @for (certificate of languageCertificates; track certificate.id) {
+        <article class="surface certificate-card certificate-card--toeic">
+          <p class="eyebrow">{{ certificate.subtitle }}</p>
+          <h3>{{ certificate.name }}</h3>
+          <p>{{ certificate.description }}</p>
+          <ul class="certificate-highlights">
+            @for (highlight of certificate.catalogHighlights; track highlight) {
+              <li>{{ highlight }}</li>
+            }
+          </ul>
+          <a class="button" [routerLink]="['/certificates', certificate.id]"
+            >Mở {{ certificate.name }}</a
+          >
+        </article>
+      }
+    </div>
   </section>
-  <p class="catalog-note">IELTS và AWS sẽ được bổ sung sau.</p>
+
+  <section class="catalog-group" aria-labelledby="professional-title">
+    <div class="catalog-group__heading">
+      <h2 id="professional-title">Công nghệ &amp; nghề nghiệp</h2>
+    </div>
+    <div class="certificate-grid">
+      @for (certificate of professionalCertificates; track certificate.id) {
+        <article class="surface certificate-card">
+          <p class="eyebrow">{{ certificate.subtitle }}</p>
+          <h3>{{ certificate.name }}</h3>
+          <p>{{ certificate.description }}</p>
+          <ul class="certificate-highlights">
+            @for (highlight of certificate.catalogHighlights; track highlight) {
+              <li>{{ highlight }}</li>
+            }
+          </ul>
+          <a class="button" [routerLink]="['/certificates', certificate.id]"
+            >Mở {{ certificate.name }}</a
+          >
+        </article>
+      }
+    </div>
+  </section>
 </div>

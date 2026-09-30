@@ -20,6 +20,7 @@ export interface GrammarLesson {
     readonly use: string;
   }[];
   readonly examples: readonly {
+    readonly ruleLabel: string;
     readonly english: string;
     readonly vietnamese: string;
     readonly clue: string;
@@ -62,11 +63,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Bổ nghĩa danh từ',
         english: 'The team submitted a detailed proposal.',
         vietnamese: 'Nhóm đã nộp một đề xuất chi tiết.',
         clue: 'detailed đứng trước proposal nên là tính từ.',
       },
       {
+        ruleLabel: 'Bổ nghĩa động từ',
         english: 'The system updates automatically.',
         vietnamese: 'Hệ thống tự động cập nhật.',
         clue: 'automatically bổ nghĩa cho updates nên là trạng từ.',
@@ -123,11 +126,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Số lượng',
         english: 'We received several invoices this morning.',
         vietnamese: 'Chúng tôi nhận được vài hóa đơn sáng nay.',
         clue: 'several đi với invoices số nhiều.',
       },
       {
+        ruleLabel: 'Sở hữu',
         english: 'Our proposal is ready; theirs is still under review.',
         vietnamese: 'Đề xuất của chúng tôi đã sẵn sàng; của họ vẫn đang được xem xét.',
         clue: 'Our cần proposal, còn theirs thay cho their proposal.',
@@ -189,11 +194,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Hiện tại',
         english: 'The supplier has delivered the materials.',
         vietnamese: 'Nhà cung cấp đã giao vật liệu.',
         clue: 'Hiện tại hoàn thành nhấn vào kết quả hiện có.',
       },
       {
+        ruleLabel: 'Tương lai',
         english: 'By Friday, we will have completed the audit.',
         vietnamese: 'Đến thứ Sáu, chúng tôi sẽ hoàn thành cuộc kiểm toán.',
         clue: 'by Friday là hạn trước đó hành động hoàn tất.',
@@ -250,11 +257,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Chủ ngữ chính',
         english: 'The list of approved vendors is available online.',
         vietnamese: 'Danh sách nhà cung cấp được duyệt có trên mạng.',
         clue: 'Chủ ngữ là list, không phải vendors.',
       },
       {
+        ruleLabel: 'Each/every',
         english: 'Each department has a separate budget.',
         vietnamese: 'Mỗi phòng ban có ngân sách riêng.',
         clue: 'Each department là số ít.',
@@ -312,11 +321,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Quá khứ',
         english: 'The invoices were sent yesterday.',
         vietnamese: 'Các hóa đơn đã được gửi hôm qua.',
         clue: 'Invoices nhận hành động gửi; yesterday gọi quá khứ.',
       },
       {
+        ruleLabel: 'Sau modal',
         english: 'The form must be signed before noon.',
         vietnamese: 'Biểu mẫu phải được ký trước trưa.',
         clue: 'must + be + signed.',
@@ -378,11 +389,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Nghĩa vụ',
         english: 'Employees must wear their badges in the building.',
         vietnamese: 'Nhân viên phải đeo thẻ trong tòa nhà.',
         clue: 'must diễn tả yêu cầu bắt buộc.',
       },
       {
+        ruleLabel: 'Khả năng',
         english: 'The shipment may arrive early.',
         vietnamese: 'Lô hàng có thể đến sớm.',
         clue: 'may + arrive nguyên thể.',
@@ -435,11 +448,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Động từ + to V',
         english: 'The team decided to postpone the launch.',
         vietnamese: 'Nhóm quyết định hoãn buổi ra mắt.',
         clue: 'decide + to V.',
       },
       {
+        ruleLabel: 'Sau giới từ',
         english: 'We look forward to meeting the new director.',
         vietnamese: 'Chúng tôi mong được gặp giám đốc mới.',
         clue: 'to trong look forward to là giới từ, nên theo sau là V-ing.',
@@ -496,11 +511,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Hiện tại phân từ',
         english: 'The employees attending the seminar received certificates.',
         vietnamese: 'Nhân viên tham dự hội thảo đã nhận chứng nhận.',
         clue: 'Employees tự thực hiện attend.',
       },
       {
+        ruleLabel: 'Quá khứ phân từ',
         english: 'The documents attached to the email are confidential.',
         vietnamese: 'Tài liệu đính kèm email là bảo mật.',
         clue: 'Documents được attach.',
@@ -557,11 +574,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Hạn và khoảng',
         english: 'Please submit the form by Thursday.',
         vietnamese: 'Vui lòng nộp biểu mẫu chậm nhất thứ Năm.',
         clue: 'by nêu hạn cuối.',
       },
       {
+        ruleLabel: 'Hạn và khoảng',
         english: 'The office will remain closed until Monday.',
         vietnamese: 'Văn phòng sẽ tiếp tục đóng cửa đến thứ Hai.',
         clue: 'until nói trạng thái kéo dài đến mốc.',
@@ -618,11 +637,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Đối lập',
         english: 'Although the order was delayed, the client remained patient.',
         vietnamese: 'Dù đơn hàng bị chậm, khách hàng vẫn kiên nhẫn.',
         clue: 'Sau although là một mệnh đề đầy đủ.',
       },
       {
+        ruleLabel: 'Chuyển ý',
         english: 'The order was delayed; therefore, we notified the client.',
         vietnamese: 'Đơn hàng bị chậm; vì vậy chúng tôi đã báo khách hàng.',
         clue: 'therefore chỉ kết quả và đứng sau dấu chấm phẩy.',
@@ -684,11 +705,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Quan hệ',
         english: 'The engineer who inspected the site sent a report.',
         vietnamese: 'Kỹ sư đã kiểm tra địa điểm gửi báo cáo.',
         clue: 'who bổ nghĩa engineer và là chủ ngữ của inspected.',
       },
       {
+        ruleLabel: 'Mệnh đề danh từ',
         english: 'We confirmed that the delivery had arrived.',
         vietnamese: 'Chúng tôi xác nhận rằng hàng đã đến.',
         clue: 'that the delivery had arrived là tân ngữ của confirmed.',
@@ -745,11 +768,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Hơn',
         english: 'This route is faster than the old one.',
         vietnamese: 'Tuyến này nhanh hơn tuyến cũ.',
         clue: 'faster + than.',
       },
       {
+        ruleLabel: 'Tăng cùng nhau',
         english: 'The earlier we book, the lower the fare will be.',
         vietnamese: 'Đặt càng sớm, giá vé sẽ càng thấp.',
         clue: 'The + so sánh hơn ở cả hai vế.',
@@ -816,11 +841,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Loại 1',
         english: 'If the supplier confirms today, we will ship tomorrow.',
         vietnamese: 'Nếu nhà cung cấp xác nhận hôm nay, mai chúng tôi sẽ gửi hàng.',
         clue: 'Điều kiện tương lai có thể xảy ra: hiện tại + will.',
       },
       {
+        ruleLabel: 'Loại 3',
         english: 'If we had ordered earlier, the parts would have arrived on time.',
         vietnamese: 'Nếu đặt sớm hơn, linh kiện đã đến đúng giờ.',
         clue: 'Giả định trái với quá khứ: had ordered + would have arrived.',
@@ -878,11 +905,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Đề nghị',
         english: 'The director requested that the report be revised.',
         vietnamese: 'Giám đốc yêu cầu báo cáo được chỉnh sửa.',
         clue: 'Sau requested that dùng be, không dùng is.',
       },
       {
+        ruleLabel: 'Wish hiện tại',
         english: 'I wish the meeting started later.',
         vietnamese: 'Ước gì cuộc họp bắt đầu muộn hơn.',
         clue: 'started là dạng lùi thì cho mong muốn hiện tại.',
@@ -943,11 +972,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Câu hỏi gián tiếp',
         english: 'Please tell me when the interview begins.',
         vietnamese: 'Vui lòng cho tôi biết buổi phỏng vấn bắt đầu khi nào.',
         clue: 'when the interview begins có trật tự mệnh đề trần thuật.',
       },
       {
+        ruleLabel: 'Yes/no gián tiếp',
         english: 'She asked whether the invoice had been paid.',
         vietnamese: 'Cô ấy hỏi liệu hóa đơn đã được thanh toán chưa.',
         clue: 'whether mở câu hỏi yes/no gián tiếp.',
@@ -1009,11 +1040,13 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
     ],
     examples: [
       {
+        ruleLabel: 'Nhờ làm dịch vụ',
         english: 'We had the printer repaired yesterday.',
         vietnamese: 'Hôm qua chúng tôi đã cho sửa máy in.',
         clue: 'printer nhận hành động sửa: have + object + V3.',
       },
       {
+        ruleLabel: 'Đủ/quá',
         english: 'The room is large enough to hold the conference.',
         vietnamese: 'Phòng đủ rộng để tổ chức hội nghị.',
         clue: 'large + enough + to hold.',

@@ -20,6 +20,7 @@ export class GrammarLessonPage {
   });
   protected readonly previous = computed(() => GRAMMAR_LESSONS[this.index() - 1]);
   protected readonly next = computed(() => GRAMMAR_LESSONS[this.index() + 1]);
+  protected readonly difficultyLabels = ['Dễ', 'Khó'] as const;
   protected readonly selectedAnswers = signal<Readonly<Record<number, number>>>({});
   protected readonly checkedAnswers = signal<Readonly<Record<number, boolean>>>({});
 
@@ -52,5 +53,17 @@ export class GrammarLessonPage {
       delete remaining[questionIndex];
       return remaining;
     });
+  }
+
+  protected examplesForRule(lesson: GrammarLesson, ruleLabel: string): GrammarLesson['examples'] {
+    return lesson.examples.filter((example) => example.ruleLabel === ruleLabel);
+  }
+
+  protected ruleUseLines(use: string): readonly string[] {
+    return use
+      .split(';')
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0)
+      .map((line) => (/[.!?]$/u.test(line) ? line : `${line}.`));
   }
 }

@@ -22,7 +22,7 @@
               414.2
             ]
           ],
-          "passageText": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) _______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ________ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
+          "passageText": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) ______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ______ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
         },
         {
           "id": "hacker-3-test-01-135-138",
@@ -42,7 +42,7 @@
               264.4
             ]
           ],
-          "passageText": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) _____ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) _____ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) _____ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. _______ ."
+          "passageText": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) ______ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) ______ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) ______ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. ______ ."
         },
         {
           "id": "hacker-3-test-01-139-142",
@@ -62,7 +62,7 @@
               264.4
             ]
           ],
-          "passageText": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)_______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) _____ the exit. Please note that the tickets will be valid for a limited time. (141)________. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) _______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
+          "passageText": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) ______ the exit. Please note that the tickets will be valid for a limited time. (141)______. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) ______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
         },
         {
           "id": "hacker-3-test-01-143-146",
@@ -82,7 +82,7 @@
               264.4
             ]
           ],
-          "passageText": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) _____ local roads instead. Most residents, however, believe the center is a (145)_______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
+          "passageText": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) ______ local roads instead. Most residents, however, believe the center is a (145)______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
         },
         {
           "id": "hacker-3-test-01-147-148",
@@ -444,7 +444,7 @@
           "needsImage": false
         },
         "103": {
-          "stem": "Beginning next week, Zumwalt, Inc.'s new smartphone will be available for purchase at ____ retailers across Korea and Japan.",
+          "stem": "Beginning next week, Zumwalt, Inc.'s new smartphone will be available for purchase at ______ retailers across Korea and Japan.",
           "options": {
             "A": "authorizing",
             "B": "authority",
@@ -462,7 +462,7 @@
           "needsImage": false
         },
         "104": {
-          "stem": "Highway construction has been postponed indefinitely as Hampshire County residents have ____ to the plan.",
+          "stem": "Highway construction has been postponed indefinitely as Hampshire County residents have ______ to the plan.",
           "options": {
             "A": "preferences",
             "B": "arrangements",
@@ -480,7 +480,7 @@
           "needsImage": false
         },
         "105": {
-          "stem": "The Trescott Chamber of Commerce _____ local businessman Brian Larue at a ceremony next week.",
+          "stem": "The Trescott Chamber of Commerce ______ local businessman Brian Larue at a ceremony next week.",
           "options": {
             "A": "was honoring",
             "B": "to honor",
@@ -498,7 +498,7 @@
           "needsImage": false
         },
         "106": {
-          "stem": "Please review your contract, and feel free to ask _____ questions you might have,",
+          "stem": "Please review your contract, and feel free to ask ______ questions you might have,",
           "options": {
             "A": "few",
             "B": "either",
@@ -516,7 +516,7 @@
           "needsImage": false
         },
         "107": {
-          "stem": "The manager announced that a few office supply _______ would be delayed because of weather conditions.",
+          "stem": "The manager announced that a few office supply ______ would be delayed because of weather conditions.",
           "options": {
             "A": "shipment",
             "B": "shipments",
@@ -534,7 +534,7 @@
           "needsImage": false
         },
         "108": {
-          "stem": "By adding extra flights between Dubai and Istanbul, Euroblue Airlines will increase its ____ for route by more than 50 percent.",
+          "stem": "By adding extra flights between Dubai and Istanbul, Euroblue Airlines will increase its ______ for route by more than 50 percent.",
           "options": {
             "A": "endurance",
             "B": "motivation",
@@ -552,7 +552,7 @@
           "needsImage": false
         },
         "109": {
-          "stem": "Halmilton Hospital’s purchase of a medical scanning device will permit doctors to diagnose patients more ____ than ever before.",
+          "stem": "Halmilton Hospital’s purchase of a medical scanning device will permit doctors to diagnose patients more ______ than ever before.",
           "options": {
             "A": "precise",
             "B": "precisely",
@@ -570,7 +570,7 @@
           "needsImage": false
         },
         "110": {
-          "stem": "____ a bank has approved Flynn Co.'s business loan, the company can begin its planned expansion.",
+          "stem": "______ a bank has approved Flynn Co.'s business loan, the company can begin its planned expansion.",
           "options": {
             "A": "Even if",
             "B": "As though",
@@ -606,7 +606,7 @@
           "needsImage": false
         },
         "112": {
-          "stem": "Though Bruce Guthrie's concert is planned _______ August 1, the organizers have said that this is subject to change.",
+          "stem": "Though Bruce Guthrie's concert is planned ______ August 1, the organizers have said that this is subject to change.",
           "options": {
             "A": "at",
             "B": "for",
@@ -624,7 +624,7 @@
           "needsImage": false
         },
         "113": {
-          "stem": "The public speaking course presents trainees with opportunities _____ themselves in front of a group.",
+          "stem": "The public speaking course presents trainees with opportunities ______ themselves in front of a group.",
           "options": {
             "A": "will express",
             "B": "to express",
@@ -642,7 +642,7 @@
           "needsImage": false
         },
         "114": {
-          "stem": "The speaker at the Westicon Literature Seminar told an _____ story that had the entire audience laughing in enjoyment.",
+          "stem": "The speaker at the Westicon Literature Seminar told an ______ story that had the entire audience laughing in enjoyment.",
           "options": {
             "A": "amusing",
             "B": "amusement",
@@ -660,7 +660,7 @@
           "needsImage": false
         },
         "115": {
-          "stem": "A fee of $100 will be _____ to office rental payments that are more than two weeks late.",
+          "stem": "A fee of $100 will be ______ to office rental payments that are more than two weeks late.",
           "options": {
             "A": "applied",
             "B": "applying",
@@ -678,7 +678,7 @@
           "needsImage": false
         },
         "116": {
-          "stem": "Last month's issue of Wise Finance _________ an exclusive interview with Chuck Granville, founder financial firm Granville Investments.",
+          "stem": "Last month's issue of Wise Finance ______ an exclusive interview with Chuck Granville, founder financial firm Granville Investments.",
           "options": {
             "A": "subscribed",
             "B": "admitted",
@@ -696,7 +696,7 @@
           "needsImage": false
         },
         "117": {
-          "stem": "Broadcasting the ________ latest news 24 hours a day, cable station CPP allows viewers to keep up-to-date on world events.",
+          "stem": "Broadcasting the ______ latest news 24 hours a day, cable station CPP allows viewers to keep up-to-date on world events.",
           "options": {
             "A": "fewer",
             "B": "very",
@@ -714,7 +714,7 @@
           "needsImage": false
         },
         "118": {
-          "stem": "The software _____ that New-Tech offers remove security risks and improve the performance computers.",
+          "stem": "The software ______ that New-Tech offers remove security risks and improve the performance computers.",
           "options": {
             "A": "increments",
             "B": "enhancements",
@@ -732,7 +732,7 @@
           "needsImage": false
         },
         "119": {
-          "stem": "Mr. Evans took a taxi to avoid being late, but the theater show had ____ begun by the time he arrived.",
+          "stem": "Mr. Evans took a taxi to avoid being late, but the theater show had ______ begun by the time he arrived.",
           "options": {
             "A": "usually",
             "B": "seldom",
@@ -750,7 +750,7 @@
           "needsImage": false
         },
         "120": {
-          "stem": "Notices _______ residents of possible power outages were mailed out a week before crews began work on the power lines.",
+          "stem": "Notices ______ residents of possible power outages were mailed out a week before crews began work on the power lines.",
           "options": {
             "A": "inform",
             "B": "information",
@@ -768,7 +768,7 @@
           "needsImage": false
         },
         "121": {
-          "stem": "Mr. Clemon’s work was so impressive that he was made a senior manager _____ only six months with the company.",
+          "stem": "Mr. Clemon’s work was so impressive that he was made a senior manager ______ only six months with the company.",
           "options": {
             "A": "on",
             "B": "after",
@@ -804,7 +804,7 @@
           "needsImage": false
         },
         "123": {
-          "stem": "Although a graduate degree is a requirement for the position, none of _______ who responded to the job announcement have one.",
+          "stem": "Although a graduate degree is a requirement for the position, none of ______ who responded to the job announcement have one.",
           "options": {
             "A": "they",
             "B": "these",
@@ -822,7 +822,7 @@
           "needsImage": false
         },
         "124": {
-          "stem": "Travel writer Arthur Chaplin will give a short presentation tomorrow _____ the trip the described in his new book, Walking in Peru.",
+          "stem": "Travel writer Arthur Chaplin will give a short presentation tomorrow ______ the trip the described in his new book, Walking in Peru.",
           "options": {
             "A": "along",
             "B": "regarding",
@@ -840,7 +840,7 @@
           "needsImage": false
         },
         "125": {
-          "stem": "Having written multiple books on the effects of global warming, Ms. Black is widely regarded as a _______ expert on environmental issues.",
+          "stem": "Having written multiple books on the effects of global warming, Ms. Black is widely regarded as a ______ expert on environmental issues.",
           "options": {
             "A": "naive",
             "B": "notable",
@@ -858,7 +858,7 @@
           "needsImage": false
         },
         "126": {
-          "stem": "Local water quality is ____ to improve once the sewage treatment center is upgraded.",
+          "stem": "Local water quality is ______ to improve once the sewage treatment center is upgraded.",
           "options": {
             "A": "grown",
             "B": "limited",
@@ -912,7 +912,7 @@
           "needsImage": false
         },
         "129": {
-          "stem": "Mercer Incorporated carefully goes over _______ its customer surveys and market research before making important decisions.",
+          "stem": "Mercer Incorporated carefully goes over ______ its customer surveys and market research before making important decisions.",
           "options": {
             "A": "as well as",
             "B": "both",
@@ -930,7 +930,7 @@
           "needsImage": false
         },
         "130": {
-          "stem": "For the purpose of increasing sales, Mendelbaum Electronics is giving a prize to _____ is the 100th person to buy a refrigerator.",
+          "stem": "For the purpose of increasing sales, Mendelbaum Electronics is giving a prize to ______ is the 100th person to buy a refrigerator.",
           "options": {
             "A": "whichever",
             "B": "another",
@@ -2637,7 +2637,7 @@
       ],
       "items": {
         "101": {
-          "stem": "According to Picton Daily News, only damage to the area occurred during the tropical storm.",
+          "stem": "According to Picton Daily News, only ______ damage to the area occurred during the tropical storm.",
           "options": {
             "A": "moderate",
             "B": "moderating",
@@ -2652,10 +2652,10 @@
             416.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "102": {
-          "stem": "The employees at Barneveld Inc. are encouraged to build teamwork by assisting on various projects.",
+          "stem": "The employees at Barneveld Inc. are encouraged to build teamwork by assisting ______ on various projects.",
           "options": {
             "A": "the other",
             "B": "one another",
@@ -2670,10 +2670,10 @@
             528.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "103": {
-          "stem": "Some marketing team members from Game-Tekno will be traveling to Tokyo the branch opening to finalize preparations.",
+          "stem": "Some marketing team members from Game-Tekno will be traveling to Tokyo ______ the branch opening to finalize preparations.",
           "options": {
             "A": "although",
             "B": "next to",
@@ -2688,10 +2688,10 @@
             653.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "104": {
-          "stem": "The seminar speaker offered some arguments in favor of natural medications and remedies.",
+          "stem": "The seminar speaker offered some ______ arguments in favor of natural medications and remedies.",
           "options": {
             "A": "convinced",
             "B": "convince",
@@ -2706,10 +2706,10 @@
             790.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "105": {
-          "stem": "The statue on Hastings Avenue that was unveiled in a ceremony yesterday by an ancient Roman sculpture.",
+          "stem": "The statue on Hastings Avenue that was unveiled in a ceremony yesterday ______ by an ancient Roman sculpture.",
           "options": {
             "A": "inspired",
             "B": "to be inspired",
@@ -2724,10 +2724,10 @@
             416.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "106": {
-          "stem": "An old building in the Brickford neighborhood will be demolished and a luxury apartment.",
+          "stem": "An old building in the Brickford neighborhood will be demolished and ______ a luxury apartment.",
           "options": {
             "A": "differed from",
             "B": "imposed on",
@@ -2742,10 +2742,10 @@
             527.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "107": {
-          "stem": "After he was appointed sales manager, Bill Haskell achieved improved between the staff in the sales and marketing departments.",
+          "stem": "After he was appointed sales manager, Bill Haskell achieved improved ______ between the staff in the sales and marketing departments.",
           "options": {
             "A": "coordinator",
             "B": "coordinative",
@@ -2760,10 +2760,10 @@
             652.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "108": {
-          "stem": "All potential clients are given brochures containing brief of GL Mutual's insurance policy packages.",
+          "stem": "All potential clients are given brochures containing brief ______ of GL Mutual's insurance policy packages.",
           "options": {
             "A": "distributions",
             "B": "operations",
@@ -2778,7 +2778,7 @@
             790.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "109": {
           "stem": "The Beckford Auditorium can be reached by walking ______ the second floor corridor to the end of the hallway.",
@@ -2799,7 +2799,7 @@
           "needsImage": false
         },
         "110": {
-          "stem": "Codex Corporation showed a great deal of about Ms. Khan's recent medical issues and gave her an extended leave.",
+          "stem": "Codex Corporation showed a great deal of ______ about Ms. Khan's recent medical issues and gave her an extended leave.",
           "options": {
             "A": "understand",
             "B": "understandable",
@@ -2814,10 +2814,10 @@
             310.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "111": {
-          "stem": "Mayor Terrence Miller the volunteers for the self-sacrificing work they did to assist the community during the disaster.",
+          "stem": "Mayor Terrence Miller ______ the volunteers for the self-sacrificing work they did to assist the community during the disaster.",
           "options": {
             "A": "contested",
             "B": "commended",
@@ -2832,10 +2832,10 @@
             422.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "112": {
-          "stem": "The Parker Fairground off Taylor Street is the perfect place for families and friends during the summer.",
+          "stem": "The Parker Fairground off Taylor Street is the perfect place for families and friends ______ during the summer.",
           "options": {
             "A": "to visit",
             "B": "will visit",
@@ -2850,7 +2850,7 @@
             533.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "113": {
           "stem": "The carpenter noted that the old house's roof was ______ run-down and would soon have to be repaired.",
@@ -2979,7 +2979,7 @@
           "needsImage": false
         },
         "120": {
-          "stem": "Bug-Fix Software users of its antivirus program to download regular updates and scan their computers on a weekly basis.",
+          "stem": "Bug-Fix Software ______ users of its antivirus program to download regular updates and scan their computers on a weekly basis.",
           "options": {
             "A": "advises",
             "B": "suggests",
@@ -2994,7 +2994,7 @@
             199.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "121": {
           "stem": "Passengers are asked to store any carry-on luggage ______ in the overhead bins and fasten their seat belts prior to takeoff.",
@@ -3015,7 +3015,7 @@
           "needsImage": false
         },
         "122": {
-          "stem": "Included in the lease is a strict requiring tenants to pay for any damages caused to the property,",
+          "stem": "Included in the lease is a strict ______ requiring tenants to pay for any damages caused to the property.",
           "options": {
             "A": "prediction",
             "B": "condition",
@@ -3030,7 +3030,7 @@
             422.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "123": {
           "stem": "Manuel Torres, ______ books have all been best-selling titles, has released his newest publication on the topic of the national election system.",
@@ -3105,7 +3105,7 @@
           "needsImage": false
         },
         "127": {
-          "stem": "Clifton Oil and Gas's annual sales are showing great compared to last year, when profits were disappointing.",
+          "stem": "Clifton Oil and Gas's annual sales are showing great ______ compared to last year, when profits were disappointing.",
           "options": {
             "A": "denial",
             "B": "consideration",
@@ -3120,10 +3120,10 @@
             311.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "128": {
-          "stem": "Most participants have found Bucksmith Capital's internship program because it provides them with relevant banking experience.",
+          "stem": "Most participants have found Bucksmith Capital's internship program ______ because it provides them with relevant banking experience.",
           "options": {
             "A": "satisfaction",
             "B": "satisfactory",
@@ -3138,7 +3138,7 @@
             436.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "129": {
           "stem": "Researchers conducting experiments in the laboratory are kindly asked to return equipment to ______ it is stored.",
@@ -3159,7 +3159,7 @@
           "needsImage": false
         },
         "130": {
-          "stem": "For coverage of top stories from around the world, more viewers tune in to Global Syndicated than any other news channel.",
+          "stem": "For ______ coverage of top stories from around the world, more viewers tune in to Global Syndicated than any other news channel.",
           "options": {
             "A": "renewable",
             "B": "dependable",
@@ -3174,7 +3174,7 @@
             699.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "131": {
           "stem": "Select the option that completes blank (131) in the passage.",
@@ -4884,7 +4884,7 @@
           "needsImage": false
         },
         "102": {
-          "stem": "The construction of a new subway line was aimed at overcrowding during rush hour.",
+          "stem": "The construction of a new subway line was aimed at ______ overcrowding during rush hour.",
           "options": {
             "A": "imposing",
             "B": "preparing",
@@ -4899,10 +4899,10 @@
             526.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "103": {
-          "stem": "Ms. Bedford was chosen to represent Centraine because of her considerable in mergers and acquisitions.",
+          "stem": "Ms. Bedford was chosen to represent Centraine because of her considerable ______ in mergers and acquisitions.",
           "options": {
             "A": "experts",
             "B": "expertly",
@@ -4917,10 +4917,10 @@
             637.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "104": {
-          "stem": "The wireless headset by Smartcom's representative at the Fentwood Technology Trade Show will go on the market next month.",
+          "stem": "The wireless headset ______ by Smartcom's representative at the Fentwood Technology Trade Show will go on the market next month.",
           "options": {
             "A": "demonstrate",
             "B": "demonstrates",
@@ -4935,10 +4935,10 @@
             788.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "105": {
-          "stem": "Members who renew their newspaper subscription at least one month prior to its will receive a 5 percent discount.",
+          "stem": "Members who renew their newspaper subscription at least one month prior to its ______ will receive a 5 percent discount.",
           "options": {
             "A": "opening",
             "B": "expiration",
@@ -4953,10 +4953,10 @@
             414.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "106": {
-          "stem": "Lorasoft's customer service agents are instructed to handle minor requests before forwarding calls directly to the technical support team.",
+          "stem": "Lorasoft's customer service agents are instructed to handle minor requests ______ before forwarding calls directly to the technical support team.",
           "options": {
             "A": "their",
             "B": "them",
@@ -4971,7 +4971,7 @@
             539.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "107": {
           "stem": "The popularity of the daily television show, Celebrity Update, has declined ______ the years as entertainment news has become increasingly available online.",
@@ -4992,7 +4992,7 @@
           "needsImage": false
         },
         "108": {
-          "stem": "Scientists employed by Fluent Pharmaceuticals spend most of their time medications to treat diabetes.",
+          "stem": "Scientists employed by Fluent Pharmaceuticals spend most of their time ______ medications to treat diabetes.",
           "options": {
             "A": "developing",
             "B": "practicing",
@@ -5007,7 +5007,7 @@
             802.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "109": {
           "stem": "______ who needs to access information on the corporate Web site must first obtain login credentials from the IT department.",
@@ -5046,7 +5046,7 @@
           "needsImage": false
         },
         "111": {
-          "stem": "Had Mr. Shriver booked his vacation package further in advance, he a much lower price.",
+          "stem": "Had Mr. Shriver booked his vacation package further in advance, he ______ a much lower price.",
           "options": {
             "A": "is being paid",
             "B": "would have paid",
@@ -5061,10 +5061,10 @@
             437.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "112": {
-          "stem": "Most of the conference participants arrived an hour ago, but the keynote speaker is on his way.",
+          "stem": "Most of the conference participants arrived an hour ago, but the keynote speaker is ______ on his way.",
           "options": {
             "A": "still",
             "B": "already",
@@ -5079,7 +5079,7 @@
             549.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "113": {
           "stem": "Research indicates that consumers are much more likely to purchase products from companies that show ______ for the environment.",
@@ -5118,7 +5118,7 @@
           "needsImage": false
         },
         "115": {
-          "stem": "The latest version of the accounting software is not with the operating system installed on the office computers.",
+          "stem": "The latest version of the accounting software is not ______ with the operating system installed on the office computers.",
           "options": {
             "A": "rational",
             "B": "challenged",
@@ -5133,10 +5133,10 @@
             199.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "116": {
-          "stem": "Automat CEO Sergei Rostov's speech on trends in the high-tech industry drew an audience consisting mostly of entrepreneurs.",
+          "stem": "Automat CEO Sergei Rostov's speech on trends in the high-tech industry drew an audience consisting mostly of ______ entrepreneurs.",
           "options": {
             "A": "aspiring",
             "B": "aspired",
@@ -5151,10 +5151,10 @@
             325.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "117": {
-          "stem": "Since acquiring the land on Taylor Avenue five years ago, the proprietor multiple offers from developers wishing to buy it.",
+          "stem": "Since acquiring the land on Taylor Avenue five years ago, the proprietor ______ multiple offers from developers wishing to buy it.",
           "options": {
             "A": "had been receiving",
             "B": "will receive",
@@ -5169,10 +5169,10 @@
             436.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "118": {
-          "stem": "BRE Manufacturing is unlikely to take chances on new names as brands are more appealing to its target market.",
+          "stem": "BRE Manufacturing is unlikely to take chances on new names as ______ brands are more appealing to its target market.",
           "options": {
             "A": "familiar",
             "B": "proficient",
@@ -5187,10 +5187,10 @@
             548.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "119": {
-          "stem": "The cast was interviewed by the press the first performance of the play Father Simon.",
+          "stem": "The cast was interviewed by the press ______ the first performance of the play Father Simon.",
           "options": {
             "A": "rather",
             "B": "as soon as",
@@ -5205,7 +5205,7 @@
             685.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "120": {
           "stem": "Ms. Morgan's ______ responsibility as the company's head of operations is to ensure that every department is running smoothly.",
@@ -5226,7 +5226,7 @@
           "needsImage": false
         },
         "121": {
-          "stem": "Home Choice is looking for suppliers who can - produce the various parts it needs for its new line of kitchen appliances.",
+          "stem": "Home Choice is looking for suppliers who can - ______ produce the various parts it needs for its new line of kitchen appliances.",
           "options": {
             "A": "afford",
             "B": "affording",
@@ -5241,7 +5241,7 @@
             312.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "122": {
           "stem": "Eastern Automotive is the largest producer of vehicle parts, ______ only Dreier Limited in terms of annual profits.",
@@ -5298,7 +5298,7 @@
           "needsImage": false
         },
         "125": {
-          "stem": "Mr. Trevors overcame the difficulty of speaking French by improving his skills with regular practice.",
+          "stem": "Mr. Trevors overcame the difficulty of speaking French by ______ improving his skills with regular practice.",
           "options": {
             "A": "gradually",
             "B": "respectively",
@@ -5313,7 +5313,7 @@
             201.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "126": {
           "stem": "Dong Suk Kim's promotion was approved after the sudden ______ of the company's chief executive officer,",
@@ -5388,7 +5388,7 @@
           "needsImage": false
         },
         "130": {
-          "stem": "Providing senior managers with incentive-based compensation is a solution to their declining productivity,",
+          "stem": "Providing senior managers with incentive-based compensation is a ______ solution to their declining productivity.",
           "options": {
             "A": "variable",
             "B": "thriving",
@@ -5403,7 +5403,7 @@
             798.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "131": {
           "stem": "Select the option that completes blank (131) in the passage.",
@@ -7113,7 +7113,7 @@
           "needsImage": false
         },
         "102": {
-          "stem": "Mayberry Research Institute offers staff which include dental coverage and a pension plan.",
+          "stem": "Mayberry Research Institute offers staff ______ which include dental coverage and a pension plan.",
           "options": {
             "A": "benefitted",
             "B": "beneficially",
@@ -7128,10 +7128,10 @@
             510.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "103": {
-          "stem": "Arranging an appointment to see Dr. Menard one month in advance is due to her busy schedule.",
+          "stem": "Arranging an appointment to see Dr. Menard one month in advance is ______ due to her busy schedule.",
           "options": {
             "A": "grateful",
             "B": "conclusive",
@@ -7146,7 +7146,7 @@
             621.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "104": {
           "stem": "Patrons who had their vehicles parked waited by the Canton Theater entrance while ______ retrieved their cars.",
@@ -7185,7 +7185,7 @@
           "needsImage": false
         },
         "106": {
-          "stem": "AEG Co. is looking for sales associates who demonstrate excellent communication skills and an ability to work in a manner.",
+          "stem": "AEG Co. is looking for sales associates who demonstrate excellent communication skills and an ability to work in a ______ manner.",
           "options": {
             "A": "cooperative",
             "B": "cooperation",
@@ -7200,7 +7200,7 @@
             537.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "107": {
           "stem": "The unnecessary extra work on Sackler Department Store's new building could have been ______ if the design plans had been followed precisely.",
@@ -7221,7 +7221,7 @@
           "needsImage": false
         },
         "108": {
-          "stem": "Ms. Herrera could not sit in an aisle seat during her international flight because there were available.",
+          "stem": "Ms. Herrera could not sit in an aisle seat during her international flight because there were ______ available.",
           "options": {
             "A": "hardly",
             "B": "any",
@@ -7236,7 +7236,7 @@
             799.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "109": {
           "stem": "Mr. Holt's acceptance of the financial executive position is ______ his satisfaction with the salary offer.",
@@ -7257,7 +7257,7 @@
           "needsImage": false
         },
         "110": {
-          "stem": "Transport officials are still unsure of caused Train 580 to break down earlier this morning.",
+          "stem": "Transport officials are still unsure of ______ caused Train 580 to break down earlier this morning.",
           "options": {
             "A": "each",
             "B": "those",
@@ -7272,10 +7272,10 @@
             309.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "111": {
-          "stem": "The Project Green report argues that the best way to save endangered species is by placing them in protected wildlife areas.",
+          "stem": "The Project Green report argues ______ that the best way to save endangered species is by placing them in protected wildlife areas.",
           "options": {
             "A": "persuasive",
             "B": "persuade",
@@ -7290,10 +7290,10 @@
             434.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "112": {
-          "stem": "The guide told visitors touring the High Point Library that the facility by the renowned architect Albert Grand.",
+          "stem": "The guide told visitors touring the High Point Library that the facility ______ by the renowned architect Albert Grand.",
           "options": {
             "A": "designs",
             "B": "was designed",
@@ -7308,7 +7308,7 @@
             546.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "113": {
           "stem": "Sundersen Technologies ______ 10 percent from Mr. Garrison's bill since he was eligible for a bulk purchase discount.",
@@ -7347,7 +7347,7 @@
           "needsImage": false
         },
         "115": {
-          "stem": "Passengers to fill in their arrival forms during the flight for quicker processing at the immigration checkpoint.",
+          "stem": "Passengers ______ to fill in their arrival forms during the flight for quicker processing at the immigration checkpoint.",
           "options": {
             "A": "remind",
             "B": "have reminded",
@@ -7362,7 +7362,7 @@
             196.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "116": {
           "stem": "Overdrive is a low-budget action film that has no ______ to actor Sam Horton's autobiography, which has the same title.",
@@ -7401,7 +7401,7 @@
           "needsImage": false
         },
         "118": {
-          "stem": "The client was never in his office many times Ms. Baxter tried to call him.",
+          "stem": "The client was never in his office ______ many times Ms. Baxter tried to call him.",
           "options": {
             "A": "otherwise",
             "B": "however",
@@ -7416,10 +7416,10 @@
             518.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "119": {
-          "stem": "LocerTech's primary goal is to be as as possible to customer inquiries.",
+          "stem": "LocerTech's primary goal is to be as ______ as possible to customer inquiries.",
           "options": {
             "A": "shortened",
             "B": "accelerated",
@@ -7434,10 +7434,10 @@
             616.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "120": {
-          "stem": "Rodgers Industrial celebrated the of its 50th anniversary by hosting a banquet for clients from around the world.",
+          "stem": "Rodgers Industrial celebrated the ______ of its 50th anniversary by hosting a banquet for clients from around the world.",
           "options": {
             "A": "impression",
             "B": "integration",
@@ -7452,10 +7452,10 @@
             752.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "121": {
-          "stem": "Gilbot Grounds had to work to get the landscaping project finished by the deadline.",
+          "stem": "Gilbot Grounds had to work ______ to get the landscaping project finished by the deadline.",
           "options": {
             "A": "intense",
             "B": "intensely",
@@ -7470,10 +7470,10 @@
             197.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "122": {
-          "stem": "Under the finance minister's leadership, corporations recovered quickly from last year's losses and then began making substantial",
+          "stem": "Under the finance minister's leadership, corporations recovered quickly from last year's losses and then began making substantial ______.",
           "options": {
             "A": "regulations",
             "B": "earnings",
@@ -7488,7 +7488,7 @@
             323.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "123": {
           "stem": "The provision of additional government grants for college tuition will make education ______ to more people from around the country.",
@@ -7509,7 +7509,7 @@
           "needsImage": false
         },
         "124": {
-          "stem": "The current edition of the employee handbook detailed guidelines for employee performance reviews.",
+          "stem": "The current edition of the employee handbook ______ detailed guidelines for employee performance reviews.",
           "options": {
             "A": "contain",
             "B": "was contained",
@@ -7524,10 +7524,10 @@
             559.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "125": {
-          "stem": "Shoppers looking for high-quality electronics at low prices will find a selection at the new NorvelTech store,",
+          "stem": "Shoppers looking for high-quality electronics at low prices will find a ______ selection at the new NorvelTech store.",
           "options": {
             "A": "greatest",
             "B": "greatly",
@@ -7542,7 +7542,7 @@
             697.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "126": {
           "stem": "Although Southmoore Records has been actively seeking a new CEO for three months, they have ______ to find a suitable candidate.",
@@ -7563,7 +7563,7 @@
           "needsImage": false
         },
         "127": {
-          "stem": "Many office workers frequent Stan's Bistro because of its to the business district.",
+          "stem": "Many office workers frequent Stan's Bistro because of its ______ to the business district.",
           "options": {
             "A": "proximity",
             "B": "closure",
@@ -7578,10 +7578,10 @@
             310.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "128": {
-          "stem": "The temperature this morning is cool and pleasant, but it is expected to increase steadily the day.",
+          "stem": "The temperature this morning is cool and pleasant, but it is expected to increase steadily ______ the day.",
           "options": {
             "A": "between",
             "B": "above",
@@ -7596,7 +7596,7 @@
             421.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "129": {
           "stem": "Now that the city has hired additional workers, it can ______ with the construction of the new civic center.",
@@ -7617,7 +7617,7 @@
           "needsImage": false
         },
         "130": {
-          "stem": "--— to be the best in the city, the Melise Restaurant is booked for the next six months.",
+          "stem": "______ to be the best in the city, the Melise Restaurant is booked for the next six months.",
           "options": {
             "A": "Reporting",
             "B": "Report",
@@ -7632,7 +7632,7 @@
             670.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "131": {
           "stem": "Select the option that completes blank (131) in the passage.",
@@ -9360,7 +9360,7 @@
           "needsImage": false
         },
         "103": {
-          "stem": "Eugene Rivera, who negotiated an agreement between the two firms, reported that the details would be settled the next several days.",
+          "stem": "Eugene Rivera, who negotiated an agreement between the two firms, reported that the details would be settled ______ the next several days.",
           "options": {
             "A": "within",
             "B": "close to",
@@ -9375,7 +9375,7 @@
             628.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "104": {
           "stem": "Earlier this morning, Mr. Yang ______ that everyone in his department would receive a bonus.",
@@ -9486,7 +9486,7 @@
           "needsImage": false
         },
         "110": {
-          "stem": "A factor especially to the agricultural industry is whether there are reliable supplies of water and electricity.",
+          "stem": "A factor especially ______ to the agricultural industry is whether there are reliable supplies of water and electricity.",
           "options": {
             "A": "knowledgeable",
             "B": "convenient",
@@ -9501,7 +9501,7 @@
             313.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "111": {
           "stem": "______ the most cutting-edge cellular phones may not satisfy the specific needs of every user.",
@@ -9522,7 +9522,7 @@
           "needsImage": false
         },
         "112": {
-          "stem": "As it has been 60 business days since the purchase date, Branson Outlet will not allow an exchange or refund.",
+          "stem": "As it has been ______ 60 business days since the purchase date, Branson Outlet will not allow an exchange or refund.",
           "options": {
             "A": "so much",
             "B": "more than",
@@ -9537,10 +9537,10 @@
             537.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "113": {
-          "stem": "Ms. Mitchell is looking for an apartment a train station so that she will not need to commute by car.",
+          "stem": "Ms. Mitchell is looking for an apartment ______ a train station so that she will not need to commute by car.",
           "options": {
             "A": "near",
             "B": "toward",
@@ -9555,10 +9555,10 @@
             648.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "114": {
-          "stem": "Immediately after ordering a new office desk online, Mr. Perez was issued of the transaction.",
+          "stem": "Immediately after ordering a new office desk online, Mr. Perez was issued ______ of the transaction.",
           "options": {
             "A": "confirm",
             "B": "confirmation",
@@ -9573,7 +9573,7 @@
             785.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "115": {
           "stem": "Ventera Inc. was able to build strong relationships with its most valuable customers by ______ communicating with them.",
@@ -9612,7 +9612,7 @@
           "needsImage": false
         },
         "117": {
-          "stem": "The candidates for the job opening have experiences and career objectives despite all having worked in the same field.",
+          "stem": "The candidates for the job opening have ______ experiences and career objectives despite all having worked in the same field.",
           "options": {
             "A": "difference",
             "B": "differently",
@@ -9627,7 +9627,7 @@
             465.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "118": {
           "stem": "Koester Company records all incoming customer calls with the ______ of ensuring inquiries are handled appropriately.",
@@ -9666,7 +9666,7 @@
           "needsImage": false
         },
         "120": {
-          "stem": "MediaCore's customers will have digital to dozens of publications by the end of the month.",
+          "stem": "MediaCore's customers will have digital ______ to dozens of publications by the end of the month.",
           "options": {
             "A": "access",
             "B": "accessing",
@@ -9681,7 +9681,7 @@
             203.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "121": {
           "stem": "______ fashion design jobs appear glamorous in popular media, most positions in the industry are demanding in reality.",
@@ -9738,7 +9738,7 @@
           "needsImage": false
         },
         "124": {
-          "stem": "Wheelpoint's new line of tires performs under the most hazardous road conditions.",
+          "stem": "Wheelpoint's new line of tires performs ______ under the most hazardous road conditions.",
           "options": {
             "A": "habitually",
             "B": "capably",
@@ -9753,7 +9753,7 @@
             663.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "125": {
           "stem": "Bransonville Beach is closed ______ further notice as the area is affected by strong tides caused by Hurricane Thurston.",
@@ -9810,7 +9810,7 @@
           "needsImage": false
         },
         "128": {
-          "stem": "Submissions meet Literati Magazine's standard will be considered for publication in our next issue.",
+          "stem": "Submissions ______ meet Literati Magazine's standard will be considered for publication in our next issue.",
           "options": {
             "A": "these",
             "B": "those",
@@ -9825,7 +9825,7 @@
             427.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "129": {
           "stem": "Investor Link was able to ______ the financial crisis because Mr. Macintyre had the foresight to develop a contingency plan.",
@@ -9846,7 +9846,7 @@
           "needsImage": false
         },
         "130": {
-          "stem": "Ms. Kenner and Mr, Stone were both invited to the meeting, but of them has confirmed yet.",
+          "stem": "Ms. Kenner and Mr, Stone were both invited to the meeting, but ______ of them has confirmed yet.",
           "options": {
             "A": "most",
             "B": "few",
@@ -9861,7 +9861,7 @@
             689.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "131": {
           "stem": "Select the option that completes blank (131) in the passage.",
@@ -11571,7 +11571,7 @@
           "needsImage": false
         },
         "102": {
-          "stem": "Patients undergoing a complete medical examination are asked eating solid food for 12 hours prior to their appointment.",
+          "stem": "Patients undergoing a complete medical examination are asked ______ eating solid food for 12 hours prior to their appointment.",
           "options": {
             "A": "avoid",
             "B": "to avoid",
@@ -11586,7 +11586,7 @@
             533.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "103": {
           "stem": "Strong winds knocked a tree down on the road and created a potential ______ for speeding motorists.",
@@ -11625,7 +11625,7 @@
           "needsImage": false
         },
         "105": {
-          "stem": "Local transport regulations permit city buses to have 32 seats for passengers.",
+          "stem": "Local transport regulations permit city buses to have ______ 32 seats for passengers.",
           "options": {
             "A": "as for",
             "B": "up to",
@@ -11640,7 +11640,7 @@
             422.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "106": {
           "stem": "In response to the feedback that her manuscript was too lengthy, author Dawn Wentz ______ the number of pages.",
@@ -11661,7 +11661,7 @@
           "needsImage": false
         },
         "107": {
-          "stem": "Zoo-Croft Fashion's corporate income and expense documents were delivered to the outside accountant to get an unbiased financial",
+          "stem": "Zoo-Croft Fashion's corporate income and expense documents were delivered to the outside accountant to get an unbiased financial ______.",
           "options": {
             "A": "analysis",
             "B": "analyst",
@@ -11676,7 +11676,7 @@
             658.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "108": {
           "stem": "Mr. Cantrell realized he had overbilled the client and ______ contacted her to explain the error.",
@@ -11733,7 +11733,7 @@
           "needsImage": false
         },
         "111": {
-          "stem": "After three months of intense negotiations, for the construction of new power plants were signed.",
+          "stem": "After three months of intense negotiations, ______ for the construction of new power plants were signed.",
           "options": {
             "A": "agreed",
             "B": "agreeable",
@@ -11748,10 +11748,10 @@
             444.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "112": {
-          "stem": "Reviews of the Mardison Hotel chain's updated business centers are positive.",
+          "stem": "Reviews of the Mardison Hotel chain's updated business centers are ______ positive.",
           "options": {
             "A": "overwhelming",
             "B": "overwhelmingly",
@@ -11766,7 +11766,7 @@
             555.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "113": {
           "stem": "Mr. Holden's outgoing ______ is beneficial to him as his job requires a lot of networking and socializing.",
@@ -11787,7 +11787,7 @@
           "needsImage": false
         },
         "114": {
-          "stem": "Mr. Henry gave his staff additional training on the new office policy, but several of them were still",
+          "stem": "Mr. Henry gave his staff additional training on the new office policy, but several of them were still ______.",
           "options": {
             "A": "confusing",
             "B": "confused",
@@ -11802,7 +11802,7 @@
             804.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "115": {
           "stem": "Southern Mutual Insurance ______ clients to sign up for long-term plans as they have lower rates.",
@@ -11823,7 +11823,7 @@
           "needsImage": false
         },
         "116": {
-          "stem": "The Loughton Youth Club offered to help organize a community cleanup day and to recruit local volunteers.",
+          "stem": "The Loughton Youth Club ______ offered to help organize a community cleanup day and to recruit local volunteers.",
           "options": {
             "A": "manually",
             "B": "arguably",
@@ -11838,10 +11838,10 @@
             318.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "117": {
-          "stem": "Mr. Pullman has asked for time to turn in his report because he requires some additional information.",
+          "stem": "Mr. Pullman has asked for ______ time to turn in his report because he requires some additional information.",
           "options": {
             "A": "any",
             "B": "a few",
@@ -11856,7 +11856,7 @@
             430.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "118": {
           "stem": "Mayor David Lee's introduction of Senator Laura Moncton ______ her speech, giving an overview of her track record of political reforms.",
@@ -11877,7 +11877,7 @@
           "needsImage": false
         },
         "119": {
-          "stem": "Album sales for rock band Trifecta have been low their concert tickets have been selling out.",
+          "stem": "Album sales for rock band Trifecta have been low ______ their concert tickets have been selling out.",
           "options": {
             "A": "if only",
             "B": "as long as",
@@ -11892,10 +11892,10 @@
             692.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "120": {
-          "stem": "Ms. Davies could only hear of what was discussed since the restaurant chosen for the meeting was so noisy.",
+          "stem": "Ms. Davies could only hear ______ of what was discussed since the restaurant chosen for the meeting was so noisy.",
           "options": {
             "A": "fragments",
             "B": "excerpts",
@@ -11910,7 +11910,7 @@
             208.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "121": {
           "stem": "There were ______ malfunctions with the agency's updated software, so management decided to use the old version temporarily.",
@@ -11931,7 +11931,7 @@
           "needsImage": false
         },
         "122": {
-          "stem": "In an emergency, an alarm in Hamley Towers will sound, indicating that everyone inside must the building immediately.",
+          "stem": "In an emergency, an alarm in Hamley Towers will sound, indicating that everyone inside must ______ the building immediately.",
           "options": {
             "A": "oppose",
             "B": "dismiss",
@@ -11946,7 +11946,7 @@
             431.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "123": {
           "stem": "The accommodations at the Grandview Hotel seemed less than ______ when compared to the attractive, reasonably priced options in town.",
@@ -11985,12 +11985,12 @@
           "needsImage": false
         },
         "125": {
-          "stem": "The sequel to last year's film Galactic Express made $400 million worldwide, is more than the first movie earned.",
+          "stem": "The sequel to last year's film Galactic Express made $400 million worldwide, ______ is more than the first movie earned.",
           "options": {
             "A": "this",
             "B": "what",
             "C": "whose",
-            "D": "which my SojUAf •"
+            "D": "which"
           },
           "page": 149,
           "box": [
@@ -12000,7 +12000,7 @@
             805.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "126": {
           "stem": "Due to their limited experience in Asia, KDM's executives made the ______ choice to collaborate with a well-established firm in the region.",
@@ -12057,7 +12057,7 @@
           "needsImage": false
         },
         "129": {
-          "stem": "The machinery in Templex's factory has become so outdated that funds have been to purchase new ones.",
+          "stem": "The machinery in Templex's factory has become so outdated that funds have been ______ to purchase new ones.",
           "options": {
             "A": "exempted",
             "B": "hosted",
@@ -12072,10 +12072,10 @@
             556.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "130": {
-          "stem": "The manager did his best to make decisions that took the finance division members' suggestions into",
+          "stem": "The manager did his best to make decisions that took the finance division members' suggestions into ______.",
           "options": {
             "A": "recommendation",
             "B": "calculation",
@@ -12090,7 +12090,7 @@
             693.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "131": {
           "stem": "Select the option that completes blank (131) in the passage.",
@@ -13782,7 +13782,7 @@
       ],
       "items": {
         "101": {
-          "stem": "Mr. Finney paused during his speech to change the slide projected on the screen.",
+          "stem": "Mr. Finney paused ______ during his speech to change the slide projected on the screen.",
           "options": {
             "A": "moment",
             "B": "momentarily",
@@ -13797,7 +13797,7 @@
             411.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "102": {
           "stem": "All of the presenters at the social media marketing seminar introduced ______ to the audience before beginning to speak.",
@@ -13818,7 +13818,7 @@
           "needsImage": false
         },
         "103": {
-          "stem": "Rattan Furniture House's new production plant is expected to be fully by early April.",
+          "stem": "Rattan Furniture House's new production plant is expected to be fully ______ by early April.",
           "options": {
             "A": "operate",
             "B": "operator",
@@ -13833,10 +13833,10 @@
             634.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "104": {
-          "stem": "Petra Towers is located just of the downtown area, close to a subway station.",
+          "stem": "Petra Towers is located just ______ of the downtown area, close to a subway station.",
           "options": {
             "A": "outside",
             "B": "beyond",
@@ -13851,7 +13851,7 @@
             757.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "105": {
           "stem": "______ gas containers in a cool environment to prevent them from exploding.",
@@ -13908,7 +13908,7 @@
           "needsImage": false
         },
         "108": {
-          "stem": "The Society for Ecological Excellence is currently accepting of environmentally friendly organizations for its upcoming awards ceremony.",
+          "stem": "The Society for Ecological Excellence is currently accepting ______ of environmentally friendly organizations for its upcoming awards ceremony.",
           "options": {
             "A": "reputations",
             "B": "nominations",
@@ -13923,10 +13923,10 @@
             784.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "109": {
-          "stem": "Ms. Crawford accepted the most job offer she received after considering all her options.",
+          "stem": "Ms. Crawford accepted the most ______ job offer she received after considering all her options.",
           "options": {
             "A": "prefer",
             "B": "preference",
@@ -13941,10 +13941,10 @@
             209.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "110": {
-          "stem": "Southbound traffic Highway 14A will be slow for the next two weeks while road repairs take place.",
+          "stem": "Southbound traffic ______ Highway 14A will be slow for the next two weeks while road repairs take place.",
           "options": {
             "A": "among",
             "B": "all",
@@ -13959,7 +13959,7 @@
             320.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "111": {
           "stem": "Greil Manufacturing began a partnership with FRN Inc. that ______ benefited both companies.",
@@ -13980,7 +13980,7 @@
           "needsImage": false
         },
         "112": {
-          "stem": "The expense for fixing the vehicle was higher than the cost given by the auto mechanic.",
+          "stem": "The expense for fixing the vehicle was higher than the ______ cost given by the auto mechanic.",
           "options": {
             "A": "estimating",
             "B": "estimated",
@@ -13995,7 +13995,7 @@
             543.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "113": {
           "stem": "______ Logan Home Appliances' annual promotion is now underway, the store is far busier than usual.",
@@ -14016,7 +14016,7 @@
           "needsImage": false
         },
         "114": {
-          "stem": "Experts say that a rise in property values in the Bedford area will be the outcome of the increase in local population.",
+          "stem": "Experts say that a rise in property values in the Bedford area will be the ______ outcome of the increase in local population.",
           "options": {
             "A": "susceptible",
             "B": "transferable",
@@ -14031,10 +14031,10 @@
             792.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "115": {
-          "stem": "The campus parking lot is used by so many students that even those with parking passes are not guaranteed a spot.",
+          "stem": "The campus parking lot is used by so many students that even those with parking passes are not ______ guaranteed a spot.",
           "options": {
             "A": "insistently",
             "B": "measurably",
@@ -14049,10 +14049,10 @@
             208.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "116": {
-          "stem": "Ram Builders' supervisor the client that the supplies needed for construction would arrive on time.",
+          "stem": "Ram Builders' supervisor ______ the client that the supplies needed for construction would arrive on time.",
           "options": {
             "A": "bargained",
             "B": "concerned",
@@ -14067,10 +14067,10 @@
             320.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "117": {
-          "stem": "Schilling Investors Group has not found a suitable candidate to replace Mr. Macmillan, who resigned two weeks ago.",
+          "stem": "Schilling Investors Group has not ______ found a suitable candidate to replace Mr. Macmillan, who resigned two weeks ago.",
           "options": {
             "A": "almost",
             "B": "yet",
@@ -14085,7 +14085,7 @@
             445.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "118": {
           "stem": "The athlete recently beat the world record for the marathon ______ less than a minute.",
@@ -14160,7 +14160,7 @@
           "needsImage": false
         },
         "122": {
-          "stem": "Once the vendor his payment, Smith & Cooper Wholesalers will ship his order out.",
+          "stem": "Once the vendor ______ his payment, Smith & Cooper Wholesalers will ship his order out.",
           "options": {
             "A": "substitutes",
             "B": "leases",
@@ -14175,7 +14175,7 @@
             321.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "123": {
           "stem": "The board of directors ______ agreed to change Two-Tone Media's logo as all the members considered it outdated,",
@@ -14196,7 +14196,7 @@
           "needsImage": false
         },
         "124": {
-          "stem": "Airport officials have announced that more security checks will be adopted to eliminate any potential threats.",
+          "stem": "Airport officials have announced that more ______ security checks will be adopted to eliminate any potential threats.",
           "options": {
             "A": "reluctant",
             "B": "mundane",
@@ -14211,10 +14211,10 @@
             545.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "125": {
-          "stem": "The organizers of the Brock County Fair have decided to the event due to the poor weather conditions.",
+          "stem": "The organizers of the Brock County Fair have decided to ______ the event due to the poor weather conditions.",
           "options": {
             "A": "back down",
             "B": "give away",
@@ -14229,10 +14229,10 @@
             682.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "126": {
-          "stem": "Customers who subscribe to Travelog's online magazine will receive discounts their subscriptions are for six months or a year.",
+          "stem": "Customers who subscribe to Travelog's online magazine will receive discounts ______ their subscriptions are for six months or a year.",
           "options": {
             "A": "rather",
             "B": "either",
@@ -14247,10 +14247,10 @@
             223.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "127": {
-          "stem": "Barton Electronics will have to boost production to meet the demand for its newest dishwasher model.",
+          "stem": "Barton Electronics will have to boost production to meet the ______ demand for its newest dishwasher model.",
           "options": {
             "A": "bulky",
             "B": "proficient",
@@ -14265,7 +14265,7 @@
             335.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "128": {
           "stem": "Mr. Sampson must renew his gym membership by December 31, ______ he will be unable to access the facility.",
@@ -16029,7 +16029,7 @@
           "needsImage": false
         },
         "102": {
-          "stem": "Sommerland Shopping Mall is situated ten minutes away from the downtown area.",
+          "stem": "Sommerland Shopping Mall is situated ______ ten minutes away from the downtown area.",
           "options": {
             "A": "approximating",
             "B": "approximated",
@@ -16044,10 +16044,10 @@
             531.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "103": {
-          "stem": "All airlines are required by law to keep inflatable life jackets located passenger seats in case there is an emergency.",
+          "stem": "All airlines are required by law to keep inflatable life jackets located ______ passenger seats in case there is an emergency.",
           "options": {
             "A": "following",
             "B": "next",
@@ -16062,10 +16062,10 @@
             656.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "104": {
-          "stem": "Mr. Katz was confident that could do a better job with database maintenance than his highly skilled team.",
+          "stem": "Mr. Katz was confident that ______ could do a better job with database maintenance than his highly skilled team.",
           "options": {
             "A": "less",
             "B": "few",
@@ -16080,10 +16080,10 @@
             793.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "105": {
-          "stem": "After Benton Enterprises adopted the of allowing its staff to work flexible hours, productivity began to rise.",
+          "stem": "After Benton Enterprises adopted the ______ of allowing its staff to work flexible hours, productivity began to rise.",
           "options": {
             "A": "practice",
             "B": "practically",
@@ -16098,10 +16098,10 @@
             420.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "106": {
-          "stem": "Evergreen Hotel was built at a time when Baldwin City strong growth, but it may close if the recession continues.",
+          "stem": "Evergreen Hotel was built at a time when Baldwin City ______ strong growth, but it may close if the recession continues.",
           "options": {
             "A": "undergoes",
             "B": "is undergoing",
@@ -16116,10 +16116,10 @@
             531.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "107": {
-          "stem": "The display coordinator's role is to ensure that everything sold in the store is arranged to look appealing to customers.",
+          "stem": "The display coordinator's role is to ensure that everything sold in the store is arranged ______ to look appealing to customers.",
           "options": {
             "A": "barely",
             "B": "namely",
@@ -16134,7 +16134,7 @@
             643.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "108": {
           "stem": "Many consumers agreed that Edgewood Limited's greatest strength was its ______ in maintaining high levels of quality.",
@@ -16155,7 +16155,7 @@
           "needsImage": false
         },
         "109": {
-          "stem": "The human resources manager called a meeting on Monday everyone about his plan to hire new employees in the coming months.",
+          "stem": "The human resources manager called a meeting on Monday ______ everyone about his plan to hire new employees in the coming months.",
           "options": {
             "A": "informs",
             "B": "informed",
@@ -16170,10 +16170,10 @@
             220.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "110": {
-          "stem": "Mary Rose was asked to join the information access team because she to similar projects previously.",
+          "stem": "Mary Rose was asked to join the information access team because she ______ to similar projects previously.",
           "options": {
             "A": "was contributed",
             "B": "had contributed",
@@ -16188,10 +16188,10 @@
             332.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "111": {
-          "stem": "The accounting department's current software program is not for the tasks that need to be performed.",
+          "stem": "The accounting department's current software program is not ______ for the tasks that need to be performed.",
           "options": {
             "A": "adequate",
             "B": "competent",
@@ -16206,7 +16206,7 @@
             443.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "112": {
           "stem": "Chef Alan Peralta's ______ of classic French dishes is considered both unique and daring in the culinary world.",
@@ -16299,7 +16299,7 @@
           "needsImage": false
         },
         "117": {
-          "stem": "The new road from Batik Enterprise's warehouse to the post office has been a great for employees in the shipping department.",
+          "stem": "The new road from Batik Enterprise's warehouse to the post office has been a great ______ for employees in the shipping department.",
           "options": {
             "A": "registration",
             "B": "increment",
@@ -16314,7 +16314,7 @@
             443.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "118": {
           "stem": "The launch of Blanca Restaurant was successful ______ , but the proprietor wished the event had attracted greater attention from local media.",
@@ -16353,7 +16353,7 @@
           "needsImage": false
         },
         "120": {
-          "stem": "Renovations can begin on Bounty Bank's main offices the board authorizes the project.",
+          "stem": "Renovations can begin on Bounty Bank's main offices ______ the board authorizes the project.",
           "options": {
             "A": "also",
             "B": "pending",
@@ -16368,10 +16368,10 @@
             208.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "121": {
-          "stem": "Ms. Wilson left behind a career in law to her dream of running a bed-and-breakfast in Tuscany.",
+          "stem": "Ms. Wilson left behind a career in law to ______ her dream of running a bed-and-breakfast in Tuscany.",
           "options": {
             "A": "aspire",
             "B": "pursue",
@@ -16386,10 +16386,10 @@
             319.9
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "122": {
-          "stem": "The staff in charge of writing press releases should get all facts thoroughly before sending an announcement to the media.",
+          "stem": "The staff in charge of writing press releases should get all facts ______ thoroughly before sending an announcement to the media.",
           "options": {
             "A": "checked",
             "B": "checking",
@@ -16404,7 +16404,7 @@
             445.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "123": {
           "stem": "Ms. Reyes considered the amount of luggage she was taking on her beach excursion before deciding on ______ car to rent.",
@@ -16425,7 +16425,7 @@
           "needsImage": false
         },
         "124": {
-          "stem": "A top competitor withdrew from the international tennis tournament due to a injury.",
+          "stem": "A top competitor withdrew from the international tennis tournament due to a ______ injury.",
           "options": {
             "A": "captivating",
             "B": "prescribing",
@@ -16440,7 +16440,7 @@
             707.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "125": {
           "stem": "______ a few members opposing the plan, the executive board has decided to go through with the investment in Diehl Electronics.",
@@ -16497,7 +16497,7 @@
           "needsImage": false
         },
         "128": {
-          "stem": "The spokesperson for Beaumont Industries made an official apology the company for the way it dealt with a delivery delay.",
+          "stem": "The spokesperson for Beaumont Industries made an official apology ______ the company for the way it dealt with a delivery delay.",
           "options": {
             "A": "as soon as",
             "B": "according to",
@@ -16512,10 +16512,10 @@
             543.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "129": {
-          "stem": "Copyright have the exclusive right to use, modify, and distribute the images they upload to Westforth Corporation's Web site.",
+          "stem": "Copyright ______ have the exclusive right to use, modify, and distribute the images they upload to Westforth Corporation's Web site.",
           "options": {
             "A": "held",
             "B": "holds",
@@ -16530,7 +16530,7 @@
             654.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "130": {
           "stem": "______ the weather is pleasant, the company's social gathering will occur at Ogilvy Park this weekend.",
@@ -18240,7 +18240,7 @@
       ],
       "items": {
         "101": {
-          "stem": "Food manufacturers are responsible for the safety requirements set by the government.",
+          "stem": "Food manufacturers are responsible for ______ the safety requirements set by the government.",
           "options": {
             "A": "fulfillment",
             "B": "fulfilling",
@@ -18255,10 +18255,10 @@
             413.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "102": {
-          "stem": "A number of people are lining up in the Sherwood Hotel lobby in the two-day technology symposium.",
+          "stem": "A number of people are lining up in the Sherwood Hotel lobby ______ in the two-day technology symposium.",
           "options": {
             "A": "enroll",
             "B": "enrolls",
@@ -18273,10 +18273,10 @@
             525.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "103": {
-          "stem": "Tel-Corn Corp.'s merger with Voice Messenger Inc. at a press conference on Monday last week.",
+          "stem": "Tel-Corn Corp.'s merger with Voice Messenger Inc. ______ at a press conference on Monday last week.",
           "options": {
             "A": "was announcing",
             "B": "to announce",
@@ -18291,10 +18291,10 @@
             636.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "104": {
-          "stem": "Mr. Kim went to Beijing by for a digital media conference and met several potential clients there.",
+          "stem": "Mr. Kim went to Beijing by ______ for a digital media conference and met several potential clients there.",
           "options": {
             "A": "he",
             "B": "him",
@@ -18309,10 +18309,10 @@
             773.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "105": {
-          "stem": "People who donate more than $50 to the Children's Cancer Group will receive a T-shirt.",
+          "stem": "People who donate more than $50 to the Children's Cancer Group will receive a ______ T-shirt.",
           "options": {
             "A": "compliment",
             "B": "compliments",
@@ -18327,7 +18327,7 @@
             414.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "106": {
           "stem": "To move items that are fragile and breakable, the manager has rented specialized ______ from Relocation Shippers.",
@@ -18348,7 +18348,7 @@
           "needsImage": false
         },
         "107": {
-          "stem": "The Grenville Heritage Museum visitors from taking any photos or videos of the exhibition pieces.",
+          "stem": "The Grenville Heritage Museum ______ visitors from taking any photos or videos of the exhibition pieces.",
           "options": {
             "A": "differentiates",
             "B": "presents",
@@ -18363,7 +18363,7 @@
             651.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "108": {
           "stem": "If you lose your room key, please ______ it to reception staff to get a replacement.",
@@ -18384,7 +18384,7 @@
           "needsImage": false
         },
         "109": {
-          "stem": "Reyman Steel is building a new warehouse the street from its main manufacturing plant.",
+          "stem": "Reyman Steel is building a new warehouse ______ the street from its main manufacturing plant.",
           "options": {
             "A": "without",
             "B": "between",
@@ -18399,7 +18399,7 @@
             197.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "110": {
           "stem": "Dr. Germain ______ dozens of research papers on electronic commerce before she retired a few years ago.",
@@ -18438,7 +18438,7 @@
           "needsImage": false
         },
         "112": {
-          "stem": "The federal government abandoned a plan to build a pipeline through Alton City due to overwhelming public",
+          "stem": "The federal government abandoned a plan to build a pipeline through Alton City due to overwhelming public ______.",
           "options": {
             "A": "opposition",
             "B": "oppose",
@@ -18453,7 +18453,7 @@
             531.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "113": {
           "stem": "The Ergonicore office chair is ______ , so it can comfortably seat individuals of varying heights.",
@@ -18528,7 +18528,7 @@
           "needsImage": false
         },
         "117": {
-          "stem": "Excursion Travel Agency has numerous listings for priced accommodations within city limits.",
+          "stem": "Excursion Travel Agency has numerous listings for ______ priced accommodations within city limits.",
           "options": {
             "A": "reasonable",
             "B": "reasonably",
@@ -18543,7 +18543,7 @@
             420.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "118": {
           "stem": "Reports that Shadco will be acquiring Durbania remain ______ at best as neither company has confirmed any such plans.",
@@ -18600,7 +18600,7 @@
           "needsImage": false
         },
         "121": {
-          "stem": "Attending the shareholders' meeting takes for the president of Goodman Company despite his hectic work schedule.",
+          "stem": "Attending the shareholders' meeting takes ______ for the president of Goodman Company despite his hectic work schedule.",
           "options": {
             "A": "outlook",
             "B": "effect",
@@ -18615,7 +18615,7 @@
             198.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "122": {
           "stem": "Quest Airlines allows registered members to accumulate mileage points ______ they buy a plane ticket.",
@@ -18690,7 +18690,7 @@
           "needsImage": false
         },
         "126": {
-          "stem": "All Swift-Dent electronic toothbrushes are warranty for a year from the time they are purchased.",
+          "stem": "All Swift-Dent electronic toothbrushes are ______ warranty for a year from the time they are purchased.",
           "options": {
             "A": "after",
             "B": "among",
@@ -18705,7 +18705,7 @@
             198.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "127": {
           "stem": "Production has been ______ on Grant Auto's new line of cars while engineers resolve a problem with the brake system.",
@@ -18744,7 +18744,7 @@
           "needsImage": false
         },
         "129": {
-          "stem": "Patrick Jolson will be interviewed three other promising candidates for the position of research and development head.",
+          "stem": "Patrick Jolson will be interviewed ______ three other promising candidates for the position of research and development head.",
           "options": {
             "A": "even though",
             "B": "up until",
@@ -18759,7 +18759,7 @@
             560.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "130": {
           "stem": "Eastwood County likely has a ______ of natural resources given its proximity to both a mountain range and the ocean.",
@@ -20487,7 +20487,7 @@
           "needsImage": false
         },
         "102": {
-          "stem": "The reporter forecasted sunny weather the Midwestern region for tomorrow.",
+          "stem": "The reporter forecasted sunny weather ______ the Midwestern region for tomorrow.",
           "options": {
             "A": "among",
             "B": "throughout",
@@ -20502,7 +20502,7 @@
             497.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "103": {
           "stem": "The faulty card reader located at the side entrance of Carter & Associates' headquarters ______ in the coming week.",
@@ -20523,7 +20523,7 @@
           "needsImage": false
         },
         "104": {
-          "stem": "The accounting department revised estimates for expenditures after the news that the budget would be changed.",
+          "stem": "The accounting department revised estimates for expenditures after ______ the news that the budget would be changed.",
           "options": {
             "A": "to receive",
             "B": "receives",
@@ -20538,7 +20538,7 @@
             746.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "105": {
           "stem": "Colorlast makes a line of outdoor paints that are ______ formulated to withstand years of exposure to sun and precipitation.",
@@ -20559,7 +20559,7 @@
           "needsImage": false
         },
         "106": {
-          "stem": "Athlete Tim Ferguson has made a recovery from his injuries and will be able to play in his team's next match.",
+          "stem": "Athlete Tim Ferguson has made a ______ recovery from his injuries and will be able to play in his team's next match.",
           "options": {
             "A": "reverse",
             "B": "preferable",
@@ -20574,7 +20574,7 @@
             525.3
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "107": {
           "stem": "Prospective candidates for the position will be notified of the final decision by June 1 at the ______ .",
@@ -20631,7 +20631,7 @@
           "needsImage": false
         },
         "110": {
-          "stem": "Verdant Island can only be visited in the daytime since of it is covered by water at night.",
+          "stem": "Verdant Island can only be visited in the daytime since ______ of it is covered by water at night.",
           "options": {
             "A": "much",
             "B": "few",
@@ -20646,10 +20646,10 @@
             321.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "111": {
-          "stem": "Extra staff were called in from nearby branches to help plant crews - production deadlines for an unexpected order.",
+          "stem": "Extra staff were called in from nearby branches to help plant crews ______ production deadlines for an unexpected order.",
           "options": {
             "A": "meet",
             "B": "enter",
@@ -20664,7 +20664,7 @@
             446.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "112": {
           "stem": "Officials at Lextar International were unable to agree ______ a definite solution to the problem of steadily declining profit margins.",
@@ -20721,7 +20721,7 @@
           "needsImage": false
         },
         "115": {
-          "stem": "Torres Architecture, the agency that planned the Steadman Tower, won an award from Building Life Global for its design.",
+          "stem": "Torres Architecture, the agency that planned the Steadman Tower, won an award from Building Life Global for its ______ design.",
           "options": {
             "A": "distinction",
             "B": "distinctiveness",
@@ -20736,7 +20736,7 @@
             321.6
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "116": {
           "stem": "transfers, the technical crew will ______ an upgraded software program on Friday.",
@@ -20757,7 +20757,7 @@
           "needsImage": false
         },
         "117": {
-          "stem": "The Cottonwood Gallery guarantees that of the items it sells is an original and comes with an official certificate of authenticity.",
+          "stem": "The Cottonwood Gallery guarantees that ______ of the items it sells is an original and comes with an official certificate of authenticity.",
           "options": {
             "A": "many",
             "B": "each",
@@ -20772,10 +20772,10 @@
             557.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "118": {
-          "stem": "If Jennifer hits all of her sales targets for the next quarter, there is a good chance she will",
+          "stem": "If Jennifer hits all of her sales targets for the next quarter, there is a good chance she will ______.",
           "options": {
             "A": "promote",
             "B": "have promoted",
@@ -20790,10 +20790,10 @@
             694.5
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "119": {
-          "stem": "The developers at Staycor test new software multiple times as their overall objective is to detect and eliminate any defects.",
+          "stem": "The developers at Staycor ______ test new software multiple times as their overall objective is to detect and eliminate any defects.",
           "options": {
             "A": "almost",
             "B": "barely",
@@ -20808,10 +20808,10 @@
             209.7
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "120": {
-          "stem": "Gigantica Studio's new action movie has some scenes which may be inappropriate for under the age of 15.",
+          "stem": "Gigantica Studio's new action movie has some scenes which may be inappropriate for ______ under the age of 15.",
           "options": {
             "A": "whoever",
             "B": "them",
@@ -20826,7 +20826,7 @@
             321.1
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "121": {
           "stem": "After years of difficulty doing it herself, Ms. Pace had her taxes ______ through an accounting agency.",
@@ -20865,7 +20865,7 @@
           "needsImage": false
         },
         "123": {
-          "stem": "Mr. Conrad posted advertisements on several recruitment sites, including the regarding salaries and benefits.",
+          "stem": "Mr. Conrad posted advertisements on several recruitment sites, including the ______ regarding salaries and benefits.",
           "options": {
             "A": "permissions",
             "B": "configurations",
@@ -20880,7 +20880,7 @@
             655.8
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "124": {
           "stem": "Top executives from Home Stock gave members of the local media a tour of the new store ______ its grand opening.",
@@ -20937,7 +20937,7 @@
           "needsImage": false
         },
         "127": {
-          "stem": "Sunny River Vacations endeavors to satisfy every customer by personalizing travel details to ensure that each trip is",
+          "stem": "Sunny River Vacations endeavors to satisfy every customer by personalizing travel details to ensure that each trip is ______.",
           "options": {
             "A": "memory",
             "B": "memorable",
@@ -20952,10 +20952,10 @@
             420.2
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "128": {
-          "stem": "Rowan Training Center has added more business classes, which brings the total number of sessions to nearly double that of last year.",
+          "stem": "Rowan Training Center has added more business classes, which brings the total number of ______ sessions to nearly double that of last year.",
           "options": {
             "A": "schedule",
             "B": "scheduled",
@@ -20970,10 +20970,10 @@
             545.4
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "129": {
-          "stem": "Ms. Jacobs' managerial style is democratic she includes her staff in the decision-making process.",
+          "stem": "Ms. Jacobs' managerial style is democratic ______ she includes her staff in the decision-making process.",
           "options": {
             "A": "in that",
             "B": "for example",
@@ -20988,7 +20988,7 @@
             657.0
           ],
           "groupId": null,
-          "needsImage": true
+          "needsImage": false
         },
         "130": {
           "stem": "MEG Electronics has a page on its Web site dedicated to ______ from users of its products.",

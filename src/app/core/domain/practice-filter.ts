@@ -63,7 +63,7 @@ export function filterPracticeQuestions(
         case 'unseen':
           return !stat || stat.seenCount === 0;
         case 'incorrect':
-          return stat?.lastCorrect === false;
+          return (stat?.incorrectCount ?? 0) > 0;
         case 'bookmarked':
           return bookmarks.has(question.id);
       }

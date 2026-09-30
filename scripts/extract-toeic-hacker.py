@@ -17,7 +17,7 @@ import pdfplumber
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "resources/toeic/hacker/rc/question/Hacker 3 RC.pdf"
+SOURCE = ROOT / "resources/toeic/hacker3/rc/question/Hacker 3 RC.pdf"
 ANSWERS = ROOT / "content/toeic-hacker-answers.json"
 OUTPUT = ROOT / "content/toeic-hacker-items.json"
 OVERRIDES = ROOT / "content/toeic-hacker-overrides.json"
@@ -28,7 +28,11 @@ OPTION = re.compile(r"\(([ABCD])\)")
 
 def normalize(text: str) -> str:
     text = re.sub(r"\s+", " ", text).strip()
-    return text.replace("�", "-").replace("(cid:3)", "")
+    text = text.replace("�", "-").replace("(cid:3)", "")
+    return re.sub(r"_{3,}", "______", text)
+
+
+BLANK_GAP_POINTS = 10
 
 
 def line_text(words: list[dict]) -> str:
@@ -39,7 +43,9 @@ def line_text(words: list[dict]) -> str:
     result = words[0]["text"]
     for previous, current in zip(words, words[1:]):
         gap = current["x0"] - previous["x1"]
-        separator = " ______ " if gap > 27 else " " if gap > 1 else ""
+        # The OCR layer omits printed blank rules. A normal word space in this
+        # source is about 3-5 points; its shortest blank leaves a 10+ point gap.
+        separator = " ______ " if gap > BLANK_GAP_POINTS else " " if gap > 1 else ""
         result += separator + current["text"]
     return normalize(result)
 
@@ -262,6 +268,8 @@ def extract(only_test: int | None = None) -> dict:
                     issues.append(f"Test {test:02} question {corrected_number}: stem correction has no question")
                 else:
                     item["stem"] = corrected_stem
+                    if corrected_number <= 130 and corrected_stem.count("______") == 1:
+                        item["needsImage"] = False
             if len(answer_file["tests"].get(str(test), {})) != 100:
                 issues.append(f"Test {test:02}: answer grid incomplete")
             for group in groups:

@@ -2,24 +2,31 @@ import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
-const [source, authored, questionCrops, questionEnvelope, solutionEnvelope] = await Promise.all([
-  readJson('../content/toeic-jimmy-source.json'),
-  readJson('../content/toeic-jimmy-items.json'),
-  readJson('../content/toeic-jimmy-question-crops.json'),
-  readJson('../public/data/toeic/questions.json'),
-  readJson('../public/data/toeic/solutions.json'),
-]);
-const questions = questionEnvelope.questions.filter((question) =>
-  question.id.startsWith('jimmy-reading-'),
-);
+const [source, authored, questionCrops, manifest, questionEnvelope, solutionEnvelope] =
+  await Promise.all([
+    readJson('../content/toeic-jimmy-source.json'),
+    readJson('../content/toeic-jimmy-items.json'),
+    readJson('../content/toeic-jimmy-question-crops.json'),
+    readJson('../public/data/toeic/jimmy-manifest.json'),
+    readJson('../public/data/toeic/jimmy-questions.json'),
+    readJson('../public/data/toeic/jimmy-solutions.json'),
+  ]);
+const questions = questionEnvelope.questions;
 const solutions = new Map(
-  solutionEnvelope.solutions
-    .filter((solution) => solution.questionId.startsWith('jimmy-reading-'))
-    .map((solution) => [solution.questionId, solution]),
+  solutionEnvelope.solutions.map((solution) => [solution.questionId, solution]),
 );
 
 describe('Jimmy Reading import', () => {
   it('contains only the 977 questions present in the supplied Reading PDF', () => {
+    expect(manifest).toMatchObject({
+      certificateId: 'toeic',
+      questionCount: 977,
+      solutionCount: 977,
+      files: {
+        questions: 'jimmy-questions.json',
+        solutions: 'jimmy-solutions.json',
+      },
+    });
     expect(questions).toHaveLength(977);
     expect(solutions.size).toBe(977);
     for (const test of source.tests) {

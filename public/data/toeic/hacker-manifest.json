@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankVersion": "toeic-hacker-reading-1.0.0",
+  "certificateId": "toeic",
+  "publishedAt": "2026-09-29",
+  "syllabusVersion": "TOEIC Listening & Reading",
+  "language": "en",
+  "questionCount": 1000,
+  "solutionCount": 1000,
+  "blueprint": [],
+  "files": {
+    "questions": "hacker-questions.json",
+    "solutions": "hacker-solutions.json"
+  }
+}

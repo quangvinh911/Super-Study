@@ -1,0 +1,94 @@
+<div class="page certificate-overview">
+  <header class="overview-heading">
+    <div>
+      <p class="overview-kicker">Không gian học</p>
+      <h1>{{ certificate.name }}</h1>
+      <p class="overview-subtitle">{{ certificate.definition.subtitle }}</p>
+    </div>
+    <a class="overview-progress" [routerLink]="certificate.link('progress')">Tiến độ của bạn <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <section class="study-focus" aria-labelledby="focus-title">
+    <div class="study-focus__content">
+      @if (resume(); as session) {
+        <p class="study-focus__label">Tiếp tục từ lần trước</p>
+        <h2 id="focus-title">Bài học đang chờ bạn</h2>
+        <p>{{ session.mode === 'exam' ? 'Thi thử' : 'Luyện tập' }} · Câu {{ session.currentIndex + 1 }} / {{ session.questions.length }}</p>
+        <a class="button study-focus__button" [routerLink]="certificate.link(session.mode === 'exam' ? 'mock-exam' : 'practice', session.id)">Tiếp tục làm bài <span aria-hidden="true">→</span></a>
+      } @else {
+        <p class="study-focus__label">Bắt đầu hôm nay</p>
+        <h2 id="focus-title">Luyện tập theo chủ đề</h2>
+        <p>Chọn phần bạn muốn củng cố. Làm từng câu và xem giải thích ngay sau khi kiểm tra.</p>
+        <a class="button study-focus__button" [routerLink]="certificate.link('practice')">Bắt đầu luyện tập <span aria-hidden="true">→</span></a>
+      }
+    </div>
+    <div class="study-focus__aside">
+      <span class="study-focus__symbol" aria-hidden="true">✦</span>
+      @if (loading()) {
+        <p role="status">Đang tải nội dung…</p>
+      } @else if (count()) {
+        <strong>{{ count().toLocaleString('vi-VN') }}</strong>
+        <span>câu hỏi để luyện tập</span>
+      } @else {
+        <span>Nội dung luyện tập đang được bổ sung.</span>
+      }
+    </div>
+  </section>
+
+  @if (error()) {
+    <p class="notice notice--error overview-error" role="alert">{{ error() }}</p>
+  }
+
+  <section class="study-options" aria-labelledby="options-title">
+    <div class="overview-section-heading">
+      <h2 id="options-title">Khám phá cách học khác</h2>
+      <span>Theo nhịp của bạn</span>
+    </div>
+    <div class="study-options__grid">
+      @for (resource of certificate.definition.learningResources ?? []; track resource.path) {
+        <article class="study-card">
+          <span class="study-card__icon" aria-hidden="true">Aa</span>
+          <div class="study-card__copy">
+            <h3>{{ resource.label }}</h3>
+            <p>{{ resource.description }}</p>
+            <a [routerLink]="certificate.link(resource.path)">Khám phá bài học <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      }
+      <article class="study-card study-card--exam">
+        <span class="study-card__icon" aria-hidden="true">◷</span>
+        <div class="study-card__copy">
+          <h3>Thi thử {{ certificate.name }}</h3>
+          <p>{{ certificate.definition.exam.questionCount }} câu · {{ certificate.definition.exam.durations[0] }} phút</p>
+          @if (!loading() && !examReady()) {
+            <span class="study-card__status">Chưa có đề đầy đủ</span>
+          }
+          <a [routerLink]="certificate.link('mock-exam')">{{ examReady() ? 'Làm đề thi thử' : 'Xem cấu trúc bài thi' }} <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="review-section" aria-labelledby="review-title">
+    <div class="overview-section-heading">
+      <h2 id="review-title">Ôn lại để nhớ lâu</h2>
+    </div>
+    <div class="review-shortcuts">
+      <a [routerLink]="certificate.link('practice')" [queryParams]="{ history: 'incorrect' }">
+        <span class="review-shortcuts__icon" aria-hidden="true">↻</span>
+        <span><strong>Câu từng làm sai</strong><small>Củng cố phần còn chưa chắc</small></span>
+        <span class="review-shortcuts__arrow" aria-hidden="true">→</span>
+      </a>
+      <a [routerLink]="certificate.link('practice')" [queryParams]="{ history: 'bookmarked' }">
+        <span class="review-shortcuts__icon" aria-hidden="true">☆</span>
+        <span><strong>Câu đã đánh dấu</strong><small>Xem lại những câu cần nhớ</small></span>
+        <span class="review-shortcuts__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="overview-footnote">
+    <p>{{ certificate.definition.description }}</p>
+    <a [routerLink]="certificate.link('methodology')">Hướng dẫn &amp; nguồn tham khảo</a>
+  </div>
+</div>

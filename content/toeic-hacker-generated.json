@@ -5,7 +5,7 @@
       "formId": "hacker-3-test-01",
       "order": 101,
       "id": "hacker-3-test-01-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -82,7 +82,7 @@
       "formId": "hacker-3-test-01",
       "order": 102,
       "id": "hacker-3-test-01-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -159,12 +159,12 @@
       "formId": "hacker-3-test-01",
       "order": 103,
       "id": "hacker-3-test-01-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Beginning next week, Zumwalt, Inc.'s new smartphone will be available for purchase at ____ retailers across Korea and Japan."
+          "text": "Beginning next week, Zumwalt, Inc.'s new smartphone will be available for purchase at ______ retailers across Korea and Japan."
         }
       ],
       "options": [
@@ -236,12 +236,12 @@
       "formId": "hacker-3-test-01",
       "order": 104,
       "id": "hacker-3-test-01-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Highway construction has been postponed indefinitely as Hampshire County residents have ____ to the plan."
+          "text": "Highway construction has been postponed indefinitely as Hampshire County residents have ______ to the plan."
         }
       ],
       "options": [
@@ -313,12 +313,12 @@
       "formId": "hacker-3-test-01",
       "order": 105,
       "id": "hacker-3-test-01-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The Trescott Chamber of Commerce _____ local businessman Brian Larue at a ceremony next week."
+          "text": "The Trescott Chamber of Commerce ______ local businessman Brian Larue at a ceremony next week."
         }
       ],
       "options": [
@@ -390,12 +390,12 @@
       "formId": "hacker-3-test-01",
       "order": 106,
       "id": "hacker-3-test-01-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Please review your contract, and feel free to ask _____ questions you might have,"
+          "text": "Please review your contract, and feel free to ask ______ questions you might have,"
         }
       ],
       "options": [
@@ -467,12 +467,12 @@
       "formId": "hacker-3-test-01",
       "order": 107,
       "id": "hacker-3-test-01-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The manager announced that a few office supply _______ would be delayed because of weather conditions."
+          "text": "The manager announced that a few office supply ______ would be delayed because of weather conditions."
         }
       ],
       "options": [
@@ -544,12 +544,12 @@
       "formId": "hacker-3-test-01",
       "order": 108,
       "id": "hacker-3-test-01-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "By adding extra flights between Dubai and Istanbul, Euroblue Airlines will increase its ____ for route by more than 50 percent."
+          "text": "By adding extra flights between Dubai and Istanbul, Euroblue Airlines will increase its ______ for route by more than 50 percent."
         }
       ],
       "options": [
@@ -621,12 +621,12 @@
       "formId": "hacker-3-test-01",
       "order": 109,
       "id": "hacker-3-test-01-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Halmilton Hospital’s purchase of a medical scanning device will permit doctors to diagnose patients more ____ than ever before."
+          "text": "Halmilton Hospital’s purchase of a medical scanning device will permit doctors to diagnose patients more ______ than ever before."
         }
       ],
       "options": [
@@ -698,12 +698,12 @@
       "formId": "hacker-3-test-01",
       "order": 110,
       "id": "hacker-3-test-01-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "____ a bank has approved Flynn Co.'s business loan, the company can begin its planned expansion."
+          "text": "______ a bank has approved Flynn Co.'s business loan, the company can begin its planned expansion."
         }
       ],
       "options": [
@@ -775,7 +775,7 @@
       "formId": "hacker-3-test-01",
       "order": 111,
       "id": "hacker-3-test-01-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -852,12 +852,12 @@
       "formId": "hacker-3-test-01",
       "order": 112,
       "id": "hacker-3-test-01-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Though Bruce Guthrie's concert is planned _______ August 1, the organizers have said that this is subject to change."
+          "text": "Though Bruce Guthrie's concert is planned ______ August 1, the organizers have said that this is subject to change."
         }
       ],
       "options": [
@@ -929,12 +929,12 @@
       "formId": "hacker-3-test-01",
       "order": 113,
       "id": "hacker-3-test-01-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The public speaking course presents trainees with opportunities _____ themselves in front of a group."
+          "text": "The public speaking course presents trainees with opportunities ______ themselves in front of a group."
         }
       ],
       "options": [
@@ -1006,12 +1006,12 @@
       "formId": "hacker-3-test-01",
       "order": 114,
       "id": "hacker-3-test-01-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The speaker at the Westicon Literature Seminar told an _____ story that had the entire audience laughing in enjoyment."
+          "text": "The speaker at the Westicon Literature Seminar told an ______ story that had the entire audience laughing in enjoyment."
         }
       ],
       "options": [
@@ -1083,12 +1083,12 @@
       "formId": "hacker-3-test-01",
       "order": 115,
       "id": "hacker-3-test-01-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "A fee of $100 will be _____ to office rental payments that are more than two weeks late."
+          "text": "A fee of $100 will be ______ to office rental payments that are more than two weeks late."
         }
       ],
       "options": [
@@ -1160,12 +1160,12 @@
       "formId": "hacker-3-test-01",
       "order": 116,
       "id": "hacker-3-test-01-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Last month's issue of Wise Finance _________ an exclusive interview with Chuck Granville, founder financial firm Granville Investments."
+          "text": "Last month's issue of Wise Finance ______ an exclusive interview with Chuck Granville, founder financial firm Granville Investments."
         }
       ],
       "options": [
@@ -1237,12 +1237,12 @@
       "formId": "hacker-3-test-01",
       "order": 117,
       "id": "hacker-3-test-01-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Broadcasting the ________ latest news 24 hours a day, cable station CPP allows viewers to keep up-to-date on world events."
+          "text": "Broadcasting the ______ latest news 24 hours a day, cable station CPP allows viewers to keep up-to-date on world events."
         }
       ],
       "options": [
@@ -1314,12 +1314,12 @@
       "formId": "hacker-3-test-01",
       "order": 118,
       "id": "hacker-3-test-01-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The software _____ that New-Tech offers remove security risks and improve the performance computers."
+          "text": "The software ______ that New-Tech offers remove security risks and improve the performance computers."
         }
       ],
       "options": [
@@ -1391,12 +1391,12 @@
       "formId": "hacker-3-test-01",
       "order": 119,
       "id": "hacker-3-test-01-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Evans took a taxi to avoid being late, but the theater show had ____ begun by the time he arrived."
+          "text": "Mr. Evans took a taxi to avoid being late, but the theater show had ______ begun by the time he arrived."
         }
       ],
       "options": [
@@ -1468,12 +1468,12 @@
       "formId": "hacker-3-test-01",
       "order": 120,
       "id": "hacker-3-test-01-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Notices _______ residents of possible power outages were mailed out a week before crews began work on the power lines."
+          "text": "Notices ______ residents of possible power outages were mailed out a week before crews began work on the power lines."
         }
       ],
       "options": [
@@ -1545,12 +1545,12 @@
       "formId": "hacker-3-test-01",
       "order": 121,
       "id": "hacker-3-test-01-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Clemon’s work was so impressive that he was made a senior manager _____ only six months with the company."
+          "text": "Mr. Clemon’s work was so impressive that he was made a senior manager ______ only six months with the company."
         }
       ],
       "options": [
@@ -1622,7 +1622,7 @@
       "formId": "hacker-3-test-01",
       "order": 122,
       "id": "hacker-3-test-01-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -1699,12 +1699,12 @@
       "formId": "hacker-3-test-01",
       "order": 123,
       "id": "hacker-3-test-01-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Although a graduate degree is a requirement for the position, none of _______ who responded to the job announcement have one."
+          "text": "Although a graduate degree is a requirement for the position, none of ______ who responded to the job announcement have one."
         }
       ],
       "options": [
@@ -1776,12 +1776,12 @@
       "formId": "hacker-3-test-01",
       "order": 124,
       "id": "hacker-3-test-01-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Travel writer Arthur Chaplin will give a short presentation tomorrow _____ the trip the described in his new book, Walking in Peru."
+          "text": "Travel writer Arthur Chaplin will give a short presentation tomorrow ______ the trip the described in his new book, Walking in Peru."
         }
       ],
       "options": [
@@ -1853,12 +1853,12 @@
       "formId": "hacker-3-test-01",
       "order": 125,
       "id": "hacker-3-test-01-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Having written multiple books on the effects of global warming, Ms. Black is widely regarded as a _______ expert on environmental issues."
+          "text": "Having written multiple books on the effects of global warming, Ms. Black is widely regarded as a ______ expert on environmental issues."
         }
       ],
       "options": [
@@ -1930,12 +1930,12 @@
       "formId": "hacker-3-test-01",
       "order": 126,
       "id": "hacker-3-test-01-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Local water quality is ____ to improve once the sewage treatment center is upgraded."
+          "text": "Local water quality is ______ to improve once the sewage treatment center is upgraded."
         }
       ],
       "options": [
@@ -2007,7 +2007,7 @@
       "formId": "hacker-3-test-01",
       "order": 127,
       "id": "hacker-3-test-01-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -2084,7 +2084,7 @@
       "formId": "hacker-3-test-01",
       "order": 128,
       "id": "hacker-3-test-01-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -2161,12 +2161,12 @@
       "formId": "hacker-3-test-01",
       "order": 129,
       "id": "hacker-3-test-01-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mercer Incorporated carefully goes over _______ its customer surveys and market research before making important decisions."
+          "text": "Mercer Incorporated carefully goes over ______ its customer surveys and market research before making important decisions."
         }
       ],
       "options": [
@@ -2238,12 +2238,12 @@
       "formId": "hacker-3-test-01",
       "order": 130,
       "id": "hacker-3-test-01-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "For the purpose of increasing sales, Mendelbaum Electronics is giving a prize to _____ is the 100th person to buy a refrigerator."
+          "text": "For the purpose of increasing sales, Mendelbaum Electronics is giving a prize to ______ is the 100th person to buy a refrigerator."
         }
       ],
       "options": [
@@ -2391,7 +2391,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) _______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ________ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
+            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) ______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ______ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
           },
           {
             "kind": "image",
@@ -2482,7 +2482,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) _______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ________ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
+            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) ______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ______ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
           },
           {
             "kind": "image",
@@ -2573,7 +2573,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) _______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ________ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
+            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) ______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ______ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
           },
           {
             "kind": "image",
@@ -2664,7 +2664,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) _______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ________ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
+            "text": "PART 6: Directions: In each question, you will be asked to review a statement that is missing a word or phrase. Four answer choices will be provided for each statement. Select the best answer and mark the corresponding letter (A), (B), (C), or (D) on the answer sheet. Questions 131-134 refer to the following e-mail, To: MoRay Productions <inquiries@mcrayprod.com> From: Laura Hahn <lhahn@delrio.com> Subject: Proposal Attachment: Product list To Whom It May Concern, My retail business, Delrio, currently needs a new (131) ______ for its pros. Delrio mostlys souvenir items, like canvas bags, pouches, and umbrellas, and I was wondering if you could produce some goods I've designed for an upcoming trade fair. This event will provide an opportunity for my company to attract customers and establish a positive (132) ______ with them. It is therefore very important for the merchandise I sell to appeal to my target market. (133) ______ everything must be convenient to use and made of durable materials. I have attached a list of products I intend to feature and would like a sample of each one (134) ______. Sincerely, Laura Hahn, Delrio CEO"
           },
           {
             "kind": "image",
@@ -2755,7 +2755,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) _____ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) _____ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) _____ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. _______ ."
+            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) ______ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) ______ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) ______ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. ______ ."
           },
           {
             "kind": "image",
@@ -2846,7 +2846,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) _____ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) _____ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) _____ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. _______ ."
+            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) ______ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) ______ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) ______ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. ______ ."
           },
           {
             "kind": "image",
@@ -2937,7 +2937,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) _____ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) _____ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) _____ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. _______ ."
+            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) ______ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) ______ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) ______ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. ______ ."
           },
           {
             "kind": "image",
@@ -3028,7 +3028,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) _____ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) _____ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) _____ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. _______ ."
+            "text": "Questions 135-138 refer to the following notice, Notice to all Northrup Apartment residents: As you know, we have done some (135) ______ facility renovations for the first time. A children's playground in the compound has been added, and the old water pipes have been changed. Also, new walkways have been put in to replace the ones that had holes. Northrup Apartment management (136) ______ you a detailed report of the amount that was spent on materials and labor. You all should have had a chance to go over it carefully by now. Costs will be divided as we earlier (137) ______ during the management-resident meeting. The management will pay 60 percent of the costs and residents will pay the remainder. To offset the share you have claimed responsibility for, your monthly amenities and maintenance bills will increase by $25 beginning next month. ______ ."
           },
           {
             "kind": "image",
@@ -3119,7 +3119,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)_______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) _____ the exit. Please note that the tickets will be valid for a limited time. (141)________. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) _______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
+            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) ______ the exit. Please note that the tickets will be valid for a limited time. (141)______. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) ______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
           },
           {
             "kind": "image",
@@ -3210,7 +3210,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)_______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) _____ the exit. Please note that the tickets will be valid for a limited time. (141)________. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) _______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
+            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) ______ the exit. Please note that the tickets will be valid for a limited time. (141)______. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) ______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
           },
           {
             "kind": "image",
@@ -3301,7 +3301,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)_______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) _____ the exit. Please note that the tickets will be valid for a limited time. (141)________. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) _______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
+            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) ______ the exit. Please note that the tickets will be valid for a limited time. (141)______. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) ______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
           },
           {
             "kind": "image",
@@ -3392,7 +3392,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)_______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) _____ the exit. Please note that the tickets will be valid for a limited time. (141)________. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) _______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
+            "text": "Questions 139-142 refer to the following information, Win a free ski lift ticket from Schuler! Schuler Gas (139)______ its customers a chance to win free ski lift tickets. They are worth $149 each and good for the entire day at any of the 15 resorts participating in this promotion. From now until December 26, simply buy over 38 liters of fuel at any Schuler gas station nationwide. Then leave the receipt, complete with your contact information on the back, in the box (140) ______ the exit. Please note that the tickets will be valid for a limited time. (141)______. Furthermore, they cannot be exchanged for cash. Our raffle on January 1 will determine the winners, who can (142) ______ the tickets at the station the day after we call them. Alternatively, winners can arrange to have them mailed."
           },
           {
             "kind": "image",
@@ -3483,7 +3483,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) _____ local roads instead. Most residents, however, believe the center is a (145)_______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
+            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) ______ local roads instead. Most residents, however, believe the center is a (145)______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
           },
           {
             "kind": "image",
@@ -3574,7 +3574,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) _____ local roads instead. Most residents, however, believe the center is a (145)_______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
+            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) ______ local roads instead. Most residents, however, believe the center is a (145)______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
           },
           {
             "kind": "image",
@@ -3665,7 +3665,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) _____ local roads instead. Most residents, however, believe the center is a (145)_______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
+            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) ______ local roads instead. Most residents, however, believe the center is a (145)______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
           },
           {
             "kind": "image",
@@ -3756,7 +3756,7 @@
         "content": [
           {
             "kind": "paragraph",
-            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) _____ local roads instead. Most residents, however, believe the center is a (145)_______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
+            "text": "Questions 143-146 refer to the following article, Abbotsburg, May 9 — After a year of construction, the Abbotsburg Community Center will be unveiled next Friday. (143) ______ . Costing nearly $5 million, the center is considered a luxury by some who contend that the money should have been used to (144) ______ local roads instead. Most residents, however, believe the center is a (145)______ Karen Petrowski, (146) ______ has been appointed the center's director said, \"It will provide residents with the vital social, recreational, and educational opportunities they require.\" And she added, \"We believe that, in time, the entire community will consider it a worthwhile place.\""
           },
           {
             "kind": "image",
@@ -8760,17 +8760,12 @@
       "formId": "hacker-3-test-02",
       "order": 101,
       "id": "hacker-3-test-02-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "According to Picton Daily News, only damage to the area occurred during the tropical storm."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q101.webp",
-          "alt": "Câu 101 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "According to Picton Daily News, only ______ damage to the area occurred during the tropical storm."
         }
       ],
       "options": [
@@ -8842,17 +8837,12 @@
       "formId": "hacker-3-test-02",
       "order": 102,
       "id": "hacker-3-test-02-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The employees at Barneveld Inc. are encouraged to build teamwork by assisting on various projects."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q102.webp",
-          "alt": "Câu 102 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "The employees at Barneveld Inc. are encouraged to build teamwork by assisting ______ on various projects."
         }
       ],
       "options": [
@@ -8924,17 +8914,12 @@
       "formId": "hacker-3-test-02",
       "order": 103,
       "id": "hacker-3-test-02-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Some marketing team members from Game-Tekno will be traveling to Tokyo the branch opening to finalize preparations."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q103.webp",
-          "alt": "Câu 103 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "Some marketing team members from Game-Tekno will be traveling to Tokyo ______ the branch opening to finalize preparations."
         }
       ],
       "options": [
@@ -9006,17 +8991,12 @@
       "formId": "hacker-3-test-02",
       "order": 104,
       "id": "hacker-3-test-02-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The seminar speaker offered some arguments in favor of natural medications and remedies."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q104.webp",
-          "alt": "Câu 104 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "The seminar speaker offered some ______ arguments in favor of natural medications and remedies."
         }
       ],
       "options": [
@@ -9088,17 +9068,12 @@
       "formId": "hacker-3-test-02",
       "order": 105,
       "id": "hacker-3-test-02-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The statue on Hastings Avenue that was unveiled in a ceremony yesterday by an ancient Roman sculpture."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q105.webp",
-          "alt": "Câu 105 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "The statue on Hastings Avenue that was unveiled in a ceremony yesterday ______ by an ancient Roman sculpture."
         }
       ],
       "options": [
@@ -9170,17 +9145,12 @@
       "formId": "hacker-3-test-02",
       "order": 106,
       "id": "hacker-3-test-02-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "An old building in the Brickford neighborhood will be demolished and a luxury apartment."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q106.webp",
-          "alt": "Câu 106 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "An old building in the Brickford neighborhood will be demolished and ______ a luxury apartment."
         }
       ],
       "options": [
@@ -9252,17 +9222,12 @@
       "formId": "hacker-3-test-02",
       "order": 107,
       "id": "hacker-3-test-02-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "After he was appointed sales manager, Bill Haskell achieved improved between the staff in the sales and marketing departments."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q107.webp",
-          "alt": "Câu 107 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "After he was appointed sales manager, Bill Haskell achieved improved ______ between the staff in the sales and marketing departments."
         }
       ],
       "options": [
@@ -9334,17 +9299,12 @@
       "formId": "hacker-3-test-02",
       "order": 108,
       "id": "hacker-3-test-02-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "All potential clients are given brochures containing brief of GL Mutual's insurance policy packages."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q108.webp",
-          "alt": "Câu 108 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "All potential clients are given brochures containing brief ______ of GL Mutual's insurance policy packages."
         }
       ],
       "options": [
@@ -9416,7 +9376,7 @@
       "formId": "hacker-3-test-02",
       "order": 109,
       "id": "hacker-3-test-02-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -9493,17 +9453,12 @@
       "formId": "hacker-3-test-02",
       "order": 110,
       "id": "hacker-3-test-02-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Codex Corporation showed a great deal of about Ms. Khan's recent medical issues and gave her an extended leave."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q110.webp",
-          "alt": "Câu 110 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "Codex Corporation showed a great deal of ______ about Ms. Khan's recent medical issues and gave her an extended leave."
         }
       ],
       "options": [
@@ -9575,17 +9530,12 @@
       "formId": "hacker-3-test-02",
       "order": 111,
       "id": "hacker-3-test-02-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mayor Terrence Miller the volunteers for the self-sacrificing work they did to assist the community during the disaster."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q111.webp",
-          "alt": "Câu 111 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "Mayor Terrence Miller ______ the volunteers for the self-sacrificing work they did to assist the community during the disaster."
         }
       ],
       "options": [
@@ -9657,17 +9607,12 @@
       "formId": "hacker-3-test-02",
       "order": 112,
       "id": "hacker-3-test-02-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The Parker Fairground off Taylor Street is the perfect place for families and friends during the summer."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q112.webp",
-          "alt": "Câu 112 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "The Parker Fairground off Taylor Street is the perfect place for families and friends ______ during the summer."
         }
       ],
       "options": [
@@ -9739,7 +9684,7 @@
       "formId": "hacker-3-test-02",
       "order": 113,
       "id": "hacker-3-test-02-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -9816,7 +9761,7 @@
       "formId": "hacker-3-test-02",
       "order": 114,
       "id": "hacker-3-test-02-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -9893,7 +9838,7 @@
       "formId": "hacker-3-test-02",
       "order": 115,
       "id": "hacker-3-test-02-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -9970,7 +9915,7 @@
       "formId": "hacker-3-test-02",
       "order": 116,
       "id": "hacker-3-test-02-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10047,7 +9992,7 @@
       "formId": "hacker-3-test-02",
       "order": 117,
       "id": "hacker-3-test-02-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10124,7 +10069,7 @@
       "formId": "hacker-3-test-02",
       "order": 118,
       "id": "hacker-3-test-02-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10201,7 +10146,7 @@
       "formId": "hacker-3-test-02",
       "order": 119,
       "id": "hacker-3-test-02-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10278,17 +10223,12 @@
       "formId": "hacker-3-test-02",
       "order": 120,
       "id": "hacker-3-test-02-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Bug-Fix Software users of its antivirus program to download regular updates and scan their computers on a weekly basis."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q120.webp",
-          "alt": "Câu 120 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "Bug-Fix Software ______ users of its antivirus program to download regular updates and scan their computers on a weekly basis."
         }
       ],
       "options": [
@@ -10360,7 +10300,7 @@
       "formId": "hacker-3-test-02",
       "order": 121,
       "id": "hacker-3-test-02-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10437,17 +10377,12 @@
       "formId": "hacker-3-test-02",
       "order": 122,
       "id": "hacker-3-test-02-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Included in the lease is a strict requiring tenants to pay for any damages caused to the property,"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q122.webp",
-          "alt": "Câu 122 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "Included in the lease is a strict ______ requiring tenants to pay for any damages caused to the property."
         }
       ],
       "options": [
@@ -10519,7 +10454,7 @@
       "formId": "hacker-3-test-02",
       "order": 123,
       "id": "hacker-3-test-02-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10596,7 +10531,7 @@
       "formId": "hacker-3-test-02",
       "order": 124,
       "id": "hacker-3-test-02-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10673,7 +10608,7 @@
       "formId": "hacker-3-test-02",
       "order": 125,
       "id": "hacker-3-test-02-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10750,7 +10685,7 @@
       "formId": "hacker-3-test-02",
       "order": 126,
       "id": "hacker-3-test-02-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -10827,17 +10762,12 @@
       "formId": "hacker-3-test-02",
       "order": 127,
       "id": "hacker-3-test-02-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Clifton Oil and Gas's annual sales are showing great compared to last year, when profits were disappointing."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q127.webp",
-          "alt": "Câu 127 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "Clifton Oil and Gas's annual sales are showing great ______ compared to last year, when profits were disappointing."
         }
       ],
       "options": [
@@ -10909,17 +10839,12 @@
       "formId": "hacker-3-test-02",
       "order": 128,
       "id": "hacker-3-test-02-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Most participants have found Bucksmith Capital's internship program because it provides them with relevant banking experience."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q128.webp",
-          "alt": "Câu 128 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "Most participants have found Bucksmith Capital's internship program ______ because it provides them with relevant banking experience."
         }
       ],
       "options": [
@@ -10991,7 +10916,7 @@
       "formId": "hacker-3-test-02",
       "order": 129,
       "id": "hacker-3-test-02-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -11068,17 +10993,12 @@
       "formId": "hacker-3-test-02",
       "order": 130,
       "id": "hacker-3-test-02-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "For coverage of top stories from around the world, more viewers tune in to Global Syndicated than any other news channel."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-02-q130.webp",
-          "alt": "Câu 130 và vị trí chỗ trống trong ảnh gốc Test 2"
+          "text": "For ______ coverage of top stories from around the world, more viewers tune in to Global Syndicated than any other news channel."
         }
       ],
       "options": [
@@ -17665,7 +17585,7 @@
       "formId": "hacker-3-test-03",
       "order": 101,
       "id": "hacker-3-test-03-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -17742,17 +17662,12 @@
       "formId": "hacker-3-test-03",
       "order": 102,
       "id": "hacker-3-test-03-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The construction of a new subway line was aimed at overcrowding during rush hour."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q102.webp",
-          "alt": "Câu 102 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "The construction of a new subway line was aimed at ______ overcrowding during rush hour."
         }
       ],
       "options": [
@@ -17824,17 +17739,12 @@
       "formId": "hacker-3-test-03",
       "order": 103,
       "id": "hacker-3-test-03-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Bedford was chosen to represent Centraine because of her considerable in mergers and acquisitions."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q103.webp",
-          "alt": "Câu 103 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Ms. Bedford was chosen to represent Centraine because of her considerable ______ in mergers and acquisitions."
         }
       ],
       "options": [
@@ -17906,17 +17816,12 @@
       "formId": "hacker-3-test-03",
       "order": 104,
       "id": "hacker-3-test-03-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The wireless headset by Smartcom's representative at the Fentwood Technology Trade Show will go on the market next month."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q104.webp",
-          "alt": "Câu 104 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "The wireless headset ______ by Smartcom's representative at the Fentwood Technology Trade Show will go on the market next month."
         }
       ],
       "options": [
@@ -17988,17 +17893,12 @@
       "formId": "hacker-3-test-03",
       "order": 105,
       "id": "hacker-3-test-03-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Members who renew their newspaper subscription at least one month prior to its will receive a 5 percent discount."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q105.webp",
-          "alt": "Câu 105 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Members who renew their newspaper subscription at least one month prior to its ______ will receive a 5 percent discount."
         }
       ],
       "options": [
@@ -18070,17 +17970,12 @@
       "formId": "hacker-3-test-03",
       "order": 106,
       "id": "hacker-3-test-03-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Lorasoft's customer service agents are instructed to handle minor requests before forwarding calls directly to the technical support team."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q106.webp",
-          "alt": "Câu 106 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Lorasoft's customer service agents are instructed to handle minor requests ______ before forwarding calls directly to the technical support team."
         }
       ],
       "options": [
@@ -18152,7 +18047,7 @@
       "formId": "hacker-3-test-03",
       "order": 107,
       "id": "hacker-3-test-03-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -18229,17 +18124,12 @@
       "formId": "hacker-3-test-03",
       "order": 108,
       "id": "hacker-3-test-03-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Scientists employed by Fluent Pharmaceuticals spend most of their time medications to treat diabetes."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q108.webp",
-          "alt": "Câu 108 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Scientists employed by Fluent Pharmaceuticals spend most of their time ______ medications to treat diabetes."
         }
       ],
       "options": [
@@ -18311,7 +18201,7 @@
       "formId": "hacker-3-test-03",
       "order": 109,
       "id": "hacker-3-test-03-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -18388,7 +18278,7 @@
       "formId": "hacker-3-test-03",
       "order": 110,
       "id": "hacker-3-test-03-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -18465,17 +18355,12 @@
       "formId": "hacker-3-test-03",
       "order": 111,
       "id": "hacker-3-test-03-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Had Mr. Shriver booked his vacation package further in advance, he a much lower price."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q111.webp",
-          "alt": "Câu 111 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Had Mr. Shriver booked his vacation package further in advance, he ______ a much lower price."
         }
       ],
       "options": [
@@ -18547,17 +18432,12 @@
       "formId": "hacker-3-test-03",
       "order": 112,
       "id": "hacker-3-test-03-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Most of the conference participants arrived an hour ago, but the keynote speaker is on his way."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q112.webp",
-          "alt": "Câu 112 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Most of the conference participants arrived an hour ago, but the keynote speaker is ______ on his way."
         }
       ],
       "options": [
@@ -18629,7 +18509,7 @@
       "formId": "hacker-3-test-03",
       "order": 113,
       "id": "hacker-3-test-03-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -18706,7 +18586,7 @@
       "formId": "hacker-3-test-03",
       "order": 114,
       "id": "hacker-3-test-03-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -18783,17 +18663,12 @@
       "formId": "hacker-3-test-03",
       "order": 115,
       "id": "hacker-3-test-03-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The latest version of the accounting software is not with the operating system installed on the office computers."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q115.webp",
-          "alt": "Câu 115 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "The latest version of the accounting software is not ______ with the operating system installed on the office computers."
         }
       ],
       "options": [
@@ -18865,17 +18740,12 @@
       "formId": "hacker-3-test-03",
       "order": 116,
       "id": "hacker-3-test-03-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Automat CEO Sergei Rostov's speech on trends in the high-tech industry drew an audience consisting mostly of entrepreneurs."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q116.webp",
-          "alt": "Câu 116 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Automat CEO Sergei Rostov's speech on trends in the high-tech industry drew an audience consisting mostly of ______ entrepreneurs."
         }
       ],
       "options": [
@@ -18947,17 +18817,12 @@
       "formId": "hacker-3-test-03",
       "order": 117,
       "id": "hacker-3-test-03-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Since acquiring the land on Taylor Avenue five years ago, the proprietor multiple offers from developers wishing to buy it."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q117.webp",
-          "alt": "Câu 117 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Since acquiring the land on Taylor Avenue five years ago, the proprietor ______ multiple offers from developers wishing to buy it."
         }
       ],
       "options": [
@@ -19029,17 +18894,12 @@
       "formId": "hacker-3-test-03",
       "order": 118,
       "id": "hacker-3-test-03-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "BRE Manufacturing is unlikely to take chances on new names as brands are more appealing to its target market."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q118.webp",
-          "alt": "Câu 118 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "BRE Manufacturing is unlikely to take chances on new names as ______ brands are more appealing to its target market."
         }
       ],
       "options": [
@@ -19111,17 +18971,12 @@
       "formId": "hacker-3-test-03",
       "order": 119,
       "id": "hacker-3-test-03-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The cast was interviewed by the press the first performance of the play Father Simon."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q119.webp",
-          "alt": "Câu 119 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "The cast was interviewed by the press ______ the first performance of the play Father Simon."
         }
       ],
       "options": [
@@ -19193,7 +19048,7 @@
       "formId": "hacker-3-test-03",
       "order": 120,
       "id": "hacker-3-test-03-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19270,17 +19125,12 @@
       "formId": "hacker-3-test-03",
       "order": 121,
       "id": "hacker-3-test-03-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Home Choice is looking for suppliers who can - produce the various parts it needs for its new line of kitchen appliances."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q121.webp",
-          "alt": "Câu 121 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Home Choice is looking for suppliers who can - ______ produce the various parts it needs for its new line of kitchen appliances."
         }
       ],
       "options": [
@@ -19352,7 +19202,7 @@
       "formId": "hacker-3-test-03",
       "order": 122,
       "id": "hacker-3-test-03-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19429,7 +19279,7 @@
       "formId": "hacker-3-test-03",
       "order": 123,
       "id": "hacker-3-test-03-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19506,7 +19356,7 @@
       "formId": "hacker-3-test-03",
       "order": 124,
       "id": "hacker-3-test-03-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19583,17 +19433,12 @@
       "formId": "hacker-3-test-03",
       "order": 125,
       "id": "hacker-3-test-03-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Trevors overcame the difficulty of speaking French by improving his skills with regular practice."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q125.webp",
-          "alt": "Câu 125 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Mr. Trevors overcame the difficulty of speaking French by ______ improving his skills with regular practice."
         }
       ],
       "options": [
@@ -19665,7 +19510,7 @@
       "formId": "hacker-3-test-03",
       "order": 126,
       "id": "hacker-3-test-03-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19742,7 +19587,7 @@
       "formId": "hacker-3-test-03",
       "order": 127,
       "id": "hacker-3-test-03-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19819,7 +19664,7 @@
       "formId": "hacker-3-test-03",
       "order": 128,
       "id": "hacker-3-test-03-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19896,7 +19741,7 @@
       "formId": "hacker-3-test-03",
       "order": 129,
       "id": "hacker-3-test-03-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -19973,17 +19818,12 @@
       "formId": "hacker-3-test-03",
       "order": 130,
       "id": "hacker-3-test-03-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Providing senior managers with incentive-based compensation is a solution to their declining productivity,"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-03-q130.webp",
-          "alt": "Câu 130 và vị trí chỗ trống trong ảnh gốc Test 3"
+          "text": "Providing senior managers with incentive-based compensation is a ______ solution to their declining productivity."
         }
       ],
       "options": [
@@ -26570,7 +26410,7 @@
       "formId": "hacker-3-test-04",
       "order": 101,
       "id": "hacker-3-test-04-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -26647,17 +26487,12 @@
       "formId": "hacker-3-test-04",
       "order": 102,
       "id": "hacker-3-test-04-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mayberry Research Institute offers staff which include dental coverage and a pension plan."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q102.webp",
-          "alt": "Câu 102 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Mayberry Research Institute offers staff ______ which include dental coverage and a pension plan."
         }
       ],
       "options": [
@@ -26729,17 +26564,12 @@
       "formId": "hacker-3-test-04",
       "order": 103,
       "id": "hacker-3-test-04-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Arranging an appointment to see Dr. Menard one month in advance is due to her busy schedule."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q103.webp",
-          "alt": "Câu 103 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Arranging an appointment to see Dr. Menard one month in advance is ______ due to her busy schedule."
         }
       ],
       "options": [
@@ -26811,7 +26641,7 @@
       "formId": "hacker-3-test-04",
       "order": 104,
       "id": "hacker-3-test-04-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -26888,7 +26718,7 @@
       "formId": "hacker-3-test-04",
       "order": 105,
       "id": "hacker-3-test-04-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -26965,17 +26795,12 @@
       "formId": "hacker-3-test-04",
       "order": 106,
       "id": "hacker-3-test-04-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "AEG Co. is looking for sales associates who demonstrate excellent communication skills and an ability to work in a manner."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q106.webp",
-          "alt": "Câu 106 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "AEG Co. is looking for sales associates who demonstrate excellent communication skills and an ability to work in a ______ manner."
         }
       ],
       "options": [
@@ -27047,7 +26872,7 @@
       "formId": "hacker-3-test-04",
       "order": 107,
       "id": "hacker-3-test-04-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -27124,17 +26949,12 @@
       "formId": "hacker-3-test-04",
       "order": 108,
       "id": "hacker-3-test-04-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Herrera could not sit in an aisle seat during her international flight because there were available."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q108.webp",
-          "alt": "Câu 108 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Ms. Herrera could not sit in an aisle seat during her international flight because there were ______ available."
         }
       ],
       "options": [
@@ -27206,7 +27026,7 @@
       "formId": "hacker-3-test-04",
       "order": 109,
       "id": "hacker-3-test-04-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -27283,17 +27103,12 @@
       "formId": "hacker-3-test-04",
       "order": 110,
       "id": "hacker-3-test-04-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Transport officials are still unsure of caused Train 580 to break down earlier this morning."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q110.webp",
-          "alt": "Câu 110 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Transport officials are still unsure of ______ caused Train 580 to break down earlier this morning."
         }
       ],
       "options": [
@@ -27365,17 +27180,12 @@
       "formId": "hacker-3-test-04",
       "order": 111,
       "id": "hacker-3-test-04-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The Project Green report argues that the best way to save endangered species is by placing them in protected wildlife areas."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q111.webp",
-          "alt": "Câu 111 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "The Project Green report argues ______ that the best way to save endangered species is by placing them in protected wildlife areas."
         }
       ],
       "options": [
@@ -27447,17 +27257,12 @@
       "formId": "hacker-3-test-04",
       "order": 112,
       "id": "hacker-3-test-04-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The guide told visitors touring the High Point Library that the facility by the renowned architect Albert Grand."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q112.webp",
-          "alt": "Câu 112 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "The guide told visitors touring the High Point Library that the facility ______ by the renowned architect Albert Grand."
         }
       ],
       "options": [
@@ -27529,7 +27334,7 @@
       "formId": "hacker-3-test-04",
       "order": 113,
       "id": "hacker-3-test-04-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -27606,7 +27411,7 @@
       "formId": "hacker-3-test-04",
       "order": 114,
       "id": "hacker-3-test-04-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -27683,17 +27488,12 @@
       "formId": "hacker-3-test-04",
       "order": 115,
       "id": "hacker-3-test-04-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Passengers to fill in their arrival forms during the flight for quicker processing at the immigration checkpoint."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q115.webp",
-          "alt": "Câu 115 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Passengers ______ to fill in their arrival forms during the flight for quicker processing at the immigration checkpoint."
         }
       ],
       "options": [
@@ -27765,7 +27565,7 @@
       "formId": "hacker-3-test-04",
       "order": 116,
       "id": "hacker-3-test-04-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -27842,7 +27642,7 @@
       "formId": "hacker-3-test-04",
       "order": 117,
       "id": "hacker-3-test-04-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -27919,17 +27719,12 @@
       "formId": "hacker-3-test-04",
       "order": 118,
       "id": "hacker-3-test-04-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The client was never in his office many times Ms. Baxter tried to call him."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q118.webp",
-          "alt": "Câu 118 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "The client was never in his office ______ many times Ms. Baxter tried to call him."
         }
       ],
       "options": [
@@ -28001,17 +27796,12 @@
       "formId": "hacker-3-test-04",
       "order": 119,
       "id": "hacker-3-test-04-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "LocerTech's primary goal is to be as as possible to customer inquiries."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q119.webp",
-          "alt": "Câu 119 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "LocerTech's primary goal is to be as ______ as possible to customer inquiries."
         }
       ],
       "options": [
@@ -28083,17 +27873,12 @@
       "formId": "hacker-3-test-04",
       "order": 120,
       "id": "hacker-3-test-04-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Rodgers Industrial celebrated the of its 50th anniversary by hosting a banquet for clients from around the world."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q120.webp",
-          "alt": "Câu 120 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Rodgers Industrial celebrated the ______ of its 50th anniversary by hosting a banquet for clients from around the world."
         }
       ],
       "options": [
@@ -28165,17 +27950,12 @@
       "formId": "hacker-3-test-04",
       "order": 121,
       "id": "hacker-3-test-04-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Gilbot Grounds had to work to get the landscaping project finished by the deadline."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q121.webp",
-          "alt": "Câu 121 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Gilbot Grounds had to work ______ to get the landscaping project finished by the deadline."
         }
       ],
       "options": [
@@ -28247,17 +28027,12 @@
       "formId": "hacker-3-test-04",
       "order": 122,
       "id": "hacker-3-test-04-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Under the finance minister's leadership, corporations recovered quickly from last year's losses and then began making substantial"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q122.webp",
-          "alt": "Câu 122 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Under the finance minister's leadership, corporations recovered quickly from last year's losses and then began making substantial ______."
         }
       ],
       "options": [
@@ -28329,7 +28104,7 @@
       "formId": "hacker-3-test-04",
       "order": 123,
       "id": "hacker-3-test-04-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -28406,17 +28181,12 @@
       "formId": "hacker-3-test-04",
       "order": 124,
       "id": "hacker-3-test-04-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The current edition of the employee handbook detailed guidelines for employee performance reviews."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q124.webp",
-          "alt": "Câu 124 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "The current edition of the employee handbook ______ detailed guidelines for employee performance reviews."
         }
       ],
       "options": [
@@ -28488,17 +28258,12 @@
       "formId": "hacker-3-test-04",
       "order": 125,
       "id": "hacker-3-test-04-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Shoppers looking for high-quality electronics at low prices will find a selection at the new NorvelTech store,"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q125.webp",
-          "alt": "Câu 125 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Shoppers looking for high-quality electronics at low prices will find a ______ selection at the new NorvelTech store."
         }
       ],
       "options": [
@@ -28570,7 +28335,7 @@
       "formId": "hacker-3-test-04",
       "order": 126,
       "id": "hacker-3-test-04-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -28647,17 +28412,12 @@
       "formId": "hacker-3-test-04",
       "order": 127,
       "id": "hacker-3-test-04-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Many office workers frequent Stan's Bistro because of its to the business district."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q127.webp",
-          "alt": "Câu 127 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "Many office workers frequent Stan's Bistro because of its ______ to the business district."
         }
       ],
       "options": [
@@ -28729,17 +28489,12 @@
       "formId": "hacker-3-test-04",
       "order": 128,
       "id": "hacker-3-test-04-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The temperature this morning is cool and pleasant, but it is expected to increase steadily the day."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q128.webp",
-          "alt": "Câu 128 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "The temperature this morning is cool and pleasant, but it is expected to increase steadily ______ the day."
         }
       ],
       "options": [
@@ -28811,7 +28566,7 @@
       "formId": "hacker-3-test-04",
       "order": 129,
       "id": "hacker-3-test-04-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -28888,17 +28643,12 @@
       "formId": "hacker-3-test-04",
       "order": 130,
       "id": "hacker-3-test-04-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "--— to be the best in the city, the Melise Restaurant is booked for the next six months."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-04-q130.webp",
-          "alt": "Câu 130 và vị trí chỗ trống trong ảnh gốc Test 4"
+          "text": "______ to be the best in the city, the Melise Restaurant is booked for the next six months."
         }
       ],
       "options": [
@@ -35485,7 +35235,7 @@
       "formId": "hacker-3-test-05",
       "order": 101,
       "id": "hacker-3-test-05-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -35562,7 +35312,7 @@
       "formId": "hacker-3-test-05",
       "order": 102,
       "id": "hacker-3-test-05-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -35639,17 +35389,12 @@
       "formId": "hacker-3-test-05",
       "order": 103,
       "id": "hacker-3-test-05-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Eugene Rivera, who negotiated an agreement between the two firms, reported that the details would be settled the next several days."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q103.webp",
-          "alt": "Câu 103 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "Eugene Rivera, who negotiated an agreement between the two firms, reported that the details would be settled ______ the next several days."
         }
       ],
       "options": [
@@ -35721,7 +35466,7 @@
       "formId": "hacker-3-test-05",
       "order": 104,
       "id": "hacker-3-test-05-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -35798,7 +35543,7 @@
       "formId": "hacker-3-test-05",
       "order": 105,
       "id": "hacker-3-test-05-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -35875,7 +35620,7 @@
       "formId": "hacker-3-test-05",
       "order": 106,
       "id": "hacker-3-test-05-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -35952,7 +35697,7 @@
       "formId": "hacker-3-test-05",
       "order": 107,
       "id": "hacker-3-test-05-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36029,7 +35774,7 @@
       "formId": "hacker-3-test-05",
       "order": 108,
       "id": "hacker-3-test-05-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36106,7 +35851,7 @@
       "formId": "hacker-3-test-05",
       "order": 109,
       "id": "hacker-3-test-05-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36183,17 +35928,12 @@
       "formId": "hacker-3-test-05",
       "order": 110,
       "id": "hacker-3-test-05-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "A factor especially to the agricultural industry is whether there are reliable supplies of water and electricity."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q110.webp",
-          "alt": "Câu 110 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "A factor especially ______ to the agricultural industry is whether there are reliable supplies of water and electricity."
         }
       ],
       "options": [
@@ -36265,7 +36005,7 @@
       "formId": "hacker-3-test-05",
       "order": 111,
       "id": "hacker-3-test-05-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36342,17 +36082,12 @@
       "formId": "hacker-3-test-05",
       "order": 112,
       "id": "hacker-3-test-05-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "As it has been 60 business days since the purchase date, Branson Outlet will not allow an exchange or refund."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q112.webp",
-          "alt": "Câu 112 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "As it has been ______ 60 business days since the purchase date, Branson Outlet will not allow an exchange or refund."
         }
       ],
       "options": [
@@ -36424,17 +36159,12 @@
       "formId": "hacker-3-test-05",
       "order": 113,
       "id": "hacker-3-test-05-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Mitchell is looking for an apartment a train station so that she will not need to commute by car."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q113.webp",
-          "alt": "Câu 113 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "Ms. Mitchell is looking for an apartment ______ a train station so that she will not need to commute by car."
         }
       ],
       "options": [
@@ -36506,17 +36236,12 @@
       "formId": "hacker-3-test-05",
       "order": 114,
       "id": "hacker-3-test-05-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Immediately after ordering a new office desk online, Mr. Perez was issued of the transaction."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q114.webp",
-          "alt": "Câu 114 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "Immediately after ordering a new office desk online, Mr. Perez was issued ______ of the transaction."
         }
       ],
       "options": [
@@ -36588,7 +36313,7 @@
       "formId": "hacker-3-test-05",
       "order": 115,
       "id": "hacker-3-test-05-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36665,7 +36390,7 @@
       "formId": "hacker-3-test-05",
       "order": 116,
       "id": "hacker-3-test-05-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36742,17 +36467,12 @@
       "formId": "hacker-3-test-05",
       "order": 117,
       "id": "hacker-3-test-05-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The candidates for the job opening have experiences and career objectives despite all having worked in the same field."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q117.webp",
-          "alt": "Câu 117 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "The candidates for the job opening have ______ experiences and career objectives despite all having worked in the same field."
         }
       ],
       "options": [
@@ -36824,7 +36544,7 @@
       "formId": "hacker-3-test-05",
       "order": 118,
       "id": "hacker-3-test-05-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36901,7 +36621,7 @@
       "formId": "hacker-3-test-05",
       "order": 119,
       "id": "hacker-3-test-05-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -36978,17 +36698,12 @@
       "formId": "hacker-3-test-05",
       "order": 120,
       "id": "hacker-3-test-05-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "MediaCore's customers will have digital to dozens of publications by the end of the month."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q120.webp",
-          "alt": "Câu 120 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "MediaCore's customers will have digital ______ to dozens of publications by the end of the month."
         }
       ],
       "options": [
@@ -37060,7 +36775,7 @@
       "formId": "hacker-3-test-05",
       "order": 121,
       "id": "hacker-3-test-05-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -37137,7 +36852,7 @@
       "formId": "hacker-3-test-05",
       "order": 122,
       "id": "hacker-3-test-05-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -37214,7 +36929,7 @@
       "formId": "hacker-3-test-05",
       "order": 123,
       "id": "hacker-3-test-05-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -37291,17 +37006,12 @@
       "formId": "hacker-3-test-05",
       "order": 124,
       "id": "hacker-3-test-05-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Wheelpoint's new line of tires performs under the most hazardous road conditions."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q124.webp",
-          "alt": "Câu 124 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "Wheelpoint's new line of tires performs ______ under the most hazardous road conditions."
         }
       ],
       "options": [
@@ -37373,7 +37083,7 @@
       "formId": "hacker-3-test-05",
       "order": 125,
       "id": "hacker-3-test-05-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -37450,7 +37160,7 @@
       "formId": "hacker-3-test-05",
       "order": 126,
       "id": "hacker-3-test-05-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -37527,7 +37237,7 @@
       "formId": "hacker-3-test-05",
       "order": 127,
       "id": "hacker-3-test-05-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -37604,17 +37314,12 @@
       "formId": "hacker-3-test-05",
       "order": 128,
       "id": "hacker-3-test-05-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Submissions meet Literati Magazine's standard will be considered for publication in our next issue."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q128.webp",
-          "alt": "Câu 128 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "Submissions ______ meet Literati Magazine's standard will be considered for publication in our next issue."
         }
       ],
       "options": [
@@ -37686,7 +37391,7 @@
       "formId": "hacker-3-test-05",
       "order": 129,
       "id": "hacker-3-test-05-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -37763,17 +37468,12 @@
       "formId": "hacker-3-test-05",
       "order": 130,
       "id": "hacker-3-test-05-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Kenner and Mr, Stone were both invited to the meeting, but of them has confirmed yet."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-05-q130.webp",
-          "alt": "Câu 130 và vị trí chỗ trống trong ảnh gốc Test 5"
+          "text": "Ms. Kenner and Mr, Stone were both invited to the meeting, but ______ of them has confirmed yet."
         }
       ],
       "options": [
@@ -44360,7 +44060,7 @@
       "formId": "hacker-3-test-06",
       "order": 101,
       "id": "hacker-3-test-06-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -44437,17 +44137,12 @@
       "formId": "hacker-3-test-06",
       "order": 102,
       "id": "hacker-3-test-06-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Patients undergoing a complete medical examination are asked eating solid food for 12 hours prior to their appointment."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q102.webp",
-          "alt": "Câu 102 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Patients undergoing a complete medical examination are asked ______ eating solid food for 12 hours prior to their appointment."
         }
       ],
       "options": [
@@ -44519,7 +44214,7 @@
       "formId": "hacker-3-test-06",
       "order": 103,
       "id": "hacker-3-test-06-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -44596,7 +44291,7 @@
       "formId": "hacker-3-test-06",
       "order": 104,
       "id": "hacker-3-test-06-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -44673,17 +44368,12 @@
       "formId": "hacker-3-test-06",
       "order": 105,
       "id": "hacker-3-test-06-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Local transport regulations permit city buses to have 32 seats for passengers."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q105.webp",
-          "alt": "Câu 105 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Local transport regulations permit city buses to have ______ 32 seats for passengers."
         }
       ],
       "options": [
@@ -44755,7 +44445,7 @@
       "formId": "hacker-3-test-06",
       "order": 106,
       "id": "hacker-3-test-06-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -44832,17 +44522,12 @@
       "formId": "hacker-3-test-06",
       "order": 107,
       "id": "hacker-3-test-06-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Zoo-Croft Fashion's corporate income and expense documents were delivered to the outside accountant to get an unbiased financial"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q107.webp",
-          "alt": "Câu 107 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Zoo-Croft Fashion's corporate income and expense documents were delivered to the outside accountant to get an unbiased financial ______."
         }
       ],
       "options": [
@@ -44914,7 +44599,7 @@
       "formId": "hacker-3-test-06",
       "order": 108,
       "id": "hacker-3-test-06-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -44991,7 +44676,7 @@
       "formId": "hacker-3-test-06",
       "order": 109,
       "id": "hacker-3-test-06-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -45068,7 +44753,7 @@
       "formId": "hacker-3-test-06",
       "order": 110,
       "id": "hacker-3-test-06-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -45145,17 +44830,12 @@
       "formId": "hacker-3-test-06",
       "order": 111,
       "id": "hacker-3-test-06-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "After three months of intense negotiations, for the construction of new power plants were signed."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q111.webp",
-          "alt": "Câu 111 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "After three months of intense negotiations, ______ for the construction of new power plants were signed."
         }
       ],
       "options": [
@@ -45227,17 +44907,12 @@
       "formId": "hacker-3-test-06",
       "order": 112,
       "id": "hacker-3-test-06-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Reviews of the Mardison Hotel chain's updated business centers are positive."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q112.webp",
-          "alt": "Câu 112 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Reviews of the Mardison Hotel chain's updated business centers are ______ positive."
         }
       ],
       "options": [
@@ -45309,7 +44984,7 @@
       "formId": "hacker-3-test-06",
       "order": 113,
       "id": "hacker-3-test-06-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -45386,17 +45061,12 @@
       "formId": "hacker-3-test-06",
       "order": 114,
       "id": "hacker-3-test-06-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Henry gave his staff additional training on the new office policy, but several of them were still"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q114.webp",
-          "alt": "Câu 114 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Mr. Henry gave his staff additional training on the new office policy, but several of them were still ______."
         }
       ],
       "options": [
@@ -45468,7 +45138,7 @@
       "formId": "hacker-3-test-06",
       "order": 115,
       "id": "hacker-3-test-06-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -45545,17 +45215,12 @@
       "formId": "hacker-3-test-06",
       "order": 116,
       "id": "hacker-3-test-06-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The Loughton Youth Club offered to help organize a community cleanup day and to recruit local volunteers."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q116.webp",
-          "alt": "Câu 116 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "The Loughton Youth Club ______ offered to help organize a community cleanup day and to recruit local volunteers."
         }
       ],
       "options": [
@@ -45627,17 +45292,12 @@
       "formId": "hacker-3-test-06",
       "order": 117,
       "id": "hacker-3-test-06-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Pullman has asked for time to turn in his report because he requires some additional information."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q117.webp",
-          "alt": "Câu 117 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Mr. Pullman has asked for ______ time to turn in his report because he requires some additional information."
         }
       ],
       "options": [
@@ -45709,7 +45369,7 @@
       "formId": "hacker-3-test-06",
       "order": 118,
       "id": "hacker-3-test-06-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -45786,17 +45446,12 @@
       "formId": "hacker-3-test-06",
       "order": 119,
       "id": "hacker-3-test-06-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Album sales for rock band Trifecta have been low their concert tickets have been selling out."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q119.webp",
-          "alt": "Câu 119 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Album sales for rock band Trifecta have been low ______ their concert tickets have been selling out."
         }
       ],
       "options": [
@@ -45868,17 +45523,12 @@
       "formId": "hacker-3-test-06",
       "order": 120,
       "id": "hacker-3-test-06-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Davies could only hear of what was discussed since the restaurant chosen for the meeting was so noisy."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q120.webp",
-          "alt": "Câu 120 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "Ms. Davies could only hear ______ of what was discussed since the restaurant chosen for the meeting was so noisy."
         }
       ],
       "options": [
@@ -45950,7 +45600,7 @@
       "formId": "hacker-3-test-06",
       "order": 121,
       "id": "hacker-3-test-06-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -46027,17 +45677,12 @@
       "formId": "hacker-3-test-06",
       "order": 122,
       "id": "hacker-3-test-06-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "In an emergency, an alarm in Hamley Towers will sound, indicating that everyone inside must the building immediately."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q122.webp",
-          "alt": "Câu 122 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "In an emergency, an alarm in Hamley Towers will sound, indicating that everyone inside must ______ the building immediately."
         }
       ],
       "options": [
@@ -46109,7 +45754,7 @@
       "formId": "hacker-3-test-06",
       "order": 123,
       "id": "hacker-3-test-06-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -46186,7 +45831,7 @@
       "formId": "hacker-3-test-06",
       "order": 124,
       "id": "hacker-3-test-06-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -46263,17 +45908,12 @@
       "formId": "hacker-3-test-06",
       "order": 125,
       "id": "hacker-3-test-06-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The sequel to last year's film Galactic Express made $400 million worldwide, is more than the first movie earned."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q125.webp",
-          "alt": "Câu 125 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "The sequel to last year's film Galactic Express made $400 million worldwide, ______ is more than the first movie earned."
         }
       ],
       "options": [
@@ -46309,7 +45949,7 @@
           "content": [
             {
               "kind": "paragraph",
-              "text": "which my SojUAf •"
+              "text": "which"
             }
           ]
         }
@@ -46345,7 +45985,7 @@
       "formId": "hacker-3-test-06",
       "order": 126,
       "id": "hacker-3-test-06-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -46422,7 +46062,7 @@
       "formId": "hacker-3-test-06",
       "order": 127,
       "id": "hacker-3-test-06-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -46499,7 +46139,7 @@
       "formId": "hacker-3-test-06",
       "order": 128,
       "id": "hacker-3-test-06-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -46576,17 +46216,12 @@
       "formId": "hacker-3-test-06",
       "order": 129,
       "id": "hacker-3-test-06-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The machinery in Templex's factory has become so outdated that funds have been to purchase new ones."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q129.webp",
-          "alt": "Câu 129 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "The machinery in Templex's factory has become so outdated that funds have been ______ to purchase new ones."
         }
       ],
       "options": [
@@ -46658,17 +46293,12 @@
       "formId": "hacker-3-test-06",
       "order": 130,
       "id": "hacker-3-test-06-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The manager did his best to make decisions that took the finance division members' suggestions into"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-06-q130.webp",
-          "alt": "Câu 130 và vị trí chỗ trống trong ảnh gốc Test 6"
+          "text": "The manager did his best to make decisions that took the finance division members' suggestions into ______."
         }
       ],
       "options": [
@@ -53255,17 +52885,12 @@
       "formId": "hacker-3-test-07",
       "order": 101,
       "id": "hacker-3-test-07-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Finney paused during his speech to change the slide projected on the screen."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q101.webp",
-          "alt": "Câu 101 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Mr. Finney paused ______ during his speech to change the slide projected on the screen."
         }
       ],
       "options": [
@@ -53337,7 +52962,7 @@
       "formId": "hacker-3-test-07",
       "order": 102,
       "id": "hacker-3-test-07-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -53414,17 +53039,12 @@
       "formId": "hacker-3-test-07",
       "order": 103,
       "id": "hacker-3-test-07-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Rattan Furniture House's new production plant is expected to be fully by early April."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q103.webp",
-          "alt": "Câu 103 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Rattan Furniture House's new production plant is expected to be fully ______ by early April."
         }
       ],
       "options": [
@@ -53496,17 +53116,12 @@
       "formId": "hacker-3-test-07",
       "order": 104,
       "id": "hacker-3-test-07-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Petra Towers is located just of the downtown area, close to a subway station."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q104.webp",
-          "alt": "Câu 104 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Petra Towers is located just ______ of the downtown area, close to a subway station."
         }
       ],
       "options": [
@@ -53578,7 +53193,7 @@
       "formId": "hacker-3-test-07",
       "order": 105,
       "id": "hacker-3-test-07-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -53655,7 +53270,7 @@
       "formId": "hacker-3-test-07",
       "order": 106,
       "id": "hacker-3-test-07-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -53732,7 +53347,7 @@
       "formId": "hacker-3-test-07",
       "order": 107,
       "id": "hacker-3-test-07-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -53809,17 +53424,12 @@
       "formId": "hacker-3-test-07",
       "order": 108,
       "id": "hacker-3-test-07-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The Society for Ecological Excellence is currently accepting of environmentally friendly organizations for its upcoming awards ceremony."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q108.webp",
-          "alt": "Câu 108 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "The Society for Ecological Excellence is currently accepting ______ of environmentally friendly organizations for its upcoming awards ceremony."
         }
       ],
       "options": [
@@ -53891,17 +53501,12 @@
       "formId": "hacker-3-test-07",
       "order": 109,
       "id": "hacker-3-test-07-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Crawford accepted the most job offer she received after considering all her options."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q109.webp",
-          "alt": "Câu 109 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Ms. Crawford accepted the most ______ job offer she received after considering all her options."
         }
       ],
       "options": [
@@ -53973,17 +53578,12 @@
       "formId": "hacker-3-test-07",
       "order": 110,
       "id": "hacker-3-test-07-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Southbound traffic Highway 14A will be slow for the next two weeks while road repairs take place."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q110.webp",
-          "alt": "Câu 110 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Southbound traffic ______ Highway 14A will be slow for the next two weeks while road repairs take place."
         }
       ],
       "options": [
@@ -54055,7 +53655,7 @@
       "formId": "hacker-3-test-07",
       "order": 111,
       "id": "hacker-3-test-07-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -54132,17 +53732,12 @@
       "formId": "hacker-3-test-07",
       "order": 112,
       "id": "hacker-3-test-07-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The expense for fixing the vehicle was higher than the cost given by the auto mechanic."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q112.webp",
-          "alt": "Câu 112 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "The expense for fixing the vehicle was higher than the ______ cost given by the auto mechanic."
         }
       ],
       "options": [
@@ -54214,7 +53809,7 @@
       "formId": "hacker-3-test-07",
       "order": 113,
       "id": "hacker-3-test-07-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -54291,17 +53886,12 @@
       "formId": "hacker-3-test-07",
       "order": 114,
       "id": "hacker-3-test-07-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Experts say that a rise in property values in the Bedford area will be the outcome of the increase in local population."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q114.webp",
-          "alt": "Câu 114 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Experts say that a rise in property values in the Bedford area will be the ______ outcome of the increase in local population."
         }
       ],
       "options": [
@@ -54373,17 +53963,12 @@
       "formId": "hacker-3-test-07",
       "order": 115,
       "id": "hacker-3-test-07-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The campus parking lot is used by so many students that even those with parking passes are not guaranteed a spot."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q115.webp",
-          "alt": "Câu 115 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "The campus parking lot is used by so many students that even those with parking passes are not ______ guaranteed a spot."
         }
       ],
       "options": [
@@ -54455,17 +54040,12 @@
       "formId": "hacker-3-test-07",
       "order": 116,
       "id": "hacker-3-test-07-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ram Builders' supervisor the client that the supplies needed for construction would arrive on time."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q116.webp",
-          "alt": "Câu 116 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Ram Builders' supervisor ______ the client that the supplies needed for construction would arrive on time."
         }
       ],
       "options": [
@@ -54537,17 +54117,12 @@
       "formId": "hacker-3-test-07",
       "order": 117,
       "id": "hacker-3-test-07-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Schilling Investors Group has not found a suitable candidate to replace Mr. Macmillan, who resigned two weeks ago."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q117.webp",
-          "alt": "Câu 117 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Schilling Investors Group has not ______ found a suitable candidate to replace Mr. Macmillan, who resigned two weeks ago."
         }
       ],
       "options": [
@@ -54619,7 +54194,7 @@
       "formId": "hacker-3-test-07",
       "order": 118,
       "id": "hacker-3-test-07-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -54696,7 +54271,7 @@
       "formId": "hacker-3-test-07",
       "order": 119,
       "id": "hacker-3-test-07-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -54773,7 +54348,7 @@
       "formId": "hacker-3-test-07",
       "order": 120,
       "id": "hacker-3-test-07-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -54850,7 +54425,7 @@
       "formId": "hacker-3-test-07",
       "order": 121,
       "id": "hacker-3-test-07-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -54927,17 +54502,12 @@
       "formId": "hacker-3-test-07",
       "order": 122,
       "id": "hacker-3-test-07-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Once the vendor his payment, Smith & Cooper Wholesalers will ship his order out."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q122.webp",
-          "alt": "Câu 122 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Once the vendor ______ his payment, Smith & Cooper Wholesalers will ship his order out."
         }
       ],
       "options": [
@@ -55009,7 +54579,7 @@
       "formId": "hacker-3-test-07",
       "order": 123,
       "id": "hacker-3-test-07-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -55086,17 +54656,12 @@
       "formId": "hacker-3-test-07",
       "order": 124,
       "id": "hacker-3-test-07-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Airport officials have announced that more security checks will be adopted to eliminate any potential threats."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q124.webp",
-          "alt": "Câu 124 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Airport officials have announced that more ______ security checks will be adopted to eliminate any potential threats."
         }
       ],
       "options": [
@@ -55168,17 +54733,12 @@
       "formId": "hacker-3-test-07",
       "order": 125,
       "id": "hacker-3-test-07-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The organizers of the Brock County Fair have decided to the event due to the poor weather conditions."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q125.webp",
-          "alt": "Câu 125 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "The organizers of the Brock County Fair have decided to ______ the event due to the poor weather conditions."
         }
       ],
       "options": [
@@ -55250,17 +54810,12 @@
       "formId": "hacker-3-test-07",
       "order": 126,
       "id": "hacker-3-test-07-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Customers who subscribe to Travelog's online magazine will receive discounts their subscriptions are for six months or a year."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q126.webp",
-          "alt": "Câu 126 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Customers who subscribe to Travelog's online magazine will receive discounts ______ their subscriptions are for six months or a year."
         }
       ],
       "options": [
@@ -55332,17 +54887,12 @@
       "formId": "hacker-3-test-07",
       "order": 127,
       "id": "hacker-3-test-07-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Barton Electronics will have to boost production to meet the demand for its newest dishwasher model."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-07-q127.webp",
-          "alt": "Câu 127 và vị trí chỗ trống trong ảnh gốc Test 7"
+          "text": "Barton Electronics will have to boost production to meet the ______ demand for its newest dishwasher model."
         }
       ],
       "options": [
@@ -55414,7 +54964,7 @@
       "formId": "hacker-3-test-07",
       "order": 128,
       "id": "hacker-3-test-07-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -55491,7 +55041,7 @@
       "formId": "hacker-3-test-07",
       "order": 129,
       "id": "hacker-3-test-07-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -55568,7 +55118,7 @@
       "formId": "hacker-3-test-07",
       "order": 130,
       "id": "hacker-3-test-07-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -62155,7 +61705,7 @@
       "formId": "hacker-3-test-08",
       "order": 101,
       "id": "hacker-3-test-08-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -62232,17 +61782,12 @@
       "formId": "hacker-3-test-08",
       "order": 102,
       "id": "hacker-3-test-08-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Sommerland Shopping Mall is situated ten minutes away from the downtown area."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q102.webp",
-          "alt": "Câu 102 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "Sommerland Shopping Mall is situated ______ ten minutes away from the downtown area."
         }
       ],
       "options": [
@@ -62314,17 +61859,12 @@
       "formId": "hacker-3-test-08",
       "order": 103,
       "id": "hacker-3-test-08-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "All airlines are required by law to keep inflatable life jackets located passenger seats in case there is an emergency."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q103.webp",
-          "alt": "Câu 103 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "All airlines are required by law to keep inflatable life jackets located ______ passenger seats in case there is an emergency."
         }
       ],
       "options": [
@@ -62396,17 +61936,12 @@
       "formId": "hacker-3-test-08",
       "order": 104,
       "id": "hacker-3-test-08-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Katz was confident that could do a better job with database maintenance than his highly skilled team."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q104.webp",
-          "alt": "Câu 104 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "Mr. Katz was confident that ______ could do a better job with database maintenance than his highly skilled team."
         }
       ],
       "options": [
@@ -62478,17 +62013,12 @@
       "formId": "hacker-3-test-08",
       "order": 105,
       "id": "hacker-3-test-08-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "After Benton Enterprises adopted the of allowing its staff to work flexible hours, productivity began to rise."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q105.webp",
-          "alt": "Câu 105 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "After Benton Enterprises adopted the ______ of allowing its staff to work flexible hours, productivity began to rise."
         }
       ],
       "options": [
@@ -62560,17 +62090,12 @@
       "formId": "hacker-3-test-08",
       "order": 106,
       "id": "hacker-3-test-08-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Evergreen Hotel was built at a time when Baldwin City strong growth, but it may close if the recession continues."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q106.webp",
-          "alt": "Câu 106 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "Evergreen Hotel was built at a time when Baldwin City ______ strong growth, but it may close if the recession continues."
         }
       ],
       "options": [
@@ -62642,17 +62167,12 @@
       "formId": "hacker-3-test-08",
       "order": 107,
       "id": "hacker-3-test-08-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The display coordinator's role is to ensure that everything sold in the store is arranged to look appealing to customers."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q107.webp",
-          "alt": "Câu 107 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "The display coordinator's role is to ensure that everything sold in the store is arranged ______ to look appealing to customers."
         }
       ],
       "options": [
@@ -62724,7 +62244,7 @@
       "formId": "hacker-3-test-08",
       "order": 108,
       "id": "hacker-3-test-08-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -62801,17 +62321,12 @@
       "formId": "hacker-3-test-08",
       "order": 109,
       "id": "hacker-3-test-08-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The human resources manager called a meeting on Monday everyone about his plan to hire new employees in the coming months."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q109.webp",
-          "alt": "Câu 109 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "The human resources manager called a meeting on Monday ______ everyone about his plan to hire new employees in the coming months."
         }
       ],
       "options": [
@@ -62883,17 +62398,12 @@
       "formId": "hacker-3-test-08",
       "order": 110,
       "id": "hacker-3-test-08-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mary Rose was asked to join the information access team because she to similar projects previously."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q110.webp",
-          "alt": "Câu 110 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "Mary Rose was asked to join the information access team because she ______ to similar projects previously."
         }
       ],
       "options": [
@@ -62965,17 +62475,12 @@
       "formId": "hacker-3-test-08",
       "order": 111,
       "id": "hacker-3-test-08-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The accounting department's current software program is not for the tasks that need to be performed."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q111.webp",
-          "alt": "Câu 111 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "The accounting department's current software program is not ______ for the tasks that need to be performed."
         }
       ],
       "options": [
@@ -63047,7 +62552,7 @@
       "formId": "hacker-3-test-08",
       "order": 112,
       "id": "hacker-3-test-08-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63124,7 +62629,7 @@
       "formId": "hacker-3-test-08",
       "order": 113,
       "id": "hacker-3-test-08-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63201,7 +62706,7 @@
       "formId": "hacker-3-test-08",
       "order": 114,
       "id": "hacker-3-test-08-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63278,7 +62783,7 @@
       "formId": "hacker-3-test-08",
       "order": 115,
       "id": "hacker-3-test-08-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63355,7 +62860,7 @@
       "formId": "hacker-3-test-08",
       "order": 116,
       "id": "hacker-3-test-08-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63432,17 +62937,12 @@
       "formId": "hacker-3-test-08",
       "order": 117,
       "id": "hacker-3-test-08-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The new road from Batik Enterprise's warehouse to the post office has been a great for employees in the shipping department."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q117.webp",
-          "alt": "Câu 117 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "The new road from Batik Enterprise's warehouse to the post office has been a great ______ for employees in the shipping department."
         }
       ],
       "options": [
@@ -63514,7 +63014,7 @@
       "formId": "hacker-3-test-08",
       "order": 118,
       "id": "hacker-3-test-08-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63591,7 +63091,7 @@
       "formId": "hacker-3-test-08",
       "order": 119,
       "id": "hacker-3-test-08-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63668,17 +63168,12 @@
       "formId": "hacker-3-test-08",
       "order": 120,
       "id": "hacker-3-test-08-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Renovations can begin on Bounty Bank's main offices the board authorizes the project."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q120.webp",
-          "alt": "Câu 120 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "Renovations can begin on Bounty Bank's main offices ______ the board authorizes the project."
         }
       ],
       "options": [
@@ -63750,17 +63245,12 @@
       "formId": "hacker-3-test-08",
       "order": 121,
       "id": "hacker-3-test-08-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Wilson left behind a career in law to her dream of running a bed-and-breakfast in Tuscany."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q121.webp",
-          "alt": "Câu 121 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "Ms. Wilson left behind a career in law to ______ her dream of running a bed-and-breakfast in Tuscany."
         }
       ],
       "options": [
@@ -63832,17 +63322,12 @@
       "formId": "hacker-3-test-08",
       "order": 122,
       "id": "hacker-3-test-08-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The staff in charge of writing press releases should get all facts thoroughly before sending an announcement to the media."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q122.webp",
-          "alt": "Câu 122 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "The staff in charge of writing press releases should get all facts ______ thoroughly before sending an announcement to the media."
         }
       ],
       "options": [
@@ -63914,7 +63399,7 @@
       "formId": "hacker-3-test-08",
       "order": 123,
       "id": "hacker-3-test-08-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -63991,17 +63476,12 @@
       "formId": "hacker-3-test-08",
       "order": 124,
       "id": "hacker-3-test-08-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "A top competitor withdrew from the international tennis tournament due to a injury."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q124.webp",
-          "alt": "Câu 124 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "A top competitor withdrew from the international tennis tournament due to a ______ injury."
         }
       ],
       "options": [
@@ -64073,7 +63553,7 @@
       "formId": "hacker-3-test-08",
       "order": 125,
       "id": "hacker-3-test-08-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -64150,7 +63630,7 @@
       "formId": "hacker-3-test-08",
       "order": 126,
       "id": "hacker-3-test-08-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -64227,7 +63707,7 @@
       "formId": "hacker-3-test-08",
       "order": 127,
       "id": "hacker-3-test-08-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -64304,17 +63784,12 @@
       "formId": "hacker-3-test-08",
       "order": 128,
       "id": "hacker-3-test-08-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The spokesperson for Beaumont Industries made an official apology the company for the way it dealt with a delivery delay."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q128.webp",
-          "alt": "Câu 128 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "The spokesperson for Beaumont Industries made an official apology ______ the company for the way it dealt with a delivery delay."
         }
       ],
       "options": [
@@ -64386,17 +63861,12 @@
       "formId": "hacker-3-test-08",
       "order": 129,
       "id": "hacker-3-test-08-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Copyright have the exclusive right to use, modify, and distribute the images they upload to Westforth Corporation's Web site."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-08-q129.webp",
-          "alt": "Câu 129 và vị trí chỗ trống trong ảnh gốc Test 8"
+          "text": "Copyright ______ have the exclusive right to use, modify, and distribute the images they upload to Westforth Corporation's Web site."
         }
       ],
       "options": [
@@ -64468,7 +63938,7 @@
       "formId": "hacker-3-test-08",
       "order": 130,
       "id": "hacker-3-test-08-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -71060,17 +70530,12 @@
       "formId": "hacker-3-test-09",
       "order": 101,
       "id": "hacker-3-test-09-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Food manufacturers are responsible for the safety requirements set by the government."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q101.webp",
-          "alt": "Câu 101 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "Food manufacturers are responsible for ______ the safety requirements set by the government."
         }
       ],
       "options": [
@@ -71142,17 +70607,12 @@
       "formId": "hacker-3-test-09",
       "order": 102,
       "id": "hacker-3-test-09-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "A number of people are lining up in the Sherwood Hotel lobby in the two-day technology symposium."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q102.webp",
-          "alt": "Câu 102 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "A number of people are lining up in the Sherwood Hotel lobby ______ in the two-day technology symposium."
         }
       ],
       "options": [
@@ -71224,17 +70684,12 @@
       "formId": "hacker-3-test-09",
       "order": 103,
       "id": "hacker-3-test-09-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Tel-Corn Corp.'s merger with Voice Messenger Inc. at a press conference on Monday last week."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q103.webp",
-          "alt": "Câu 103 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "Tel-Corn Corp.'s merger with Voice Messenger Inc. ______ at a press conference on Monday last week."
         }
       ],
       "options": [
@@ -71306,17 +70761,12 @@
       "formId": "hacker-3-test-09",
       "order": 104,
       "id": "hacker-3-test-09-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Kim went to Beijing by for a digital media conference and met several potential clients there."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q104.webp",
-          "alt": "Câu 104 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "Mr. Kim went to Beijing by ______ for a digital media conference and met several potential clients there."
         }
       ],
       "options": [
@@ -71388,17 +70838,12 @@
       "formId": "hacker-3-test-09",
       "order": 105,
       "id": "hacker-3-test-09-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "People who donate more than $50 to the Children's Cancer Group will receive a T-shirt."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q105.webp",
-          "alt": "Câu 105 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "People who donate more than $50 to the Children's Cancer Group will receive a ______ T-shirt."
         }
       ],
       "options": [
@@ -71470,7 +70915,7 @@
       "formId": "hacker-3-test-09",
       "order": 106,
       "id": "hacker-3-test-09-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -71547,17 +70992,12 @@
       "formId": "hacker-3-test-09",
       "order": 107,
       "id": "hacker-3-test-09-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The Grenville Heritage Museum visitors from taking any photos or videos of the exhibition pieces."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q107.webp",
-          "alt": "Câu 107 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "The Grenville Heritage Museum ______ visitors from taking any photos or videos of the exhibition pieces."
         }
       ],
       "options": [
@@ -71629,7 +71069,7 @@
       "formId": "hacker-3-test-09",
       "order": 108,
       "id": "hacker-3-test-09-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -71706,17 +71146,12 @@
       "formId": "hacker-3-test-09",
       "order": 109,
       "id": "hacker-3-test-09-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Reyman Steel is building a new warehouse the street from its main manufacturing plant."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q109.webp",
-          "alt": "Câu 109 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "Reyman Steel is building a new warehouse ______ the street from its main manufacturing plant."
         }
       ],
       "options": [
@@ -71788,7 +71223,7 @@
       "formId": "hacker-3-test-09",
       "order": 110,
       "id": "hacker-3-test-09-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -71865,7 +71300,7 @@
       "formId": "hacker-3-test-09",
       "order": 111,
       "id": "hacker-3-test-09-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -71942,17 +71377,12 @@
       "formId": "hacker-3-test-09",
       "order": 112,
       "id": "hacker-3-test-09-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The federal government abandoned a plan to build a pipeline through Alton City due to overwhelming public"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q112.webp",
-          "alt": "Câu 112 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "The federal government abandoned a plan to build a pipeline through Alton City due to overwhelming public ______."
         }
       ],
       "options": [
@@ -72024,7 +71454,7 @@
       "formId": "hacker-3-test-09",
       "order": 113,
       "id": "hacker-3-test-09-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72101,7 +71531,7 @@
       "formId": "hacker-3-test-09",
       "order": 114,
       "id": "hacker-3-test-09-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72178,7 +71608,7 @@
       "formId": "hacker-3-test-09",
       "order": 115,
       "id": "hacker-3-test-09-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72255,7 +71685,7 @@
       "formId": "hacker-3-test-09",
       "order": 116,
       "id": "hacker-3-test-09-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72332,17 +71762,12 @@
       "formId": "hacker-3-test-09",
       "order": 117,
       "id": "hacker-3-test-09-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Excursion Travel Agency has numerous listings for priced accommodations within city limits."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q117.webp",
-          "alt": "Câu 117 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "Excursion Travel Agency has numerous listings for ______ priced accommodations within city limits."
         }
       ],
       "options": [
@@ -72414,7 +71839,7 @@
       "formId": "hacker-3-test-09",
       "order": 118,
       "id": "hacker-3-test-09-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72491,7 +71916,7 @@
       "formId": "hacker-3-test-09",
       "order": 119,
       "id": "hacker-3-test-09-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72568,7 +71993,7 @@
       "formId": "hacker-3-test-09",
       "order": 120,
       "id": "hacker-3-test-09-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72645,17 +72070,12 @@
       "formId": "hacker-3-test-09",
       "order": 121,
       "id": "hacker-3-test-09-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Attending the shareholders' meeting takes for the president of Goodman Company despite his hectic work schedule."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q121.webp",
-          "alt": "Câu 121 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "Attending the shareholders' meeting takes ______ for the president of Goodman Company despite his hectic work schedule."
         }
       ],
       "options": [
@@ -72727,7 +72147,7 @@
       "formId": "hacker-3-test-09",
       "order": 122,
       "id": "hacker-3-test-09-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72804,7 +72224,7 @@
       "formId": "hacker-3-test-09",
       "order": 123,
       "id": "hacker-3-test-09-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72881,7 +72301,7 @@
       "formId": "hacker-3-test-09",
       "order": 124,
       "id": "hacker-3-test-09-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -72958,7 +72378,7 @@
       "formId": "hacker-3-test-09",
       "order": 125,
       "id": "hacker-3-test-09-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -73035,17 +72455,12 @@
       "formId": "hacker-3-test-09",
       "order": 126,
       "id": "hacker-3-test-09-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "All Swift-Dent electronic toothbrushes are warranty for a year from the time they are purchased."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q126.webp",
-          "alt": "Câu 126 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "All Swift-Dent electronic toothbrushes are ______ warranty for a year from the time they are purchased."
         }
       ],
       "options": [
@@ -73117,7 +72532,7 @@
       "formId": "hacker-3-test-09",
       "order": 127,
       "id": "hacker-3-test-09-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -73194,7 +72609,7 @@
       "formId": "hacker-3-test-09",
       "order": 128,
       "id": "hacker-3-test-09-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -73271,17 +72686,12 @@
       "formId": "hacker-3-test-09",
       "order": 129,
       "id": "hacker-3-test-09-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Patrick Jolson will be interviewed three other promising candidates for the position of research and development head."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-09-q129.webp",
-          "alt": "Câu 129 và vị trí chỗ trống trong ảnh gốc Test 9"
+          "text": "Patrick Jolson will be interviewed ______ three other promising candidates for the position of research and development head."
         }
       ],
       "options": [
@@ -73353,7 +72763,7 @@
       "formId": "hacker-3-test-09",
       "order": 130,
       "id": "hacker-3-test-09-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -79945,7 +79355,7 @@
       "formId": "hacker-3-test-10",
       "order": 101,
       "id": "hacker-3-test-10-q101",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80022,17 +79432,12 @@
       "formId": "hacker-3-test-10",
       "order": 102,
       "id": "hacker-3-test-10-q102",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The reporter forecasted sunny weather the Midwestern region for tomorrow."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q102.webp",
-          "alt": "Câu 102 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "The reporter forecasted sunny weather ______ the Midwestern region for tomorrow."
         }
       ],
       "options": [
@@ -80104,7 +79509,7 @@
       "formId": "hacker-3-test-10",
       "order": 103,
       "id": "hacker-3-test-10-q103",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80181,17 +79586,12 @@
       "formId": "hacker-3-test-10",
       "order": 104,
       "id": "hacker-3-test-10-q104",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The accounting department revised estimates for expenditures after the news that the budget would be changed."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q104.webp",
-          "alt": "Câu 104 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "The accounting department revised estimates for expenditures after ______ the news that the budget would be changed."
         }
       ],
       "options": [
@@ -80263,7 +79663,7 @@
       "formId": "hacker-3-test-10",
       "order": 105,
       "id": "hacker-3-test-10-q105",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80340,17 +79740,12 @@
       "formId": "hacker-3-test-10",
       "order": 106,
       "id": "hacker-3-test-10-q106",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Athlete Tim Ferguson has made a recovery from his injuries and will be able to play in his team's next match."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q106.webp",
-          "alt": "Câu 106 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Athlete Tim Ferguson has made a ______ recovery from his injuries and will be able to play in his team's next match."
         }
       ],
       "options": [
@@ -80422,7 +79817,7 @@
       "formId": "hacker-3-test-10",
       "order": 107,
       "id": "hacker-3-test-10-q107",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80499,7 +79894,7 @@
       "formId": "hacker-3-test-10",
       "order": 108,
       "id": "hacker-3-test-10-q108",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80576,7 +79971,7 @@
       "formId": "hacker-3-test-10",
       "order": 109,
       "id": "hacker-3-test-10-q109",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80653,17 +80048,12 @@
       "formId": "hacker-3-test-10",
       "order": 110,
       "id": "hacker-3-test-10-q110",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Verdant Island can only be visited in the daytime since of it is covered by water at night."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q110.webp",
-          "alt": "Câu 110 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Verdant Island can only be visited in the daytime since ______ of it is covered by water at night."
         }
       ],
       "options": [
@@ -80735,17 +80125,12 @@
       "formId": "hacker-3-test-10",
       "order": 111,
       "id": "hacker-3-test-10-q111",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Extra staff were called in from nearby branches to help plant crews - production deadlines for an unexpected order."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q111.webp",
-          "alt": "Câu 111 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Extra staff were called in from nearby branches to help plant crews ______ production deadlines for an unexpected order."
         }
       ],
       "options": [
@@ -80817,7 +80202,7 @@
       "formId": "hacker-3-test-10",
       "order": 112,
       "id": "hacker-3-test-10-q112",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80894,7 +80279,7 @@
       "formId": "hacker-3-test-10",
       "order": 113,
       "id": "hacker-3-test-10-q113",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -80971,7 +80356,7 @@
       "formId": "hacker-3-test-10",
       "order": 114,
       "id": "hacker-3-test-10-q114",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -81048,17 +80433,12 @@
       "formId": "hacker-3-test-10",
       "order": 115,
       "id": "hacker-3-test-10-q115",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Torres Architecture, the agency that planned the Steadman Tower, won an award from Building Life Global for its design."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q115.webp",
-          "alt": "Câu 115 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Torres Architecture, the agency that planned the Steadman Tower, won an award from Building Life Global for its ______ design."
         }
       ],
       "options": [
@@ -81130,7 +80510,7 @@
       "formId": "hacker-3-test-10",
       "order": 116,
       "id": "hacker-3-test-10-q116",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -81207,17 +80587,12 @@
       "formId": "hacker-3-test-10",
       "order": 117,
       "id": "hacker-3-test-10-q117",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The Cottonwood Gallery guarantees that of the items it sells is an original and comes with an official certificate of authenticity."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q117.webp",
-          "alt": "Câu 117 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "The Cottonwood Gallery guarantees that ______ of the items it sells is an original and comes with an official certificate of authenticity."
         }
       ],
       "options": [
@@ -81289,17 +80664,12 @@
       "formId": "hacker-3-test-10",
       "order": 118,
       "id": "hacker-3-test-10-q118",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "If Jennifer hits all of her sales targets for the next quarter, there is a good chance she will"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q118.webp",
-          "alt": "Câu 118 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "If Jennifer hits all of her sales targets for the next quarter, there is a good chance she will ______."
         }
       ],
       "options": [
@@ -81371,17 +80741,12 @@
       "formId": "hacker-3-test-10",
       "order": 119,
       "id": "hacker-3-test-10-q119",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "The developers at Staycor test new software multiple times as their overall objective is to detect and eliminate any defects."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q119.webp",
-          "alt": "Câu 119 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "The developers at Staycor ______ test new software multiple times as their overall objective is to detect and eliminate any defects."
         }
       ],
       "options": [
@@ -81453,17 +80818,12 @@
       "formId": "hacker-3-test-10",
       "order": 120,
       "id": "hacker-3-test-10-q120",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Gigantica Studio's new action movie has some scenes which may be inappropriate for under the age of 15."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q120.webp",
-          "alt": "Câu 120 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Gigantica Studio's new action movie has some scenes which may be inappropriate for ______ under the age of 15."
         }
       ],
       "options": [
@@ -81535,7 +80895,7 @@
       "formId": "hacker-3-test-10",
       "order": 121,
       "id": "hacker-3-test-10-q121",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -81612,7 +80972,7 @@
       "formId": "hacker-3-test-10",
       "order": 122,
       "id": "hacker-3-test-10-q122",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -81689,17 +81049,12 @@
       "formId": "hacker-3-test-10",
       "order": 123,
       "id": "hacker-3-test-10-q123",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Mr. Conrad posted advertisements on several recruitment sites, including the regarding salaries and benefits."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q123.webp",
-          "alt": "Câu 123 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Mr. Conrad posted advertisements on several recruitment sites, including the ______ regarding salaries and benefits."
         }
       ],
       "options": [
@@ -81771,7 +81126,7 @@
       "formId": "hacker-3-test-10",
       "order": 124,
       "id": "hacker-3-test-10-q124",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -81848,7 +81203,7 @@
       "formId": "hacker-3-test-10",
       "order": 125,
       "id": "hacker-3-test-10-q125",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -81925,7 +81280,7 @@
       "formId": "hacker-3-test-10",
       "order": 126,
       "id": "hacker-3-test-10-q126",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
@@ -82002,17 +81357,12 @@
       "formId": "hacker-3-test-10",
       "order": 127,
       "id": "hacker-3-test-10-q127",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Sunny River Vacations endeavors to satisfy every customer by personalizing travel details to ensure that each trip is"
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q127.webp",
-          "alt": "Câu 127 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Sunny River Vacations endeavors to satisfy every customer by personalizing travel details to ensure that each trip is ______."
         }
       ],
       "options": [
@@ -82084,17 +81434,12 @@
       "formId": "hacker-3-test-10",
       "order": 128,
       "id": "hacker-3-test-10-q128",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Rowan Training Center has added more business classes, which brings the total number of sessions to nearly double that of last year."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q128.webp",
-          "alt": "Câu 128 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Rowan Training Center has added more business classes, which brings the total number of ______ sessions to nearly double that of last year."
         }
       ],
       "options": [
@@ -82166,17 +81511,12 @@
       "formId": "hacker-3-test-10",
       "order": 129,
       "id": "hacker-3-test-10-q129",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {
           "kind": "paragraph",
-          "text": "Ms. Jacobs' managerial style is democratic she includes her staff in the decision-making process."
-        },
-        {
-          "kind": "image",
-          "src": "/pdf-evidence/hacker-3-test-10-q129.webp",
-          "alt": "Câu 129 và vị trí chỗ trống trong ảnh gốc Test 10"
+          "text": "Ms. Jacobs' managerial style is democratic ______ she includes her staff in the decision-making process."
         }
       ],
       "options": [
@@ -82248,7 +81588,7 @@
       "formId": "hacker-3-test-10",
       "order": 130,
       "id": "hacker-3-test-10-q130",
-      "revision": 1,
+      "revision": 2,
       "language": "en",
       "stem": [
         {

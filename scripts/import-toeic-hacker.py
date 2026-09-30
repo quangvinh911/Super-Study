@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "resources/toeic/hacker/rc/question/Hacker 3 RC.pdf"
+SOURCE = ROOT / "resources/toeic/hacker3/rc/question/Hacker 3 RC.pdf"
 ANSWERS = ROOT / "content/toeic-hacker-answers.json"
 ITEMS = ROOT / "content/toeic-hacker-items.json"
 OUTPUT = ROOT / "content/toeic-hacker-generated.json"
@@ -32,7 +32,7 @@ def verify_sources(authored: dict, answers: dict) -> None:
     if authored["issues"] or answers["issues"]:
         raise ValueError("Source extraction has unresolved issues")
     for test in range(1, 11):
-        path = ROOT / f"resources/toeic/hacker/rc/answer/{test}.PNG"
+        path = ROOT / f"resources/toeic/hacker3/rc/answer/{test}.PNG"
         if hashlib.sha256(path.read_bytes()).hexdigest() != answers["sourceSha256"][str(test)]:
             raise ValueError(f"{path.name} changed; recheck printed answer mapping")
 
@@ -74,8 +74,16 @@ def compile_bank(authored: dict, answers: dict) -> tuple[dict, list[tuple[str, l
                 raise ValueError(f"{question_id}: missing separate A-D choices")
             if not item["stem"].strip():
                 raise ValueError(f"{question_id}: missing question text")
-            if part == 5 and "_" not in item["stem"] and not item["needsImage"]:
-                raise ValueError(f"{question_id}: blank is absent without a visible source image")
+            if part == 5 and item["stem"].count("______") != 1:
+                raise ValueError(f"{question_id}: Part 5 requires exactly one text blank")
+            if any(marker in item["stem"] for marker in ("�", "Hackers.co.kr")):
+                raise ValueError(f"{question_id}: question text contains an OCR artifact")
+            if any(
+                marker in option_values[letter]
+                for letter in "ABCD"
+                for marker in ("�", "Hackers.co.kr")
+            ):
+                raise ValueError(f"{question_id}: option text contains an OCR artifact")
             if part > 5 and item["groupId"] not in groups:
                 raise ValueError(f"{question_id}: passage group missing")
             source_src = f"/pdf-evidence/{question_id}.webp"
@@ -87,7 +95,7 @@ def compile_bank(authored: dict, answers: dict) -> tuple[dict, list[tuple[str, l
                 "formId": form_id,
                 "order": number,
                 "id": question_id,
-                "revision": 1,
+                "revision": 2 if part == 5 else 1,
                 "language": "en",
                 "stem": stem,
                 "options": [

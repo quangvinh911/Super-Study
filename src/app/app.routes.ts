@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { ResolveFn, Routes } from '@angular/router';
 import { CERTIFICATES } from './certificates/registry';
 import { CERTIFICATE, CertificateContext } from './certificates/certificate-context';
 import { CertificateShell } from './certificates/certificate-shell';
@@ -20,6 +20,7 @@ const learningRoutes: Routes = [
   {
     path: 'practice/:sessionId',
     title: 'Phiên luyện tập - CTFL Practice',
+    data: { layout: 'focus' },
     loadComponent: () =>
       import('./features/practice/practice-session-page').then((m) => m.PracticeSessionPage),
   },
@@ -32,6 +33,7 @@ const learningRoutes: Routes = [
   {
     path: 'mock-exam/:sessionId',
     title: 'Bài thi thử - CTFL Practice',
+    data: { layout: 'focus' },
     loadComponent: () =>
       import('./features/mock-exam/mock-exam-session-page').then((m) => m.MockExamSessionPage),
   },
@@ -61,6 +63,15 @@ const toeicGrammarRoutes: Routes = [
   },
   {
     path: 'grammar/:slug',
+    resolve: {
+      breadcrumb: (async (route) => {
+        const { GRAMMAR_LESSONS } = await import('./features/grammar/grammar-lessons');
+        return (
+          GRAMMAR_LESSONS.find((lesson) => lesson.slug === route.paramMap.get('slug'))?.title ??
+          'Bài học'
+        );
+      }) satisfies ResolveFn<string>,
+    },
     loadComponent: () =>
       import('./features/grammar/grammar-lesson-page').then((m) => m.GrammarLessonPage),
   },
