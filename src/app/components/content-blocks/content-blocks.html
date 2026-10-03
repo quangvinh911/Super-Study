@@ -1,5 +1,5 @@
 <div class="content-blocks">
-  @for (block of blocks(); track $index) {
+  @for (block of displayBlocks(); track $index) {
     @switch (block.kind) {
       @case ('paragraph') {
         <p>{{ block.text }}</p>

@@ -7,6 +7,7 @@ import Ajv from 'ajv';
 import { parse as parseYaml } from 'yaml';
 import { validateCertificateBanks } from './validate-certificate-banks.mjs';
 import { buildToeic } from './build-toeic.mjs';
+import { buildToeicVocabulary } from './build-toeic-vocabulary.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_ROOT = resolve(SCRIPT_DIR, '..');
@@ -85,7 +86,8 @@ function validateBankMetadata(bank, problems) {
   }
 
   const blueprint = Array.isArray(bank?.blueprint) ? bank.blueprint : [];
-  if (blueprint.length !== 40) problems.push(`blueprint must define 40 slots, found ${blueprint.length}`);
+  if (blueprint.length !== 40)
+    problems.push(`blueprint must define 40 slots, found ${blueprint.length}`);
   const seen = new Set();
   for (const slot of blueprint) {
     if (!slot || typeof slot !== 'object') {
@@ -123,7 +125,8 @@ function validateAudit(audit, problems) {
   if (audit.containsExtractedText !== false) {
     problems.push('source audit must explicitly declare containsExtractedText=false');
   }
-  if (audit.purpose !== 'research-only') problems.push('source audit purpose must be research-only');
+  if (audit.purpose !== 'research-only')
+    problems.push('source audit purpose must be research-only');
   if (typeof audit.publicationPolicy !== 'string' || audit.publicationPolicy.length < 20) {
     problems.push('source audit requires a publication policy');
   }
@@ -153,7 +156,9 @@ function semanticValidation(bank, chapters, problems) {
 
       const slot = slots.get(question.classification.blueprintBucket);
       if (!slot) {
-        problems.push(`${label} uses unknown blueprint bucket ${question.classification.blueprintBucket}`);
+        problems.push(
+          `${label} uses unknown blueprint bucket ${question.classification.blueprintBucket}`,
+        );
       } else {
         bucketQuestions.get(slot.bucket).push(question);
         if (
@@ -170,7 +175,8 @@ function semanticValidation(bank, chapters, problems) {
       const optionIds = new Set();
       const optionContents = new Set();
       for (const option of question.options) {
-        if (optionIds.has(option.id)) problems.push(`${label} has duplicate option id ${option.id}`);
+        if (optionIds.has(option.id))
+          problems.push(`${label} has duplicate option id ${option.id}`);
         optionIds.add(option.id);
         const contentKey = canonical(option.content);
         if (optionContents.has(contentKey)) problems.push(`${label} has duplicate option content`);
@@ -180,7 +186,8 @@ function semanticValidation(bank, chapters, problems) {
       const answers = question.solution.correctOptionIds;
       if (answers.includes('U')) problems.push(`${label} contains invalid answer id U`);
       for (const answer of answers) {
-        if (!optionIds.has(answer)) problems.push(`${label} answer ${answer} does not identify an option`);
+        if (!optionIds.has(answer))
+          problems.push(`${label} answer ${answer} does not identify an option`);
       }
       if (answers.length !== question.interaction.requiredSelections) {
         problems.push(`${label} answer count does not equal requiredSelections`);
@@ -207,7 +214,9 @@ function semanticValidation(bank, chapters, problems) {
     if (!chapterNumbers.has(chapter)) problems.push(`chapter ${chapter} authoring file is missing`);
   }
   if (questions.length !== bank.expectedQuestionCount) {
-    problems.push(`bank requires ${bank.expectedQuestionCount} questions, found ${questions.length}`);
+    problems.push(
+      `bank requires ${bank.expectedQuestionCount} questions, found ${questions.length}`,
+    );
   }
   for (const slot of bank.blueprint) {
     const candidates = bucketQuestions.get(slot.bucket) ?? [];
@@ -216,8 +225,12 @@ function semanticValidation(bank, chapters, problems) {
         `blueprint bucket ${slot.bucket} requires ${slot.variantsRequired} candidates, found ${candidates.length}`,
       );
     }
-    const variants = candidates.map((question) => question.variant).sort().join('');
-    if (variants !== 'AB') problems.push(`blueprint bucket ${slot.bucket} must contain variants A and B`);
+    const variants = candidates
+      .map((question) => question.variant)
+      .sort()
+      .join('');
+    if (variants !== 'AB')
+      problems.push(`blueprint bucket ${slot.bucket} must contain variants A and B`);
   }
 }
 
@@ -357,6 +370,7 @@ async function atomicWrite(path, contents) {
 
 export async function buildContent({ rootDir = DEFAULT_ROOT, write = true } = {}) {
   await buildToeic(rootDir, { write });
+  await buildToeicVocabulary(rootDir, { write });
   await validateCertificateBanks(rootDir);
   const documents = await loadAuthoringDocuments(rootDir);
   const artifacts = compileFromDocuments(documents);

@@ -85,16 +85,15 @@ export class PracticeSetupPage implements OnInit {
     const requestedPart = this.route.snapshot.queryParamMap.get('part');
     if (
       this.certificate.id === 'toeic' &&
-      (requestedPart === 'part-5' || requestedPart === 'part-6')
+      requestedPart !== null &&
+      /^part-[1-7]$/.test(requestedPart)
     ) {
       this.section = requestedPart;
     }
-    if (
-      this.route.snapshot.queryParamMap.get('source') === 'pdf' &&
-      this.certificate.definition.banks.some((bank) => bank.id === 'pdf')
-    ) {
-      this.bankSource = 'pdf';
-    }
+    const requestedSource = this.certificate.definition.banks.find(
+      (bank) => bank.id === this.route.snapshot.queryParamMap.get('source'),
+    );
+    if (requestedSource) this.bankSource = requestedSource.id;
     if (
       requestedHistory === 'unseen' ||
       requestedHistory === 'incorrect' ||

@@ -55,7 +55,31 @@ const learningRoutes: Routes = [
   },
 ];
 
-const toeicGrammarRoutes: Routes = [
+const toeicKnowledgeRoutes: Routes = [
+  {
+    path: 'vocabulary',
+    loadComponent: () =>
+      import('./features/vocabulary/vocabulary-overview-page').then(
+        (m) => m.VocabularyOverviewPage,
+      ),
+  },
+  {
+    path: 'vocabulary/:collectionId',
+    resolve: {
+      breadcrumb: (async (route) => {
+        const { VOCABULARY_COLLECTIONS } = await import('./features/vocabulary/vocabulary-data');
+        return (
+          VOCABULARY_COLLECTIONS.find(
+            (collection) => collection.id === route.paramMap.get('collectionId'),
+          )?.title ?? 'Bộ từ vựng'
+        );
+      }) satisfies ResolveFn<string>,
+    },
+    loadComponent: () =>
+      import('./features/vocabulary/vocabulary-collection-page').then(
+        (m) => m.VocabularyCollectionPage,
+      ),
+  },
   {
     path: 'grammar',
     loadComponent: () =>
@@ -98,7 +122,7 @@ export const routes: Routes = [
       ProgressRepository,
       QuizSessionStore,
     ],
-    children: [...learningRoutes, ...(certificate.id === 'toeic' ? toeicGrammarRoutes : [])].map(
+    children: [...learningRoutes, ...(certificate.id === 'toeic' ? toeicKnowledgeRoutes : [])].map(
       (route) => ({
         ...route,
         title: `${certificate.name} · Certificate Practice`,

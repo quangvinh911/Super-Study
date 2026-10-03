@@ -1,17 +1,23 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const BANK_VERSION = 'toeic-sources-1.0.0';
+const BANK_VERSION = 'toeic-sources-1.1.1';
 const SCHEMA_VERSION = '1.0.0';
-const PUBLISHED_AT = '2026-09-29';
+const PUBLISHED_AT = '2026-10-02';
 
-function createBankArtifacts({ bankVersion, filePrefix, questions, solutions }) {
+function createBankArtifacts({
+  bankVersion,
+  filePrefix,
+  questions,
+  solutions,
+  publishedAt = PUBLISHED_AT,
+}) {
   const fileName = (name) => (filePrefix ? `${filePrefix}-${name}.json` : `${name}.json`);
   const manifest = {
     schemaVersion: SCHEMA_VERSION,
     bankVersion,
     certificateId: 'toeic',
-    publishedAt: PUBLISHED_AT,
+    publishedAt,
     syllabusVersion: 'TOEIC Listening & Reading',
     language: 'en',
     questionCount: questions.length,
@@ -41,10 +47,17 @@ export async function buildToeic(rootDir, { write = true } = {}) {
   const content = join(rootDir, 'content');
   const output = join(rootDir, 'public', 'data', 'toeic');
   const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
-  const [jimmy, hacker] = await Promise.all([
+  const [jimmy, hackerReading, hackerListening] = await Promise.all([
     readJson(join(content, 'toeic-jimmy-generated.json')),
     readJson(join(content, 'toeic-hacker-generated.json')),
+    readJson(join(content, 'toeic-hacker-lc-generated.json')),
   ]);
+  const hacker = {
+    questions: [...hackerReading.questions, ...hackerListening.questions].sort(
+      (left, right) => left.formId.localeCompare(right.formId) || left.order - right.order,
+    ),
+    solutions: [...hackerReading.solutions, ...hackerListening.solutions],
+  };
   const questions = [...jimmy.questions, ...hacker.questions];
   const solutions = [...jimmy.solutions, ...hacker.solutions];
   const combinedBank = createBankArtifacts({
@@ -58,9 +71,10 @@ export async function buildToeic(rootDir, { write = true } = {}) {
     filePrefix: 'jimmy',
     questions: jimmy.questions,
     solutions: jimmy.solutions,
+    publishedAt: '2026-09-29',
   });
   const hackerBank = createBankArtifacts({
-    bankVersion: 'toeic-hacker-reading-1.0.0',
+    bankVersion: 'toeic-hacker-listening-reading-1.1.1',
     filePrefix: 'hacker',
     questions: hacker.questions,
     solutions: hacker.solutions,

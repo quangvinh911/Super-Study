@@ -43,14 +43,19 @@ export const CERTIFICATES: readonly CertificateDefinition[] = [
     id: 'toeic',
     name: 'TOEIC',
     subtitle: 'Listening & Reading',
-    description: 'Luyện TOEIC Reading theo từng Part; đề Listening sẽ được bổ sung sau.',
+    description: 'Luyện TOEIC Listening và Reading theo từng Part với ngân hàng Hacker 3.',
     catalogGroup: 'language',
-    catalogHighlights: ['Ngữ pháp', 'Luyện Reading'],
+    catalogHighlights: ['Ngữ pháp', 'Luyện Listening & Reading', 'Thi thử TOEIC'],
     learningResources: [
       {
         label: 'Ngữ pháp',
         path: 'grammar',
         description: '16 bài học, ví dụ công việc và câu tự kiểm tra cho Part 5–6.',
+      },
+      {
+        label: 'Từ vựng',
+        path: 'vocabulary',
+        description: 'Từ vựng, thành ngữ và cụm từ theo từng bộ tài liệu TOEIC.',
       },
     ],
     taxonomy: 'sections',
@@ -58,7 +63,7 @@ export const CERTIFICATES: readonly CertificateDefinition[] = [
       {
         id: 'hacker',
         label: 'Hacker TOEIC',
-        description: '1.000 câu · 10 đề Reading Part 5–7',
+        description: '1.980 câu · 9 đề đủ Listening & Reading; Test 4 luyện tập 180 câu',
         manifestUrl: '/data/toeic/hacker-manifest.json',
       },
       {
