@@ -80,11 +80,17 @@
     <div class="entry-grid">
       @for (entry of filtered(); track entry.id) {
         <article class="surface vocabulary-entry">
-          <div class="entry-meta">
-            <span>{{ labels[entry.kind] }}</span
-            ><span>{{ entry.topic }}</span>
-          </div>
-          <h2 lang="en">{{ entry.term }}</h2>
+          <h2 lang="en">
+            <button
+              class="entry-term"
+              type="button"
+              [attr.aria-label]="'Nghe cách đọc ' + entry.term"
+              (click)="speak(entry.term)"
+            >
+              {{ entry.term }}
+            </button>
+          </h2>
+          <p class="pronunciation-hint">Nhấn để nghe cách đọc tiếng Anh</p>
           @if (!selfCheck() || revealed().has(entry.id)) {
             <div [id]="entry.id + '-meaning'">
               <p class="meaning">{{ entry.meaning }}</p>

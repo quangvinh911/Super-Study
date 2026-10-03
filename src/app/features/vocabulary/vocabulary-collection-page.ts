@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import {
   VOCABULARY_COLLECTIONS,
   VocabularyCollection,
-  VocabularyKind,
   parseVocabulary,
   searchVocabulary,
 } from './vocabulary-data';
@@ -26,11 +25,6 @@ export class VocabularyCollectionPage {
   protected readonly onlyInTests = signal(false);
   protected readonly selfCheck = signal(false);
   protected readonly revealed = signal<ReadonlySet<string>>(new Set());
-  protected readonly labels: Record<VocabularyKind, string> = {
-    word: 'Từ vựng',
-    phrase: 'Cụm từ',
-    idiom: 'Thành ngữ',
-  };
   protected readonly topics = computed(() => [
     ...new Set(this.collection()?.entries.map((entry) => entry.topic) ?? []),
   ]);
@@ -69,6 +63,13 @@ export class VocabularyCollectionPage {
     this.kind.set('all');
     this.topic.set('all');
     this.onlyInTests.set(false);
+  }
+  protected speak(term: string): void {
+    if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(term);
+    utterance.lang = 'en-US';
+    window.speechSynthesis.speak(utterance);
   }
   private async load(id: string, url: string): Promise<void> {
     try {

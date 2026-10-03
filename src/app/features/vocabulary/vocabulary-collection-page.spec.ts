@@ -47,7 +47,7 @@ describe('Vocabulary learning controls', () => {
     checkboxes[1].click();
     await fixture.whenStable();
     expect(element.querySelector('.meaning')).toBeNull();
-    element.querySelector<HTMLButtonElement>('.vocabulary-entry button')?.click();
+    element.querySelector<HTMLButtonElement>('.vocabulary-entry .button--secondary')?.click();
     await fixture.whenStable();
     expect(element.querySelector('.meaning')?.textContent).toContain('lô hàng');
     const search = element.querySelector<HTMLInputElement>('input[type=search]');
@@ -59,6 +59,48 @@ describe('Vocabulary learning controls', () => {
     element.querySelector<HTMLButtonElement>('.empty-results button')?.click();
     await fixture.whenStable();
     expect(element.querySelector('.vocabulary-entry')).not.toBeNull();
+  });
+  it('offers pronunciation playback without the entry metadata row', async () => {
+    const speak = vi.fn();
+    const cancel = vi.fn();
+    class MockUtterance {
+      lang = '';
+      constructor(readonly text: string) {}
+    }
+    vi.stubGlobal('speechSynthesis', { speak, cancel });
+    vi.stubGlobal('SpeechSynthesisUtterance', MockUtterance);
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          id: 'hacker-3',
+          title: 'Hacker 3',
+          reviewNote: 'Selected words',
+          entries: [entry],
+        }),
+      }),
+    );
+    await TestBed.configureTestingModule({
+      imports: [VocabularyCollectionPage],
+      providers: [
+        provideRouter([]),
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { paramMap: convertToParamMap({ collectionId: 'hacker-3' }) } },
+        },
+      ],
+    }).compileComponents();
+    const fixture = TestBed.createComponent(VocabularyCollectionPage);
+    await fixture.whenStable();
+    const element: HTMLElement = fixture.nativeElement;
+    expect(element.querySelector('.entry-meta')).toBeNull();
+    expect(element.querySelector('.pronunciation-hint')?.textContent).toContain('cách đọc');
+    element.querySelector<HTMLButtonElement>('.entry-term')?.click();
+    expect(cancel).toHaveBeenCalledOnce();
+    expect(speak).toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'shipment', lang: 'en-US' }),
+    );
   });
   it('shows an explicit error when private collection data cannot load', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 404 }));
