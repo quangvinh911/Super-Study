@@ -56,6 +56,7 @@ describe('Sites R2 media worker', () => {
       'audio//a.mp3',
       'data/questions.json',
       'audio\\a.mp3',
+      'audio/a.constructor',
     ])
       expect(mediaType(key)).toBeNull();
   });
@@ -149,6 +150,39 @@ describe('Sites R2 media worker', () => {
     expect(key).toBe('audio/a.mp3');
     expect(Buffer.from(stored)).toEqual(bytes);
     expect(options.customMetadata.sha256).toBe(createHash('sha256').update(bytes).digest('hex'));
+  });
+  it('streams documents and videos into R2 with checksum verification', async () => {
+    const bytes = Buffer.from('original video');
+    const runtime = env(bucket(bytes));
+    const input = request('/api/site-media/file?key=videos/demo.mp4', {
+      method: 'PUT',
+      body: bytes,
+      headers: {
+        'X-Media-Upload-Key': 'test-secret',
+        'Content-Length': String(bytes.length),
+        'X-Media-Sha256': createHash('sha256').update(bytes).digest('hex'),
+      },
+    });
+    const response = await worker.fetch(input, runtime);
+    expect(response.status).toBe(200);
+    expect(runtime.MEDIA.put.mock.calls[0][1]).toBe(input.body);
+    expect(runtime.MEDIA.put.mock.calls[0][2].httpMetadata.contentType).toBe('video/mp4');
+    expect(Buffer.from(runtime.MEDIA.put.mock.calls[0][2].sha256)).toEqual(
+      createHash('sha256').update(bytes).digest(),
+    );
+  });
+  it('rejects streaming uploads without a valid checksum before writing', async () => {
+    const runtime = env();
+    const response = await worker.fetch(
+      request('/api/site-media/file?key=documents/guide.pdf', {
+        method: 'PUT',
+        body: 'pdf',
+        headers: { 'X-Media-Upload-Key': 'test-secret', 'Content-Length': '3' },
+      }),
+      runtime,
+    );
+    expect(response.status).toBe(400);
+    expect(runtime.MEDIA.put).not.toHaveBeenCalled();
   });
   it('preserves normal SPA routes', async () => {
     const runtime = env();

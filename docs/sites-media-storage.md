@@ -22,10 +22,11 @@ service-worker configuration.
 
 ## Publishing and synchronization
 
-1. Use the Sites workflow to build, package, push and publish the application.
-   The Sites runtime provisions the declared `MEDIA` bucket binding.
-2. Configure a random `MEDIA_UPLOAD_SECRET` as a Sites secret, never in source,
+1. Configure a random `MEDIA_UPLOAD_SECRET` as a Sites secret, never in source,
    shell arguments or a file. Existing runtime variables must be preserved.
+2. Use the Sites workflow to build, package, push and publish the application.
+   The Sites runtime provisions the declared `MEDIA` bucket binding and applies
+   the configured upload secret.
 3. Run `node scripts/sync-sites-media.mjs` from the main checkout. At its stdin
    prompt, provide one JSON object containing the verified `siteUrl`,
    `uploadSecret` and existing `bypassToken` from the native Site read response.
@@ -34,12 +35,13 @@ service-worker configuration.
 4. The sync script inventories public media, uploads bounded batches and checks
    SHA-256 and byte counts against R2 metadata for every object. Unchanged files
    are skipped, transient failures are retried, and rerunning resumes safely.
-   Source media bytes are preserved without audio transcoding. Current sync
-   batches accept individual files up to 5 MiB; larger future videos need a
-   streaming/multipart uploader before publishing them.
+   Source media bytes are preserved without audio transcoding. Files up to 5 MiB
+   use multipart batches; larger documents and videos use checksum-verified
+   streaming uploads up to 100 MiB per file. Files above that limit require an R2
+   multipart-upload extension rather than being silently skipped.
 5. Verify media responses and byte-range behavior. Remove the upload secret when
-   synchronization finishes and redeploy the same saved version to apply that
-   environment revision. The administrative route is then disabled. Neither
+   synchronization finishes and deploy the final application version to apply
+   that environment revision. The administrative route is then disabled. Neither
    synchronization nor disabling writes deletes existing R2 objects.
 
 `POST /api/site-media` returns bounded checksum metadata and `PUT /api/site-media`

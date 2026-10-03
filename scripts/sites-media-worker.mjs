@@ -20,6 +20,8 @@ export const MEDIA_TYPES = {
   gif: 'image/gif',
   svg: 'image/svg+xml',
   pdf: 'application/pdf',
+  txt: 'text/plain',
+  csv: 'text/csv',
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   mp4: 'video/mp4',
   webm: 'video/webm',
@@ -34,10 +36,12 @@ export function mediaType(key) {
     /[\\\u0000-\u001f]/.test(key)
   )
     return null;
-  return MEDIA_TYPES[key.split('.').at(-1).toLowerCase()] ?? null;
+  const extension = key.split('.').at(-1).toLowerCase();
+  return Object.hasOwn(MEDIA_TYPES, extension) ? MEDIA_TYPES[extension] : null;
 }
 
 const adminPath = '/api/site-media';
+const singleUploadPath = `${adminPath}/file`;
 const maxBatchBytes = 8 * 1024 * 1024;
 const maxBatchFiles = 40;
 const securityHeaders = {
@@ -67,6 +71,31 @@ async function administerMedia(request, env) {
   }
   if (!env.MEDIA) return json({ error: 'Media storage unavailable' }, 503);
   const length = Number(request.headers.get('content-length'));
+  if (new URL(request.url).pathname === singleUploadPath) {
+    if (request.method !== 'PUT') return json({ error: 'Method not allowed' }, 405);
+    const key = new URL(request.url).searchParams.get('key');
+    const sha256 = request.headers.get('X-Media-Sha256');
+    if (
+      typeof key !== 'string' ||
+      !mediaType(key) ||
+      !/^[a-f0-9]{64}$/.test(sha256 ?? '') ||
+      !Number.isSafeInteger(length) ||
+      length <= 0 ||
+      length > 100 * 1024 * 1024
+    ) {
+      return json({ error: 'Invalid media upload' }, 400);
+    }
+    // R2 verifies the supplied digest while consuming the stream; large videos stay out of Worker memory.
+    const digest = Uint8Array.from(sha256.match(/../g), (hex) => parseInt(hex, 16)).buffer;
+    const object = await env.MEDIA.put(key, request.body, {
+      sha256: digest,
+      httpMetadata: { contentType: mediaType(key), cacheControl: 'private, max-age=86400' },
+      customMetadata: { sha256 },
+    });
+    if (!object || object.size !== length)
+      throw new Error('R2 did not acknowledge the complete media file.');
+    return json({ stored: [{ key, size: object.size, sha256 }] });
+  }
   if (!Number.isSafeInteger(length) || length <= 0 || length > maxBatchBytes) {
     return json({ error: 'Invalid batch size' }, 413);
   }
@@ -196,7 +225,8 @@ export default {
   async fetch(request, env) {
     try {
       const url = new URL(request.url);
-      if (url.pathname === adminPath) return secure(await administerMedia(request, env));
+      if (url.pathname === adminPath || url.pathname === singleUploadPath)
+        return secure(await administerMedia(request, env));
       const key = decodeURIComponent(url.pathname.slice(1));
       if (mediaType(key)) return secure(await serveMedia(request, env, key));
       if (MEDIA_ROOTS.includes(key.split('/')[0]))
