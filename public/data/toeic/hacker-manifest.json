@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "bankVersion": "toeic-hacker-reading-1.0.0",
+  "bankVersion": "toeic-hacker-listening-reading-1.1.1",
   "certificateId": "toeic",
-  "publishedAt": "2026-09-29",
+  "publishedAt": "2026-10-02",
   "syllabusVersion": "TOEIC Listening & Reading",
   "language": "en",
-  "questionCount": 1000,
-  "solutionCount": 1000,
+  "questionCount": 1980,
+  "solutionCount": 1980,
   "blueprint": [],
   "files": {
     "questions": "hacker-questions.json",

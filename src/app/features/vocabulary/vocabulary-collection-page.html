@@ -1,0 +1,147 @@
+<div class="page vocabulary-page">
+  <header class="page-header">
+    <a routerLink="/certificates/toeic/vocabulary">← Các bộ từ vựng</a>
+    <p class="eyebrow">TOEIC · Bộ tài liệu</p>
+    <h1>{{ collection()?.title ?? 'Từ vựng' }}</h1>
+    @if (collection(); as data) {
+      <p>{{ data.entries.length }} mục học · 30 chủ đề · Có nghĩa tiếng Việt và cách dùng.</p>
+      <details class="source-note">
+        <summary>Phạm vi và nguồn tài liệu</summary>
+        <p>{{ data.reviewNote }}</p>
+        <p>
+          Các liên kết đề chỉ dựa trên khớp từ/cụm từ nguyên dạng trong câu, lựa chọn hoặc
+          transcript; không thống kê biến thể. Một từ xuất hiện trong lựa chọn không có nghĩa đó là
+          đáp án đúng.
+        </p>
+      </details>
+    }
+  </header>
+  @if (loading()) {
+    <p role="status">Đang tải từ vựng…</p>
+  }
+  @if (error()) {
+    <p role="alert">{{ error() }}</p>
+  }
+  @if (collection()) {
+    <section class="surface vocabulary-controls" aria-label="Tìm và lọc từ vựng">
+      <div class="filter-grid">
+        <label
+          >Tìm từ hoặc nghĩa
+          <input
+            type="search"
+            placeholder="Ví dụ: shipment, giao hàng…"
+            [ngModel]="query()"
+            (ngModelChange)="query.set($event)"
+        /></label>
+        <label
+          >Loại mục học
+          <select [ngModel]="kind()" (ngModelChange)="kind.set($event)">
+            <option value="all">Tất cả</option>
+            <option value="word">Từ vựng</option>
+            <option value="phrase">Cụm từ</option>
+            <option value="idiom">Thành ngữ</option>
+          </select></label
+        >
+        <label
+          >Chủ đề
+          <select [ngModel]="topic()" (ngModelChange)="topic.set($event)">
+            <option value="all">Tất cả chủ đề</option>
+            @for (topicName of topics(); track topicName) {
+              <option [value]="topicName">{{ topicName }}</option>
+            }
+          </select></label
+        >
+      </div>
+      <div class="filter-actions">
+        <label
+          ><input
+            type="checkbox"
+            [ngModel]="onlyInTests()"
+            (ngModelChange)="onlyInTests.set($event)"
+          />
+          Có khớp trong đề Hacker 3</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            [ngModel]="selfCheck()"
+            (ngModelChange)="changeSelfCheck($event)"
+          />
+          Tự kiểm tra: ẩn nghĩa và ví dụ</label
+        >
+        <button class="button button--quiet" type="button" (click)="resetFilters()">
+          Xóa bộ lọc
+        </button>
+      </div>
+    </section>
+    <p role="status" class="result-count">
+      {{ filtered().length }} / {{ collection()?.entries?.length }} mục học
+    </p>
+    <div class="entry-grid">
+      @for (entry of filtered(); track entry.id) {
+        <article class="surface vocabulary-entry">
+          <div class="entry-meta">
+            <span>{{ labels[entry.kind] }}</span
+            ><span>{{ entry.topic }}</span>
+          </div>
+          <h2 lang="en">{{ entry.term }}</h2>
+          @if (!selfCheck() || revealed().has(entry.id)) {
+            <div [id]="entry.id + '-meaning'">
+              <p class="meaning">{{ entry.meaning }}</p>
+              <p class="usage" lang="en">{{ entry.usage }}</p>
+            </div>
+          }
+          @if (selfCheck()) {
+            <button
+              class="button button--secondary"
+              type="button"
+              [attr.aria-expanded]="revealed().has(entry.id)"
+              (click)="toggleMeaning(entry.id)"
+            >
+              {{ revealed().has(entry.id) ? 'Ẩn nghĩa' : 'Xem nghĩa và cách dùng'
+              }}<span class="sr-only">: {{ entry.term }}</span>
+            </button>
+          }
+          <details class="entry-source">
+            <summary>
+              Nguồn và vị trí trong đề <span>({{ entry.occurrences.length }} câu khớp)</span>
+            </summary>
+            @for (source of entry.sources; track source.file) {
+              <p>
+                {{ source.file }} · trang PDF {{ source.pdfPages.join(', ') }}
+                @if (source.item) {
+                  · mục {{ source.item }}
+                }
+              </p>
+            }
+            @if (entry.occurrences.length) {
+              <ul>
+                @for (occurrence of entry.occurrences; track occurrence.questionId) {
+                  <li>
+                    Test {{ occurrence.test }} · câu {{ occurrence.order }} · Part
+                    {{ occurrence.part.slice(-1) }}
+                  </li>
+                }
+              </ul>
+              <a
+                routerLink="/certificates/toeic/practice"
+                [queryParams]="{ part: entry.occurrences[0].part, source: 'hacker' }"
+                >Luyện Part {{ entry.occurrences[0].part.slice(-1) }} →</a
+              >
+            } @else {
+              <p>Chưa có khớp nguyên dạng trong đề đã nhập.</p>
+            }
+          </details>
+        </article>
+      } @empty {
+        <div class="surface empty-results">
+          <h2>Không tìm thấy mục học</h2>
+          <p>Thử từ khóa khác hoặc xóa bộ lọc.</p>
+          <button class="button button--secondary" type="button" (click)="resetFilters()">
+            Xóa bộ lọc
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

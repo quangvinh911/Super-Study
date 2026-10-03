@@ -40,6 +40,18 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
+.sites-sync/
+__pycache__/
+*.pyc
+
+# Private Hacker 3 Listening source material and locally extracted media.
+/resources/toeic/hacker3/lc/
+/content/toeic-hacker-lc-*.json
+/public/audio/toeic/hacker-3-test-*.mp3
+/public/pdf-evidence/hacker-3-lc-test-*.webp
+/resources/toeic/hacker3/notes/
+/content/toeic-hacker-vocabulary-reviewed.json
+/public/data/toeic/vocabulary/hacker-3.json
 
 # System files
 .DS_Store
