@@ -96,6 +96,7 @@ describe('Vocabulary learning controls', () => {
     const element: HTMLElement = fixture.nativeElement;
     expect(element.querySelector('.entry-meta')).toBeNull();
     expect(element.querySelector('.pronunciation-hint')?.textContent).toContain('cách đọc');
+    expect(element.querySelector('.entry-source')).toBeNull();
     element.querySelector<HTMLButtonElement>('.entry-term')?.click();
     expect(cancel).toHaveBeenCalledOnce();
     expect(speak).toHaveBeenCalledWith(
