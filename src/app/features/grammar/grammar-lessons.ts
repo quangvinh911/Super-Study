@@ -1,3 +1,5 @@
+import { HACKER_GRAMMAR_LESSONS } from './hacker-grammar-lessons';
+
 export type GrammarStage = 'Nền tảng' | 'Động từ' | 'Nối ý' | 'Mở rộng';
 
 export interface GrammarCheck {
@@ -30,7 +32,7 @@ export interface GrammarLesson {
   readonly checks: readonly [GrammarCheck, GrammarCheck];
 }
 
-/** Original learning material. External articles inform topic selection, not wording or questions. */
+/** Original lessons; Hacker 3 topic evidence is recorded in docs/toeic-hacker-grammar-review.md. */
 export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
   {
     slug: 'cau-va-tu-loai',
@@ -59,6 +61,11 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         label: 'Họ từ',
         pattern: 'approve → approval → approved',
         use: 'Nhận diện hậu tố như -tion, -ment, -ly nhưng luôn kiểm tra vị trí và nghĩa.',
+      },
+      {
+        label: 'Bổ ngữ tân ngữ',
+        pattern: 'find / consider / make + object + adjective',
+        use: 'Tính từ mô tả tân ngữ: find the program satisfactory; make services accessible. Không dùng trạng từ khi cần nêu đặc điểm của tân ngữ.',
       },
     ],
     examples: [
@@ -122,6 +129,11 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         label: 'Phản thân',
         pattern: 'subject + verb + oneself',
         use: 'Dùng khi chủ ngữ và đối tượng nhận tác động là cùng người.',
+      },
+      {
+        label: 'Phân lượng trong nhóm',
+        pattern: 'each of + plural noun + singular verb; neither of the two + singular verb',
+        use: 'Each of chỉ từng thành viên nên dùng động từ số ít. Trong văn phong trang trọng, neither of the two thường đi với động từ số ít; all / both of thường đi với động từ số nhiều.',
       },
     ],
     examples: [
@@ -445,6 +457,12 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         use: 'Sau giới từ thường dùng danh từ hoặc V-ing.',
       },
       { label: 'Mục đích', pattern: 'to + V', use: 'To V có thể nêu mục đích của một hành động.' },
+      {
+        label: 'Mẫu động từ thường gặp',
+        pattern:
+          'spend time + V-ing; permit / advise / encourage + object + to V; help + object + (to) V',
+        use: 'Spend time đi với V-ing; permit, advise và encourage có tân ngữ rồi to V. Help có thể dùng động từ nguyên mẫu có hoặc không có to.',
+      },
     ],
     examples: [
       {
@@ -634,6 +652,12 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         pattern: 'however / therefore, + clause',
         use: 'Trạng từ nối ý thường tách bằng dấu câu; xét logic toàn đoạn.',
       },
+      {
+        label: 'Nguyên nhân và giả định',
+        pattern:
+          'now that / in that / assuming that + clause; given / notwithstanding + noun phrase',
+        use: 'Now that chỉ hoàn cảnh mới làm căn cứ; in that giải thích ở chỗ nào; assuming that đặt giả định. Given và notwithstanding có thể đi trước cụm danh từ, lần lượt mang nghĩa xét đến và mặc dù.',
+      },
     ],
     examples: [
       {
@@ -702,6 +726,11 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         pattern: 'If / when / because + subject + verb',
         use: 'Thêm điều kiện, thời gian hoặc lý do cho mệnh đề chính.',
       },
+      {
+        label: 'Quan hệ sở hữu và cả mệnh đề',
+        pattern: 'whose + noun; clause, which + verb',
+        use: 'Whose đứng trước danh từ để diễn tả sở hữu. Which sau dấu phẩy có thể thay cho toàn bộ sự việc ở mệnh đề trước; không dùng what như đại từ quan hệ sau một tiền ngữ danh từ.',
+      },
     ],
     examples: [
       {
@@ -764,6 +793,11 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         label: 'Tăng cùng nhau',
         pattern: 'The more ..., the better ...',
         use: 'Hai thay đổi liên hệ với nhau.',
+      },
+      {
+        label: 'Mức chênh lệch và hạn cuối',
+        pattern: 'more + adverb + than; by + amount; at the latest',
+        use: 'So sánh cách thực hiện hành động bằng trạng từ, như more precisely. By + lượng có thể chỉ mức chênh lệch; at the latest nghĩa là muộn nhất, còn no later than giới thiệu hạn cuối.',
       },
     ],
     examples: [
@@ -837,6 +871,11 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         label: 'Hỗn hợp',
         pattern: 'If + had + V3, would + V now',
         use: 'Điều kiện không thật trong quá khứ dẫn đến kết quả hiện tại.',
+      },
+      {
+        label: 'Đảo ngữ loại 3',
+        pattern: 'Had + subject + V3, subject + would have + V3',
+        use: 'Bỏ if và đảo had lên trước chủ ngữ để diễn tả điều kiện trái thực tế quá khứ; had ở đây không mở đầu một câu hỏi.',
       },
     ],
     examples: [
@@ -1072,6 +1111,7 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       },
     ],
   },
+  ...HACKER_GRAMMAR_LESSONS,
 ];
 
 export const GRAMMAR_STAGES: readonly GrammarStage[] = ['Nền tảng', 'Động từ', 'Nối ý', 'Mở rộng'];

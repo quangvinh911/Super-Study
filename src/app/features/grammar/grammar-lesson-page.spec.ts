@@ -5,9 +5,9 @@ import { GrammarLessonPage } from './grammar-lesson-page';
 import { GRAMMAR_LESSONS } from './grammar-lessons';
 
 describe('TOEIC grammar lessons', () => {
-  it('provides 16 complete lessons with two valid self-check answers each', () => {
-    expect(GRAMMAR_LESSONS).toHaveLength(16);
-    expect(new Set(GRAMMAR_LESSONS.map((lesson) => lesson.slug)).size).toBe(16);
+  it('provides 19 complete lessons with two valid self-check answers each', () => {
+    expect(GRAMMAR_LESSONS).toHaveLength(19);
+    expect(new Set(GRAMMAR_LESSONS.map((lesson) => lesson.slug)).size).toBe(19);
     for (const lesson of GRAMMAR_LESSONS) {
       expect(lesson.examples.length).toBeGreaterThanOrEqual(2);
       expect(lesson.rules.length).toBeGreaterThanOrEqual(3);
