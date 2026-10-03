@@ -108,19 +108,19 @@
               }}<span class="sr-only">: {{ entry.term }}</span>
             </button>
           }
-          <details class="entry-source">
-            <summary>
-              Nguồn và vị trí trong đề <span>({{ entry.occurrences.length }} câu khớp)</span>
-            </summary>
-            @for (source of entry.sources; track source.file) {
-              <p>
-                {{ source.file }} · trang PDF {{ source.pdfPages.join(', ') }}
-                @if (source.item) {
-                  · mục {{ source.item }}
-                }
-              </p>
-            }
-            @if (entry.occurrences.length) {
+          @if (entry.occurrences.length) {
+            <details class="entry-source">
+              <summary>
+                Nguồn và vị trí trong đề <span>({{ entry.occurrences.length }} câu khớp)</span>
+              </summary>
+              @for (source of entry.sources; track source.file) {
+                <p>
+                  {{ source.file }} · trang PDF {{ source.pdfPages.join(', ') }}
+                  @if (source.item) {
+                    · mục {{ source.item }}
+                  }
+                </p>
+              }
               <ul>
                 @for (occurrence of entry.occurrences; track occurrence.questionId) {
                   <li>
@@ -134,10 +134,8 @@
                 [queryParams]="{ part: entry.occurrences[0].part, source: 'hacker' }"
                 >Luyện Part {{ entry.occurrences[0].part.slice(-1) }} →</a
               >
-            } @else {
-              <p>Chưa có khớp nguyên dạng trong đề đã nhập.</p>
-            }
-          </details>
+            </details>
+          }
         </article>
       } @empty {
         <div class="surface empty-results">
