@@ -58,6 +58,7 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": { "proxyConfig": "proxy.vocabulary.json" },
           "configurations": {
             "production": {
               "buildTarget": "ctfl-practice:build:production"

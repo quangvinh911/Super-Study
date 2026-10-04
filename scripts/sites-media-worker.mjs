@@ -1,3 +1,7 @@
+import { createVocabularyApi } from './vocabulary-api.mjs';
+
+const vocabularyApi = createVocabularyApi();
+
 export const MEDIA_ROOTS = [
   'audio',
   'pdf-evidence',
@@ -225,6 +229,8 @@ export default {
   async fetch(request, env) {
     try {
       const url = new URL(request.url);
+      if (url.pathname === '/api/vocabulary/enrich')
+        return secure(await vocabularyApi(request, env));
       if (url.pathname === adminPath || url.pathname === singleUploadPath)
         return secure(await administerMedia(request, env));
       const key = decodeURIComponent(url.pathname.slice(1));

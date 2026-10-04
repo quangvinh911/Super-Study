@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FavoriteVocabularyService } from './favorite-vocabulary.service';
 import {
   VOCABULARY_COLLECTIONS,
   VocabularyCollection,
@@ -16,6 +17,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VocabularyCollectionPage {
+  protected readonly favorites = inject(FavoriteVocabularyService);
   protected readonly collection = signal<VocabularyCollection | null>(null);
   protected readonly loading = signal(true);
   protected readonly error = signal('');

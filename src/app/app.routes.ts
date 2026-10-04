@@ -4,8 +4,15 @@ import { CERTIFICATE, CertificateContext } from './certificates/certificate-cont
 import { CertificateShell } from './certificates/certificate-shell';
 import { PROGRESS_DATABASE_NAME, ProgressRepository } from './core/persistence/progress.repository';
 import { QuizSessionStore } from './core/state';
+import { FavoriteVocabularyRepository } from './core/persistence/favorite-vocabulary.repository';
+import { FavoriteVocabularyService } from './features/vocabulary/favorite-vocabulary.service';
 
 const learningRoutes: Routes = [
+  {
+    path: 'saved-vocabulary',
+    loadComponent: () =>
+      import('./features/vocabulary/saved-vocabulary-page').then((m) => m.SavedVocabularyPage),
+  },
   {
     path: '',
     pathMatch: 'full',
@@ -121,6 +128,8 @@ export const routes: Routes = [
       CertificateContext,
       ProgressRepository,
       QuizSessionStore,
+      FavoriteVocabularyRepository,
+      FavoriteVocabularyService,
     ],
     children: [...learningRoutes, ...(certificate.id === 'toeic' ? toeicKnowledgeRoutes : [])].map(
       (route) => ({

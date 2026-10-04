@@ -4,7 +4,8 @@
   "description": "A privacy-first multi-certificate practice and mock exam PWA for CTFL and TOEIC.",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node scripts/start-development.mjs",
+    "start:api": "node scripts/serve-vocabulary-api.mjs",
     "content:build": "node scripts/build-content.mjs",
     "content:check": "node scripts/build-content.mjs --check",
     "build": "pnpm run content:build && ng build",

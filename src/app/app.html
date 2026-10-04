@@ -126,6 +126,18 @@
               (click)="closeMenu()"
               >Luyện tập</a
             >
+            <details class="workspace-nav__knowledge" [open]="section() === 'saved-vocabulary'">
+              <summary>Từ vựng yêu thích</summary>
+              <div class="workspace-nav__subitems">
+                <a
+                  [routerLink]="link('saved-vocabulary')"
+                  routerLinkActive="workspace-nav__link--active"
+                  ariaCurrentWhenActive="page"
+                  (click)="closeMenu()"
+                  >Từ vựng đã lưu</a
+                >
+              </div>
+            </details>
             <a
               [routerLink]="link('mock-exam')"
               routerLinkActive="workspace-nav__link--active"

@@ -55,5 +55,10 @@ await promisify(execFile)(
 );
 await rm(configPath);
 await cp(resolve(root, 'scripts/sites-media-worker.mjs'), resolve(serverOutput, 'index.js'));
+await cp(resolve(root, 'scripts/vocabulary-api.mjs'), resolve(serverOutput, 'vocabulary-api.mjs'));
+await cp(
+  resolve(root, 'scripts/vocabulary-lookup.mjs'),
+  resolve(serverOutput, 'vocabulary-lookup.mjs'),
+);
 await rm(buildOutput, { recursive: true, force: true });
 console.log('Prepared Sites application; media is served by the MEDIA R2 binding.');
