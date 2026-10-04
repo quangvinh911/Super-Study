@@ -59,4 +59,7 @@ pnpm run build:cf
 
 ## Tuyên bố
 
+Triển khai Sites dùng R2 cho media để giữ gói ứng dụng nhỏ. Xem
+[hướng dẫn lưu trữ và đồng bộ media](docs/sites-media-storage.md).
+
 Đây là công cụ học tập độc lập, phi thương mại. Dự án không liên kết hoặc được chứng thực bởi ISTQB® hay CertyIQ.
