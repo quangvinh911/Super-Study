@@ -41,6 +41,7 @@ testem.log
 /typings
 __screenshots__/
 .sites-sync/
+.env*.local
 __pycache__/
 *.pyc
 
@@ -51,10 +52,8 @@ __pycache__/
 /public/pdf-evidence/hacker-3-lc-test-*.webp
 /resources/toeic/hacker3/notes/
 /content/toeic-hacker-vocabulary-reviewed.json
-# Packaged into authorized private deployments without committing the generated data.
 /public/data/toeic/vocabulary/hacker-3.json
 
 # System files
 .DS_Store
 Thumbs.db
-.env*.local

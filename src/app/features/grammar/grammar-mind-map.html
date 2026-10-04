@@ -1,0 +1,41 @@
+<nav
+  class="mind-map"
+  [class.mind-map--full]="groups().length === 4"
+  aria-label="Sơ đồ tư duy ngữ pháp TOEIC"
+>
+  <div class="mind-map__root">
+    <span aria-hidden="true">S + V</span>
+    <strong>Ngữ pháp<br />TOEIC</strong>
+    <small>{{ lessons().length }} bài · {{ groups().length }} nhánh</small>
+  </div>
+  @for (group of groups(); track group.name) {
+    <details
+      class="mind-map__branch"
+      [class]="'mind-map__branch mind-map__branch--' + group.index"
+      open
+    >
+      <summary>
+        <span class="mind-map__number" aria-hidden="true">0{{ group.index + 1 }}</span>
+        <h3>{{ group.name }}</h3>
+        <span class="mind-map__count">{{ group.lessons.length }} bài</span>
+        <span class="mind-map__chevron" aria-hidden="true">⌄</span>
+      </summary>
+      <ol>
+        @for (lesson of group.lessons; track lesson.slug) {
+          <li>
+            <a class="mind-map__lesson" [routerLink]="['/certificates/toeic/grammar', lesson.slug]">
+              <span class="mind-map__lesson-number"
+                ><span class="sr-only">Bài </span>{{ position(lesson) }}</span
+              >
+              <span class="mind-map__lesson-title">{{ lesson.title }}</span>
+              <span class="mind-map__part">{{
+                lesson.part === 'part-5' ? 'Part 5' : 'Part 6'
+              }}</span>
+              <span class="mind-map__arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        }
+      </ol>
+    </details>
+  }
+</nav>

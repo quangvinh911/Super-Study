@@ -2,33 +2,16 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { GrammarLessonPage } from './grammar-lesson-page';
-import { GRAMMAR_LESSONS } from './grammar-lessons';
+import { GRAMMAR_LEARNING_ORDER, GRAMMAR_LESSONS } from './grammar-lessons';
 
 describe('TOEIC grammar lessons', () => {
-  it('provides 19 complete lessons with two valid self-check answers each', () => {
-    expect(GRAMMAR_LESSONS).toHaveLength(19);
-    expect(new Set(GRAMMAR_LESSONS.map((lesson) => lesson.slug)).size).toBe(19);
-    for (const lesson of GRAMMAR_LESSONS) {
-      expect(lesson.examples.length).toBeGreaterThanOrEqual(2);
-      expect(lesson.rules.length).toBeGreaterThanOrEqual(3);
-      expect(lesson.visual.steps.length).toBeGreaterThanOrEqual(3);
-      const ruleLabels = new Set(lesson.rules.map((rule) => rule.label));
-      for (const example of lesson.examples) {
-        expect(ruleLabels.has(example.ruleLabel)).toBe(true);
-      }
-      expect(lesson.checks).toHaveLength(2);
-      for (const check of lesson.checks) {
-        expect(check.options).toHaveLength(4);
-        expect(new Set(check.options).size).toBe(4);
-        expect(check.answer).toBeGreaterThanOrEqual(0);
-        expect(check.answer).toBeLessThan(4);
-        expect(check.explanation.trim()).not.toBe('');
-      }
-    }
-  });
-
-  it('shows feedback, allows a retry, and clears answers on the next lesson', async () => {
-    const params = new BehaviorSubject(convertToParamMap({ slug: 'cac-thi' }));
+  function element<T extends Element>(scope: ParentNode, selector: string): T {
+    const result = scope.querySelector<T>(selector);
+    if (!result) throw new Error('Missing element: ' + selector);
+    return result;
+  }
+  async function render(slug = 'cac-thi') {
+    const params = new BehaviorSubject(convertToParamMap({ slug }));
     await TestBed.configureTestingModule({
       imports: [GrammarLessonPage],
       providers: [
@@ -36,64 +19,115 @@ describe('TOEIC grammar lessons', () => {
         { provide: ActivatedRoute, useValue: { paramMap: params.asObservable() } },
       ],
     }).compileComponents();
-
     const fixture = TestBed.createComponent(GrammarLessonPage);
     await fixture.whenStable();
-    const page = fixture.nativeElement as HTMLElement;
-    const lessonSections = page.querySelectorAll('.grammar-article > section');
-    expect(lessonSections).toHaveLength(2);
-    expect(lessonSections[0].querySelector('h2')?.textContent).toContain('Cấu trúc / Quy tắc');
-    expect(lessonSections[0].querySelector('.grammar-flow')).toBeNull();
-    expect(lessonSections[0].querySelectorAll('.grammar-learning-card')).toHaveLength(1);
-    expect(lessonSections[0].querySelector('.grammar-examples-block')).toBeNull();
-    expect(lessonSections[0].querySelectorAll('.grammar-example')).toHaveLength(2);
-    const firstRule = lessonSections[0].querySelector('.grammar-rule') as HTMLElement;
-    expect(firstRule.querySelector('h3')?.textContent).toContain('Hiện tại');
-    expect(firstRule.querySelector('.grammar-formula-label')?.textContent).toContain('Công thức');
-    expect(firstRule.querySelector('.grammar-pattern')?.textContent).toContain('have/has + V3');
-    expect(
-      Array.from(firstRule.querySelectorAll('.grammar-rule__use-line')).map((line) =>
-        line.textContent?.trim(),
-      ),
-    ).toEqual([
-      'Lần lượt: thói quen.',
-      'đang diễn ra.',
-      'kết quả còn liên quan hiện tại.',
-      'quá trình kéo dài đến nay.',
-    ]);
-    expect(firstRule.querySelector('.grammar-examples__label')?.textContent).toContain('Ví dụ');
-    expect(
-      firstRule.querySelector('.grammar-example')?.textContent?.replace(/\s+/g, ' ').trim(),
-    ).toContain('The supplier has delivered the materials.');
-    expect(firstRule.querySelector('.grammar-example__translation')?.textContent).toContain(
-      'Nhà cung cấp đã giao vật liệu.',
-    );
-    expect(lessonSections[1].querySelector('h2')?.textContent).toContain('Thực hành trắc nghiệm');
-    expect(
-      Array.from(lessonSections[1].querySelectorAll('.grammar-check__meta')).map((item) =>
-        item.textContent?.trim(),
-      ),
-    ).toEqual(['Câu 1 · Dễ', 'Câu 2 · Khó']);
-    expect(page.querySelector('.grammar-sidebar a[href$="#checks-heading"]')).not.toBeNull();
+    return { fixture, params, page: fixture.nativeElement as HTMLElement };
+  }
 
-    const firstQuestion = page.querySelector('.grammar-check') as HTMLFieldSetElement;
-    const correctOption = firstQuestion.querySelectorAll(
-      'input[type="radio"]',
-    )[1] as HTMLInputElement;
-    correctOption.click();
-    await fixture.whenStable();
-    (firstQuestion.querySelector('button') as HTMLButtonElement).click();
-    await fixture.whenStable();
-    expect(firstQuestion.querySelector('[role="status"]')?.textContent).toContain('Đúng rồi');
+  it('retains 19 lessons and the two original self-checks per lesson', () => {
+    expect(GRAMMAR_LESSONS).toHaveLength(19);
+    expect(new Set(GRAMMAR_LESSONS.map((lesson) => lesson.slug)).size).toBe(19);
+    for (const lesson of GRAMMAR_LESSONS) {
+      const ruleLabels = new Set(lesson.rules.map((rule) => rule.label));
+      expect(lesson.examples).toHaveLength(2);
+      for (const example of lesson.examples) expect(ruleLabels.has(example.ruleLabel)).toBe(true);
+      expect(lesson.checks).toHaveLength(2);
+      for (const check of lesson.checks) {
+        expect(check.options).toHaveLength(4);
+        expect(new Set(check.options).size).toBe(4);
+        expect(Number.isInteger(check.answer)).toBe(true);
+        expect(check.answer).toBeGreaterThanOrEqual(0);
+        expect(check.answer).toBeLessThan(4);
+        expect(check.explanation.trim()).not.toBe('');
+      }
+    }
+  });
 
-    (firstQuestion.querySelector('button') as HTMLButtonElement).click();
-    await fixture.whenStable();
-    expect(firstQuestion.querySelector('[role="status"]')).toBeNull();
-    expect(firstQuestion.querySelectorAll('input:checked')).toHaveLength(0);
+  it('delays feedback, disables checked answers and supports retry for correct and incorrect choices', async () => {
+    const { fixture, page } = await render();
+    const fieldsets = page.querySelectorAll<HTMLFieldSetElement>('.grammar-check');
+    const lesson = GRAMMAR_LESSONS.find((item) => item.slug === 'cac-thi');
+    if (!lesson) throw new Error('Missing tense lesson');
+    for (const [index, check] of lesson.checks.entries()) {
+      const fieldset = fieldsets[index];
+      let button = element<HTMLButtonElement>(fieldset, 'button');
+      expect(button.disabled).toBe(true);
+      expect(fieldset.querySelector('[role="status"]')).toBeNull();
+      const radios = fieldset.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+      radios[index === 0 ? check.answer : (check.answer + 1) % 4].click();
+      await fixture.whenStable();
+      expect(fieldset.querySelector('[role="status"]')).toBeNull();
+      button.focus();
+      button.click();
+      await fixture.whenStable();
+      expect(fieldset.querySelector('[role="status"]')?.textContent).toContain(
+        index === 0 ? 'Đúng rồi.' : 'Chưa đúng.',
+      );
+      expect(Array.from(radios).every((radio) => radio.disabled)).toBe(true);
+      expect(document.activeElement).toBe(button);
+      button = element<HTMLButtonElement>(fieldset, 'button');
+      button.click();
+      await fixture.whenStable();
+      expect(fieldset.querySelector('[role="status"]')).toBeNull();
+      expect(fieldset.querySelector('input:checked')).toBeNull();
+      expect(Array.from(radios).every((radio) => !radio.disabled)).toBe(true);
+      expect(document.activeElement).toBe(radios[0]);
+      expect(fieldset.querySelector<HTMLButtonElement>('button')?.disabled).toBe(true);
+    }
+  });
 
+  it('renders all 19 lessons, preserves practice links and uses the same neighbor order as the library', async () => {
+    const { fixture, params, page } = await render();
+    for (const [index, lesson] of GRAMMAR_LEARNING_ORDER.entries()) {
+      params.next(convertToParamMap({ slug: lesson.slug }));
+      await fixture.whenStable();
+      expect(page.querySelector('h1')?.textContent).toContain(lesson.title);
+      expect(page.querySelector('.grammar-lesson-meta')?.textContent).toContain(
+        'Bài ' + (index + 1),
+      );
+      expect(page.querySelectorAll('.grammar-check')).toHaveLength(2);
+      expect(page.querySelectorAll('.grammar-rule app-grammar-syntax-sentence')).toHaveLength(2);
+      expect(page.querySelector('.grammar-breadcrumb')).toBeNull();
+      expect(page.querySelector('.grammar-sidebar')).toBeNull();
+      expect(page.querySelector('.grammar-practice a')?.getAttribute('href')).toBe(
+        '/certificates/toeic/practice?part=' + lesson.part,
+      );
+      const neighbors = page.querySelectorAll<HTMLAnchorElement>('.grammar-neighbors a');
+      const expected = [GRAMMAR_LEARNING_ORDER[index - 1], GRAMMAR_LEARNING_ORDER[index + 1]]
+        .filter((item) => item !== undefined)
+        .map((item) => '/certificates/toeic/grammar/' + item.slug);
+      expect(Array.from(neighbors, (link) => link.getAttribute('href'))).toEqual(expected);
+    }
+  });
+
+  it('clears answers and restores the default timeline after leaving and returning to a lesson', async () => {
+    const { fixture, params, page } = await render();
+    const radio = element<HTMLInputElement>(page, '.grammar-check input');
+    radio.click();
+    await fixture.whenStable();
+    element<HTMLButtonElement>(page, '.grammar-check button').click();
+    await fixture.whenStable();
+    const slider = element<HTMLInputElement>(page, 'input[type="range"]');
+    slider.value = '2';
+    slider.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
     params.next(convertToParamMap({ slug: 'cau-bi-dong' }));
     await fixture.whenStable();
-    expect(page.querySelector('h1')?.textContent).toContain('Câu bị động');
-    expect(page.querySelectorAll('input:checked')).toHaveLength(0);
+    expect(page.querySelector('input:checked')).toBeNull();
+    expect(page.querySelector('.grammar-check [role="status"]')).toBeNull();
+    expect(page.querySelector('app-grammar-transformation')).not.toBeNull();
+    params.next(convertToParamMap({ slug: 'cac-thi' }));
+    await fixture.whenStable();
+    expect(page.querySelector<HTMLInputElement>('input[type="range"]')?.value).toBe('1');
+    expect(page.querySelector('.grammar-check input:checked')).toBeNull();
+  });
+
+  it('offers a library link for an unknown slug', async () => {
+    const { page } = await render('not-a-lesson');
+    expect(page.querySelector('h1')?.textContent).toContain('Không tìm thấy bài học');
+    expect(page.querySelector('.grammar-not-found a')?.getAttribute('href')).toBe(
+      '/certificates/toeic/grammar',
+    );
+    expect(page.querySelector('.grammar-article')).toBeNull();
   });
 });

@@ -1,0 +1,144 @@
+<section
+  class="listening-player"
+  [class.listening-player--playing]="playing() && !buffering() && !pending()"
+  [attr.aria-label]="label()"
+  lang="vi"
+>
+  <audio
+    #media
+    preload="none"
+    [src]="src()"
+    [attr.aria-label]="label()"
+    (loadedmetadata)="syncTime()"
+    (durationchange)="syncTime()"
+    (timeupdate)="syncTime()"
+    (play)="onPlay()"
+    (playing)="buffering.set(false)"
+    (waiting)="buffering.set(true)"
+    (canplay)="buffering.set(false)"
+    (pause)="onPause()"
+    (ended)="onEnded()"
+    (volumechange)="syncVolume()"
+    (error)="fail()"
+  >
+    Trình duyệt không hỗ trợ phát audio.
+  </audio>
+  <div class="listening-player__heading">
+    <span class="listening-player__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 14v-3a8 8 0 0 1 16 0v3" />
+        <rect x="3" y="12" width="4" height="8" rx="2" />
+        <rect x="17" y="12" width="4" height="8" rx="2" />
+      </svg>
+    </span>
+    <div class="listening-player__title">
+      <span class="listening-player__eyebrow">LUYỆN NGHE</span><strong>{{ label() }}</strong>
+    </div>
+    <span class="listening-player__activity" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  </div>
+  <div class="listening-player__main">
+    <button
+      class="listening-player__play"
+      type="button"
+      [disabled]="pending() && !playing()"
+      (click)="togglePlayback()"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+        @if (playing()) {
+          <path d="M6 4h4v16H6zm8 0h4v16h-4z" />
+        } @else {
+          <path d="M7 4v16l14-8z" />
+        }
+      </svg>
+      {{ error() ? 'Thử lại' : playing() ? 'Tạm dừng' : ended() ? 'Nghe lại' : 'Phát audio' }}
+    </button>
+    <div class="listening-player__timeline">
+      <p class="listening-player__status" role="status">{{ status() }}</p>
+      <input
+        #seekControl
+        class="listening-player__seek"
+        type="range"
+        min="0"
+        [max]="duration() || 1"
+        step="0.1"
+        [value]="currentTime()"
+        [disabled]="duration() <= 0 || !!error()"
+        aria-label="Vị trí phát audio"
+        [attr.aria-valuetext]="seekText()"
+        [style.--audio-progress]="progress() + '%'"
+        (input)="seek(seekControl.valueAsNumber)"
+      />
+      <div class="listening-player__times" aria-hidden="true">
+        <span>{{ elapsed() }}</span
+        ><span>{{ total() }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="listening-player__tools">
+    <div class="listening-player__skip" role="group" aria-label="Tua audio">
+      <button
+        type="button"
+        [disabled]="duration() <= 0 || !!error()"
+        (click)="skip(-10)"
+        aria-label="Tua lùi 10 giây"
+      >
+        <span aria-hidden="true">↶</span> 10s
+      </button>
+      <button
+        type="button"
+        [disabled]="duration() <= 0 || !!error()"
+        (click)="skip(10)"
+        aria-label="Tua tới 10 giây"
+      >
+        10s <span aria-hidden="true">↷</span>
+      </button>
+    </div>
+    <label class="listening-player__speed"
+      ><span>Tốc độ</span
+      ><select #rate [value]="speed()" (change)="changeSpeed(rate.value)">
+        <option value="0.75">0.75×</option>
+        <option value="1">1×</option>
+        <option value="1.25">1.25×</option>
+        <option value="1.5">1.5×</option>
+      </select></label
+    >
+    <div class="listening-player__volume">
+      <button
+        type="button"
+        [attr.aria-pressed]="muted()"
+        [attr.aria-label]="muted() ? 'Bật âm thanh' : 'Tắt âm thanh'"
+        (click)="toggleMute()"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path d="M11 4 6 8H3v8h3l5 4z" />
+          @if (muted() || volume() === 0) {
+            <path d="m16 9 5 6m0-6-5 6" />
+          } @else {
+            <path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" />
+          }
+        </svg>
+      </button>
+      <input
+        #loudness
+        type="range"
+        min="0"
+        max="1"
+        step="0.05"
+        [value]="muted() ? 0 : volume()"
+        aria-label="Âm lượng"
+        [attr.aria-valuetext]="(muted() ? 0 : volume() * 100).toFixed(0) + '%'"
+        (input)="changeVolume(loudness.value)"
+      />
+    </div>
+  </div>
+  @if (error()) {
+    <p class="listening-player__error" role="alert">{{ error() }}</p>
+  }
+  <p class="listening-player__hint">Nghe ý chính trước, tua lại đoạn cần chú ý để luyện kỹ hơn.</p>
+</section>
