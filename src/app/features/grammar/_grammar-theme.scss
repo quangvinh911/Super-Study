@@ -1,0 +1,67 @@
+@mixin page {
+  .grammar-page {
+    --grammar-accent: #2563eb;
+    --grammar-accent-dark: #1d4ed8;
+    --grammar-muted: #52657c;
+    --grammar-line: #dce5f0;
+    --grammar-wash: #eff5ff;
+    --color-ink: #14263d;
+    --color-text: #24364d;
+    --color-text-muted: var(--grammar-muted);
+    --color-paper: #f6f8fc;
+    --color-paper-strong: #ffffff;
+    --color-paper-deep: #edf2f8;
+    --color-border: var(--grammar-line);
+    --color-border-strong: #acbdd2;
+    --color-teal: var(--grammar-accent);
+    --color-teal-dark: var(--grammar-accent-dark);
+    --color-teal-light: #bdd5fc;
+    --color-teal-wash: var(--grammar-wash);
+    --font-display: var(--font-sans);
+    --focus-ring: 0 0 0 0.18rem #ffffff, 0 0 0 0.35rem var(--grammar-accent);
+    width: 100%;
+    margin: 0;
+    padding: clamp(1rem, 2.5vw, 2rem);
+    color: var(--color-text);
+    background: var(--color-paper);
+    border-radius: 1.2rem;
+  }
+
+  .grammar-page :where(h1, h2, h3, h4) {
+    font-family: var(--font-sans);
+    font-weight: 850;
+  }
+
+  .grammar-page .button {
+    border-radius: 0.65rem;
+  }
+
+  .grammar-page .surface {
+    box-shadow: none;
+  }
+
+  // Route focus announces the page title without making it look like a control.
+  .grammar-page h1:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  @media (prefers-contrast: more) {
+    .grammar-page {
+      --grammar-muted: #33465f;
+      --grammar-line: #667b98;
+      --color-border-strong: #425975;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .grammar-page {
+      --focus-ring: 0 0 0 0.25rem Highlight;
+    }
+    .grammar-page :focus-visible {
+      outline: 2px solid Highlight;
+      outline-offset: 3px;
+      box-shadow: none;
+    }
+  }
+}

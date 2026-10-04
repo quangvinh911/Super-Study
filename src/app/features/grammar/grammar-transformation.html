@@ -1,0 +1,55 @@
+<div class="transformation">
+  <div class="transformation-heading">
+    <span class="transformation-eyebrow">Biến đổi từng bước</span>
+    <h3>{{ demo().title }}</h3>
+  </div>
+
+  @if (step(); as current) {
+    <ol class="transformation-steps" aria-label="Các bước biến đổi">
+      @for (item of demo().steps; track item.id; let index = $index) {
+        <li
+          [class.is-current]="index === stepIndex()"
+          [class.is-done]="index < stepIndex()"
+          [attr.aria-current]="index === stepIndex() ? 'step' : null"
+        >
+          <span class="transformation-step-number">{{ index + 1 }}</span>
+          <span>{{ item.label }}</span>
+        </li>
+      }
+    </ol>
+    <div class="transformation-content">
+      <p class="transformation-progress" role="status">
+        Bước {{ stepIndex() + 1 }}/{{ demo().steps.length }} · {{ current.label }}
+      </p>
+      <div class="transformation-sentence">
+        <app-grammar-syntax-sentence [sentence]="current.sentence" />
+      </div>
+      <p class="transformation-explanation">{{ current.explanation }}</p>
+    </div>
+    <div class="transformation-actions">
+      <button
+        type="button"
+        class="transformation-reset"
+        [disabled]="stepIndex() === 0"
+        (click)="reset()"
+      >
+        Đặt lại
+      </button>
+      <div class="transformation-navigation">
+        <button type="button" [disabled]="stepIndex() === 0" (click)="previous()">
+          ← Bước trước
+        </button>
+        <button
+          type="button"
+          class="transformation-next"
+          [disabled]="stepIndex() === demo().steps.length - 1"
+          (click)="next()"
+        >
+          Bước sau →
+        </button>
+      </div>
+    </div>
+  } @else {
+    <p class="transformation-unavailable" role="alert">Chưa có các bước cho mô phỏng này.</p>
+  }
+</div>

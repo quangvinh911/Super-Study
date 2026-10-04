@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { ContentBlock } from '../../core/models';
+import { ListeningAudio } from '../listening-audio/listening-audio';
 
 export function formatLegacyTranscript(blocks: readonly ContentBlock[]): readonly ContentBlock[] {
   return blocks.flatMap((block) => {
@@ -34,11 +35,13 @@ export function formatLegacyTranscript(blocks: readonly ContentBlock[]): readonl
 
 @Component({
   selector: 'app-content-blocks',
+  imports: [ListeningAudio],
   templateUrl: './content-blocks.html',
   styleUrl: './content-blocks.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentBlocks {
   readonly blocks = input.required<readonly ContentBlock[]>();
+  readonly enhancedAudio = input(false);
   readonly displayBlocks = computed(() => formatLegacyTranscript(this.blocks()));
 }

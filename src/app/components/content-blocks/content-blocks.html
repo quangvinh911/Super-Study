@@ -70,12 +70,16 @@
         </figure>
       }
       @case ('audio') {
-        <figure>
-          <figcaption>{{ block.label }}</figcaption>
-          <audio controls preload="none" [src]="block.src" [attr.aria-label]="block.label">
-            Trình duyệt không hỗ trợ phát audio.
-          </audio>
-        </figure>
+        @if (enhancedAudio()) {
+          <app-listening-audio [src]="block.src" [label]="block.label" />
+        } @else {
+          <figure>
+            <figcaption>{{ block.label }}</figcaption>
+            <audio controls preload="none" [src]="block.src" [attr.aria-label]="block.label">
+              Trình duyệt không hỗ trợ phát audio.
+            </audio>
+          </figure>
+        }
       }
     }
   }

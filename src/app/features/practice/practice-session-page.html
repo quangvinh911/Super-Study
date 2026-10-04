@@ -60,10 +60,10 @@
       <div class="stem">
         @if (item.question.stimulus; as stimulus) {
           <section class="shared-stimulus" aria-label="Nội dung dùng chung" lang="en">
-            <app-content-blocks [blocks]="stimulus.content" />
+            <app-content-blocks [blocks]="stimulus.content" [enhancedAudio]="true" />
           </section>
         }
-        <app-content-blocks [blocks]="item.question.stem" />
+        <app-content-blocks [blocks]="item.question.stem" [enhancedAudio]="true" />
       </div>
 
       @if (item.question.sourceEvidence; as evidence) {

@@ -1,92 +1,181 @@
-<div class="page grammar-page">
-  <header class="page-header grammar-hero">
-    <a routerLink="/certificates/toeic">← TOEIC</a>
-    <p class="eyebrow">TOEIC Reading · Học trước khi luyện đề</p>
-    <h1>Ngữ pháp để hiểu và chọn đúng</h1>
-    <p>
-      {{ lessonCount }} bài học ngắn theo lộ trình. Đọc quy tắc, quan sát ví dụ trong công việc, tự
-      kiểm tra rồi chuyển sang luyện Part 5 hoặc Part 6.
-    </p>
-    <p class="grammar-hero__note">
-      Các bài tự kiểm tra không tính vào điểm thi hoặc tiến độ luyện đề.
-    </p>
+<div class="page grammar-page grammar-overview">
+  <header class="grammar-hero">
+    <div class="grammar-hero__copy">
+      <p class="grammar-kicker"><span aria-hidden="true">✦</span> TOEIC · NGỮ PHÁP TRỰC QUAN</p>
+      <h1 #pageHeading tabindex="-1">Nhìn cấu trúc.<br />Hiểu ngữ pháp.</h1>
+      <p>
+        Khám phá câu bằng các khối màu, quan sát cách câu thay đổi và tự kiểm tra ngay trong bài.
+      </p>
+      <div class="grammar-hero__actions">
+        <a class="button" href="/certificates/toeic/grammar#grammar-library"
+          >Khám phá {{ lessonCount }} bài học <span aria-hidden="true">↓</span></a
+        >
+        <span>4 chặng · Part 5 &amp; 6</span>
+      </div>
+    </div>
+    <div class="grammar-demo">
+      <div class="grammar-demo__heading">
+        <span class="grammar-demo__icon" aria-hidden="true">S + V</span>
+        <div>
+          <strong>Một câu, nhiều manh mối</strong>
+          <p>Chạm vào khối màu để hiểu vai trò của từ.</p>
+        </div>
+      </div>
+      @if (demoSentence; as sentence) {
+        <app-grammar-syntax-sentence [sentence]="sentence" [showLegend]="true" />
+      }
+    </div>
   </header>
 
-  <section class="grammar-tree" aria-labelledby="tree-title">
-    <div class="grammar-tree__heading">
+  <section
+    id="grammar-library"
+    class="grammar-library"
+    aria-labelledby="library-title"
+    tabindex="-1"
+  >
+    <div class="grammar-library__heading">
       <div>
-        <p class="eyebrow">Bản đồ học tập</p>
-        <h2 id="tree-title">Một gốc, bốn nhánh, {{ lessonCount }} bài học</h2>
+        <p class="grammar-kicker">BẢN ĐỒ KIẾN THỨC</p>
+        <h2 id="library-title" tabindex="-1">Một sơ đồ, toàn bộ ngữ pháp TOEIC</h2>
       </div>
-      <p>Chọn tên nhánh để thu gọn hoặc mở các bài bên trong.</p>
+      <p>Đi theo nhánh kiến thức, chọn một bài để bắt đầu.</p>
     </div>
 
-    <div class="grammar-tree__body">
-      <div class="grammar-tree__root surface">
-        <span class="grammar-tree__root-mark" aria-hidden="true">✳</span>
-        <span class="grammar-tree__root-label">Điểm bắt đầu</span>
-        <strong>Ngữ pháp TOEIC</strong>
-        <p>Từ cách dùng một từ đến cách hiểu cả đoạn văn.</p>
-      </div>
+    <div class="grammar-filters" role="search" aria-label="Tìm bài học ngữ pháp">
+      <label class="grammar-search" for="grammar-search">
+        <span>Tìm bài học</span>
+        <input
+          #searchInput
+          id="grammar-search"
+          type="search"
+          [value]="search()"
+          (input)="search.set(searchInput.value)"
+          placeholder="Tìm từ loại, câu bị động, mệnh đề…"
+          autocomplete="off"
+        />
+      </label>
+      <label for="grammar-stage"
+        ><span>Chặng học</span>
+        <select
+          #stageInput
+          id="grammar-stage"
+          [value]="stage()"
+          (change)="stage.set(stageInput.value)"
+        >
+          <option value="all">Tất cả chặng</option>
+          @for (item of stages; track item) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
+      </label>
+      <label for="grammar-part"
+        ><span>TOEIC Part</span>
+        <select #partInput id="grammar-part" [value]="part()" (change)="part.set(partInput.value)">
+          <option value="all">Part 5 &amp; 6</option>
+          <option value="part-5">Part 5</option>
+          <option value="part-6">Part 6</option>
+        </select>
+      </label>
+    </div>
+    <div class="grammar-filter-status">
+      <p role="status" aria-live="polite">
+        {{ filteredLessons().length }} / {{ lessonCount }} bài học
+      </p>
+      @if (hasFilters()) {
+        <button type="button" class="grammar-clear" (click)="clearFilters()">Xóa bộ lọc</button>
+      }
+    </div>
 
-      <ol class="grammar-tree__branches">
-        @for (stage of stages; track stage; let stageIndex = $index) {
-          <li class="grammar-tree__branch">
-            <details open>
-              <summary>
-                <span class="grammar-tree__stage-number">0{{ stageIndex + 1 }}</span>
-                <span class="grammar-tree__stage-copy">
-                  <strong>{{ stage }}</strong>
-                  <span>
-                    @switch (stage) {
-                      @case ('Nền tảng') {
-                        Từ loại · cụm từ · câu
+    <div class="grammar-view-switch" role="group" aria-label="Cách xem thư viện">
+      <button type="button" [attr.aria-pressed]="view() === 'map'" (click)="view.set('map')">
+        Sơ đồ tư duy
+      </button>
+      <button type="button" [attr.aria-pressed]="view() === 'cards'" (click)="view.set('cards')">
+        Thẻ bài học
+      </button>
+    </div>
+    @if (filteredLessons().length > 0 && view() === 'map') {
+      <p class="grammar-map-hint">
+        Bấm tên nhóm để thu gọn hoặc mở nhánh. Bấm tên bài để khám phá.
+      </p>
+      <app-grammar-mind-map [lessons]="filteredLessons()" />
+    } @else {
+      @for (group of visibleStages(); track group.name) {
+        <section class="grammar-stage" [attr.aria-labelledby]="'stage-' + group.number">
+          <div class="grammar-stage__heading">
+            <span class="grammar-stage__number" aria-hidden="true">{{ group.number }}</span>
+            <div>
+              <h3 [id]="'stage-' + group.number">{{ group.name }}</h3>
+              <p>{{ stageDescriptions[group.name] }}</p>
+            </div>
+            <span class="grammar-stage__count">{{ group.lessons.length }} bài</span>
+          </div>
+          <ol class="grammar-card-grid">
+            @for (lesson of group.lessons; track lesson.slug) {
+              <li>
+                <a
+                  class="grammar-lesson-card"
+                  [routerLink]="['/certificates/toeic/grammar', lesson.slug]"
+                >
+                  <div class="grammar-lesson-card__meta">
+                    <span class="grammar-lesson-card__number">Bài {{ position(lesson) }}</span
+                    ><span class="grammar-part">{{
+                      lesson.part === 'part-5' ? 'Part 5' : 'Part 6'
+                    }}</span>
+                  </div>
+                  <div class="grammar-mini-syntax" aria-hidden="true">
+                    @switch (lesson.slug) {
+                      @case ('cac-thi') {
+                        <span class="grammar-mini-syntax__subject">Past</span><i>→</i>
+                        <span class="grammar-mini-syntax__verb">● Now</span><i>→</i>
+                        <span class="grammar-mini-syntax__object">Future</span>
                       }
-                      @case ('Động từ') {
-                        Thời điểm · hành động · dạng từ
+                      @case ('cau-bi-dong') {
+                        <span class="grammar-mini-syntax__subject">O → S</span><i>→</i>
+                        <span class="grammar-mini-syntax__verb">be + V3</span>
                       }
-                      @case ('Nối ý') {
-                        Quan hệ giữa các ý và mệnh đề
+                      @case ('phan-tu-va-rut-gon') {
+                        <span class="grammar-mini-syntax__subject">who + V</span><i>→</i>
+                        <span class="grammar-mini-syntax__verb">V-ing / V3</span>
                       }
-                      @case ('Mở rộng') {
-                        Sắc thái và cấu trúc công việc
+                      @default {
+                        <span class="grammar-mini-syntax__subject">S</span><i>+</i>
+                        <span class="grammar-mini-syntax__verb">V</span><i>+</i>
+                        <span class="grammar-mini-syntax__object">O / C</span>
                       }
                     }
-                  </span>
-                </span>
-                <span class="grammar-tree__stage-count">{{ lessonsFor(stage).length }} bài</span>
-                <span class="grammar-tree__chevron" aria-hidden="true">⌄</span>
-              </summary>
-
-              <ol class="grammar-tree__leaves">
-                @for (lesson of lessonsFor(stage); track lesson.slug) {
-                  <li>
-                    <a [routerLink]="['/certificates/toeic/grammar', lesson.slug]">
-                      <span class="grammar-tree__lesson-number">{{ position(lesson) }}</span>
-                      <span class="grammar-tree__lesson-copy">
-                        <strong>{{ lesson.title }}</strong>
-                        <span>{{ lesson.summary }}</span>
-                      </span>
-                      <span class="grammar-tree__part">{{
-                        lesson.part === 'part-5' ? 'Part 5' : 'Part 6'
-                      }}</span>
-                      <span class="grammar-tree__arrow" aria-hidden="true">↗</span>
-                    </a>
-                  </li>
-                }
-              </ol>
-            </details>
-          </li>
-        }
-      </ol>
-    </div>
+                  </div>
+                  <h4>{{ lesson.title }}</h4>
+                  <p>{{ lesson.goal }}</p>
+                  <span class="grammar-lesson-card__open"
+                    >Khám phá bài học <span aria-hidden="true">↗</span></span
+                  >
+                </a>
+              </li>
+            }
+          </ol>
+        </section>
+      } @empty {
+        <div class="grammar-empty">
+          <span aria-hidden="true">⌕</span>
+          <h3>Chưa tìm thấy bài phù hợp</h3>
+          <p>Thử từ khóa khác hoặc xóa bộ lọc để xem toàn bộ lộ trình.</p>
+          <button class="button button--secondary" type="button" (click)="clearFilters()">
+            Xem tất cả bài học
+          </button>
+        </div>
+      }
+    }
+    <p class="grammar-learning-note">
+      Bài tự kiểm tra giúp củng cố kiến thức và không tính vào điểm thi hoặc tiến độ luyện đề.
+    </p>
   </section>
 
-  <section class="grammar-sources" aria-labelledby="sources-title">
-    <h2 id="sources-title">Nguồn tham khảo</h2>
+  <details class="grammar-sources">
+    <summary>Nguồn tham khảo &amp; cách biên soạn</summary>
     <p>
-      Lộ trình được tổng hợp theo chủ điểm; lời giải, ví dụ, câu hỏi và sơ đồ trên trang là nội dung
-      viết mới. Cấu trúc bài thi tham khảo ETS.
+      Lộ trình được tổng hợp theo chủ điểm; lời giải, ví dụ, câu hỏi và sơ đồ là nội dung viết mới.
+      Cấu trúc bài thi tham khảo ETS.
     </p>
     <ul>
       <li>
@@ -130,5 +219,5 @@
         >
       </li>
     </ul>
-  </section>
+  </details>
 </div>

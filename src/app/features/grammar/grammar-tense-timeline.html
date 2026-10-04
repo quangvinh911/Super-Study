@@ -1,0 +1,127 @@
+<div class="tense-explorer">
+  <div class="tense-controls">
+    <label class="tense-period">
+      <span class="tense-control-label"
+        >Mốc thời gian <strong>{{ periodLabel() }}</strong></span
+      >
+      <input
+        #periodRange
+        type="range"
+        min="0"
+        max="2"
+        step="1"
+        [value]="periodIndex()"
+        [attr.aria-valuetext]="periodLabel()"
+        aria-label="Mốc thời gian"
+        (input)="selectPeriod(periodRange.valueAsNumber)"
+      />
+      <span class="tense-period-labels" aria-hidden="true">
+        @for (period of periods; track period.value; let index = $index) {
+          <span [class.is-active]="periodIndex() === index">{{ period.label }}</span>
+        }
+      </span>
+    </label>
+    <fieldset class="tense-aspects">
+      <legend>Dạng thì</legend>
+      <div class="tense-aspect-options">
+        @for (option of aspects; track option.value) {
+          <label [class.is-active]="aspect() === option.value">
+            <input
+              type="radio"
+              [name]="radioName()"
+              [value]="option.value"
+              [checked]="aspect() === option.value"
+              (change)="selectAspect(option.value)"
+            />
+            <span>{{ option.label }}</span>
+          </label>
+        }
+      </div>
+    </fieldset>
+  </div>
+
+  @if (example(); as selected) {
+    <div class="tense-example">
+      <div class="tense-example__heading">
+        <span class="tense-eyebrow">Khám phá 12 thì</span>
+        <h3 aria-live="polite">{{ selected.label }}</h3>
+      </div>
+      <p class="tense-formula">
+        <span>Công thức</span><strong lang="en">{{ selected.formula }}</strong>
+      </p>
+      <figure class="tense-diagram">
+        <svg viewBox="-6 0 112 54" role="img" [attr.aria-label]="selected.description">
+          <title>{{ selected.label }}</title>
+          <line x1="0" y1="25" x2="100" y2="25" class="diagram-axis" />
+          <line x1="50" y1="7" x2="50" y2="35" class="diagram-now" />
+          <text x="0" y="47" text-anchor="start">Quá khứ</text>
+          <text x="50" y="47" text-anchor="middle">Hiện tại</text>
+          <text x="100" y="47" text-anchor="end">Tương lai</text>
+          @switch (selected.diagram.shape) {
+            @case ('routine') {
+              @for (point of routinePoints(); track $index) {
+                <circle [attr.cx]="point" cy="25" r="2.5" class="diagram-event" />
+              }
+            }
+            @case ('point') {
+              <circle [attr.cx]="selected.diagram.start" cy="25" r="3.5" class="diagram-event" />
+            }
+            @case ('duration') {
+              <rect
+                [attr.x]="selected.diagram.start"
+                y="20"
+                [attr.width]="selected.diagram.end - selected.diagram.start"
+                height="10"
+                rx="3"
+                class="diagram-duration"
+              />
+            }
+            @case ('perfect') {
+              <line
+                [attr.x1]="selected.diagram.end"
+                y1="25"
+                [attr.x2]="selected.diagram.reference"
+                y2="25"
+                class="diagram-result"
+              />
+              <circle [attr.cx]="selected.diagram.end" cy="25" r="3" class="diagram-event" />
+              <circle
+                [attr.cx]="selected.diagram.reference"
+                cy="25"
+                r="3"
+                class="diagram-reference"
+              />
+            }
+            @case ('perfect-duration') {
+              <rect
+                [attr.x]="selected.diagram.start"
+                y="20"
+                [attr.width]="selected.diagram.end - selected.diagram.start"
+                height="10"
+                rx="3"
+                class="diagram-duration"
+              />
+              <line
+                [attr.x1]="selected.diagram.end"
+                y1="25"
+                [attr.x2]="selected.diagram.reference"
+                y2="25"
+                class="diagram-result"
+              />
+              <circle
+                [attr.cx]="selected.diagram.reference"
+                cy="25"
+                r="3"
+                class="diagram-reference"
+              />
+            }
+          }
+        </svg>
+        <figcaption>{{ selected.description }}</figcaption>
+      </figure>
+      <app-grammar-syntax-sentence [sentence]="selected.sentence" />
+    </div>
+  } @else {
+    <p class="tense-unavailable" role="alert">Chưa có ví dụ cho tổ hợp thì này.</p>
+  }
+</div>

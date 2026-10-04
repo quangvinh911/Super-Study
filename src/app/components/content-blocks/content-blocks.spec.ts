@@ -1,8 +1,26 @@
 import { TestBed } from '@angular/core/testing';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { ContentBlocks, formatLegacyTranscript } from './content-blocks';
 
 describe('legacy Listening transcript display', () => {
+  it('uses the enhanced audio only when explicitly requested by the practice page', async () => {
+    const pause = vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
+    await TestBed.configureTestingModule({ imports: [ContentBlocks] }).compileComponents();
+    const fixture = TestBed.createComponent(ContentBlocks);
+    fixture.componentRef.setInput('blocks', [
+      { kind: 'audio', src: '/clip.mp3', label: 'Listening' },
+    ]);
+    await fixture.whenStable();
+    const page = fixture.nativeElement as HTMLElement;
+    expect(page.querySelector('audio')?.hasAttribute('controls')).toBe(true);
+    expect(page.querySelector('app-listening-audio')).toBeNull();
+    fixture.componentRef.setInput('enhancedAudio', true);
+    await fixture.whenStable();
+    expect(page.querySelector('app-listening-audio')).not.toBeNull();
+    expect(page.querySelectorAll('audio')).toHaveLength(1);
+    fixture.destroy();
+    pause.mockRestore();
+  });
   it('places each spoken choice on its own line', () => {
     expect(
       formatLegacyTranscript([

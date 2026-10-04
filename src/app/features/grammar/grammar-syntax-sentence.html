@@ -1,0 +1,85 @@
+<div class="syntax-sentence" (keydown.escape)="closeDetails()">
+  @if (showLegend()) {
+    <ul class="syntax-legend" aria-label="Màu và vai trò trong câu">
+      @for (role of roles; track role) {
+        <li [class]="'syntax-legend__item role-' + role">
+          <strong>{{ role }}</strong> {{ roleLabels[role] }}
+        </li>
+      }
+    </ul>
+  }
+
+  <div class="syntax-line" role="group" aria-label="Khám phá các thành phần của câu">
+    <ng-container
+      [ngTemplateOutlet]="syntaxNodes"
+      [ngTemplateOutletContext]="{ $implicit: sentence().syntax }"
+    />
+  </div>
+  <p class="syntax-translation">{{ sentence().vietnamese }}</p>
+  <p class="syntax-clue"><span>Gợi ý nhận diện</span> {{ sentence().clue }}</p>
+
+  @if (selectedToken(); as token) {
+    <section class="syntax-detail" aria-label="Giải thích thành phần đã chọn">
+      <div class="syntax-detail__heading">
+        <p class="syntax-detail-title">
+          <strong
+            ><span lang="en">{{ token.text }}</span> · {{ roleLabels[token.role] }}</strong
+          >
+        </p>
+        <button type="button" class="syntax-close" (click)="closeDetails()">
+          <span aria-hidden="true">×</span><span>Đóng</span>
+        </button>
+      </div>
+      <p class="syntax-pos"><strong>Từ loại:</strong> {{ token.pos }}</p>
+      <p>{{ token.explanation }}</p>
+      @if (token.wordFormation) {
+        <p class="syntax-extra"><strong>Biến đổi từ:</strong> {{ token.wordFormation }}</p>
+      }
+      @if (token.distractor) {
+        <p class="syntax-trap"><strong>Bẫy thường gặp:</strong> {{ token.distractor }}</p>
+      }
+    </section>
+  }
+</div>
+
+<ng-template #syntaxNodes let-nodes>
+  @for (node of nodes; track node.id) {
+    @switch (node.kind) {
+      @case ('text') {
+        <span class="syntax-neutral" lang="en">{{ node.text }}</span>
+      }
+      @case ('token') {
+        <button
+          #tokenButton
+          type="button"
+          [class]="'syntax-token role-' + node.role"
+          [class.is-selected]="selectedToken()?.id === node.id"
+          [attr.data-syntax-id]="node.id"
+          [attr.aria-expanded]="selectedToken()?.id === node.id"
+          (click)="selectToken(node, tokenButton)"
+        >
+          <span class="syntax-token__role" lang="vi"
+            >{{ node.role }} · {{ roleLabel(node.role) }}</span
+          >
+          <span class="syntax-token__text" lang="en">{{ node.text }}</span>
+        </button>
+      }
+      @case ('group') {
+        <span [class]="'syntax-group' + (node.role ? ' role-' + node.role : '')">
+          <span class="syntax-group__label" lang="vi">
+            @if (node.role) {
+              {{ node.role }} ·
+            }
+            {{ node.label }}
+          </span>
+          <span class="syntax-group__children">
+            <ng-container
+              [ngTemplateOutlet]="syntaxNodes"
+              [ngTemplateOutletContext]="{ $implicit: node.children }"
+            />
+          </span>
+        </span>
+      }
+    }
+  }
+</ng-template>
