@@ -80,16 +80,35 @@
     <div class="entry-grid">
       @for (entry of filtered(); track entry.id) {
         <article class="surface vocabulary-entry">
-          <h2 lang="en">
+          <div class="entry-heading">
+            <h2 lang="en">
+              <button
+                class="entry-term"
+                type="button"
+                [attr.aria-label]="'Nghe cách đọc ' + entry.term"
+                (click)="speak(entry.term)"
+              >
+                {{ entry.term }}
+              </button>
+            </h2>
             <button
-              class="entry-term"
+              class="entry-favorite"
               type="button"
-              [attr.aria-label]="'Nghe cách đọc ' + entry.term"
-              (click)="speak(entry.term)"
+              [attr.aria-label]="'Lưu từ vựng ' + entry.term"
+              title="Thêm vào từ vựng đã lưu"
+              (click)="
+                favorites.save({
+                  term: entry.term,
+                  meaning: entry.meaning,
+                  example: entry.usage,
+                })
+              "
             >
-              {{ entry.term }}
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2-4.5-4.4 6.3-.9Z" />
+              </svg>
             </button>
-          </h2>
+          </div>
           <p class="pronunciation-hint">Nhấn để nghe cách đọc tiếng Anh</p>
           @if (!selfCheck() || revealed().has(entry.id)) {
             <div [id]="entry.id + '-meaning'">

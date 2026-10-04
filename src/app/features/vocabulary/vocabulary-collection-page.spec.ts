@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { VocabularyCollectionPage } from './vocabulary-collection-page';
+import { FavoriteVocabularyService } from './favorite-vocabulary.service';
 
 const entry = {
   id: 'hacker-3-word-1',
@@ -16,6 +17,45 @@ const entry = {
 };
 describe('Vocabulary learning controls', () => {
   afterEach(() => vi.unstubAllGlobals());
+  it('saves via the star without opening a dialog', async () => {
+    const save = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValue({
+          ok: true,
+          json: async () => ({
+            id: 'hacker-3',
+            title: 'Hacker 3',
+            reviewNote: 'Selected words',
+            entries: [entry],
+          }),
+        }),
+    );
+    TestBed.configureTestingModule({
+      imports: [VocabularyCollectionPage],
+      providers: [
+        provideRouter([]),
+        { provide: FavoriteVocabularyService, useValue: { save } },
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { paramMap: convertToParamMap({ collectionId: 'hacker-3' }) } },
+        },
+      ],
+    });
+    const fixture = TestBed.createComponent(VocabularyCollectionPage);
+    await fixture.whenStable();
+    const element: HTMLElement = fixture.nativeElement;
+    element.querySelector<HTMLButtonElement>('.entry-favorite')?.click();
+    await fixture.whenStable();
+    expect(save).toHaveBeenCalledWith({
+      term: entry.term,
+      meaning: entry.meaning,
+      example: entry.usage,
+    });
+    expect(element.querySelector('dialog')).toBeNull();
+  });
   it('filters the collection and reveals a meaning only on request in self-check mode', async () => {
     vi.stubGlobal(
       'fetch',

@@ -63,6 +63,7 @@ export class App {
         practice: 'Luyện tập',
         'mock-exam': 'Thi thử',
         progress: 'Tiến độ',
+        'saved-vocabulary': 'Từ vựng đã lưu',
         methodology: 'Hướng dẫn & nguồn',
         results: 'Kết quả',
       }[section] ?? 'Tổng quan'
