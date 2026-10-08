@@ -1,0 +1,122 @@
+<dialog #dialog aria-labelledby="dictionary-title" (close)="closed.emit()">
+  <header>
+    <div>
+      <p class="eyebrow">Từ điển Anh – Việt</p>
+      <h2 id="dictionary-title" lang="en">
+        <button
+          class="word-audio"
+          type="button"
+          (click)="speak()"
+          [attr.aria-label]="'Nghe phát âm ' + word().term"
+          title="Bấm để nghe phát âm"
+        >
+          {{ word().term }}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M11 4 6 8H3v8h3l5 4V4Z" />
+            <path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14" />
+          </svg>
+        </button>
+      </h2>
+    </div>
+    <button
+      class="close-button"
+      type="button"
+      aria-label="Đóng từ điển"
+      (click)="dialog.close()"
+      autofocus
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </header>
+  @if (speechError()) {
+    <p class="error" role="alert">{{ speechError() }}</p>
+  }
+  @if (loading()) {
+    <p role="status">Đang tra từ…</p>
+  } @else {
+    @if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+      <button
+        class="button button--secondary"
+        type="button"
+        (click)="retry()"
+        [disabled]="saving()"
+      >
+        Thử tra lại
+      </button>
+    }
+    <dl>
+      <dt>Nghĩa {{ details()?.meaningLanguage === 'en' ? 'tiếng Anh' : 'tiếng Việt' }}</dt>
+      <dd [attr.lang]="details()?.meaningLanguage ?? 'vi'">
+        {{ details()?.meaning || 'Chưa tìm thấy nghĩa.' }}
+      </dd>
+      @if (details()?.meaningLanguage === 'en') {
+        <dd class="note">Chưa tìm được bản dịch tiếng Việt.</dd>
+      }
+      <dt>Phiên âm</dt>
+      <dd [attr.lang]="details()?.pronunciation ? 'en' : 'vi'">
+        {{ details()?.pronunciation || 'Chưa có phiên âm.' }}
+      </dd>
+      @if (details()?.pronunciationKind === 'word-by-word') {
+        <dd class="note">Phiên âm từng từ, không phải cách đọc nối âm của cả cụm.</dd>
+      }
+      <dt>Ví dụ sử dụng trong câu</dt>
+      <dd [attr.lang]="details()?.example ? 'en' : 'vi'">
+        {{ details()?.example || 'Chưa tìm thấy câu ví dụ.' }}
+      </dd>
+    </dl>
+    @if (details(); as entry) {
+      @if (entry.sourceUrl) {
+        <p class="note">
+          Nguồn:
+          @if (entry.sourceUrl === 'https://dictionaryapi.dev/') {
+            <a [href]="entry.sourceUrl" target="_blank" rel="noopener noreferrer"
+              >Free Dictionary API</a
+            >
+          } @else {
+            <a href="https://freedictionaryapi.com/" target="_blank" rel="noopener noreferrer"
+              >FreeDictionaryAPI.com</a
+            >
+            · <a [href]="entry.sourceUrl" target="_blank" rel="noopener noreferrer">Wiktionary</a> ·
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >CC BY-SA 4.0</a
+            >
+          }
+          @if (entry.translationSource) {
+            · Bản dịch: {{ entry.translationSource }}
+          }
+          @if (entry.pronunciationSource) {
+            · Phiên âm: {{ entry.pronunciationSource }}
+          }
+        </p>
+      }
+    }
+  }
+  <footer>
+    <button
+      class="button button--primary"
+      type="button"
+      [disabled]="loading() || saving() || saved()"
+      (click)="save()"
+    >
+      {{
+        saved() ? 'Đã thêm vào yêu thích' : saving() ? 'Đang lưu…' : '☆ Thêm vào từ vựng yêu thích'
+      }}
+    </button>
+    @if (saved()) {
+      <p role="status">Đã lưu vào từ vựng yêu thích.</p>
+    }
+    @if (saveError()) {
+      <p class="error" role="alert">{{ saveError() }}</p>
+    }
+  </footer>
+</dialog>

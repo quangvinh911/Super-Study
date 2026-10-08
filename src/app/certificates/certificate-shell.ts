@@ -1,19 +1,12 @@
-import {
-  afterNextRender,
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  Injector,
-  OnDestroy,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnDestroy, signal } from '@angular/core';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { QuizSessionStore } from '../core/state';
-import { FavoriteVocabularyService } from '../features/vocabulary/favorite-vocabulary.service';
 import { FavoriteVocabularyNotice } from '../features/vocabulary/favorite-vocabulary-notice';
+import { VocabularyLookupPopup } from '../features/vocabulary/vocabulary-lookup-popup';
+
+const excludedVocabularyTargets =
+  'button, a, input, textarea, select, label, dialog, summary, audio, [contenteditable], app-vocabulary-lookup-popup';
 
 export function wordAtOffset(text: string, offset: number): string | undefined {
   return [...text.matchAll(/[\p{L}]+(?:['’’-][\p{L}]+)*/gu)].find(
@@ -23,71 +16,63 @@ export function wordAtOffset(text: string, offset: number): string | undefined {
 
 @Component({
   selector: 'app-certificate-shell',
-  imports: [RouterOutlet, FavoriteVocabularyNotice],
+  imports: [RouterOutlet, FavoriteVocabularyNotice, VocabularyLookupPopup],
   template: `<router-outlet />
-    <button class="button button--quiet" type="button" (click)="saveSelection()">
-      Lưu từ đang bôi đen
+    <button class="button button--quiet" type="button" (click)="lookupSelection()">
+      Tra từ / cụm từ đang bôi đen
     </button>
-    @if (confirmation(); as word) {
-      <div
-        class="word-confirmation"
-        role="dialog"
-        aria-labelledby="word-confirmation-title"
+    @if (selectedWord(); as word) {
+      <button
+        class="dictionary-trigger"
+        type="button"
+        [attr.aria-label]="'Tra từ điển: ' + word.term"
+        [title]="'Tra từ điển: ' + word.term"
+        aria-haspopup="dialog"
         [style.left.px]="word.x"
         [style.top.px]="word.y"
+        (click)="openDictionary()"
       >
-        <p id="word-confirmation-title">
-          Lưu <strong lang="en">{{ word.term }}</strong> vào từ vựng yêu thích?
-        </p>
-        <div class="word-confirmation__actions">
-          <button
-            #confirmButton
-            class="button button--primary"
-            type="button"
-            (click)="confirmWord()"
-          >
-            Thêm từ vựng
-          </button>
-          <button class="button button--quiet" type="button" (click)="dismissConfirmation()">
-            Không
-          </button>
-        </div>
-      </div>
+        <svg
+          aria-hidden="true"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path d="M12 5v15M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Z" />
+          <path d="M5 8h4M5 11h4M15 8h4M15 11h4" />
+        </svg>
+      </button>
+    }
+    @if (lookupWord(); as word) {
+      <app-vocabulary-lookup-popup [word]="word" (closed)="closeDictionary()" />
     }
     <app-favorite-vocabulary-notice />`,
   styles: `
-    .word-confirmation {
+    .dictionary-trigger {
       position: fixed;
       z-index: 900;
-      width: min(320px, calc(100vw - 24px));
-      box-sizing: border-box;
-      max-height: calc(100vh - 24px);
-      overflow: auto;
-      padding: 1rem;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
       border: 1px solid var(--color-teal);
       border-radius: 0.75rem;
-      background: var(--color-surface, white);
-      color: var(--color-ink);
+      background: var(--color-paper-strong);
+      color: var(--color-teal-dark);
       box-shadow: 0 4px 20px #0002;
-    }
-    .word-confirmation p {
-      margin: 0 0 0.75rem;
-      overflow-wrap: anywhere;
-    }
-    .word-confirmation__actions {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+      cursor: pointer;
     }
   `,
 })
 export class CertificateShell implements OnDestroy {
   private readonly store = inject(QuizSessionStore);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly favorites = inject(FavoriteVocabularyService);
-  private readonly injector = inject(Injector);
-  private readonly confirmButton = viewChild<ElementRef<HTMLButtonElement>>('confirmButton');
-  protected readonly confirmation = signal<{
+  protected readonly lookupWord = signal<{ term: string; example: string } | null>(null);
+  protected readonly selectedWord = signal<{
     term: string;
     example: string;
     x: number;
@@ -103,31 +88,38 @@ export class CertificateShell implements OnDestroy {
       .subscribe((event) => {
         if (event instanceof NavigationStart) {
           this.cancelHold();
-          this.dismissConfirmation(false);
+          this.dismissSelection(false);
         }
       });
   }
 
-  protected saveSelection(): void {
+  protected lookupSelection(): void {
+    const word = this.selectedText();
+    if (!word) return;
     const selection = window.getSelection();
-    const term = selection?.toString().trim();
-    if (!term || !selection?.anchorNode || !this.host.nativeElement.contains(selection.anchorNode))
-      return;
-    const rectangle = selection.rangeCount ? selection.getRangeAt(0).getBoundingClientRect() : null;
-    this.showConfirmation(
-      {
-        term,
-        example: selection.anchorNode.parentElement?.textContent?.trim() ?? '',
-      },
-      rectangle?.left ?? 12,
-      rectangle?.bottom ?? 12,
-    );
+    const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
+    const rectangle =
+      range && typeof range.getBoundingClientRect === 'function'
+        ? range.getBoundingClientRect()
+        : null;
+    this.showDictionaryIcon(word, rectangle?.left ?? 12, rectangle?.bottom ?? 12);
+  }
+
+  @HostListener('mouseup', ['$event'])
+  protected selectPhrase(event: MouseEvent): void {
+    if (!this.isStudyText(event.target) || this.lookupWord()) return;
+    const word = this.selectedText();
+    if (word) this.showDictionaryIcon(word, event.clientX, event.clientY);
   }
 
   @HostListener('dblclick', ['$event'])
   protected selectWord(event: MouseEvent): void {
-    const word = this.wordUnderPointer(event);
-    if (word) this.showConfirmation(word, event.clientX, event.clientY);
+    if (!this.isStudyText(event.target) || this.lookupWord()) return;
+    const word =
+      this.termFromCard(event.target) ??
+      this.selectedText(event.target) ??
+      this.wordUnderPointer(event);
+    if (word) this.showDictionaryIcon(word, event.clientX, event.clientY);
   }
 
   @HostListener('pointerdown', ['$event'])
@@ -142,7 +134,7 @@ export class CertificateShell implements OnDestroy {
       y: event.clientY,
       timer: setTimeout(() => {
         this.hold = undefined;
-        this.showConfirmation(word, event.clientX, event.clientY);
+        this.showDictionaryIcon(word, event.clientX, event.clientY);
       }, 1000),
     };
   }
@@ -165,24 +157,31 @@ export class CertificateShell implements OnDestroy {
 
   @HostListener('contextmenu', ['$event'])
   protected suppressTouchMenu(event: MouseEvent): void {
-    if ((this.hold || this.confirmation()) && this.wordUnderPointer(event)) event.preventDefault();
+    if ((this.hold || this.selectedWord()) && this.wordUnderPointer(event)) event.preventDefault();
   }
 
   @HostListener('document:pointerdown', ['$event'])
   protected dismissOutside(event: PointerEvent): void {
     if (this.hold && event.pointerId !== this.hold.pointerId) this.cancelHold();
     if (
-      this.confirmation() &&
+      this.selectedWord() &&
+      !this.lookupWord() &&
       event.target instanceof Element &&
-      !event.target.closest('.word-confirmation')
+      !event.target.closest('.dictionary-trigger')
     )
-      this.dismissConfirmation(false);
+      this.dismissSelection(false);
   }
 
   @HostListener('document:keydown.escape')
-  protected dismissConfirmation(returnFocus = true): void {
+  protected handleEscape(): void {
+    if (this.lookupWord()) this.closeDictionary();
+    else this.dismissSelection();
+  }
+
+  protected dismissSelection(returnFocus = true): void {
     this.cancelHold();
-    this.confirmation.set(null);
+    this.selectedWord.set(null);
+    this.lookupWord.set(null);
     if (returnFocus) this.previousFocus?.focus();
   }
 
@@ -190,39 +189,82 @@ export class CertificateShell implements OnDestroy {
   @HostListener('window:resize')
   protected dismissOnViewportChange(): void {
     this.cancelHold();
-    this.dismissConfirmation(false);
+    if (!this.lookupWord()) this.dismissSelection(false);
   }
 
-  protected confirmWord(): void {
-    const word = this.confirmation();
+  protected openDictionary(): void {
+    const word = this.selectedWord();
     if (!word) return;
-    this.dismissConfirmation();
-    void this.favorites.save({ term: word.term, example: word.example });
-  }
-
-  private showConfirmation(word: { term: string; example: string }, x: number, y: number): void {
     this.previousFocus =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const width = Math.min(320, window.innerWidth - 24);
-    this.confirmation.set({
+    this.lookupWord.set({ term: word.term, example: word.example });
+  }
+
+  protected closeDictionary(): void {
+    this.lookupWord.set(null);
+    this.previousFocus?.focus();
+  }
+
+  private showDictionaryIcon(word: { term: string; example: string }, x: number, y: number): void {
+    if (word.term.length > 120) return;
+    this.selectedWord.set({
       ...word,
-      x: Math.max(12, Math.min(x, window.innerWidth - width - 12)),
-      y: Math.max(12, Math.min(y + 16, window.innerHeight - 180)),
+      x: Math.max(12, Math.min(x, window.innerWidth - 56)),
+      y: Math.max(12, Math.min(y + 16, window.innerHeight - 56)),
     });
-    afterNextRender(() => this.confirmButton()?.nativeElement.focus(), { injector: this.injector });
+  }
+
+  private isStudyText(target: EventTarget | null): target is HTMLElement {
+    return (
+      target instanceof HTMLElement &&
+      (!target.closest(excludedVocabularyTargets) || !!target.closest('[data-vocabulary-term]')) &&
+      !target.closest('dialog, app-vocabulary-lookup-popup') &&
+      !!target.closest('[lang="en"], .content-blocks')
+    );
+  }
+
+  private termFromCard(target: HTMLElement): { term: string; example: string } | undefined {
+    const cardTerm = target.closest<HTMLElement>('[data-vocabulary-term]');
+    const term = cardTerm?.dataset['vocabularyTerm'];
+    if (!term?.trim() || term.length > 120) return;
+    return { term: term.trim(), example: cardTerm?.dataset['vocabularyExample'] ?? '' };
+  }
+
+  private selectedText(target?: HTMLElement): { term: string; example: string } | undefined {
+    const selection = window.getSelection();
+    if (!selection?.rangeCount || selection.isCollapsed) return;
+    const range = selection.getRangeAt(0);
+    const start = range.startContainer.parentElement;
+    const end = range.endContainer.parentElement;
+    if (
+      !start ||
+      !end ||
+      !this.host.nativeElement.contains(start) ||
+      !this.host.nativeElement.contains(end) ||
+      !this.isStudyText(start) ||
+      !this.isStudyText(end)
+    )
+      return;
+    if (target && !target.contains(range.commonAncestorContainer)) return;
+    const term = selection.toString().trim().replace(/\s+/g, ' ');
+    if (
+      term.length > 120 ||
+      !/^[a-z]+(?:['’‘-][a-z]+)*(?:\s+[a-z]+(?:['’‘-][a-z]+)*)*$/i.test(term)
+    )
+      return;
+    return {
+      term,
+      example:
+        start.closest('p, li, td, blockquote')?.textContent?.trim() ??
+        start.textContent?.trim() ??
+        '',
+    };
   }
 
   private wordUnderPointer(event: MouseEvent): { term: string; example: string } | undefined {
-    if (event.target instanceof HTMLElement && event.target.closest('app-saved-vocabulary-page'))
-      return;
-    if (
-      !(event.target instanceof HTMLElement) ||
-      event.target.closest(
-        'button, a, input, textarea, select, label, dialog, summary, audio, .word-confirmation',
-      )
-    )
-      return;
-    if (!event.target.closest('[lang="en"], .content-blocks')) return;
+    if (!this.isStudyText(event.target)) return;
+    const cardTerm = this.termFromCard(event.target);
+    if (cardTerm) return cardTerm;
     // Resolve the text under the pointer without rewriting sentence markup or answer controls.
     const caretDocument = document as Document & {
       caretPositionFromPoint?: (

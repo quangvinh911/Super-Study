@@ -16,8 +16,10 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
         <p class="eyebrow">Favorite Vocabulary</p>
         <h1>Từ vựng đã lưu</h1>
         <p>
-          Nhấn vào từ đã lưu để nghe phát âm. Double-click hoặc giữ 1 giây trên từ tiếng Anh trong
-          nội dung học để lưu. Từ vựng được lưu trên thiết bị này, riêng theo chứng chỉ.
+          Nhấn vào từ đã lưu để nghe phát âm. Double-click một từ hoặc bôi đen cụm từ trong nội dung
+          học, rồi nhấn biểu tượng từ điển để xem nghĩa, phiên âm và câu ví dụ. Trong popup, nhấn
+          “Thêm vào từ vựng yêu thích” để lưu. Trên điện thoại, giữ từ trong 1 giây để hiện biểu
+          tượng.
         </p>
       </header>
       <form (ngSubmit)="favorites.save({ term: newTerm }); newTerm = ''">
@@ -49,6 +51,8 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
             <h2 lang="en">
               <button
                 class="word-audio"
+                [attr.data-vocabulary-term]="word.term"
+                [attr.data-vocabulary-example]="word.example"
                 type="button"
                 (click)="speak(word)"
                 [attr.aria-label]="'Nghe phát âm ' + word.term"

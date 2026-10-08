@@ -1,0 +1,87 @@
+dialog {
+  width: min(32rem, calc(100vw - 1.5rem));
+  max-height: calc(100dvh - 1.5rem);
+  overflow: auto;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-paper-strong);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-md);
+  overflow-wrap: anywhere;
+}
+
+dialog::backdrop {
+  background: #102b3a80;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+h2,
+.eyebrow {
+  margin: 0;
+}
+
+.close-button {
+  flex: 0 0 44px;
+  min-height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.word-audio {
+  padding: 0;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.word-audio:hover {
+  color: var(--color-teal);
+}
+
+.word-audio svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.35rem;
+  vertical-align: middle;
+}
+
+dt {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+dd {
+  margin: 0.35rem 0 0;
+  white-space: pre-line;
+}
+
+.note {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+footer .button {
+  white-space: normal;
+  text-align: center;
+}
