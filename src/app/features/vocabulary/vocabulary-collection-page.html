@@ -84,6 +84,8 @@
             <h2 lang="en">
               <button
                 class="entry-term"
+                [attr.data-vocabulary-term]="entry.term"
+                [attr.data-vocabulary-example]="entry.usage"
                 type="button"
                 [attr.aria-label]="'Nghe cách đọc ' + entry.term"
                 (click)="speak(entry.term)"

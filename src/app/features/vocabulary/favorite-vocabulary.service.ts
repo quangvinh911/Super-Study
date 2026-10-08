@@ -94,6 +94,73 @@ export class FavoriteVocabularyService {
     return operation;
   }
 
+  // Previewing dictionary information must never create or change a favorite.
+  async lookup(
+    entry: { term: string; meaning?: string; example?: string; meaningLanguage?: 'vi' | 'en' },
+    signal: AbortSignal,
+  ): Promise<FavoriteVocabulary> {
+    const response = await fetch('/api/vocabulary/enrich', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        term: entry.term,
+        meaning: entry.meaningLanguage === 'en' ? '' : (entry.meaning ?? ''),
+        context: (entry.example ?? '').slice(0, 4000),
+      }),
+      signal,
+    });
+    if (!response.ok) {
+      const body: unknown = await response.json().catch(() => null);
+      let message =
+        'Không kết nối được dịch vụ tra từ. Kiểm tra kết nối hoặc máy chủ API rồi thử lại.';
+      if (response.status === 404 && isRecord(body) && body['error'] === 'word_not_found')
+        message = 'Các từ điển chưa tìm thấy từ này. Kiểm tra chính tả hoặc bổ sung thủ công.';
+      else if (response.status === 429)
+        message = 'Dịch vụ tra từ đang giới hạn lượt truy cập. Đợi một phút rồi thử lại.';
+      else if (
+        response.status === 502 &&
+        isRecord(body) &&
+        body['error'] === 'dictionary_unavailable'
+      )
+        message = 'Nguồn từ điển đang không khả dụng. Hãy thử tra lại sau.';
+      throw new VocabularyLookupError(message);
+    }
+    if (!response.headers.get('Content-Type')?.includes('application/json'))
+      throw new Error('Vocabulary API did not return JSON');
+    const data: unknown = await response.json();
+    const details = parseVocabularyDetails(data);
+    const complete =
+      !!details.meaning &&
+      !!details.pronunciation &&
+      !!details.example &&
+      details.meaningLanguage !== 'en';
+    return {
+      term: entry.term,
+      ...details,
+      source: 'dictionary',
+      enrichment: complete ? 'complete' : 'partial',
+    };
+  }
+
+  async savePreview(entry: FavoriteVocabulary): Promise<boolean> {
+    try {
+      const existing = (await this.repository.list()).find(
+        (word) => vocabularyKey(word.term) === vocabularyKey(entry.term),
+      );
+      if (!existing) await this.repository.save(entry);
+      this.notify(
+        existing
+          ? `“${existing.term}” đã có trong từ vựng đã lưu.`
+          : `Đã lưu “${entry.term}” vào từ vựng yêu thích.`,
+      );
+      return true;
+    } catch (error) {
+      console.error('Unable to save vocabulary preview', error);
+      this.notify('Không lưu được từ vựng. Hãy thử lại.', true);
+      return false;
+    }
+  }
+
   dismiss(): void {
     clearTimeout(this.timer);
     this.notice.set(null);
@@ -147,35 +214,7 @@ export class FavoriteVocabularyService {
     let failureMessage =
       'Không kết nối được dịch vụ tra từ. Kiểm tra kết nối hoặc máy chủ API rồi thử lại.';
     try {
-      const response = await fetch('/api/vocabulary/enrich', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          term: pending.term,
-          meaning: pending.meaningLanguage === 'en' ? '' : pending.meaning,
-          context: pending.example,
-        }),
-        signal: controller.signal,
-      });
-      if (!response.ok) {
-        const body: unknown = await response.json().catch(() => null);
-        if (response.status === 404 && isRecord(body) && body['error'] === 'word_not_found')
-          failureMessage =
-            'Các từ điển chưa tìm thấy từ này. Kiểm tra chính tả hoặc bổ sung thủ công.';
-        else if (response.status === 429)
-          failureMessage = 'Dịch vụ tra từ đang giới hạn lượt truy cập. Đợi một phút rồi thử lại.';
-        else if (
-          response.status === 502 &&
-          isRecord(body) &&
-          body['error'] === 'dictionary_unavailable'
-        )
-          failureMessage = 'Nguồn từ điển đang không khả dụng. Hãy thử tra lại sau.';
-        throw new Error(`Vocabulary enrichment HTTP ${response.status}`);
-      }
-      if (!response.headers.get('Content-Type')?.includes('application/json'))
-        throw new Error('Vocabulary API did not return JSON');
-      const data: unknown = await response.json();
-      const fetchedDetails = parseVocabularyDetails(data);
+      const fetchedDetails = await this.lookup(pending, controller.signal);
       const details = {
         ...fetchedDetails,
         pronunciation: fetchedDetails.pronunciation || pending.pronunciation,
@@ -210,6 +249,7 @@ export class FavoriteVocabularyService {
         );
     } catch (error) {
       console.error('Unable to enrich favorite vocabulary', error);
+      if (error instanceof VocabularyLookupError) failureMessage = error.message;
       try {
         const updated = await this.repository.updateEnrichment(
           { ...pending, enrichment: 'failed', enrichmentError: failureMessage },
@@ -229,3 +269,5 @@ export class FavoriteVocabularyService {
     }
   }
 }
+
+export class VocabularyLookupError extends Error {}

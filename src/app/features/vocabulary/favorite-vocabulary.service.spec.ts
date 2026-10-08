@@ -25,6 +25,61 @@ describe('Saving vocabulary without a dialog', () => {
     TestBed.resetTestingModule();
     vi.unstubAllGlobals();
   });
+  it('previews dictionary details without writing favorites or showing a saved notice', async () => {
+    const fetch = vi.fn().mockResolvedValue(Response.json(details));
+    vi.stubGlobal('fetch', fetch);
+    const { repository, service } = setup();
+    const signal = new AbortController().signal;
+    const word = await service.lookup(
+      { term: 'keep in mind', example: 'Please keep in mind the deadline.' },
+      signal,
+    );
+    expect(word).toEqual(
+      expect.objectContaining({ ...details, term: 'keep in mind', source: 'dictionary' }),
+    );
+    expect(fetch).toHaveBeenCalledWith(
+      '/api/vocabulary/enrich',
+      expect.objectContaining({
+        signal,
+        body: JSON.stringify({
+          term: 'keep in mind',
+          meaning: '',
+          context: 'Please keep in mind the deadline.',
+        }),
+      }),
+    );
+    expect(repository.save).not.toHaveBeenCalled();
+    expect(repository.updateEnrichment).not.toHaveBeenCalled();
+    expect(service.notice()).toBeNull();
+  });
+  it('saves previewed data without another dictionary request', async () => {
+    const fetch = vi.fn();
+    vi.stubGlobal('fetch', fetch);
+    const { repository, service } = setup();
+    const word = {
+      term: 'shipment',
+      ...details,
+      source: 'dictionary' as const,
+      enrichment: 'complete' as const,
+    };
+    expect(await service.savePreview(word)).toBe(true);
+    expect(repository.save).toHaveBeenCalledWith(word);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+  it('preserves a manually edited favorite when saving a preview of the same term', async () => {
+    const { repository, service } = setup([
+      { term: 'Shipment', ...details, meaning: 'hàng gửi', source: 'manual' },
+    ]);
+    expect(await service.savePreview({ term: 'shipment', ...details })).toBe(true);
+    expect(repository.save).not.toHaveBeenCalled();
+    expect(service.notice()?.text).toContain('đã có');
+  });
+  it('reports failed preview persistence without claiming a saved result', async () => {
+    const { repository, service } = setup();
+    repository.save.mockRejectedValue(new Error('Storage full'));
+    expect(await service.savePreview({ term: 'shipment', ...details })).toBe(false);
+    expect(service.notice()?.error).toBe(true);
+  });
   it('persists immediately and enriches once despite rapid clicks', async () => {
     let resolveResponse: (response: Response) => void = () => {
       throw new Error('Fetch not started');
