@@ -8,6 +8,8 @@ Click the word or phrase in the popup heading, or a saved word, to hear English 
 
 ## Sources and selection
 
+The popup shows Vietnamese meaning first. The original English definition is retained as optional `englishMeaning` and displayed in a native “Nghĩa tiếng Anh” disclosure, collapsed by default. Existing records and API responses without this field remain supported. If translation is unavailable, the popup explicitly reports missing Vietnamese meaning, offers “Thử dịch lại” and keeps the English definition inside the disclosure. Saving retains both meanings when available.
+
 - [FreeDictionaryAPI.com](https://freedictionaryapi.com/) returns Wiktionary entries, IPA, meanings, examples and translations. The service requests the whole term, including multiword expressions, and uses a current sense with an example where available. US IPA is preferred, with another available IPA accepted if necessary. Source data is cached for one hour in a bounded 200-entry server cache.
 - Vietnamese meanings supplied by the local study library are preserved. Otherwise, a Vietnamese translation from the dictionary sense is used. If absent, the service queries the [MyMemory translation service](https://mymemory.translated.net/) for the term. It checks response status and quota flags; service error text is never treated as a translation.
 - If translation is unavailable, the original English definition is kept and explicitly labeled English. No invented Vietnamese meaning is inserted.

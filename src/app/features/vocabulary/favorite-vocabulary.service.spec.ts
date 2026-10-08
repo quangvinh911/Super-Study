@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { FavoriteVocabularyRepository } from '../../core/persistence/favorite-vocabulary.repository';
-import { FavoriteVocabularyService } from './favorite-vocabulary.service';
+import { FavoriteVocabularyService, parseVocabularyDetails } from './favorite-vocabulary.service';
 
 const details = {
   meaning: 'lô hàng',
+  englishMeaning: 'A load of goods being transported.',
   pronunciation: '/ˈʃɪpmənt/',
   example: 'The shipment arrived.',
 };
@@ -51,6 +52,16 @@ describe('Saving vocabulary without a dialog', () => {
     expect(repository.save).not.toHaveBeenCalled();
     expect(repository.updateEnrichment).not.toHaveBeenCalled();
     expect(service.notice()).toBeNull();
+  });
+  it('validates optional English definitions and accepts older API responses', () => {
+    expect(parseVocabularyDetails(details).englishMeaning).toBe(details.englishMeaning);
+    expect(
+      parseVocabularyDetails({ ...details, englishMeaning: undefined }).englishMeaning,
+    ).toBeUndefined();
+    expect(() => parseVocabularyDetails({ ...details, englishMeaning: 123 })).toThrow();
+    expect(() =>
+      parseVocabularyDetails({ ...details, englishMeaning: 'x'.repeat(2001) }),
+    ).toThrow();
   });
   it('saves previewed data without another dictionary request', async () => {
     const fetch = vi.fn();

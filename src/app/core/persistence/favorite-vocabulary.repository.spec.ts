@@ -62,6 +62,7 @@ describe('Favorite vocabulary', () => {
     const entry = {
       term: 'shipment',
       meaning: 'A load of goods.',
+      englishMeaning: 'A load of goods being transported.',
       pronunciation: '/ˈʃɪpmənt/',
       example: '',
       enrichment: 'partial' as const,

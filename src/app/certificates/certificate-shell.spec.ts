@@ -17,6 +17,7 @@ async function setup() {
   const details = {
     term: 'shipment',
     meaning: 'lô hàng',
+    englishMeaning: 'A delivery of goods.',
     pronunciation: '/ˈʃɪpmənt/',
     example: 'The shipment arrived today.',
     source: 'dictionary',
@@ -107,6 +108,13 @@ describe('Dictionary selection gestures', () => {
       expect.any(AbortSignal),
     );
     expect(element.querySelector('dialog')?.textContent).toContain('lô hàng');
+    expect(element.querySelector('dialog dt')?.textContent).toBe('Nghĩa tiếng Việt');
+    const englishMeaning = element.querySelector<HTMLDetailsElement>('dialog .english-meaning');
+    expect(englishMeaning?.open).toBe(false);
+    expect(englishMeaning?.querySelector('summary')?.textContent).toBe('Nghĩa tiếng Anh');
+    expect(englishMeaning?.querySelector('[lang=en]')?.textContent).toContain(
+      'A delivery of goods.',
+    );
     expect(element.querySelector('dialog')?.textContent).toContain('/ˈʃɪpmənt/');
     expect(save).not.toHaveBeenCalled();
     element.querySelector<HTMLButtonElement>('dialog .button--primary')?.click();
@@ -308,6 +316,7 @@ describe('Dictionary selection gestures', () => {
       pronunciation: '',
       example: '',
       meaningLanguage: 'en',
+      englishMeaning: undefined,
       meaning: 'A delivery of goods.',
       sourceUrl: 'https://en.wiktionary.org/wiki/shipment',
       enrichment: 'partial',
@@ -323,6 +332,11 @@ describe('Dictionary selection gestures', () => {
     expect(element.querySelector('dialog')?.textContent).toContain('Chưa tìm thấy câu ví dụ.');
     expect(element.querySelector('dialog')?.textContent).toContain(
       'Chưa tìm được bản dịch tiếng Việt.',
+    );
+    expect(element.querySelector('dialog dd[lang=vi]')?.textContent).not.toContain(partial.meaning);
+    expect(element.querySelector<HTMLDetailsElement>('dialog .english-meaning')?.open).toBe(false);
+    expect(element.querySelector('dialog .english-meaning [lang=en]')?.textContent).toContain(
+      partial.meaning,
     );
     expect(element.querySelector('dialog a')?.getAttribute('href')).toBe(
       'https://freedictionaryapi.com/',

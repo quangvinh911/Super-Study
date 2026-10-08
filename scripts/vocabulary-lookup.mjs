@@ -201,6 +201,7 @@ export async function lookupVocabulary(input, { signal, cache } = {}) {
       : '';
   return {
     meaning,
+    englishMeaning: text(sense.definition, 2000),
     pronunciation: ipa,
     example: sentence || contextualExample,
     meaningLanguage,

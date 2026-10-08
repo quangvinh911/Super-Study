@@ -1,6 +1,7 @@
 import {
   afterNextRender,
   Component,
+  computed,
   DestroyRef,
   effect,
   ElementRef,
@@ -33,6 +34,10 @@ export class VocabularyLookupPopup {
   protected readonly saved = signal(false);
   protected readonly saveError = signal('');
   protected readonly speechError = signal('');
+  protected readonly englishMeaning = computed(() => {
+    const entry = this.details();
+    return entry?.englishMeaning || (entry?.meaningLanguage === 'en' ? entry.meaning : '');
+  });
 
   constructor() {
     afterNextRender(() => this.dialog().nativeElement.showModal());
