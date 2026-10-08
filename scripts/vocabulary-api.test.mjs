@@ -44,6 +44,7 @@ describe('Internet vocabulary lookup without credentials', () => {
       pronunciation: '/ˈʃɪpmənt/',
       example: 'The shipment arrived today.',
       sourceUrl: 'https://en.wiktionary.org/wiki/shipment',
+      englishMeaning: 'A load of goods being transported.',
     });
     expect(fetch.mock.calls[0][0]).toContain('freedictionaryapi.com');
     expect(fetch.mock.calls[0][1].headers).toBeUndefined();
@@ -91,6 +92,7 @@ describe('Internet vocabulary lookup without credentials', () => {
       await (await createVocabularyApi()(request({ ...input, meaning: '' }))).json(),
     ).toMatchObject({
       meaning: 'A load of goods being transported.',
+      englishMeaning: 'A load of goods being transported.',
       meaningLanguage: 'en',
       pronunciation: '',
       example: '',
@@ -187,6 +189,7 @@ describe('Internet vocabulary lookup without credentials', () => {
       pronunciation: '/ˈʃɪpmənt/',
       example: 'The shipment arrived today.',
       sourceUrl: 'https://dictionaryapi.dev/',
+      englishMeaning: 'Goods sent together.',
     });
   });
   it('caches dictionary requests and limits bursts', async () => {

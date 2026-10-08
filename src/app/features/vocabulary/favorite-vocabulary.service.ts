@@ -10,6 +10,7 @@ export function parseVocabularyDetails(
 ): Pick<
   FavoriteVocabulary,
   | 'meaning'
+  | 'englishMeaning'
   | 'pronunciation'
   | 'example'
   | 'sourceUrl'
@@ -20,11 +21,14 @@ export function parseVocabularyDetails(
 > {
   if (!isRecord(value)) throw new Error('Invalid vocabulary response');
   const meaning = value['meaning'];
+  const englishMeaning = value['englishMeaning'];
   const pronunciation = value['pronunciation'];
   const example = value['example'];
   if (
     typeof meaning !== 'string' ||
     meaning.length > 2000 ||
+    (englishMeaning !== undefined &&
+      (typeof englishMeaning !== 'string' || englishMeaning.length > 2000)) ||
     typeof pronunciation !== 'string' ||
     pronunciation.length > 200 ||
     typeof example !== 'string' ||
@@ -56,6 +60,9 @@ export function parseVocabularyDetails(
     throw new Error('Invalid dictionary metadata');
   return {
     meaning: meaning.trim(),
+    ...(typeof englishMeaning === 'string' && englishMeaning.trim()
+      ? { englishMeaning: englishMeaning.trim() }
+      : {}),
     pronunciation: pronunciation.trim(),
     example: example.trim(),
     ...(typeof sourceUrl === 'string' ? { sourceUrl } : {}),

@@ -5,6 +5,7 @@ import { CertificateContext } from '../../certificates/certificate-context';
 export interface FavoriteVocabulary {
   readonly term: string;
   readonly meaning: string;
+  readonly englishMeaning?: string;
   readonly pronunciation: string;
   readonly example: string;
   readonly enrichment?: 'pending' | 'failed' | 'partial' | 'complete';
@@ -67,6 +68,7 @@ export class FavoriteVocabularyRepository {
         {
           term: entry.term.trim(),
           meaning: entry.meaning.trim(),
+          ...(entry.englishMeaning ? { englishMeaning: entry.englishMeaning.trim() } : {}),
           pronunciation: entry.pronunciation.trim(),
           example: entry.example.trim(),
           ...(entry.enrichment ? { enrichment: entry.enrichment } : {}),

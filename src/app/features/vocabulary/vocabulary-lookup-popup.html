@@ -52,13 +52,34 @@
       </button>
     }
     <dl>
-      <dt>Nghĩa {{ details()?.meaningLanguage === 'en' ? 'tiếng Anh' : 'tiếng Việt' }}</dt>
-      <dd [attr.lang]="details()?.meaningLanguage ?? 'vi'">
-        {{ details()?.meaning || 'Chưa tìm thấy nghĩa.' }}
+      <dt>Nghĩa tiếng Việt</dt>
+      <dd lang="vi">
+        {{
+          details()?.meaningLanguage === 'en'
+            ? 'Chưa tìm được bản dịch tiếng Việt.'
+            : details()?.meaning || 'Chưa tìm thấy nghĩa tiếng Việt.'
+        }}
       </dd>
       @if (details()?.meaningLanguage === 'en') {
-        <dd class="note">Chưa tìm được bản dịch tiếng Việt.</dd>
+        <dd>
+          <button
+            class="button button--secondary"
+            type="button"
+            (click)="retry()"
+            [disabled]="saving()"
+          >
+            Thử dịch lại
+          </button>
+        </dd>
       }
+    </dl>
+    @if (englishMeaning(); as meaning) {
+      <details class="english-meaning">
+        <summary>Nghĩa tiếng Anh</summary>
+        <p lang="en">{{ meaning }}</p>
+      </details>
+    }
+    <dl>
       <dt>Phiên âm</dt>
       <dd [attr.lang]="details()?.pronunciation ? 'en' : 'vi'">
         {{ details()?.pronunciation || 'Chưa có phiên âm.' }}
