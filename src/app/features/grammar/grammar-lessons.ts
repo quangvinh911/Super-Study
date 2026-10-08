@@ -3,13 +3,6 @@ import type { GrammarSentence } from './grammar-visual.models';
 
 export type GrammarStage = 'Nền tảng' | 'Động từ' | 'Nối ý' | 'Mở rộng';
 
-export interface GrammarCheck {
-  readonly prompt: string;
-  readonly options: readonly [string, string, string, string];
-  readonly answer: number;
-  readonly explanation: string;
-}
-
 export interface GrammarLesson {
   readonly slug: string;
   readonly title: string;
@@ -25,7 +18,6 @@ export interface GrammarLesson {
   readonly examples: readonly (GrammarSentence & { readonly ruleLabel: string })[];
   readonly trap: string;
   readonly visual: { readonly title: string; readonly steps: readonly string[] };
-  readonly checks: readonly [GrammarCheck, GrammarCheck];
 }
 
 /** Original lessons; Hacker 3 topic evidence is recorded in docs/toeic-hacker-grammar-review.md. */
@@ -179,20 +171,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Vị trí quyết định từ loại',
       steps: ['a / the', 'tính từ', 'danh từ', 'động từ', 'trạng từ'],
     },
-    checks: [
-      {
-        prompt: 'The manager gave a _____ explanation of the policy.',
-        options: ['clarity', 'clear', 'clearly', 'clearance'],
-        answer: 1,
-        explanation: 'Trước danh từ explanation cần tính từ clear.',
-      },
-      {
-        prompt: 'All requests are processed _____.',
-        options: ['prompt', 'promptly', 'promptness', 'prompts'],
-        answer: 1,
-        explanation: 'Sau processed cần trạng từ promptly chỉ cách xử lý.',
-      },
-    ],
   },
   {
     slug: 'danh-tu-va-tu-han-dinh',
@@ -417,20 +395,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Chọn a/an, the hoặc lượng từ',
       ],
     },
-    checks: [
-      {
-        prompt: 'The office needs _____ equipment for the new staff.',
-        options: ['many', 'a few', 'some', 'an'],
-        answer: 2,
-        explanation: 'Equipment không đếm được; some dùng được ở đây.',
-      },
-      {
-        prompt: 'This schedule is ours, but the revised one is _____.',
-        options: ['their', 'theirs', 'them', 'they'],
-        answer: 1,
-        explanation: 'Theirs là đại từ sở hữu, đứng một mình sau is.',
-      },
-    ],
   },
   {
     slug: 'cac-thi',
@@ -578,20 +542,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Trục thời gian',
       steps: ['Quá khứ', 'Hiện tại', 'Tương lai', 'by + mốc: hoàn tất trước mốc'],
     },
-    checks: [
-      {
-        prompt: 'The board _____ the budget yesterday.',
-        options: ['approves', 'approved', 'has approved', 'will approve'],
-        answer: 1,
-        explanation: 'Yesterday là mốc đã kết thúc, nên dùng quá khứ đơn approved.',
-      },
-      {
-        prompt: 'By the time the client arrives, we _____ the presentation.',
-        options: ['finish', 'finished', 'will have finished', 'are finishing'],
-        answer: 2,
-        explanation: 'Việc hoàn thành xảy ra trước mốc tương lai the client arrives.',
-      },
-    ],
   },
   {
     slug: 'hoa-hop-chu-vi',
@@ -775,20 +725,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Chọn số ít hoặc nhiều',
       ],
     },
-    checks: [
-      {
-        prompt: 'The results of the survey _____ ready.',
-        options: ['is', 'are', 'was', 'be'],
-        answer: 1,
-        explanation: 'Chủ ngữ results là số nhiều nên dùng are.',
-      },
-      {
-        prompt: 'Each of the applicants _____ an interview time.',
-        options: ['have', 'has', 'having', 'are having'],
-        answer: 1,
-        explanation: 'Each là chủ ngữ số ít, dùng has.',
-      },
-    ],
   },
   {
     slug: 'cau-bi-dong',
@@ -926,20 +862,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'by the clerk: chỉ thêm khi cần',
       ],
     },
-    checks: [
-      {
-        prompt: 'The contract _____ by both parties last week.',
-        options: ['signed', 'was signed', 'has signed', 'signing'],
-        answer: 1,
-        explanation: 'Contract nhận hành động; last week yêu cầu quá khứ bị động was signed.',
-      },
-      {
-        prompt: 'All applications must _____ before Friday.',
-        options: ['submit', 'be submitted', 'submitted', 'be submitting'],
-        answer: 1,
-        explanation: 'Sau must, dạng bị động là be + V3.',
-      },
-    ],
   },
   {
     slug: 'dong-tu-khuyet-thieu',
@@ -1088,20 +1010,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Chọn mức độ',
       steps: ['can: có thể', 'may/might: có khả năng', 'should: nên', 'must: phải'],
     },
-    checks: [
-      {
-        prompt: 'Visitors _____ show identification at reception; it is required.',
-        options: ['must', 'might', 'could', 'would'],
-        answer: 0,
-        explanation: 'It is required diễn tả nghĩa vụ bắt buộc, chọn must.',
-      },
-      {
-        prompt: 'The technician should _____ the device first.',
-        options: ['checks', 'checking', 'check', 'to check'],
-        answer: 2,
-        explanation: 'Modal should đi với động từ nguyên thể không to: check.',
-      },
-    ],
   },
   {
     slug: 'to-v-va-v-ing',
@@ -1282,20 +1190,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Nhìn từ đứng trước',
       steps: ['decide', 'to V', 'avoid', 'V-ing', 'giới từ', 'V-ing'],
     },
-    checks: [
-      {
-        prompt: 'The company plans _____ a new branch.',
-        options: ['open', 'opening', 'to open', 'opened'],
-        answer: 2,
-        explanation: 'Plan + to V: plans to open.',
-      },
-      {
-        prompt: 'Ms. Tran is interested in _____ the workshop.',
-        options: ['attend', 'attending', 'to attend', 'attended'],
-        answer: 1,
-        explanation: 'Sau giới từ in dùng V-ing: attending.',
-      },
-    ],
   },
   {
     slug: 'phan-tu-va-rut-gon',
@@ -1518,20 +1412,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Ai thực hiện hành động?',
       steps: ['Danh từ tự làm', 'V-ing', 'Danh từ được tác động', 'V3'],
     },
-    checks: [
-      {
-        prompt: 'The guests _____ at the hotel should check in online.',
-        options: ['stay', 'staying', 'stayed', 'stays'],
-        answer: 1,
-        explanation: 'Guests tự thực hiện stay; staying rút gọn who are staying.',
-      },
-      {
-        prompt: 'Please review the file _____ to this message.',
-        options: ['attach', 'attaching', 'attached', 'attaches'],
-        answer: 2,
-        explanation: 'File được đính kèm, nên dùng V3 attached.',
-      },
-    ],
   },
   {
     slug: 'gioi-tu',
@@ -1690,20 +1570,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Hai loại mốc',
       steps: ['by: xong trước hạn', 'mốc thời gian', 'until: kéo dài tới hạn'],
     },
-    checks: [
-      {
-        prompt: 'The revised report is due _____ noon.',
-        options: ['by', 'until', 'during', 'since'],
-        answer: 0,
-        explanation: 'Due by noon nghĩa là chậm nhất vào giữa trưa.',
-      },
-      {
-        prompt: 'The analyst is responsible _____ updating the records.',
-        options: ['at', 'for', 'with', 'to'],
-        answer: 1,
-        explanation: 'Cụm cố định responsible for + V-ing.',
-      },
-    ],
   },
   {
     slug: 'lien-tu-va-tu-noi',
@@ -1934,20 +1800,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'despite / because of',
       ],
     },
-    checks: [
-      {
-        prompt: '_____ the rain, the event continued as planned.',
-        options: ['Although', 'Despite', 'Because', 'While'],
-        answer: 1,
-        explanation: 'The rain là cụm danh từ, dùng despite.',
-      },
-      {
-        prompt: 'The venue was unavailable; _____, we moved the meeting online.',
-        options: ['however', 'therefore', 'although', 'despite'],
-        answer: 1,
-        explanation: 'Chuyển sang họp trực tuyến là kết quả, dùng therefore.',
-      },
-    ],
   },
   {
     slug: 'menh-de',
@@ -2169,20 +2021,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Ba vai trò của mệnh đề',
       steps: ['Sau danh từ → quan hệ', 'Làm chủ/tân ngữ → danh từ', 'Nêu hoàn cảnh → trạng ngữ'],
     },
-    checks: [
-      {
-        prompt: 'The consultant _____ led the workshop will return next month.',
-        options: ['whose', 'who', 'where', 'when'],
-        answer: 1,
-        explanation: 'Chỉ người consultant, đồng thời làm chủ ngữ của led: who.',
-      },
-      {
-        prompt: 'Please confirm _____ the shipment has arrived.',
-        options: ['what', 'whose', 'that', 'where'],
-        answer: 2,
-        explanation: 'That mở đầu mệnh đề danh từ làm tân ngữ của confirm.',
-      },
-    ],
   },
   {
     slug: 'so-sanh',
@@ -2403,20 +2241,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Cùng thay đổi → the ..., the ...',
       ],
     },
-    checks: [
-      {
-        prompt: 'The new software is _____ than the previous version.',
-        options: ['efficient', 'more efficient', 'most efficient', 'as efficient'],
-        answer: 1,
-        explanation: 'Có than nên dùng so sánh hơn more efficient.',
-      },
-      {
-        prompt: 'Of the three plans, this is _____ expensive.',
-        options: ['less', 'the least', 'least', 'as'],
-        answer: 1,
-        explanation: 'Of the three plans nêu nhóm để so sánh nhất: the least expensive.',
-      },
-    ],
   },
   {
     slug: 'cau-dieu-kien',
@@ -2685,20 +2509,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Tiếc về quá khứ → loại 3',
       ],
     },
-    checks: [
-      {
-        prompt: 'If the client approves the design, we _____ production.',
-        options: ['begin', 'began', 'will begin', 'would have begun'],
-        answer: 2,
-        explanation: 'Điều kiện loại 1: if + hiện tại, mệnh đề chính will + V.',
-      },
-      {
-        prompt: 'If the team had checked the address, the parcel _____ lost.',
-        options: ['will not be', 'would not have been', 'is not', 'would not be'],
-        answer: 1,
-        explanation: 'Giả định ngược với quá khứ: would not have been.',
-      },
-    ],
   },
   {
     slug: 'cau-gia-dinh',
@@ -2894,20 +2704,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Ước quá khứ → had + V3',
       ],
     },
-    checks: [
-      {
-        prompt: 'The supervisor recommended that she _____ the form again.',
-        options: ['submits', 'submitted', 'submit', 'submitting'],
-        answer: 2,
-        explanation: 'Recommend that + chủ ngữ + động từ nguyên thể submit.',
-      },
-      {
-        prompt: 'I wish I _____ the deadline yesterday.',
-        options: ['know', 'knew', 'had known', 'will know'],
-        answer: 2,
-        explanation: 'Yesterday là điều đã qua; wish + had + V3.',
-      },
-    ],
   },
   {
     slug: 'cau-hoi-va-gian-tiep',
@@ -3112,25 +2908,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Đảo hay không đảo?',
       steps: ['Hỏi trực tiếp → Where is it?', 'Nằm trong câu khác', '... where it is'],
     },
-    checks: [
-      {
-        prompt: 'Do you know when _____?',
-        options: [
-          'does the train leave',
-          'the train leaves',
-          'leaves the train',
-          'the train leave',
-        ],
-        answer: 1,
-        explanation: 'Trong câu hỏi gián tiếp, dùng trật tự the train leaves.',
-      },
-      {
-        prompt: 'He asked _____ the office was open on Saturday.',
-        options: ['that', 'whether', 'what', 'who'],
-        answer: 1,
-        explanation: 'Câu hỏi có/không được dẫn bằng whether hoặc if.',
-      },
-    ],
   },
   {
     slug: 'cau-truc-cong-viec',
@@ -3348,20 +3125,6 @@ export const GRAMMAR_LESSONS: readonly GrammarLesson[] = [
       title: 'Mẫu sai khiến',
       steps: ['have + người + V', 'get + người + to V', 'have/get + vật + V3'],
     },
-    checks: [
-      {
-        prompt: 'We will have the air conditioner _____ tomorrow.',
-        options: ['repair', 'repairing', 'repaired', 'to repair'],
-        answer: 2,
-        explanation: 'Máy điều hòa nhận hành động: have + object + V3 repaired.',
-      },
-      {
-        prompt: 'The hall is _____ to seat 200 guests.',
-        options: ['enough large', 'large enough', 'too large', 'large too'],
-        answer: 1,
-        explanation: 'Tính từ đứng trước enough: large enough to seat.',
-      },
-    ],
   },
   ...HACKER_GRAMMAR_LESSONS,
 ];

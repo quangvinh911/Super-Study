@@ -49,7 +49,7 @@ function verifySentence(sentence: GrammarSentence): void {
 describe('authored grammar analyses', () => {
   const examples = GRAMMAR_LESSONS.flatMap((lesson) => lesson.examples);
 
-  it('retains all 19 stable lesson slugs and 38 examples and self-checks', () => {
+  it('retains all 19 stable lesson slugs and 38 visual examples', () => {
     expect(GRAMMAR_LESSONS.map((lesson) => lesson.slug)).toEqual([
       'cau-va-tu-loai',
       'danh-tu-va-tu-han-dinh',
@@ -72,7 +72,6 @@ describe('authored grammar analyses', () => {
       'lien-tu-cap-va-cau-truc-song-song',
     ]);
     expect(examples).toHaveLength(38);
-    expect(GRAMMAR_LESSONS.flatMap((lesson) => lesson.checks)).toHaveLength(38);
     expect(new Set(examples.map((sentence) => sentence.id)).size).toBe(38);
     const nodeIds = examples.flatMap((sentence) =>
       allNodes(sentence.syntax).map((node) => node.id),

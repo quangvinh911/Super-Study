@@ -42,8 +42,16 @@
       <section aria-labelledby="rules-heading">
         <p class="eyebrow">02 · Ghi nhớ cách dùng</p>
         <h2 tabindex="-1" id="rules-heading">Cấu trúc / Quy tắc</h2>
+        @if (hackerExamples.error()) {
+          <div class="grammar-examples-error" role="alert">
+            <p>{{ hackerExamples.error() }}</p>
+            <button class="button button--secondary" type="button" (click)="hackerExamples.load()">
+              Tải lại ví dụ
+            </button>
+          </div>
+        }
         <div class="grammar-rules">
-          @for (rule of current.rules; track rule.label; let ruleIndex = $index) {
+          @for (rule of current.rules; track rule; let ruleIndex = $index) {
             <article class="grammar-rule surface">
               <div class="grammar-rule__heading">
                 <span aria-hidden="true">{{ ruleIndex + 1 }}</span>
@@ -56,12 +64,45 @@
                   <p>{{ line }}</p>
                 }
               </div>
-              @for (example of examplesForRule(current, rule.label); track example.id) {
-                <div class="grammar-example">
-                  <p class="grammar-examples__label">Ví dụ trong công việc</p>
-                  <app-grammar-syntax-sentence [sentence]="example" />
-                </div>
-              }
+              <details class="grammar-rule-examples">
+                <summary>Xem 5 ví dụ từ đề Hacker</summary>
+                @if (hackerExamples.loading()) {
+                  <p role="status">Đang tải ví dụ…</p>
+                } @else if (hackerExamples.error()) {
+                  <p>Ví dụ chưa có sẵn. Bạn có thể thử tải lại ở đầu phần quy tắc.</p>
+                } @else {
+                  <ol class="grammar-hacker-examples">
+                    @for (example of examplesForRule(current.slug, rule.label); track example.id) {
+                      <li class="grammar-example">
+                        <p class="grammar-example__source">
+                          Hacker 3 · Test {{ example.source.test }} · Part
+                          {{ example.source.part.slice(-1) }} · Câu {{ example.source.order }}
+                          <span>{{
+                            example.kind === 'adapted' ? 'Câu biến đổi' : 'Câu trích từ đề'
+                          }}</span>
+                        </p>
+                        @let parts = sentenceParts(example.english, example.highlight);
+                        <p class="grammar-example__sentence" lang="en">
+                          {{ parts[0] }}<mark>{{ example.highlight }}</mark
+                          >{{ parts[1] }}
+                        </p>
+                        <p class="grammar-example__explanation">{{ example.explanation }}</p>
+                        @if (example.kind === 'adapted') {
+                          <p class="grammar-example__original">
+                            <strong>Câu Hacker gốc:</strong>
+                            <span lang="en">{{ example.source.quote }}</span>
+                          </p>
+                        }
+                        @if (example.source.completedFromAnswerKey) {
+                          <p class="grammar-example__note">
+                            Câu gốc đã điền chỗ trống theo đáp án in trong đề.
+                          </p>
+                        }
+                      </li>
+                    }
+                  </ol>
+                }
+              </details>
             </article>
           }
         </div>
@@ -71,78 +112,9 @@
         </aside>
       </section>
 
-      <section aria-labelledby="checks-heading">
-        <p class="eyebrow">03 · Tự kiểm tra</p>
-        <h2 tabindex="-1" id="checks-heading">Thử áp dụng vào câu mới</h2>
-        <p class="grammar-section-intro">
-          Chọn đáp án rồi bấm “Kiểm tra” để xem giải thích. Hai câu này không tính vào điểm thi hoặc
-          tiến độ luyện đề.
-        </p>
-        @for (check of current.checks; track $index; let questionIndex = $index) {
-          <fieldset class="grammar-check surface">
-            <legend>
-              <span class="grammar-check__meta"
-                >Câu {{ questionIndex + 1 }} · {{ difficultyLabels[questionIndex] }}</span
-              >
-              <span lang="en">{{ check.prompt }}</span>
-            </legend>
-            <div class="grammar-check__options">
-              @for (option of check.options; track $index; let optionIndex = $index) {
-                <label
-                  [class.grammar-option--selected]="
-                    selectedAnswers()[questionIndex] === optionIndex
-                  "
-                  [class.grammar-option--correct]="
-                    checkedAnswers()[questionIndex] && optionIndex === check.answer
-                  "
-                >
-                  <input
-                    type="radio"
-                    [name]="'grammar-check-' + current.slug + '-' + questionIndex"
-                    [checked]="selectedAnswers()[questionIndex] === optionIndex"
-                    [disabled]="checkedAnswers()[questionIndex]"
-                    (change)="selectAnswer(questionIndex, optionIndex)"
-                  />
-                  <span class="grammar-option-letter" aria-hidden="true">{{
-                    optionLetters[optionIndex]
-                  }}</span>
-                  <span lang="en">{{ option }}</span>
-                  @if (checkedAnswers()[questionIndex] && optionIndex === check.answer) {
-                    <span class="grammar-option-result">Đáp án đúng</span>
-                  }
-                </label>
-              }
-            </div>
-            @if (checkedAnswers()[questionIndex]) {
-              <p
-                class="grammar-check__feedback"
-                [class.grammar-check__feedback--correct]="
-                  selectedAnswers()[questionIndex] === check.answer
-                "
-                role="status"
-              >
-                <strong>{{
-                  selectedAnswers()[questionIndex] === check.answer ? 'Đúng rồi.' : 'Chưa đúng.'
-                }}</strong>
-                {{ check.explanation }}
-              </p>
-            }
-            <button
-              class="button"
-              [class.button--secondary]="checkedAnswers()[questionIndex]"
-              type="button"
-              [disabled]="selectedAnswers()[questionIndex] === undefined"
-              (click)="checkOrRetry(questionIndex)"
-            >
-              {{ checkedAnswers()[questionIndex] ? 'Làm lại câu này' : 'Kiểm tra' }}
-            </button>
-          </fieldset>
-        }
-      </section>
-
       <section class="grammar-practice" aria-labelledby="practice-heading">
         <div>
-          <p class="eyebrow">04 · Từ kiến thức đến luyện đề</p>
+          <p class="eyebrow">03 · Từ kiến thức đến luyện đề</p>
           <h2 tabindex="-1" id="practice-heading">
             Luyện thêm Part {{ current.part === 'part-5' ? '5' : '6' }}
           </h2>

@@ -57,3 +57,7 @@ __pycache__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Private Hacker grammar examples.
+/content/toeic-hacker-grammar-reviewed.json
+/public/data/toeic/grammar/hacker-3.json

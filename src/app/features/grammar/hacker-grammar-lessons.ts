@@ -208,21 +208,6 @@ export const HACKER_GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Tác động vào mình hay lẫn nhau?',
       ],
     },
-    checks: [
-      {
-        prompt: 'This monitor is faulty. Please bring _____ monitor from storage.',
-        options: ['another', 'others', 'each other', 'anyone'],
-        answer: 0,
-        explanation: 'Monitor là danh từ đếm được số ít; another monitor là một màn hình khác.',
-      },
-      {
-        prompt: '_____ who wishes to attend must register by Friday.',
-        options: ['Those', 'Anyone', 'All', 'Others'],
-        answer: 1,
-        explanation:
-          'Wishes là động từ số ít, phù hợp với anyone who; those/all/others who cần wish.',
-      },
-    ],
   },
   {
     slug: 'trang-tu-va-tu-nhan-manh',
@@ -426,20 +411,6 @@ export const HACKER_GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Đọc nghĩa cả câu',
       ],
     },
-    checks: [
-      {
-        prompt: 'The reviews of the new service are _____ positive.',
-        options: ['overwhelming', 'overwhelmingly', 'overwhelm', 'overwhelmed'],
-        answer: 1,
-        explanation: 'Trước tính từ positive cần trạng từ overwhelmingly chỉ mức độ.',
-      },
-      {
-        prompt: 'The team has not _____ received the signed contract.',
-        options: ['yet', 'ever since', 'soon', 'no longer'],
-        answer: 0,
-        explanation: 'Has not yet received diễn tả đến nay nhóm vẫn chưa nhận được hợp đồng.',
-      },
-    ],
   },
   {
     slug: 'lien-tu-cap-va-cau-truc-song-song',
@@ -673,19 +644,5 @@ export const HACKER_GRAMMAR_LESSONS: readonly GrammarLesson[] = [
         'Lựa chọn hay điều kiện?',
       ],
     },
-    checks: [
-      {
-        prompt: 'The report includes both the sales figures _____ the operating costs.',
-        options: ['and', 'or', 'nor', 'whether'],
-        answer: 0,
-        explanation: 'Both kết hợp với and để nối hai cụm danh từ cùng chức năng.',
-      },
-      {
-        prompt: 'The discount applies _____ customers pay by card or in cash.',
-        options: ['either', 'whether', 'neither', 'both'],
-        answer: 1,
-        explanation: 'Whether mở đầu mệnh đề customers pay và kết hợp với or để nêu hai khả năng.',
-      },
-    ],
   },
 ];

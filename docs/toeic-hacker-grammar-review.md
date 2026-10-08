@@ -58,3 +58,17 @@ Không thay đổi đáp án, revision, quyền nguồn hoặc trạng thái xá
 
 Các điểm trên chỉ là nghi vấn từ bản nhập text. Cần đối chiếu crop/PDF và khóa
 đáp án trước khi sửa; không suy đoán câu nguồn để làm dữ liệu có vẻ hoàn chỉnh.
+
+## Cập nhật ví dụ theo từng quy tắc (2026-10-08)
+
+Phần Tự kiểm tra đã được bỏ khỏi cả 19 bài. Mỗi quy tắc có phần mở rộng
+riêng với 5 ví dụ: tổng cộng 84 quy tắc và 420 ví dụ. Có 361 câu trích
+từ bản nhập Hacker và 59 câu biến đổi có nhãn riêng, câu gốc và giải thích.
+Nguồn hiện bao gồm Part 5, đoạn Reading và transcript Listening. Câu Part 5
+được điền chỗ trống theo khóa đáp án hiện có; không nâng trạng thái xác minh.
+
+Dữ liệu biên soạn riêng tư nằm trong `content/toeic-hacker-grammar-reviewed.json`;
+`scripts/build-toeic-grammar.mjs` đối chiếu từng câu trích với ngân hàng trước
+khi xuất `public/data/toeic/grammar/hacker-3.json`. Hai tệp JSON được bỏ qua
+bởi Git. Câu biến đổi chỉ phục vụ luyện cấu trúc, không được gán là nguyên văn
+đề thi. Các sơ đồ trực quan ở đầu bài vẫn dùng câu biên soạn riêng.

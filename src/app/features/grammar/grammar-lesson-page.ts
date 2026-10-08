@@ -15,6 +15,7 @@ import { GrammarSyntaxSentence } from './grammar-syntax-sentence';
 import { GrammarTenseTimeline } from './grammar-tense-timeline';
 import { GrammarTransformation } from './grammar-transformation';
 import { PASSIVE_DEMO, REDUCTION_DEMOS, TENSE_EXAMPLES } from './grammar-visual-data';
+import { HackerGrammarExamples } from './hacker-grammar-examples';
 
 @Component({
   selector: 'app-grammar-lesson-page',
@@ -24,6 +25,7 @@ import { PASSIVE_DEMO, REDUCTION_DEMOS, TENSE_EXAMPLES } from './grammar-visual-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GrammarLessonPage {
+  protected readonly hackerExamples = inject(HackerGrammarExamples);
   private readonly route = inject(ActivatedRoute);
   private readonly injector = inject(Injector);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -38,16 +40,11 @@ export class GrammarLessonPage {
   });
   protected readonly previous = computed(() => GRAMMAR_LEARNING_ORDER[this.index() - 1]);
   protected readonly next = computed(() => GRAMMAR_LEARNING_ORDER[this.index() + 1]);
-  protected readonly difficultyLabels = ['Dễ', 'Khó'] as const;
-  protected readonly optionLetters = ['A', 'B', 'C', 'D'] as const;
-  protected readonly selectedAnswers = signal<Readonly<Record<number, number>>>({});
-  protected readonly checkedAnswers = signal<Readonly<Record<number, boolean>>>({});
 
   constructor() {
+    void this.hackerExamples.load();
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       this.lesson.set(GRAMMAR_LEARNING_ORDER.find((item) => item.slug === params.get('slug')));
-      this.selectedAnswers.set({});
-      this.checkedAnswers.set({});
       afterNextRender(
         () => {
           const fragment = this.route.snapshot?.fragment;
@@ -68,48 +65,17 @@ export class GrammarLessonPage {
     });
   }
 
-  protected selectAnswer(questionIndex: number, optionIndex: number): void {
-    if (this.checkedAnswers()[questionIndex]) return;
-    this.selectedAnswers.update((answers) => ({ ...answers, [questionIndex]: optionIndex }));
-  }
-
-  protected checkAnswer(questionIndex: number): void {
-    if (this.selectedAnswers()[questionIndex] === undefined) return;
-    this.checkedAnswers.update((answers) => ({ ...answers, [questionIndex]: true }));
-  }
-
-  protected retry(questionIndex: number): void {
-    this.selectedAnswers.update((answers) => {
-      const remaining = { ...answers };
-      delete remaining[questionIndex];
-      return remaining;
-    });
-    this.checkedAnswers.update((answers) => {
-      const remaining = { ...answers };
-      delete remaining[questionIndex];
-      return remaining;
-    });
-    afterNextRender(
-      () => {
-        this.host.nativeElement
-          .querySelectorAll('.grammar-check')
-          [questionIndex]?.querySelector<HTMLInputElement>('input[type="radio"]')
-          ?.focus();
-      },
-      { injector: this.injector },
+  protected examplesForRule(slug: string, ruleLabel: string) {
+    return (
+      this.hackerExamples
+        .groups()
+        .find((group) => group.slug === slug && group.ruleLabel === ruleLabel)?.examples ?? []
     );
   }
 
-  protected checkOrRetry(questionIndex: number): void {
-    if (this.checkedAnswers()[questionIndex]) {
-      this.retry(questionIndex);
-      return;
-    }
-    this.checkAnswer(questionIndex);
-  }
-
-  protected examplesForRule(lesson: GrammarLesson, ruleLabel: string): GrammarLesson['examples'] {
-    return lesson.examples.filter((example) => example.ruleLabel === ruleLabel);
+  protected sentenceParts(english: string, highlight: string): readonly [string, string] {
+    const start = english.indexOf(highlight);
+    return [english.slice(0, start), english.slice(start + highlight.length)];
   }
 
   protected ruleUseLines(use: string): readonly string[] {
