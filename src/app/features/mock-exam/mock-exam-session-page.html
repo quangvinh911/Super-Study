@@ -12,6 +12,12 @@
     <section class="surface" role="status">
       <h1>Đang lưu kết quả…</h1>
       <p>Bài thi đã kết thúc. Kết quả sẽ hiển thị sau khi lưu xong.</p>
+      @if (store.persistenceError()) {
+        <p role="alert">Chưa lưu được kết quả. Hãy giữ trang mở và kiểm tra kết nối.</p>
+        <button class="button" type="button" [disabled]="submitting()" (click)="retrySave()">
+          Thử lưu lại
+        </button>
+      }
     </section>
   } @else if (store.currentQuestion(); as item) {
     <header class="exam-header">
@@ -188,6 +194,7 @@
       <p class="persistence-warning" role="alert">
         Không thể lưu bài thi hoặc phiên đang được dùng ở tab khác. Dừng thao tác và kiểm tra tab
         còn lại.
+        <button type="button" (click)="retrySave()">Thử lưu lại</button>
       </p>
     }
   }

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1791122081299,
+      "tag": "0000_remarkable_virginia_dare",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791122421586,
+      "tag": "0001_account-invariants",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791123208780,
+      "tag": "0002_light_roulette",
+      "breakpoints": true
+    }
+  ]
+}

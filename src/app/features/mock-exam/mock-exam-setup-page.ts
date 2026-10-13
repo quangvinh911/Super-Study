@@ -7,6 +7,8 @@ import { LoadedQuestionBank, QuestionBankSource } from '../../core/models';
 import { ProgressRepository } from '../../core/persistence';
 import { QuizSessionStore } from '../../core/state';
 import { generateExam } from '../../core/domain/exam-generator';
+import { AuthService } from '../../core/auth/auth.service';
+import { LoginDialogService } from '../../core/auth/login-dialog.service';
 
 @Component({
   selector: 'app-mock-exam-setup-page',
@@ -16,6 +18,8 @@ import { generateExam } from '../../core/domain/exam-generator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MockExamSetupPage implements OnInit {
+  private readonly auth = inject(AuthService);
+  private readonly loginDialog = inject(LoginDialogService);
   protected readonly certificate = inject(CertificateContext);
   private readonly bankService = inject(QuestionBankService);
   private readonly repository = inject(ProgressRepository);
@@ -98,6 +102,10 @@ export class MockExamSetupPage implements OnInit {
   }
 
   protected async start(): Promise<void> {
+    if (!this.auth.user()) {
+      this.loginDialog.open();
+      return;
+    }
     const bank = this.selectedBank();
     if (!bank || !this.inventoryReady() || this.starting()) {
       return;

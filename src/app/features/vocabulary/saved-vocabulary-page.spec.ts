@@ -10,6 +10,36 @@ describe('Saved vocabulary page', () => {
     TestBed.resetTestingModule();
     vi.unstubAllGlobals();
   });
+  it('offers automatic enrichment for legacy words with a missing example', async () => {
+    const word = {
+      term: 'shipment',
+      meaning: 'lô hàng',
+      pronunciation: '/ˈʃɪpmənt/',
+      example: '',
+      enrichment: 'complete',
+    };
+    const save = vi.fn().mockResolvedValue(undefined);
+    TestBed.configureTestingModule({
+      imports: [SavedVocabularyPage],
+      providers: [
+        {
+          provide: FavoriteVocabularyRepository,
+          useValue: { list: vi.fn().mockResolvedValue([word]), revision: signal(0) },
+        },
+        { provide: FavoriteVocabularyService, useValue: { save } },
+      ],
+    });
+    const fixture = TestBed.createComponent(SavedVocabularyPage);
+    await fixture.whenStable();
+    const element: HTMLElement = fixture.nativeElement;
+    const retry = Array.from(element.querySelectorAll<HTMLButtonElement>('article button')).find(
+      (button) => button.textContent?.includes('Thử bổ sung lại'),
+    );
+    if (!retry) throw new Error('Missing enrichment retry button');
+    retry.click();
+    expect(save).toHaveBeenCalledWith(word);
+  });
+
   it('speaks a saved word without saving again even when pronunciation is missing', async () => {
     const word = {
       term: 'shipment',

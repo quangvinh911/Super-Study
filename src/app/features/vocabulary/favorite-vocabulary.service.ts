@@ -17,6 +17,9 @@ export function parseVocabularyDetails(
   | 'meaningLanguage'
   | 'pronunciationKind'
   | 'pronunciationSource'
+  | 'exampleSource'
+  | 'exampleSourceUrl'
+  | 'exampleAuthor'
   | 'translationSource'
 > {
   if (!isRecord(value)) throw new Error('Invalid vocabulary response');
@@ -50,12 +53,23 @@ export function parseVocabularyDetails(
   const pronunciationKind = value['pronunciationKind'] ?? 'entry';
   const translationSource = value['translationSource'] ?? '';
   const pronunciationSource = value['pronunciationSource'] ?? '';
+  const exampleSource = value['exampleSource'] ?? '';
+  const exampleSourceUrl = value['exampleSourceUrl'];
+  const exampleAuthor = value['exampleAuthor'];
   if (
     (meaningLanguage !== 'vi' && meaningLanguage !== 'en') ||
     (pronunciationKind !== 'entry' && pronunciationKind !== 'word-by-word') ||
     typeof translationSource !== 'string' ||
     translationSource.length > 100 ||
-    (pronunciationSource !== '' && pronunciationSource !== 'Free Dictionary API')
+    (pronunciationSource !== '' && pronunciationSource !== 'Free Dictionary API') ||
+    typeof exampleSource !== 'string' ||
+    !['', 'Free Dictionary API', 'Tatoeba'].includes(exampleSource) ||
+    (exampleSourceUrl !== undefined &&
+      (typeof exampleSourceUrl !== 'string' ||
+        !/^https:\/\/tatoeba\.org\/en\/sentences\/show\/[1-9]\d*$/.test(exampleSourceUrl))) ||
+    (exampleAuthor !== undefined &&
+      (typeof exampleAuthor !== 'string' || !exampleAuthor.trim() || exampleAuthor.length > 100)) ||
+    (exampleSource === 'Tatoeba' && (!exampleSourceUrl || !exampleAuthor))
   )
     throw new Error('Invalid dictionary metadata');
   return {
@@ -70,6 +84,9 @@ export function parseVocabularyDetails(
     pronunciationKind: pronunciationKind === 'word-by-word' ? 'word-by-word' : 'entry',
     translationSource,
     pronunciationSource,
+    ...(exampleSource ? { exampleSource } : {}),
+    ...(typeof exampleSourceUrl === 'string' ? { exampleSourceUrl } : {}),
+    ...(typeof exampleAuthor === 'string' ? { exampleAuthor } : {}),
   };
 }
 
@@ -82,6 +99,7 @@ export class FavoriteVocabularyService {
   private readonly repository = inject(FavoriteVocabularyRepository);
   private readonly requests = new Map<string, Promise<void>>();
   private readonly controllers = new Set<AbortController>();
+  private readonly translations = new Map<string, { meaning: string; at: number }>();
   private timer: ReturnType<typeof setTimeout> | undefined;
   readonly notice = signal<{ text: string; error: boolean } | null>(null);
 
@@ -135,7 +153,22 @@ export class FavoriteVocabularyService {
     if (!response.headers.get('Content-Type')?.includes('application/json'))
       throw new Error('Vocabulary API did not return JSON');
     const data: unknown = await response.json();
-    const details = parseVocabularyDetails(data);
+    let details = parseVocabularyDetails(data);
+    if (details.meaningLanguage === 'en') {
+      try {
+        const meaning = await this.translateInBrowser(entry.term, signal);
+        details = {
+          ...details,
+          englishMeaning: details.englishMeaning || details.meaning,
+          meaning,
+          meaningLanguage: 'vi',
+          translationSource: 'MyMemory',
+        };
+      } catch (error) {
+        if (signal.aborted) throw error;
+        console.warn('Browser translation unavailable', error);
+      }
+    }
     const complete =
       !!details.meaning &&
       !!details.pronunciation &&
@@ -166,6 +199,44 @@ export class FavoriteVocabularyService {
       this.notify('Không lưu được từ vựng. Hãy thử lại.', true);
       return false;
     }
+  }
+
+  private async translateInBrowser(term: string, signal: AbortSignal): Promise<string> {
+    const key = vocabularyKey(term);
+    const cached = this.translations.get(key);
+    if (cached && Date.now() - cached.at < 3600000) return cached.meaning;
+    const url = new URL('https://api.mymemory.translated.net/get');
+    url.searchParams.set('q', term);
+    url.searchParams.set('langpair', 'en|vi');
+    // Browser requests avoid a shared hosting IP's quota; send only the selected term.
+    const response = await fetch(url, {
+      signal: AbortSignal.any([signal, AbortSignal.timeout(6000)]),
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+    });
+    if (!response.ok) throw new Error(`Translation HTTP ${response.status}`);
+    const value: unknown = await response.json();
+    if (
+      !isRecord(value) ||
+      (value['responseStatus'] !== 200 && value['responseStatus'] !== '200') ||
+      (value['quotaFinished'] !== undefined && value['quotaFinished'] !== false) ||
+      !isRecord(value['responseData'])
+    )
+      throw new Error('Translation unavailable');
+    const meaning = value['responseData']['translatedText'];
+    if (
+      typeof meaning !== 'string' ||
+      !meaning.trim() ||
+      meaning.length > 2000 ||
+      vocabularyKey(meaning) === key
+    )
+      throw new Error('Translation not found');
+    if (this.translations.size >= 200) {
+      const oldestKey = this.translations.keys().next().value;
+      if (oldestKey !== undefined) this.translations.delete(oldestKey);
+    }
+    this.translations.set(key, { meaning: meaning.trim(), at: Date.now() });
+    return meaning.trim();
   }
 
   dismiss(): void {
@@ -226,6 +297,15 @@ export class FavoriteVocabularyService {
         ...fetchedDetails,
         pronunciation: fetchedDetails.pronunciation || pending.pronunciation,
         example: fetchedDetails.example || pending.example,
+        exampleSource: fetchedDetails.example
+          ? fetchedDetails.exampleSource
+          : pending.exampleSource,
+        exampleSourceUrl: fetchedDetails.example
+          ? fetchedDetails.exampleSourceUrl
+          : pending.exampleSourceUrl,
+        exampleAuthor: fetchedDetails.example
+          ? fetchedDetails.exampleAuthor
+          : pending.exampleAuthor,
         ...(!fetchedDetails.pronunciation && pending.pronunciation
           ? {
               pronunciationKind: pending.pronunciationKind,

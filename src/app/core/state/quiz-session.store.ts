@@ -1,4 +1,5 @@
-import { computed, Injectable, OnDestroy, signal } from '@angular/core';
+import { computed, Inject, Injectable, OnDestroy, signal } from '@angular/core';
+import { AuthService, AccountApiError } from '../auth/auth.service';
 import {
   calculateAttemptResult,
   createPracticeQuestions,
@@ -100,11 +101,17 @@ function initialResponses(
 
 @Injectable({ providedIn: 'root' })
 export class QuizSessionStore implements OnDestroy {
+  private readonly unregisterAccount: () => void;
   private readonly snapshotState = signal<SessionSnapshot | null>(null);
   private readonly remainingMsState = signal<number | null>(null);
   private readonly deadlineWarningState = signal<DeadlineWarningMinutes | null>(null);
   private readonly lastAttemptState = signal<Attempt | null>(null);
   private readonly persistenceErrorState = signal<unknown>(null);
+  private pendingSubmission: Attempt | null = null;
+  private readonly pendingPracticeResults = new Map<
+    string,
+    { revision: number; correct: boolean; answeredAt: string; sessionId: string }
+  >();
 
   readonly snapshot = this.snapshotState.asReadonly();
   readonly remainingMs = this.remainingMsState.asReadonly();
@@ -156,7 +163,12 @@ export class QuizSessionStore implements OnDestroy {
   private submitPromise?: Promise<Attempt | null>;
   private lifecycleQueue: Promise<unknown> = Promise.resolve();
 
-  constructor(private readonly repository: ProgressRepository) {}
+  constructor(
+    private readonly repository: ProgressRepository,
+    @Inject(AuthService) private readonly auth: AuthService | null = null,
+  ) {
+    this.unregisterAccount = this.auth?.registerBeforeChange(() => this.close()) ?? (() => {});
+  }
 
   setDeadlineHooks(hooks: DeadlineHooks): void {
     this.hooks = hooks;
@@ -171,7 +183,13 @@ export class QuizSessionStore implements OnDestroy {
     await this.detachCurrent();
     const id = identifier('practice');
     const seed = String(input.config?.seed ?? id);
-    const config = { ...input.config, seed };
+    const config = {
+      ...input.config,
+      seed,
+      ...(this.auth && !this.auth.user()
+        ? { questionLimit: Math.min(input.config?.questionLimit ?? 10, 10) }
+        : {}),
+    };
     const questions = createPracticeQuestions(
       input.questions,
       input.solutions,
@@ -206,7 +224,7 @@ export class QuizSessionStore implements OnDestroy {
     };
     this.ownsLease = true;
     this.install(snapshot);
-    await this.repository.saveActiveSession(snapshot);
+    await this.repository.saveActiveSession(snapshot, this.ownerId);
     return immutable(snapshot);
   }
 
@@ -215,6 +233,7 @@ export class QuizSessionStore implements OnDestroy {
   }
 
   private async performStartExam(input: StartExamInput): Promise<SessionSnapshot> {
+    if (this.auth && !this.auth.user()) throw new AccountApiError('login_required', 401);
     this.assertCertificate(input.certificateId, input.questions);
     const exam = input.examDefinition ?? CTFL.exam;
     if (!exam.durations.includes(input.durationMinutes)) throw new Error('Invalid exam duration.');
@@ -253,7 +272,7 @@ export class QuizSessionStore implements OnDestroy {
     }
     this.ownsLease = true;
     this.install(snapshot);
-    await this.repository.saveActiveSession(snapshot);
+    await this.repository.saveActiveSession(snapshot, this.ownerId);
     this.startMonitoring();
     await this.tick(now);
     return immutable(snapshot);
@@ -268,6 +287,16 @@ export class QuizSessionStore implements OnDestroy {
     const snapshot = await this.repository.getActiveSession(sessionId);
     if (!snapshot || snapshot.status !== 'active') {
       return false;
+    }
+    if (
+      this.auth &&
+      !this.auth.user() &&
+      (snapshot.mode === 'exam' || snapshot.questions.length > 10)
+    ) {
+      throw new AccountApiError(
+        snapshot.mode === 'exam' ? 'login_required' : 'guest_practice_limit',
+        401,
+      );
     }
     if (
       snapshot.mode === 'exam' &&
@@ -336,6 +365,7 @@ export class QuizSessionStore implements OnDestroy {
     }
     const response = snapshot.responses[item.question.id]!;
     if (response.checked) {
+      await this.flushPersistence();
       return response.isCorrect ?? false;
     }
     if (!validateSelection(item.question, response.selectedOptionIds)) {
@@ -349,15 +379,13 @@ export class QuizSessionStore implements OnDestroy {
       isCorrect: correct,
       answeredAt,
     });
-    await Promise.all([
-      this.flushPersistence(),
-      this.repository.recordQuestionResult(
-        item.question.id,
-        item.question.revision,
-        correct,
-        answeredAt,
-      ),
-    ]);
+    this.pendingPracticeResults.set(item.question.id, {
+      revision: item.question.revision,
+      correct,
+      answeredAt,
+      sessionId: snapshot.id,
+    });
+    await this.flushPersistence();
     return correct;
   }
 
@@ -458,6 +486,45 @@ export class QuizSessionStore implements OnDestroy {
 
   async flushPersistence(): Promise<void> {
     await this.persistenceQueue;
+    const snapshot = this.snapshotState();
+    try {
+      if (this.persistenceErrorState() && snapshot && !this.pendingSubmission) {
+        await this.repository.saveActiveSession(snapshot, this.ownerId);
+      }
+      for (const [questionId, result] of this.pendingPracticeResults) {
+        await this.repository.recordQuestionResult(
+          questionId,
+          result.revision,
+          result.correct,
+          result.answeredAt,
+          result.sessionId,
+        );
+        this.pendingPracticeResults.delete(questionId);
+      }
+      this.persistenceErrorState.set(null);
+    } catch (error) {
+      this.persistenceErrorState.set(error);
+      throw error;
+    }
+  }
+
+  async retryPersistence(): Promise<Attempt | null> {
+    const snapshot = this.snapshotState();
+    if (snapshot?.mode === 'exam') {
+      this.ownsLease = await this.repository.acquireSessionLease(
+        snapshot.id,
+        this.ownerId,
+        LEASE_TTL_MS,
+      );
+      if (!this.ownsLease) throw new SessionLockedError(snapshot.id);
+    }
+    if (this.pendingSubmission) return this.submit();
+    await this.flushPersistence();
+    if (snapshot?.mode === 'exam' && snapshot.status === 'active') {
+      this.startMonitoring();
+      return this.tick();
+    }
+    return null;
   }
 
   close(): Promise<void> {
@@ -469,6 +536,7 @@ export class QuizSessionStore implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.unregisterAccount();
     this.stopMonitoring();
     const snapshot = this.snapshotState();
     if (snapshot?.mode === 'exam' && this.ownsLease) {
@@ -477,6 +545,8 @@ export class QuizSessionStore implements OnDestroy {
   }
 
   private install(snapshot: SessionSnapshot): void {
+    this.pendingSubmission = null;
+    this.pendingPracticeResults.clear();
     this.snapshotState.set(immutable(snapshot));
     this.lastAttemptState.set(null);
     this.persistenceErrorState.set(null);
@@ -519,13 +589,16 @@ export class QuizSessionStore implements OnDestroy {
 
   private enqueuePersistence(snapshot: SessionSnapshot): void {
     const copy = clone(snapshot);
-    const operation = this.persistenceQueue.then(() => this.repository.saveActiveSession(copy));
+    const operation = this.persistenceQueue.then(() =>
+      this.repository.saveActiveSession(copy, this.ownerId),
+    );
     this.persistenceQueue = operation.catch((error: unknown) => {
       this.persistenceErrorState.set(error);
     });
   }
 
   private async performSubmit(reason: 'submitted' | 'expired'): Promise<Attempt | null> {
+    if (this.pendingSubmission) return this.persistSubmission(this.pendingSubmission);
     const snapshot = this.snapshotState();
     if (!snapshot || snapshot.status !== 'active') {
       return this.lastAttemptState();
@@ -582,15 +655,29 @@ export class QuizSessionStore implements OnDestroy {
       ),
     };
     this.snapshotState.set(immutable(completedSnapshot));
-    this.lastAttemptState.set(immutable(attempt));
+    this.pendingSubmission = immutable(attempt);
     this.stopMonitoring();
+    return this.persistSubmission(this.pendingSubmission);
+  }
 
-    await this.repository.completeSession(attempt);
-    if (snapshot.mode === 'exam') {
-      await this.repository.releaseSessionLease(snapshot.id, this.ownerId);
+  private async persistSubmission(attempt: Attempt): Promise<Attempt> {
+    try {
+      await this.repository.completeSession(attempt, this.ownerId);
+    } catch (error) {
+      this.persistenceErrorState.set(error);
+      throw error;
+    }
+    this.pendingSubmission = null;
+    this.lastAttemptState.set(attempt);
+    this.persistenceErrorState.set(null);
+    if (attempt.mode === 'exam') {
+      // Completion already removes the lease atomically in account storage.
+      await this.repository
+        .releaseSessionLease(attempt.sessionId, this.ownerId)
+        .catch((error: unknown) => this.persistenceErrorState.set(error));
       this.ownsLease = false;
     }
-    if (reason === 'expired') {
+    if (attempt.completionReason === 'expired') {
       this.hooks.onAutoSubmit?.(attempt);
     }
     return immutable(attempt);
@@ -604,9 +691,11 @@ export class QuizSessionStore implements OnDestroy {
         return;
       }
       this.tickRunning = true;
-      void this.monitorStep().finally(() => {
-        this.tickRunning = false;
-      });
+      void this.monitorStep()
+        .catch((error: unknown) => this.persistenceErrorState.set(error))
+        .finally(() => {
+          this.tickRunning = false;
+        });
     }, 1_000);
   }
 
@@ -640,6 +729,7 @@ export class QuizSessionStore implements OnDestroy {
   private async detachCurrent(): Promise<void> {
     this.stopMonitoring();
     await this.submitPromise;
+    if (this.pendingSubmission) await this.submit();
     await this.flushPersistence();
     const snapshot = this.snapshotState();
     if (snapshot?.mode === 'exam' && snapshot.status === 'active' && this.ownsLease) {

@@ -21,6 +21,19 @@
       }
 
       <div class="header-actions">
+        @if (auth.user(); as user) {
+          <span>{{ user.username }}</span>
+          @if (user.role === 'admin') {
+            <a routerLink="/admin/users">Quản lý user</a>
+          }
+          <button class="button button--secondary" type="button" (click)="logout()">
+            Đăng xuất
+          </button>
+        } @else {
+          <button class="button button--secondary" type="button" (click)="loginDialog.open()">
+            Đăng nhập
+          </button>
+        }
         <span
           class="connection-status"
           [class.connection-status--offline]="!isOnline()"
@@ -162,12 +175,26 @@
               >
             </div>
           </nav>
-          <p class="workspace-sidebar__note">Tiến độ được lưu trên thiết bị này.</p>
+          <p class="workspace-sidebar__note">
+            {{
+              auth.user()
+                ? 'Dữ liệu học được lưu theo tài khoản.'
+                : 'Dữ liệu khách được lưu trên thiết bị này.'
+            }}
+          </p>
         </aside>
       }
     }
 
     <main id="main-content" class="site-main" tabindex="-1">
+      @if (accountMessage() || auth.error()) {
+        <p class="error" role="alert">
+          {{ accountMessage() || auth.error() }}
+          @if (auth.user()) {
+            <button type="button" (click)="loginDialog.open()">Đăng nhập lại</button>
+          }
+        </p>
+      }
       @if (activeCertificate(); as certificate) {
         @if (!isFocusLayout()) {
           <nav class="breadcrumbs" aria-label="Đường dẫn trang">
@@ -209,3 +236,5 @@
     </footer>
   }
 </div>
+
+<app-login-dialog />

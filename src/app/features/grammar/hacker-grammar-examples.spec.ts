@@ -2,6 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { HackerGrammarExamples, parseHackerGrammarExamples } from './hacker-grammar-examples';
 import { hackerGrammarFixture } from './hacker-grammar-examples.fixture';
 
+type FixtureQuiz = ReturnType<
+  typeof hackerGrammarFixture
+>['groups'][number]['examples'][number]['quiz'];
+
 describe('Hacker grammar examples', () => {
   afterEach(() => vi.restoreAllMocks());
 
@@ -29,6 +33,34 @@ describe('Hacker grammar examples', () => {
     const duplicates = hackerGrammarFixture();
     duplicates.groups[0].examples[1] = { ...duplicates.groups[0].examples[0], id: 'different-id' };
     expect(() => parseHackerGrammarExamples(duplicates)).toThrow('Duplicate');
+  });
+
+  it('validates four distinct options, answer membership and a blank in the highlighted phrase', () => {
+    for (const mutate of [
+      (quiz: FixtureQuiz) => {
+        quiz.correctOptionId = 'X';
+      },
+      (quiz: FixtureQuiz) => {
+        quiz.options[2].text = ' reviews ';
+      },
+      (quiz: FixtureQuiz) => {
+        quiz.options[3].id = 'B';
+      },
+      (quiz: FixtureQuiz) => {
+        quiz.options.pop();
+      },
+      (quiz: FixtureQuiz) => {
+        quiz.prompt = 'The team _____ something else.';
+      },
+      (quiz: FixtureQuiz) => {
+        quiz.prompt = '_____ team reviews report 1.';
+        quiz.options[1].text = 'The';
+      },
+    ]) {
+      const pack = hackerGrammarFixture();
+      mutate(pack.groups[0].examples[0].quiz);
+      expect(() => parseHackerGrammarExamples(pack)).toThrow('five valid examples');
+    }
   });
 
   it('shows load failures, permits retry and reuses a successful collection', async () => {

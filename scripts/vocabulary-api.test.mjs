@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { readFile } from 'node:fs/promises';
 import { createVocabularyApi } from './vocabulary-api.mjs';
 
 const input = { term: 'shipment', meaning: 'lô hàng', context: 'track a shipment' };
@@ -11,7 +12,12 @@ function request(body = input, origin = 'https://study.example') {
 }
 function entry(
   term = 'shipment',
-  { ipa = '/ˈʃɪpmənt/', examples = ['The shipment arrived today.'], translations = [] } = {},
+  {
+    ipa = '/ˈʃɪpmənt/',
+    examples = ['The shipment arrived today.'],
+    quotes = [],
+    translations = [],
+  } = {},
 ) {
   return {
     word: term,
@@ -23,6 +29,7 @@ function entry(
           {
             definition: 'A load of goods being transported.',
             examples,
+            quotes,
             translations,
             tags: [],
             subsenses: [],
@@ -34,6 +41,151 @@ function entry(
 }
 describe('Internet vocabulary lookup without credentials', () => {
   afterEach(() => vi.unstubAllGlobals());
+  it('allows browser translation fallback in the production connection policy', async () => {
+    const headers = await readFile(new URL('../public/_headers', import.meta.url), 'utf8');
+    const policy = headers.match(/^\s*Content-Security-Policy:\s*(.+)$/m)?.[1];
+    expect(policy).toBeDefined();
+    const connectSources = policy
+      ?.split(';')
+      .map((directive) => directive.trim().split(/\s+/))
+      .find(([name]) => name === 'connect-src')
+      ?.slice(1);
+    expect(connectSources).toEqual(["'self'", 'https://api.mymemory.translated.net']);
+  });
+  it('finds a real daisy sentence when both dictionaries lack examples', async () => {
+    const primary = entry('daisy', { examples: [] });
+    primary.entries[0].senses.push({
+      definition: 'Something splendid.',
+      examples: ['That car is a daisy.'],
+    });
+    const fetch = vi
+      .fn()
+      .mockResolvedValueOnce(Response.json(primary))
+      .mockResolvedValueOnce(Response.json([]))
+      .mockResolvedValueOnce(
+        Response.json({
+          data: [
+            {
+              id: 1,
+              text: 'Does Tom like daisies?',
+              lang: 'eng',
+              owner: 'CK',
+              license: 'CC BY 2.0 FR',
+              is_unapproved: false,
+            },
+            {
+              id: 3657396,
+              text: 'The daisy is white.',
+              lang: 'eng',
+              owner: 'kerbear407',
+              license: 'CC BY 2.0 FR',
+              is_unapproved: false,
+            },
+          ],
+        }),
+      );
+    vi.stubGlobal('fetch', fetch);
+    const response = await createVocabularyApi()(
+      request({ term: 'daisy', meaning: 'hoa cúc', context: '' }),
+    );
+    expect(await response.json()).toMatchObject({
+      meaning: 'hoa cúc',
+      example: 'The daisy is white.',
+      exampleSource: 'Tatoeba',
+      exampleSourceUrl: 'https://tatoeba.org/en/sentences/show/3657396',
+      exampleAuthor: 'kerbear407',
+    });
+    const url = new URL(fetch.mock.calls[2][0]);
+    expect(url.origin).toBe('https://api.tatoeba.org');
+    expect(url.searchParams.get('q')).toBe('"daisy"');
+    expect(url.searchParams.get('is_unapproved')).toBe('no');
+    expect(url.searchParams.get('license')).toBe('CC BY 2.0 FR');
+  });
+  it('keeps the whole phrase together when choosing a corpus example and caches the result', async () => {
+    const fetch = vi.fn().mockImplementation(async (url) => {
+      if (String(url).includes('freedictionaryapi.com'))
+        return Response.json(entry('keep in mind', { examples: [] }));
+      if (String(url).includes('dictionaryapi.dev')) return Response.json([]);
+      return Response.json({
+        data: [
+          {
+            id: 1,
+            text: 'Keep your plans in mind.',
+            lang: 'eng',
+            owner: 'CK',
+            license: 'CC BY 2.0 FR',
+            is_unapproved: false,
+          },
+          {
+            id: 2,
+            text: 'Please keep in mind the deadline.',
+            lang: 'eng',
+            owner: 'CK',
+            license: 'CC BY 2.0 FR',
+            is_unapproved: false,
+          },
+        ],
+      });
+    });
+    vi.stubGlobal('fetch', fetch);
+    const api = createVocabularyApi();
+    for (let index = 0; index < 2; index++) {
+      expect(
+        await (
+          await api(request({ term: 'keep in mind', meaning: 'ghi nhớ', context: '' }))
+        ).json(),
+      ).toMatchObject({ example: 'Please keep in mind the deadline.', exampleSource: 'Tatoeba' });
+    }
+    expect(fetch.mock.calls.filter(([url]) => String(url).includes('tatoeba.org'))).toHaveLength(1);
+  });
+  it('rejects unapproved, unlicensed or unattributed sentences', async () => {
+    const sentence = {
+      id: 1,
+      text: 'The daisy is white.',
+      lang: 'eng',
+      owner: 'CK',
+      license: 'CC BY 2.0 FR',
+      is_unapproved: false,
+    };
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(Response.json(entry('daisy', { examples: [] })))
+        .mockResolvedValueOnce(Response.json([]))
+        .mockResolvedValueOnce(
+          Response.json({
+            data: [
+              { ...sentence, is_unapproved: true },
+              { ...sentence, license: 'PROBLEM' },
+              { ...sentence, owner: null },
+              { ...sentence, lang: 'deu' },
+              { ...sentence, id: '1' },
+            ],
+          }),
+        ),
+    );
+    expect(
+      await (
+        await createVocabularyApi()(request({ term: 'daisy', meaning: 'hoa cúc', context: '' }))
+      ).json(),
+    ).toMatchObject({ meaning: 'hoa cúc', example: '' });
+  });
+  it('preserves dictionary details when the corpus is unavailable', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(Response.json(entry('daisy', { examples: [] })))
+        .mockResolvedValueOnce(Response.json([]))
+        .mockResolvedValueOnce(new Response(null, { status: 503 })),
+    );
+    expect(
+      await (
+        await createVocabularyApi()(request({ term: 'daisy', meaning: 'hoa cúc', context: '' }))
+      ).json(),
+    ).toMatchObject({ meaning: 'hoa cúc', pronunciation: '/ˈʃɪpmənt/', example: '' });
+  });
   it('uses dictionary definitions, IPA and examples while preserving local Vietnamese meanings', async () => {
     const fetch = vi.fn().mockResolvedValue(Response.json(entry()));
     vi.stubGlobal('fetch', fetch);
@@ -62,6 +214,102 @@ describe('Internet vocabulary lookup without credentials', () => {
     expect((await response.json()).meaning).toBe('hàng gửi');
     expect(fetch).toHaveBeenCalledTimes(1);
   });
+  it('uses a dictionary quotation when no example is listed', async () => {
+    const fetch = vi.fn().mockResolvedValue(
+      Response.json(
+        entry('keep in mind', {
+          examples: [],
+          quotes: [
+            { text: 'Please keep in mind the deadline.', reference: 'Dictionary quotation' },
+          ],
+        }),
+      ),
+    );
+    vi.stubGlobal('fetch', fetch);
+    const response = await createVocabularyApi()(
+      request({ term: 'keep in mind', meaning: 'ghi nhớ', context: '' }),
+    );
+    expect(await response.json()).toMatchObject({ example: 'Please keep in mind the deadline.' });
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+  it.each(['shipment', 'take place'])(
+    'automatically retrieves a missing example for the manually entered term %s',
+    async (term) => {
+      const sentence =
+        term === 'shipment'
+          ? 'The shipment arrived today.'
+          : 'The meeting will take place tomorrow.';
+      const fetch = vi
+        .fn()
+        .mockResolvedValueOnce(Response.json(entry(term, { examples: [] })))
+        .mockResolvedValueOnce(
+          Response.json([
+            {
+              meanings: [
+                { definitions: [{ definition: 'Secondary definition.', example: sentence }] },
+              ],
+            },
+          ]),
+        );
+      vi.stubGlobal('fetch', fetch);
+      const response = await createVocabularyApi()(
+        request({ term, meaning: 'nghĩa đã lưu', context: '' }),
+      );
+      expect(await response.json()).toMatchObject({
+        meaning: 'nghĩa đã lưu',
+        pronunciation: '/ˈʃɪpmənt/',
+        example: sentence,
+        exampleSource: 'Free Dictionary API',
+        sourceUrl: `https://en.wiktionary.org/wiki/${term.replace(/ /g, '_')}`,
+      });
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(term)}`,
+      );
+    },
+  );
+  it('reuses the secondary response for missing IPA and example', async () => {
+    const fetch = vi
+      .fn()
+      .mockResolvedValueOnce(Response.json(entry('shipment', { ipa: '', examples: [] })))
+      .mockResolvedValueOnce(
+        Response.json([
+          {
+            phonetic: '/ˈʃɪpmənt/',
+            meanings: [
+              { definitions: [{ definition: 'Goods.', example: 'The shipment arrived.' }] },
+            ],
+          },
+        ]),
+      );
+    vi.stubGlobal('fetch', fetch);
+    expect(await (await createVocabularyApi()(request())).json()).toMatchObject({
+      pronunciation: '/ˈʃɪpmənt/',
+      pronunciationSource: 'Free Dictionary API',
+      example: 'The shipment arrived.',
+      exampleSource: 'Free Dictionary API',
+    });
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+  it.each([404, 503])(
+    'preserves primary details when example fallback returns %s',
+    async (status) => {
+      vi.stubGlobal(
+        'fetch',
+        vi
+          .fn()
+          .mockResolvedValueOnce(Response.json(entry('shipment', { examples: [] })))
+          .mockResolvedValueOnce(new Response(null, { status })),
+      );
+      const response = await createVocabularyApi()(request());
+      expect(response.status).toBe(200);
+      expect(await response.json()).toMatchObject({
+        meaning: 'lô hàng',
+        pronunciation: '/ˈʃɪpmənt/',
+        example: '',
+      });
+    },
+  );
   it('looks up a Vietnamese translation when the dictionary lacks one', async () => {
     const fetch = vi
       .fn()

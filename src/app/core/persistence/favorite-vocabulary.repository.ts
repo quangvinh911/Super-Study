@@ -1,6 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { DBSchema, openDB } from 'idb';
 import { CertificateContext } from '../../certificates/certificate-context';
+import { AuthService } from '../auth/auth.service';
+import { AccountLearningClient } from '../auth/account-learning.client';
 
 export interface FavoriteVocabulary {
   readonly term: string;
@@ -15,6 +17,9 @@ export interface FavoriteVocabulary {
   readonly meaningLanguage?: 'vi' | 'en';
   readonly pronunciationKind?: 'entry' | 'word-by-word';
   readonly pronunciationSource?: string;
+  readonly exampleSource?: string;
+  readonly exampleSourceUrl?: string;
+  readonly exampleAuthor?: string;
   readonly translationSource?: string;
 }
 
@@ -30,6 +35,8 @@ export function vocabularyKey(term: string): string {
 export class FavoriteVocabularyRepository {
   readonly revision = signal(0);
   private readonly certificate = inject(CertificateContext);
+  private readonly auth = inject(AuthService);
+  private readonly account = inject(AccountLearningClient);
 
   private open() {
     return openDB<VocabularyDatabase>(`certificate-vocabulary:${this.certificate.id}`, 1, {
@@ -40,6 +47,8 @@ export class FavoriteVocabularyRepository {
   }
 
   async list(): Promise<FavoriteVocabulary[]> {
+    if (this.auth.user())
+      return this.account.parseWords(await this.account.call(this.certificate.id, 'listWords'));
     const database = await this.open();
     try {
       return await database.getAll('words');
@@ -61,6 +70,11 @@ export class FavoriteVocabularyRepository {
     ) {
       throw new Error('Vocabulary fields must not be empty.');
     }
+    if (this.auth.user()) {
+      await this.account.call(this.certificate.id, 'saveWord', [entry]);
+      this.revision.update((value) => value + 1);
+      return;
+    }
     const database = await this.open();
     try {
       await database.put(
@@ -78,6 +92,9 @@ export class FavoriteVocabularyRepository {
           ...(entry.meaningLanguage ? { meaningLanguage: entry.meaningLanguage } : {}),
           ...(entry.pronunciationKind ? { pronunciationKind: entry.pronunciationKind } : {}),
           ...(entry.pronunciationSource ? { pronunciationSource: entry.pronunciationSource } : {}),
+          ...(entry.exampleSource ? { exampleSource: entry.exampleSource } : {}),
+          ...(entry.exampleSourceUrl ? { exampleSourceUrl: entry.exampleSourceUrl } : {}),
+          ...(entry.exampleAuthor ? { exampleAuthor: entry.exampleAuthor } : {}),
           ...(entry.translationSource ? { translationSource: entry.translationSource } : {}),
         },
         vocabularyKey(entry.term),
@@ -89,6 +106,11 @@ export class FavoriteVocabularyRepository {
   }
 
   async remove(term: string): Promise<void> {
+    if (this.auth.user()) {
+      await this.account.call(this.certificate.id, 'removeWord', [term]);
+      this.revision.update((value) => value + 1);
+      return;
+    }
     const database = await this.open();
     try {
       await database.delete('words', vocabularyKey(term));
@@ -102,6 +124,15 @@ export class FavoriteVocabularyRepository {
     entry: FavoriteVocabulary,
     expected: FavoriteVocabulary,
   ): Promise<boolean> {
+    if (this.auth.user()) {
+      const result = await this.account.call(this.certificate.id, 'updateWordEnrichment', [
+        entry,
+        expected,
+      ]);
+      if (typeof result !== 'boolean') throw new Error('Invalid vocabulary response');
+      if (result) this.revision.update((value) => value + 1);
+      return result;
+    }
     const database = await this.open();
     try {
       const transaction = database.transaction('words', 'readwrite');

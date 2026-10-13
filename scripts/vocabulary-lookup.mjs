@@ -33,9 +33,9 @@ function senses(entries) {
   return result;
 }
 function example(sense) {
-  return Array.isArray(sense.examples)
-    ? (sense.examples.map((value) => text(value, 500)).find(Boolean) ?? '')
-    : '';
+  const examples = Array.isArray(sense.examples) ? sense.examples : [];
+  const quotes = Array.isArray(sense.quotes) ? sense.quotes.map((quote) => quote?.text) : [];
+  return [...examples, ...quotes].map((value) => text(value, 500)).find(Boolean) ?? '';
 }
 async function dictionary(term, signal, cache) {
   const key = term.toLowerCase();
@@ -54,23 +54,39 @@ async function dictionary(term, signal, cache) {
   }
   return value;
 }
-async function translateTerm(term, signal) {
+async function translateTerm(term, signal, cache) {
+  const key = `translation:${term.toLowerCase()}`;
+  const cached = cache?.get(key);
+  if (cached && Date.now() - cached.at < 3600000) return cached.value;
   const url = new URL('https://api.mymemory.translated.net/get');
   url.searchParams.set('q', term);
   url.searchParams.set('langpair', 'en|vi');
-  const response = await fetch(url, { signal });
+  const timeout = AbortSignal.timeout(6000);
+  const response = await fetch(url, {
+    signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
+  });
   if (!response.ok) throw new Error(`Translation HTTP ${response.status}`);
   const value = await response.json();
   if (Number(value?.responseStatus) !== 200 || value.quotaFinished)
-    throw new Error('Translation unavailable');
+    throw new Error(
+      `Translation unavailable: status ${value?.responseStatus}, quota exhausted ${!!value?.quotaFinished}`,
+    );
   const translated = text(value.responseData?.translatedText, 2000);
   if (!translated || translated.toLowerCase() === term.toLowerCase())
     throw new Error('Translation not found');
+  if (cache) {
+    if (cache.size >= 200) cache.delete(cache.keys().next().value);
+    cache.set(key, { at: Date.now(), value: translated });
+  }
   return translated;
 }
-async function lookupPronunciation(term, entries, signal) {
+async function lookupPronunciation(term, entries, signal, secondaryEntries) {
   const ipa = pronunciation(entries);
   if (ipa) return { ipa, source: '' };
+  if (secondaryEntries !== undefined) {
+    const secondaryIpa = pronunciation(secondaryEntries);
+    return { ipa: secondaryIpa, source: secondaryIpa ? 'Free Dictionary API' : '' };
+  }
   try {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(term.toLowerCase())}`,
@@ -96,9 +112,10 @@ async function lookupPronunciation(term, entries, signal) {
   return { ipa: '', source: '' };
 }
 async function secondaryDictionary(term, signal) {
+  const timeout = AbortSignal.timeout(5000);
   const response = await fetch(
     `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(term.toLowerCase())}`,
-    { signal },
+    { signal: signal ? AbortSignal.any([signal, timeout]) : timeout },
   );
   if (response.status === 404) return [];
   if (!response.ok) throw new Error(`Secondary dictionary HTTP ${response.status}`);
@@ -118,9 +135,62 @@ async function secondaryDictionary(term, signal) {
     ),
   }));
 }
+async function sentenceExample(term, signal, cache) {
+  const key = `sentence:${term.toLowerCase()}`;
+  const cached = cache?.get(key);
+  if (cached && Date.now() - cached.at < 3600000) return cached.value;
+  const url = new URL('https://api.tatoeba.org/v1/sentences');
+  url.searchParams.set('lang', 'eng');
+  url.searchParams.set('q', `"${term}"`);
+  url.searchParams.set('sort', 'relevance');
+  url.searchParams.set('limit', '20');
+  url.searchParams.set('word_count', '4-20');
+  url.searchParams.set('is_unapproved', 'no');
+  url.searchParams.set('is_orphan', 'no');
+  url.searchParams.set('license', 'CC BY 2.0 FR');
+  const timeout = AbortSignal.timeout(6000);
+  const response = await fetch(url, {
+    signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
+  });
+  if (!response.ok) throw new Error(`Sentence search HTTP ${response.status}`);
+  const value = await response.json();
+  if (!Array.isArray(value?.data)) throw new Error('Invalid sentence search response');
+  const escapedTerm = term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const termPattern = new RegExp(`(^|[^a-z])${escapedTerm}($|[^a-z])`);
+  for (const candidate of value.data.slice(0, 20)) {
+    const sentence = text(candidate?.text, 500);
+    const author = text(candidate?.owner, 100);
+    const normalizedSentence = sentence.toLowerCase().replace(/\s+/g, ' ');
+    if (
+      candidate?.lang !== 'eng' ||
+      candidate?.is_unapproved !== false ||
+      candidate?.license !== 'CC BY 2.0 FR' ||
+      !Number.isSafeInteger(candidate?.id) ||
+      candidate.id <= 0 ||
+      !author ||
+      sentence.split(/\s+/).length < 4 ||
+      !/[.!?]["'”’)]*$/.test(sentence) ||
+      !termPattern.test(normalizedSentence)
+    )
+      continue;
+    const result = {
+      example: sentence,
+      exampleSource: 'Tatoeba',
+      exampleSourceUrl: `https://tatoeba.org/en/sentences/show/${candidate.id}`,
+      exampleAuthor: author,
+    };
+    if (cache) {
+      if (cache.size >= 200) cache.delete(cache.keys().next().value);
+      cache.set(key, { at: Date.now(), value: result });
+    }
+    return result;
+  }
+  return null;
+}
 export async function lookupVocabulary(input, { signal, cache } = {}) {
   const term = input.term.trim().replace(/\s+/g, ' ');
   let entries = [];
+  let secondaryEntries;
   let primaryError;
   let secondary = false;
   try {
@@ -130,13 +200,31 @@ export async function lookupVocabulary(input, { signal, cache } = {}) {
     primaryError = error;
   }
   if (!senses(entries).length) {
-    entries = await secondaryDictionary(term, signal);
+    secondaryEntries = await secondaryDictionary(term, signal);
+    entries = secondaryEntries;
     secondary = true;
     if (!senses(entries).length && primaryError) throw primaryError;
   }
   const availableSenses = senses(entries);
-  const sense = availableSenses.find((item) => example(item)) ?? availableSenses[0];
+  // Keep the primary sense instead of switching to a slang meaning just to obtain an example.
+  const sense = availableSenses[0];
   if (!sense) return null;
+  let sentence = example(sense);
+  let exampleSource = '';
+  if (!sentence && !secondary) {
+    try {
+      secondaryEntries = await secondaryDictionary(term, signal);
+      const secondarySense = senses(secondaryEntries)[0];
+      sentence = secondarySense ? example(secondarySense) : '';
+      if (sentence) exampleSource = 'Free Dictionary API';
+    } catch (error) {
+      // Keep the primary definition and IPA when only example lookup fails.
+      console.warn(
+        'Example lookup incomplete',
+        error instanceof Error ? error.message : 'Unknown dictionary error',
+      );
+    }
+  }
   const vietnamese = Array.isArray(sense.translations)
     ? sense.translations
         .filter((translation) => translation?.language?.code === 'vi')
@@ -147,25 +235,28 @@ export async function lookupVocabulary(input, { signal, cache } = {}) {
   let meaning = text(input.meaning, 2000) || text(vietnamese, 2000);
   let meaningLanguage = 'vi';
   let translationSource = '';
-  const pronunciationResult = await lookupPronunciation(term, entries, signal);
-  let ipa = pronunciationResult.ipa;
-  let pronunciationSource = secondary ? 'Free Dictionary API' : pronunciationResult.source;
-  let pronunciationKind = 'entry';
-  const components = term.split(' ');
   const enrichment = [];
   if (!meaning)
     enrichment.push(
       (async () => {
         try {
-          meaning = await translateTerm(term, signal);
+          meaning = await translateTerm(term, signal, cache);
           translationSource = 'MyMemory';
-        } catch {
-          // Preserve a real English definition, labeled clearly, when translation is unavailable.
+        } catch (error) {
+          console.warn(
+            'Translation lookup incomplete',
+            error instanceof Error ? error.message : 'Unknown translation error',
+          );
           meaning = text(sense.definition, 2000);
           meaningLanguage = 'en';
         }
       })(),
     );
+  const pronunciationResult = await lookupPronunciation(term, entries, signal, secondaryEntries);
+  let ipa = pronunciationResult.ipa;
+  let pronunciationSource = secondary ? 'Free Dictionary API' : pronunciationResult.source;
+  let pronunciationKind = 'entry';
+  const components = term.split(' ');
   if (!ipa && components.length > 1 && components.length <= 8)
     enrichment.push(
       (async () => {
@@ -191,7 +282,6 @@ export async function lookupVocabulary(input, { signal, cache } = {}) {
       })(),
     );
   await Promise.all(enrichment);
-  const sentence = example(sense);
   const context = text(input.context);
   const contextualExample =
     /[.!?]$/.test(context) &&
@@ -199,11 +289,24 @@ export async function lookupVocabulary(input, { signal, cache } = {}) {
     context.toLowerCase().includes(term.toLowerCase())
       ? context
       : '';
+  let corpusExample;
+  if (!sentence && !contextualExample) {
+    try {
+      corpusExample = await sentenceExample(term, signal, cache);
+    } catch (error) {
+      console.warn(
+        'Sentence search incomplete',
+        error instanceof Error ? error.message : 'Unknown sentence search error',
+      );
+    }
+  }
   return {
     meaning,
     englishMeaning: text(sense.definition, 2000),
     pronunciation: ipa,
     example: sentence || contextualExample,
+    ...(exampleSource ? { exampleSource } : {}),
+    ...(corpusExample ?? {}),
     meaningLanguage,
     pronunciationKind,
     pronunciationSource,

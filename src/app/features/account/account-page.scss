@@ -1,0 +1,38 @@
+.account-page {
+  max-width: 70rem;
+}
+.account-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  margin-block: 1rem;
+}
+.account-form input,
+.account-form select {
+  width: 100%;
+  min-height: 2.75rem;
+}
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.account-table th,
+.account-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.account-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+}
+.account-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}

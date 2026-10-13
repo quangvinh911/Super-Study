@@ -1,5 +1,5 @@
 import 'fake-indexeddb/auto';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { CTFL_EXAM_BLUEPRINT } from '../domain';
 import { Question, Solution } from '../models';
 import { ProgressRepository } from '../persistence';
@@ -62,6 +62,33 @@ function examBank(): { questions: Question[]; solutions: Solution[] } {
 }
 
 describe('QuizSessionStore exam deadline', () => {
+  it('retries the identical submission after a lost response without duplicate history', async () => {
+    const repository = new ProgressRepository(`submission-retry-${crypto.randomUUID()}`);
+    const store = new QuizSessionStore(repository);
+    const bank = examBank();
+    await store.startPractice({
+      bankVersion: 'test',
+      questions: bank.questions,
+      solutions: bank.solutions,
+      config: { seed: 'retry', questionLimit: 1 },
+    });
+    const complete = repository.completeSession.bind(repository);
+    const saved: import('../models').Attempt[] = [];
+    vi.spyOn(repository, 'completeSession').mockImplementation(async (attempt, owner) => {
+      saved.push(attempt);
+      await complete(attempt, owner);
+      if (saved.length === 1) throw new Error('Response lost');
+    });
+    await expect(store.submit()).rejects.toThrow('Response lost');
+    expect(store.lastAttempt()).toBeNull();
+    expect(store.persistenceError()).toBeTruthy();
+    const attempt = await store.retryPersistence();
+    expect(saved[1]).toEqual(saved[0]);
+    expect(store.lastAttempt()).toEqual(attempt);
+    expect(await repository.listAttempts()).toHaveLength(1);
+    store.ngOnDestroy();
+    repository.close();
+  });
   it('warns at ten minutes and atomically auto-submits at the absolute deadline', async () => {
     const repository = new ProgressRepository(
       `ctfl-timer-${Date.now()}-${Math.random().toString(36).slice(2)}`,

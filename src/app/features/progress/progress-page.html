@@ -1,11 +1,11 @@
 <div class="page progress-page">
   <header class="page-header progress-header">
     <div>
-      <p class="eyebrow">Dữ liệu trên thiết bị</p>
+      <p class="eyebrow">{{ auth.user() ? 'Dữ liệu tài khoản' : 'Dữ liệu trên thiết bị' }}</p>
       <h1>Tiến độ học tập {{ certificate.name }}</h1>
       <p>
-        Lịch sử, điểm yếu và bookmark được lưu riêng cho {{ certificate.name }} trong trình duyệt
-        này.
+        Lịch sử, điểm yếu và bookmark được lưu riêng cho {{ certificate.name }}
+        {{ auth.user() ? 'trong tài khoản đang đăng nhập.' : 'trong trình duyệt này.' }}
       </p>
     </div>
     <div class="cluster">

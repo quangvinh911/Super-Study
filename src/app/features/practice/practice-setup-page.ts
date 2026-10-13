@@ -13,6 +13,7 @@ import {
 import { QuestionBankService } from '../../core/data';
 import { ProgressRepository } from '../../core/persistence';
 import { QuizSessionStore } from '../../core/state';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-practice-setup-page',
@@ -22,6 +23,7 @@ import { QuizSessionStore } from '../../core/state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PracticeSetupPage implements OnInit {
+  protected readonly auth = inject(AuthService);
   protected readonly certificate = inject(CertificateContext);
   private readonly bankService = inject(QuestionBankService);
   private readonly repository = inject(ProgressRepository);

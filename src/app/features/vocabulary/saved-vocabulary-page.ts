@@ -87,12 +87,36 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
               <small>Nghĩa tiếng Anh · Chưa tìm được bản dịch tiếng Việt.</small>
             }
             <blockquote lang="en">{{ word.example || 'Chưa tìm thấy câu ví dụ' }}</blockquote>
+            @if (word.exampleSource === 'Free Dictionary API') {
+              <small
+                >Câu ví dụ:
+                <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer"
+                  >Free Dictionary API</a
+                ></small
+              >
+            }
+            @if (word.exampleSource === 'Tatoeba') {
+              <small>
+                Câu ví dụ:
+                <a [href]="word.exampleSourceUrl" target="_blank" rel="noopener noreferrer"
+                  >Tatoeba</a
+                >
+                · {{ word.exampleAuthor }} ·
+                <a
+                  href="https://creativecommons.org/licenses/by/2.0/fr/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >CC BY 2.0 FR</a
+                >
+              </small>
+            }
             @if (
               word.enrichment === 'pending' ||
               word.enrichment === 'failed' ||
               word.enrichment === 'partial' ||
               !word.pronunciation ||
-              !word.meaning
+              !word.meaning ||
+              !word.example
             ) {
               <p>
                 {{

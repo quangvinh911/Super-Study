@@ -40,7 +40,7 @@
 
 .site-header {
   position: sticky;
-  z-index: 50;
+  z-index: 70;
   inset-block-start: 0;
   color: var(--color-paper);
   background: var(--color-ink);
@@ -201,7 +201,7 @@
   display: none;
   position: fixed;
   z-index: 60;
-  top: 4.5rem;
+  top: calc(4.5rem + 1px);
   bottom: 0;
   left: 0;
   width: min(19rem, calc(100vw - 3rem));
@@ -220,8 +220,7 @@
 .sidebar-scrim {
   position: fixed;
   z-index: 55;
-  inset: 4.5rem 0 0;
-  width: 100%;
+  inset: calc(4.5rem + 1px) 0 0;
   height: auto;
   background: rgb(8 28 39 / 48%);
   border: 0;
@@ -369,8 +368,9 @@
     font-size: var(--text-sm);
   }
 
-  .header-row {
-    gap: 0.6rem;
+  .header-row,
+  .header-actions {
+    gap: 0.4rem;
   }
 }
 

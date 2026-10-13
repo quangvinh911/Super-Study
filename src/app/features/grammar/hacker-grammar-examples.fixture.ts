@@ -3,7 +3,7 @@ import { GRAMMAR_LESSONS } from './grammar-lessons';
 /** Synthetic examples for tests; production content is loaded from the private Hacker pack. */
 export function hackerGrammarFixture() {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     rightsStatus: 'privateUserProvided',
     groups: GRAMMAR_LESSONS.flatMap((lesson) =>
       lesson.rules.map((rule, ruleIndex) => ({
@@ -15,6 +15,17 @@ export function hackerGrammarFixture() {
           english: `The team reviews report ${index + 1}.`,
           highlight: 'reviews',
           explanation: 'Động từ theo sau chủ ngữ.',
+          quiz: {
+            instruction: 'Chọn động từ chia theo chủ ngữ.',
+            prompt: `The team _____ report ${index + 1}.`,
+            options: [
+              { id: 'A', text: 'review' },
+              { id: 'B', text: 'reviews' },
+              { id: 'C', text: 'reviewing' },
+              { id: 'D', text: 'to reviews' },
+            ],
+            correctOptionId: 'B',
+          },
           source: {
             questionId: `hacker-3-test-01-q${101 + index}`,
             quote:

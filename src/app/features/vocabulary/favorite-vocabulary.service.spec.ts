@@ -63,6 +63,110 @@ describe('Saving vocabulary without a dialog', () => {
       parseVocabularyDetails({ ...details, englishMeaning: 'x'.repeat(2001) }),
     ).toThrow();
   });
+  it('recovers Vietnamese meaning in the browser when hosted translation fails and caches it', async () => {
+    const fallback = {
+      ...details,
+      meaning: 'plural of fee',
+      englishMeaning: 'plural of fee',
+      meaningLanguage: 'en',
+    };
+    const fetch = vi
+      .fn()
+      .mockImplementation(async (url) =>
+        String(url).startsWith('/api/')
+          ? Response.json(fallback)
+          : Response.json({
+              responseStatus: 200,
+              quotaFinished: false,
+              responseData: { translatedText: 'phí' },
+            }),
+      );
+    vi.stubGlobal('fetch', fetch);
+    const { service, repository } = setup();
+    for (let index = 0; index < 2; index++) {
+      expect(
+        await service.lookup(
+          { term: 'fees', example: 'Private study context.' },
+          new AbortController().signal,
+        ),
+      ).toEqual(
+        expect.objectContaining({
+          term: 'fees',
+          meaning: 'phí',
+          englishMeaning: 'plural of fee',
+          meaningLanguage: 'vi',
+          translationSource: 'MyMemory',
+        }),
+      );
+    }
+    const providerCalls = fetch.mock.calls.filter(([url]) => !String(url).startsWith('/api/'));
+    expect(providerCalls).toHaveLength(1);
+    const url = new URL(providerCalls[0][0]);
+    expect(url.searchParams.get('q')).toBe('fees');
+    expect(url.searchParams.get('langpair')).toBe('en|vi');
+    expect([...url.searchParams.keys()]).toEqual(['q', 'langpair']);
+    expect(providerCalls[0][1]).toEqual(
+      expect.objectContaining({ credentials: 'omit', referrerPolicy: 'no-referrer' }),
+    );
+    expect(repository.save).not.toHaveBeenCalled();
+  });
+  it.each([
+    {
+      responseStatus: 403,
+      quotaFinished: true,
+      responseData: { translatedText: 'DAILY LIMIT EXCEEDED' },
+    },
+    { responseStatus: 200, quotaFinished: false, responseData: { translatedText: 'fees' } },
+    { responseStatus: 200, quotaFinished: false, responseData: { translatedText: 123 } },
+  ])('preserves English fallback when browser translation is invalid: %j', async (translation) => {
+    const fallback = {
+      ...details,
+      meaning: 'plural of fee',
+      englishMeaning: 'plural of fee',
+      meaningLanguage: 'en',
+    };
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(Response.json(fallback))
+        .mockResolvedValueOnce(Response.json(translation)),
+    );
+    const { service, repository } = setup();
+    const word = await service.lookup({ term: 'fees' }, new AbortController().signal);
+    expect(word).toEqual(
+      expect.objectContaining({
+        meaning: fallback.meaning,
+        meaningLanguage: 'en',
+        enrichment: 'partial',
+      }),
+    );
+    expect(repository.save).not.toHaveBeenCalled();
+  });
+  it('aborts browser translation when its dictionary popup is closed', async () => {
+    const fallback = { ...details, meaning: 'plural of fee', meaningLanguage: 'en' };
+    const fetch = vi
+      .fn()
+      .mockResolvedValueOnce(Response.json(fallback))
+      .mockImplementationOnce(
+        (_url, options: RequestInit) =>
+          new Promise<never>((_resolve, reject) => {
+            if (!options.signal) throw new Error('Missing cancellation signal');
+            options.signal.addEventListener(
+              'abort',
+              () => reject(new DOMException('Closed', 'AbortError')),
+              { once: true },
+            );
+          }),
+      );
+    vi.stubGlobal('fetch', fetch);
+    const { service } = setup();
+    const controller = new AbortController();
+    const pending = service.lookup({ term: 'fees' }, controller.signal);
+    await vi.waitFor(() => expect(fetch).toHaveBeenCalledTimes(2));
+    controller.abort();
+    await expect(pending).rejects.toThrow('Closed');
+  });
   it('saves previewed data without another dictionary request', async () => {
     const fetch = vi.fn();
     vi.stubGlobal('fetch', fetch);
@@ -125,6 +229,47 @@ describe('Saving vocabulary without a dialog', () => {
       expect.anything(),
     );
     expect(service.notice()?.error).toBe(true);
+  });
+  it('automatically saves the fetched example and its source for a manually added term', async () => {
+    const fetch = vi
+      .fn()
+      .mockResolvedValue(Response.json({ ...details, exampleSource: 'Free Dictionary API' }));
+    vi.stubGlobal('fetch', fetch);
+    const { repository, service } = setup();
+    await service.save({ term: 'shipment' });
+    expect(fetch).toHaveBeenCalledWith(
+      '/api/vocabulary/enrich',
+      expect.objectContaining({
+        body: JSON.stringify({ term: 'shipment', meaning: '', context: '' }),
+      }),
+    );
+    expect(repository.updateEnrichment).toHaveBeenCalledWith(
+      expect.objectContaining({
+        ...details,
+        exampleSource: 'Free Dictionary API',
+        enrichment: 'complete',
+      }),
+      expect.objectContaining({ example: '', enrichment: 'pending' }),
+    );
+  });
+  it('persists corpus examples with their source and author', async () => {
+    const corpus = {
+      ...details,
+      exampleSource: 'Tatoeba',
+      exampleSourceUrl: 'https://tatoeba.org/en/sentences/show/3657396',
+      exampleAuthor: 'kerbear407',
+    };
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(corpus)));
+    const { repository, service } = setup();
+    await service.save({ term: 'daisy' });
+    expect(repository.updateEnrichment).toHaveBeenCalledWith(
+      expect.objectContaining(corpus),
+      expect.anything(),
+    );
+    expect(() =>
+      parseVocabularyDetails({ ...corpus, exampleSourceUrl: 'https://evil.example' }),
+    ).toThrow();
+    expect(() => parseVocabularyDetails({ ...corpus, exampleAuthor: undefined })).toThrow();
   });
   it.each([
     [404, { error: 'word_not_found' }, 'chính tả'],

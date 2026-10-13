@@ -3,11 +3,37 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { App } from './app';
 import { UiPreferencesRepository } from './core/persistence';
+import { LoginDialogService } from './core/auth/login-dialog.service';
 
 @Component({ template: '' })
 class EmptyPage {}
 
 describe('App', () => {
+  it('opens login over the current page and closes with Escape without navigating', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const root: HTMLElement = fixture.nativeElement;
+    const dialog = root.querySelector('dialog');
+    if (!dialog) throw new Error('Login dialog is missing');
+    // jsdom does not implement the browser top layer or native focus trapping.
+    dialog.showModal = () => dialog.setAttribute('open', '');
+    dialog.close = () => dialog.removeAttribute('open');
+    const button = Array.from(root.querySelectorAll('button')).find(
+      (item) => item.textContent?.trim() === 'Đăng nhập',
+    );
+    if (!button) throw new Error('Login button is missing');
+    const router = TestBed.inject(Router);
+    const originalUrl = router.url;
+    button.click();
+    await fixture.whenStable();
+    expect(dialog.open).toBe(true);
+    expect(router.url).toBe(originalUrl);
+    dialog.dispatchEvent(new Event('cancel', { cancelable: true }));
+    await fixture.whenStable();
+    expect(dialog.open).toBe(false);
+    expect(TestBed.inject(LoginDialogService).visible()).toBe(false);
+    expect(router.url).toBe(originalUrl);
+  });
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],

@@ -64,12 +64,15 @@ describe('Favorite vocabulary', () => {
       meaning: 'A load of goods.',
       englishMeaning: 'A load of goods being transported.',
       pronunciation: '/ˈʃɪpmənt/',
-      example: '',
+      example: 'The shipment arrived.',
       enrichment: 'partial' as const,
       source: 'dictionary' as const,
       sourceUrl: 'https://en.wiktionary.org/wiki/shipment',
       meaningLanguage: 'en' as const,
       pronunciationKind: 'entry' as const,
+      exampleSource: 'Tatoeba',
+      exampleSourceUrl: 'https://tatoeba.org/en/sentences/show/3657396',
+      exampleAuthor: 'kerbear407',
     };
     await repo.save(entry);
     expect(await repository(CTFL).list()).toEqual([entry]);

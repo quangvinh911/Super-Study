@@ -59,14 +59,14 @@ describe('TOEIC grammar lessons', () => {
       expect(disclosures).toHaveLength(lesson.rules.length);
       for (const disclosure of disclosures) {
         expect(disclosure.open).toBe(false);
-        expect(disclosure.querySelector('summary')?.textContent).toContain('5 ví dụ');
+        expect(disclosure.querySelector('summary')?.textContent).toContain('5 câu trắc nghiệm');
         expect(disclosure.querySelectorAll('li')).toHaveLength(5);
-        expect(disclosure.querySelectorAll('mark')).toHaveLength(5);
+        expect(disclosure.querySelectorAll('input[type=radio]')).toHaveLength(20);
+        expect(disclosure.querySelectorAll('mark')).toHaveLength(0);
         expect(disclosure.textContent).toContain('Hacker 3 · Test 1 · Part 5');
         expect(disclosure.textContent).toContain('Câu biến đổi');
-        expect(disclosure.querySelector('.grammar-example__original')?.textContent).toContain(
-          'The team reviewed the report.',
-        );
+        expect(disclosure.querySelector('.grammar-example__original')).toBeNull();
+        expect(disclosure.querySelector('.grammar-example__explanation')).toBeNull();
       }
       expect(page.querySelector('.grammar-practice a')?.getAttribute('href')).toBe(
         '/certificates/toeic/practice?part=' + lesson.part,
@@ -77,6 +77,26 @@ describe('TOEIC grammar lessons', () => {
         .map((item) => '/certificates/toeic/grammar/' + item.slug);
       expect(Array.from(neighbors, (link) => link.getAttribute('href'))).toEqual(expected);
     }
+  });
+
+  it('keeps each exercise independent and clears answers when navigating to another lesson', async () => {
+    const { fixture, params, page } = await render();
+    const quizzes = page.querySelectorAll('app-grammar-example-quiz');
+    element<HTMLInputElement>(quizzes[0], 'input[value=B]').click();
+    await fixture.whenStable();
+    element<HTMLButtonElement>(quizzes[0], '.quiz-actions button').click();
+    await fixture.whenStable();
+    expect(quizzes[0].querySelector('[role=status]')?.textContent).toContain('Chính xác!');
+    expect(quizzes[1].querySelector('[role=status]')).toBeNull();
+    expect(element<HTMLButtonElement>(quizzes[1], '.quiz-actions button').disabled).toBe(true);
+    params.next(convertToParamMap({ slug: 'cau-bi-dong' }));
+    await fixture.whenStable();
+    expect(page.querySelector('.quiz-feedback')).toBeNull();
+    expect(page.querySelector('app-grammar-example-quiz input[type=radio]:checked')).toBeNull();
+    params.next(convertToParamMap({ slug: 'cac-thi' }));
+    await fixture.whenStable();
+    expect(page.querySelector('.quiz-feedback')).toBeNull();
+    expect(page.querySelector('app-grammar-example-quiz input[type=radio]:checked')).toBeNull();
   });
 
   it('opens each rule independently and resets disclosures and timeline on navigation', async () => {

@@ -132,7 +132,7 @@ describe('ProgressRepository', () => {
     const exported = await repository.exportProgress(new Date('2026-08-29T12:00:00.000Z'));
     expect(exported).toMatchObject({
       format: 'certificate-practice-progress',
-      schemaVersion: 2,
+      schemaVersion: 3,
       certificateId: 'ctfl',
       settings: { 'exam-duration': 75 },
     });

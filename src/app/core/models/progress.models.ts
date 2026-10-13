@@ -61,7 +61,7 @@ export interface UiPreferences {
 
 export interface ProgressExport {
   readonly format: 'ctfl-practice-progress' | 'certificate-practice-progress';
-  readonly schemaVersion: 1 | 2;
+  readonly schemaVersion: 1 | 2 | 3;
   readonly certificateId?: string;
   readonly exportedAt: string;
   readonly activeSessions: readonly SessionSnapshot[];

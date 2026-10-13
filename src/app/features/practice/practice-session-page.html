@@ -8,6 +8,14 @@
       <p>{{ error() }}</p>
       <a class="button" [routerLink]="certificate.link('practice')">Tạo phiên mới</a>
     </section>
+  } @else if (store.isComplete()) {
+    <section class="surface" role="status">
+      <h1>Đang lưu kết quả…</h1>
+      @if (store.persistenceError()) {
+        <p role="alert">Chưa lưu được kết quả. Hãy giữ trang mở và kiểm tra kết nối.</p>
+        <button class="button" type="button" (click)="retrySave()">Thử lưu lại</button>
+      }
+    </section>
   } @else if (store.currentQuestion(); as item) {
     <header class="quiz-toolbar" aria-label="Tiến độ phiên luyện tập">
       <div>
@@ -225,6 +233,7 @@
     @if (store.persistenceError()) {
       <p class="persistence-warning" role="status">
         Thay đổi gần nhất chưa được lưu. Hãy giữ trang này mở và thử thao tác lại.
+        <button type="button" (click)="retrySave()">Thử lưu lại</button>
       </p>
     }
   }

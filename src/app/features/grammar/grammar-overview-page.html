@@ -7,6 +7,10 @@
         Khám phá câu bằng các khối màu, quan sát cách câu thay đổi và học qua ví dụ từ đề Hacker.
       </p>
       <div class="grammar-hero__actions">
+        <span>Đã học {{ learningProgress.completed().length }} / {{ lessonCount }} bài</span>
+        @if (learningProgress.lastOpened(); as slug) {
+          <a [routerLink]="['/certificates/toeic/grammar', slug]">Tiếp tục bài gần nhất</a>
+        }
         <a class="button" href="/certificates/toeic/grammar#grammar-library"
           >Khám phá {{ lessonCount }} bài học <span aria-hidden="true">↓</span></a
         >
@@ -26,6 +30,9 @@
       }
     </div>
   </header>
+  @if (learningProgress.error()) {
+    <p class="error" role="alert">{{ learningProgress.error() }}</p>
+  }
 
   <section
     id="grammar-library"

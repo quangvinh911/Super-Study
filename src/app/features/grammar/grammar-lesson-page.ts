@@ -15,16 +15,26 @@ import { GrammarSyntaxSentence } from './grammar-syntax-sentence';
 import { GrammarTenseTimeline } from './grammar-tense-timeline';
 import { GrammarTransformation } from './grammar-transformation';
 import { PASSIVE_DEMO, REDUCTION_DEMOS, TENSE_EXAMPLES } from './grammar-visual-data';
+import { LessonProgressService } from '../../core/state/lesson-progress.service';
 import { HackerGrammarExamples } from './hacker-grammar-examples';
+import { GrammarExampleQuiz } from './grammar-example-quiz';
 
 @Component({
   selector: 'app-grammar-lesson-page',
-  imports: [RouterLink, GrammarSyntaxSentence, GrammarTenseTimeline, GrammarTransformation],
+  providers: [LessonProgressService],
+  imports: [
+    RouterLink,
+    GrammarSyntaxSentence,
+    GrammarTenseTimeline,
+    GrammarTransformation,
+    GrammarExampleQuiz,
+  ],
   templateUrl: './grammar-lesson-page.html',
   styleUrl: './grammar-lesson-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GrammarLessonPage {
+  protected readonly learningProgress = inject(LessonProgressService);
   protected readonly hackerExamples = inject(HackerGrammarExamples);
   private readonly route = inject(ActivatedRoute);
   private readonly injector = inject(Injector);
@@ -45,6 +55,8 @@ export class GrammarLessonPage {
     void this.hackerExamples.load();
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       this.lesson.set(GRAMMAR_LEARNING_ORDER.find((item) => item.slug === params.get('slug')));
+      const slug = this.lesson()?.slug;
+      if (slug) void this.learningProgress.opened(slug);
       afterNextRender(
         () => {
           const fragment = this.route.snapshot?.fragment;
@@ -71,11 +83,6 @@ export class GrammarLessonPage {
         .groups()
         .find((group) => group.slug === slug && group.ruleLabel === ruleLabel)?.examples ?? []
     );
-  }
-
-  protected sentenceParts(english: string, highlight: string): readonly [string, string] {
-    const start = english.indexOf(highlight);
-    return [english.slice(0, start), english.slice(start + highlight.length)];
   }
 
   protected ruleUseLines(use: string): readonly string[] {

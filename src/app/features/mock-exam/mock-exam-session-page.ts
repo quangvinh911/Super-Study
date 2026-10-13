@@ -172,6 +172,8 @@ export class MockExamSessionPage implements OnInit, OnDestroy {
       if (attempt) {
         await this.router.navigate(this.certificate.link('results', attempt.id));
       }
+    } catch {
+      this.warning.set('Chưa lưu được kết quả. Giữ trang mở và thử lưu lại.');
     } finally {
       this.submitting.set(false);
     }
@@ -179,5 +181,18 @@ export class MockExamSessionPage implements OnInit, OnDestroy {
 
   private restoreFocus(): void {
     globalThis.setTimeout(() => this.questionHeading?.nativeElement.focus(), 0);
+  }
+
+  protected async retrySave(): Promise<void> {
+    if (this.submitting()) return;
+    this.submitting.set(true);
+    try {
+      const attempt = await this.store.retryPersistence();
+      if (attempt) await this.router.navigate(this.certificate.link('results', attempt.id));
+    } catch {
+      this.warning.set('Vẫn chưa lưu được. Kiểm tra kết nối và các tab đang mở.');
+    } finally {
+      this.submitting.set(false);
+    }
   }
 }

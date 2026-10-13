@@ -106,7 +106,10 @@ export class FavoriteVocabularyEditor {
   private readonly repository = inject(FavoriteVocabularyRepository);
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private previousFocus: HTMLElement | null = null;
-  private sourceMetadata: Pick<FavoriteVocabulary, 'sourceUrl' | 'translationSource'> = {};
+  private sourceMetadata: Pick<
+    FavoriteVocabulary,
+    'sourceUrl' | 'translationSource' | 'exampleSource' | 'exampleSourceUrl' | 'exampleAuthor'
+  > = {};
   protected readonly titleId = `favorite-title-${crypto.randomUUID()}`;
   protected term = '';
   protected meaning = '';
@@ -127,6 +130,9 @@ export class FavoriteVocabularyEditor {
     this.sourceMetadata = {
       ...(entry.sourceUrl ? { sourceUrl: entry.sourceUrl } : {}),
       ...(entry.translationSource ? { translationSource: entry.translationSource } : {}),
+      ...(entry.exampleSource ? { exampleSource: entry.exampleSource } : {}),
+      ...(entry.exampleSourceUrl ? { exampleSourceUrl: entry.exampleSourceUrl } : {}),
+      ...(entry.exampleAuthor ? { exampleAuthor: entry.exampleAuthor } : {}),
     };
     this.error.set('');
     this.message.set('');
@@ -140,6 +146,9 @@ export class FavoriteVocabularyEditor {
         this.sourceMetadata = {
           ...(existing.sourceUrl ? { sourceUrl: existing.sourceUrl } : {}),
           ...(existing.translationSource ? { translationSource: existing.translationSource } : {}),
+          ...(existing.exampleSource ? { exampleSource: existing.exampleSource } : {}),
+          ...(existing.exampleSourceUrl ? { exampleSourceUrl: existing.exampleSourceUrl } : {}),
+          ...(existing.exampleAuthor ? { exampleAuthor: existing.exampleAuthor } : {}),
         };
         this.term = existing.term;
         this.meaning = existing.meaning;

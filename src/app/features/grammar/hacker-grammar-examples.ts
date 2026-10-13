@@ -7,6 +7,12 @@ export interface HackerGrammarExample {
   readonly english: string;
   readonly highlight: string;
   readonly explanation: string;
+  readonly quiz: {
+    readonly instruction: string;
+    readonly prompt: string;
+    readonly options: readonly { readonly id: string; readonly text: string }[];
+    readonly correctOptionId: string;
+  };
   readonly source: {
     readonly questionId: string;
     readonly quote: string;
@@ -42,6 +48,7 @@ function isExample(value: unknown): value is HackerGrammarExample {
     typeof value['english'] === 'string' &&
     typeof value['highlight'] === 'string' &&
     value['english'].includes(value['highlight']) &&
+    isQuiz(value['quiz'], value['english'], value['highlight']) &&
     hasText(source['quote']) &&
     hasText(source['answerStatus']) &&
     typeof source['test'] === 'number' &&
@@ -64,10 +71,38 @@ function isExample(value: unknown): value is HackerGrammarExample {
   );
 }
 
+function isQuiz(value: unknown, english: string, highlight: string): boolean {
+  if (
+    !isRecord(value) ||
+    !hasText(value['instruction']) ||
+    !hasText(value['prompt']) ||
+    value['prompt'].split('_____').length !== 2 ||
+    !Array.isArray(value['options']) ||
+    value['options'].length !== 4 ||
+    !value['options'].every(
+      (option: unknown, index: number): option is { id: string; text: string } =>
+        isRecord(option) && option['id'] === 'ABCD'[index] && hasText(option['text']),
+    )
+  )
+    return false;
+  const options = value['options'];
+  const correct = options.find((option) => option.id === value['correctOptionId']);
+  const blankStart = value['prompt'].indexOf('_____');
+  const highlightStart = english.indexOf(highlight);
+  return (
+    !!correct &&
+    new Set(options.map((option) => option.text.trim().replace(/\s+/gu, ' ').toLowerCase()))
+      .size === 4 &&
+    blankStart >= highlightStart &&
+    blankStart + correct.text.length <= highlightStart + highlight.length &&
+    value['prompt'].replace('_____', correct.text) === english
+  );
+}
+
 export function parseHackerGrammarExamples(value: unknown): readonly HackerGrammarRuleExamples[] {
   if (
     !isRecord(value) ||
-    value['schemaVersion'] !== 1 ||
+    value['schemaVersion'] !== 2 ||
     value['rightsStatus'] !== 'privateUserProvided' ||
     !Array.isArray(value['groups'])
   ) {

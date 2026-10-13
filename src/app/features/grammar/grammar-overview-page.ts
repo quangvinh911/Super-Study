@@ -17,6 +17,7 @@ import {
 } from './grammar-lessons';
 import { GrammarSyntaxSentence } from './grammar-syntax-sentence';
 import { GrammarMindMap } from './grammar-mind-map';
+import { LessonProgressService } from '../../core/state/lesson-progress.service';
 
 function normalizeSearch(value: string): string {
   return value
@@ -29,12 +30,14 @@ function normalizeSearch(value: string): string {
 
 @Component({
   selector: 'app-grammar-overview-page',
+  providers: [LessonProgressService],
   imports: [RouterLink, GrammarSyntaxSentence, GrammarMindMap],
   templateUrl: './grammar-overview-page.html',
   styleUrl: './grammar-overview-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GrammarOverviewPage {
+  protected readonly learningProgress = inject(LessonProgressService);
   private readonly route = inject(ActivatedRoute);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly heading = viewChild<ElementRef<HTMLHeadingElement>>('pageHeading');
@@ -75,6 +78,7 @@ export class GrammarOverviewPage {
   };
 
   constructor() {
+    void this.learningProgress.load();
     afterNextRender(() => {
       const fragment = this.route.snapshot.fragment;
       const target = fragment

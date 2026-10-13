@@ -1,6 +1,10 @@
+import { InvalidProgressExportError, validateProgressExport } from '../domain/progress-validation';
+export { InvalidProgressExportError } from '../domain/progress-validation';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { CERTIFICATE } from '../../certificates/certificate-context';
 import { CTFL } from '../../certificates/registry';
+import { AuthService } from '../auth/auth.service';
+import { AccountLearningClient } from '../auth/account-learning.client';
 import { DBSchema, IDBPDatabase, openDB } from 'idb';
 import {
   Attempt,
@@ -103,256 +107,6 @@ function isSessionLease(value: unknown): value is SessionLease {
   );
 }
 
-export class InvalidProgressExportError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'InvalidProgressExportError';
-  }
-}
-
-function validDate(value: unknown): boolean {
-  return typeof value === 'string' && Number.isFinite(Date.parse(value));
-}
-
-function nonnegativeInteger(value: unknown): boolean {
-  return typeof value === 'number' && Number.isInteger(value) && value >= 0;
-}
-
-function validScoringPolicy(value: unknown): boolean {
-  return (
-    isRecord(value) &&
-    (value['kind'] === 'raw' ||
-      (value['kind'] === 'threshold' &&
-        typeof value['passPercent'] === 'number' &&
-        value['passPercent'] >= 0 &&
-        value['passPercent'] <= 100))
-  );
-}
-
-function validateSnapshotRecord(
-  record: Record<string, unknown>,
-  kind: 'activeSessions' | 'attempts',
-): void {
-  const fail = (): never => {
-    throw new InvalidProgressExportError('Session or attempt data is malformed.');
-  };
-  if (record['scoringPolicy'] !== undefined && !validScoringPolicy(record['scoringPolicy'])) fail();
-  if (
-    !['practice', 'exam'].includes(String(record['mode'])) ||
-    typeof record['bankVersion'] !== 'string' ||
-    typeof record['seed'] !== 'string' ||
-    !validDate(record['startedAt']) ||
-    !isRecord(record['responses'])
-  )
-    fail();
-  const questions = record['questions'] as Record<string, unknown>[];
-  if (!questions.length) fail();
-  const ids = new Set<string>();
-  for (const item of questions) {
-    const question = item['question'];
-    const solution = item['solution'];
-    if (!isRecord(question) || !isRecord(solution)) fail();
-    const q = question as Record<string, unknown>;
-    const s = solution as Record<string, unknown>;
-    if (
-      typeof q['id'] !== 'string' ||
-      ids.has(q['id']) ||
-      !nonnegativeInteger(q['revision']) ||
-      !Array.isArray(q['stem']) ||
-      !Array.isArray(q['options']) ||
-      !isRecord(q['classification']) ||
-      typeof q['classification']['section'] !== 'string' ||
-      !isRecord(q['interaction']) ||
-      !isRecord(q['provenance']) ||
-      !isRecord(q['verification'])
-    )
-      fail();
-    const id = q['id'] as string;
-    ids.add(id);
-    const optionIds = (q['options'] as unknown[]).map((option) =>
-      isRecord(option) && typeof option['id'] === 'string' && Array.isArray(option['content'])
-        ? option['id']
-        : null,
-    );
-    if (
-      optionIds.length < 2 ||
-      optionIds.includes(null) ||
-      new Set(optionIds).size !== optionIds.length ||
-      s['questionId'] !== id ||
-      !Array.isArray(s['correctOptionIds']) ||
-      !s['correctOptionIds'].length ||
-      !s['correctOptionIds'].every((option) => optionIds.includes(option)) ||
-      !Array.isArray(s['explanation']) ||
-      !Array.isArray(s['references'])
-    )
-      fail();
-    const response = (record['responses'] as Record<string, unknown>)[id];
-    if (
-      !isRecord(response) ||
-      response['questionId'] !== id ||
-      !Array.isArray(response['selectedOptionIds']) ||
-      !response['selectedOptionIds'].every((option) => optionIds.includes(option)) ||
-      typeof response['checked'] !== 'boolean' ||
-      typeof response['flagged'] !== 'boolean'
-    )
-      fail();
-  }
-  if (kind === 'activeSessions') {
-    if (
-      record['schemaVersion'] !== 1 ||
-      !['active', 'completed', 'expired'].includes(String(record['status'])) ||
-      !validDate(record['createdAt']) ||
-      !validDate(record['updatedAt']) ||
-      !nonnegativeInteger(record['currentIndex']) ||
-      Number(record['currentIndex']) >= questions.length
-    )
-      fail();
-    if (
-      record['mode'] === 'exam' &&
-      (!validDate(record['deadlineAt']) ||
-        !nonnegativeInteger(record['durationMinutes']) ||
-        Number(record['durationMinutes']) === 0)
-    )
-      fail();
-  } else {
-    const result = record['result'];
-    if (
-      typeof record['sessionId'] !== 'string' ||
-      !validDate(record['completedAt']) ||
-      !nonnegativeInteger(record['durationSeconds']) ||
-      !['submitted', 'expired'].includes(String(record['completionReason'])) ||
-      !isRecord(result)
-    )
-      fail();
-    const r = result as Record<string, unknown>;
-    if (
-      !nonnegativeInteger(r['score']) ||
-      r['total'] !== questions.length ||
-      !nonnegativeInteger(r['answered']) ||
-      Number(r['answered']) > questions.length ||
-      Number(r['score']) > questions.length ||
-      typeof r['percent'] !== 'number' ||
-      !Number.isFinite(r['percent']) ||
-      r['percent'] < 0 ||
-      r['percent'] > 100 ||
-      !(r['passed'] === null || typeof r['passed'] === 'boolean') ||
-      !(r['passMark'] === null || nonnegativeInteger(r['passMark']))
-    )
-      fail();
-    for (const key of ['byChapter', 'byKLevel', 'bySection']) {
-      if (key === 'bySection' && r[key] === undefined) continue;
-      if (
-        !Array.isArray(r[key]) ||
-        !(r[key] as unknown[]).every(
-          (row) =>
-            isRecord(row) &&
-            ['string', 'number'].includes(typeof row['key']) &&
-            ['total', 'correct', 'answered'].every((field) => nonnegativeInteger(row[field])) &&
-            typeof row['percent'] === 'number' &&
-            Number.isFinite(row['percent']),
-        )
-      )
-        fail();
-    }
-  }
-  const exam = record['examDefinition'];
-  if (record['mode'] === 'exam' && (record['certificateId'] ?? 'ctfl') !== 'ctfl' && !exam) fail();
-  if (exam !== undefined) {
-    if (
-      !isRecord(exam) ||
-      !Array.isArray(exam['durations']) ||
-      !exam['durations'].every((value) => typeof value === 'number' && value > 0) ||
-      !nonnegativeInteger(exam['questionCount']) ||
-      typeof exam['label'] !== 'string' ||
-      !isRecord(exam['scoring'])
-    )
-      fail();
-    const definition = exam as Record<string, unknown>;
-    const scoring = definition['scoring'] as Record<string, unknown>;
-    if (!validScoringPolicy(scoring)) fail();
-    if (
-      definition['sections'] !== undefined &&
-      (!Array.isArray(definition['sections']) ||
-        !definition['sections'].every(
-          (section) =>
-            isRecord(section) &&
-            typeof section['label'] === 'string' &&
-            typeof section['durationMinutes'] === 'number' &&
-            section['durationMinutes'] > 0 &&
-            Array.isArray(section['parts']) &&
-            section['parts'].every(
-              (part) =>
-                isRecord(part) &&
-                typeof part['id'] === 'string' &&
-                nonnegativeInteger(part['count']),
-            ),
-        ))
-    )
-      fail();
-  }
-}
-
-function validateProgressExport(value: unknown, certificateId: string): ProgressExport {
-  if (!isRecord(value)) {
-    throw new InvalidProgressExportError('Progress import must be a JSON object.');
-  }
-  const legacy = value['format'] === 'ctfl-practice-progress' && value['schemaVersion'] === 1;
-  if (!legacy && (value['format'] !== EXPORT_FORMAT || value['schemaVersion'] !== 2)) {
-    throw new InvalidProgressExportError('Unsupported progress export format or version.');
-  }
-  if ((legacy ? 'ctfl' : value['certificateId']) !== certificateId) {
-    throw new InvalidProgressExportError('This export belongs to a different certificate.');
-  }
-  for (const field of ['activeSessions', 'attempts', 'questionStats', 'bookmarks'] as const) {
-    if (!Array.isArray(value[field])) {
-      throw new InvalidProgressExportError(`Progress field "${field}" must be an array.`);
-    }
-    for (const record of value[field] as unknown[]) {
-      if (!isRecord(record)) throw new InvalidProgressExportError('Invalid progress record.');
-      if (field === 'activeSessions' || field === 'attempts') {
-        if (
-          (record['certificateId'] ?? 'ctfl') !== certificateId ||
-          typeof record['id'] !== 'string' ||
-          !Array.isArray(record['questions'])
-        ) {
-          throw new InvalidProgressExportError(
-            'Session belongs to a different certificate or is malformed.',
-          );
-        }
-        for (const item of record['questions']) {
-          if (
-            !isRecord(item) ||
-            !isRecord(item['question']) ||
-            (item['question']['certificateId'] ?? 'ctfl') !== certificateId
-          ) {
-            throw new InvalidProgressExportError('Question belongs to a different certificate.');
-          }
-        }
-        validateSnapshotRecord(record, field);
-      } else if (
-        typeof record['questionId'] !== 'string' ||
-        !Number.isInteger(record['revision'])
-      ) {
-        throw new InvalidProgressExportError('Invalid question progress record.');
-      } else if (
-        field === 'questionStats' &&
-        (!['seenCount', 'correctCount', 'incorrectCount', 'currentCorrectStreak'].every((key) =>
-          nonnegativeInteger(record[key]),
-        ) ||
-          !validDate(record['updatedAt']))
-      ) {
-        throw new InvalidProgressExportError('Invalid question counters.');
-      } else if (field === 'bookmarks' && !validDate(record['createdAt'])) {
-        throw new InvalidProgressExportError('Invalid bookmark timestamp.');
-      }
-    }
-  }
-  if (!isRecord(value['settings']) || typeof value['exportedAt'] !== 'string') {
-    throw new InvalidProgressExportError('Progress settings or export timestamp is invalid.');
-  }
-  return clone(value) as unknown as ProgressExport;
-}
-
 @Injectable({ providedIn: 'root' })
 export class ProgressRepository {
   readonly certificateId: string;
@@ -361,6 +115,10 @@ export class ProgressRepository {
   constructor(
     @Inject(PROGRESS_DATABASE_NAME) private readonly databaseName: string,
     @Optional() @Inject(CERTIFICATE) certificate: CertificateDefinition = CTFL,
+    @Optional() @Inject(AuthService) private readonly auth: AuthService | null = null,
+    @Optional()
+    @Inject(AccountLearningClient)
+    private readonly accountClient: AccountLearningClient | null = null,
   ) {
     this.certificateId = (certificate ?? CTFL).id;
   }
@@ -392,38 +150,66 @@ export class ProgressRepository {
     return this.databasePromise;
   }
 
-  async saveActiveSession(snapshot: SessionSnapshot): Promise<void> {
+  async saveActiveSession(snapshot: SessionSnapshot, ownerId?: string): Promise<void> {
     this.assertCertificate(snapshot);
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'saveActiveSession', [snapshot, ownerId ?? null]);
+      return;
+    }
     const database = await this.database();
     await database.put('activeSessions', clone(snapshot));
   }
 
   async getActiveSession(sessionId: string): Promise<SessionSnapshot | undefined> {
+    if (this.remote()) {
+      const value = await this.account.call(this.certificateId, 'getActiveSession', [sessionId]);
+      return value === null
+        ? undefined
+        : this.account.parseProgressField(this.certificateId, 'activeSessions', [value])[0];
+    }
     const database = await this.database();
     const snapshot = await database.get('activeSessions', sessionId);
     return snapshot ? clone(snapshot) : undefined;
   }
 
   async listActiveSessions(): Promise<SessionSnapshot[]> {
+    if (this.remote())
+      return this.account.parseProgressField(
+        this.certificateId,
+        'activeSessions',
+        await this.account.call(this.certificateId, 'listActiveSessions'),
+      );
     const database = await this.database();
     const sessions = await database.getAllFromIndex('activeSessions', 'by-updated-at');
     return sessions.reverse().map(clone);
   }
 
   async deleteActiveSession(sessionId: string): Promise<void> {
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'deleteActiveSession', [sessionId]);
+      return;
+    }
     const database = await this.database();
     await database.delete('activeSessions', sessionId);
   }
 
   async saveAttempt(attempt: Attempt): Promise<void> {
     this.assertCertificate(attempt);
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'saveAttempt', [attempt]);
+      return;
+    }
     const database = await this.database();
     await database.put('attempts', clone(attempt));
   }
 
   /** Atomically replaces an active session with its immutable attempt record. */
-  async completeSession(attempt: Attempt): Promise<void> {
+  async completeSession(attempt: Attempt, ownerId?: string): Promise<void> {
     this.assertCertificate(attempt);
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'completeSession', [attempt, ownerId ?? null]);
+      return;
+    }
     const database = await this.database();
     const transaction = database.transaction(
       ['activeSessions', 'attempts', 'questionStats'],
@@ -456,24 +242,51 @@ export class ProgressRepository {
   }
 
   async getAttempt(attemptId: string): Promise<Attempt | undefined> {
+    if (this.remote()) {
+      const value = await this.account.call(this.certificateId, 'getAttempt', [attemptId]);
+      return value === null
+        ? undefined
+        : this.account.parseProgressField(this.certificateId, 'attempts', [value])[0];
+    }
     const database = await this.database();
     const attempt = await database.get('attempts', attemptId);
     return attempt ? clone(attempt) : undefined;
   }
 
   async listAttempts(): Promise<Attempt[]> {
+    if (this.remote())
+      return this.account.parseProgressField(
+        this.certificateId,
+        'attempts',
+        await this.account.call(this.certificateId, 'listAttempts'),
+      );
     const database = await this.database();
     const attempts = await database.getAllFromIndex('attempts', 'by-completed-at');
     return attempts.reverse().map(clone);
   }
 
   async getQuestionStat(questionId: string, revision: number): Promise<QuestionStat | undefined> {
+    if (this.remote()) {
+      const value = await this.account.call(this.certificateId, 'getQuestionStat', [
+        questionId,
+        revision,
+      ]);
+      return value === null
+        ? undefined
+        : this.account.parseProgressField(this.certificateId, 'questionStats', [value])[0];
+    }
     const database = await this.database();
     const stat = await database.get('questionStats', [questionId, revision]);
     return stat ? clone(stat) : undefined;
   }
 
   async listQuestionStats(): Promise<QuestionStat[]> {
+    if (this.remote())
+      return this.account.parseProgressField(
+        this.certificateId,
+        'questionStats',
+        await this.account.call(this.certificateId, 'listQuestionStats'),
+      );
     const database = await this.database();
     return (await database.getAll('questionStats')).map(clone);
   }
@@ -494,33 +307,66 @@ export class ProgressRepository {
     revision: number,
     correct: boolean,
     answeredAt = new Date().toISOString(),
+    sessionId?: string,
   ): Promise<QuestionStat> {
+    if (this.remote())
+      return this.account.parseProgressField(this.certificateId, 'questionStats', [
+        await this.account.call(this.certificateId, 'recordQuestionResult', [
+          questionId,
+          revision,
+          correct,
+          answeredAt,
+          sessionId ?? null,
+        ]),
+      ])[0];
     const database = await this.database();
-    const transaction = database.transaction('questionStats', 'readwrite');
+    const transaction = database.transaction(['questionStats', 'settings'], 'readwrite');
     const store = transaction.objectStore('questionStats');
     const previous = await store.get([questionId, revision]);
+    const marker = sessionId ? `practice-result:${sessionId}:${questionId}` : null;
+    const settings = transaction.objectStore('settings');
+    if (marker && (await settings.get(marker)) && previous) {
+      await transaction.done;
+      return clone(previous);
+    }
     const stat = nextQuestionStat(previous, questionId, revision, correct, answeredAt);
     await store.put(stat);
+    if (marker) await settings.put({ key: marker, value: true });
     await transaction.done;
     return clone(stat);
   }
 
   async setBookmark(bookmark: Bookmark): Promise<void> {
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'setBookmark', [bookmark]);
+      return;
+    }
     const database = await this.database();
     await database.put('bookmarks', clone(bookmark));
   }
 
   async removeBookmark(questionId: string): Promise<void> {
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'removeBookmark', [questionId]);
+      return;
+    }
     const database = await this.database();
     await database.delete('bookmarks', questionId);
   }
 
   async isBookmarked(questionId: string): Promise<boolean> {
+    if (this.remote()) return this.remoteBoolean('isBookmarked', [questionId]);
     const database = await this.database();
     return (await database.count('bookmarks', questionId)) > 0;
   }
 
   async listBookmarks(): Promise<Bookmark[]> {
+    if (this.remote())
+      return this.account.parseProgressField(
+        this.certificateId,
+        'bookmarks',
+        await this.account.call(this.certificateId, 'listBookmarks'),
+      );
     const database = await this.database();
     return (await database.getAllFromIndex('bookmarks', 'by-created-at')).reverse().map(clone);
   }
@@ -530,6 +376,7 @@ export class ProgressRepository {
     revision: number,
     now = new Date().toISOString(),
   ): Promise<boolean> {
+    if (this.remote()) return this.remoteBoolean('toggleBookmark', [questionId, revision, now]);
     const database = await this.database();
     const transaction = database.transaction('bookmarks', 'readwrite');
     const existing = await transaction.store.get(questionId);
@@ -543,6 +390,10 @@ export class ProgressRepository {
   }
 
   async getSetting<T>(key: string): Promise<T | undefined> {
+    if (this.remote()) {
+      const value = await this.account.call(this.certificateId, 'getSetting', [key]);
+      return value === null ? undefined : (value as T);
+    }
     const database = await this.database();
     const record = await database.get('settings', key);
     return record ? clone(record.value as T) : undefined;
@@ -551,6 +402,10 @@ export class ProgressRepository {
   async setSetting<T>(key: string, value: T): Promise<void> {
     if (key.startsWith(SESSION_LOCK_PREFIX)) {
       throw new Error('Session lock keys are reserved.');
+    }
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'setSetting', [key, value]);
+      return;
     }
     const database = await this.database();
     await database.put('settings', { key, value: clone(value) });
@@ -562,6 +417,8 @@ export class ProgressRepository {
     ttlMs = 15_000,
     now = Date.now(),
   ): Promise<boolean> {
+    if (this.remote())
+      return this.remoteBoolean('acquireSessionLease', [sessionId, ownerId, ttlMs]);
     const database = await this.database();
     const transaction = database.transaction('settings', 'readwrite');
     const key = `${SESSION_LOCK_PREFIX}${sessionId}`;
@@ -581,6 +438,7 @@ export class ProgressRepository {
     ttlMs = 15_000,
     now = Date.now(),
   ): Promise<boolean> {
+    if (this.remote()) return this.remoteBoolean('renewSessionLease', [sessionId, ownerId, ttlMs]);
     const database = await this.database();
     const transaction = database.transaction('settings', 'readwrite');
     const key = `${SESSION_LOCK_PREFIX}${sessionId}`;
@@ -595,6 +453,10 @@ export class ProgressRepository {
   }
 
   async releaseSessionLease(sessionId: string, ownerId: string): Promise<void> {
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'releaseSessionLease', [sessionId, ownerId]);
+      return;
+    }
     const database = await this.database();
     const transaction = database.transaction('settings', 'readwrite');
     const key = `${SESSION_LOCK_PREFIX}${sessionId}`;
@@ -606,6 +468,11 @@ export class ProgressRepository {
   }
 
   async exportProgress(now = new Date()): Promise<ProgressExport> {
+    if (this.remote())
+      return validateProgressExport(
+        await this.account.call(this.certificateId, 'exportProgress'),
+        this.certificateId,
+      );
     const database = await this.database();
     const transaction = database.transaction(STORE_NAMES, 'readonly');
     const [activeSessions, attempts, questionStats, bookmarks, settingRecords] = await Promise.all([
@@ -618,12 +485,16 @@ export class ProgressRepository {
     await transaction.done;
     const settings = Object.fromEntries(
       settingRecords
-        .filter((record) => !record.key.startsWith(SESSION_LOCK_PREFIX))
+        .filter(
+          (record) =>
+            !record.key.startsWith(SESSION_LOCK_PREFIX) &&
+            !record.key.startsWith('practice-result:'),
+        )
         .map((record) => [record.key, clone(record.value)]),
     );
     return {
       format: EXPORT_FORMAT,
-      schemaVersion: 2,
+      schemaVersion: 3,
       certificateId: this.certificateId,
       exportedAt: now.toISOString(),
       activeSessions: activeSessions.map(clone),
@@ -639,6 +510,11 @@ export class ProgressRepository {
     mode: 'merge' | 'replace' = 'merge',
   ): Promise<ProgressExport> {
     const progress = validateProgressExport(input, this.certificateId);
+    if (this.remote())
+      return validateProgressExport(
+        await this.account.call(this.certificateId, 'importProgress', [progress, mode]),
+        this.certificateId,
+      );
     const database = await this.database();
     const transaction = database.transaction(STORE_NAMES, 'readwrite');
 
@@ -683,6 +559,10 @@ export class ProgressRepository {
   }
 
   async reset(): Promise<void> {
+    if (this.remote()) {
+      await this.account.call(this.certificateId, 'reset');
+      return;
+    }
     const database = await this.database();
     const transaction = database.transaction(STORE_NAMES, 'readwrite');
     await Promise.all(STORE_NAMES.map((name) => transaction.objectStore(name).clear()));
@@ -692,6 +572,23 @@ export class ProgressRepository {
   close(): void {
     void this.databasePromise?.then((database) => database.close());
     this.databasePromise = undefined;
+  }
+
+  private remote(): boolean {
+    if (this.auth?.user() && !this.accountClient)
+      throw new Error('Account storage is not configured.');
+    return Boolean(this.auth?.user());
+  }
+
+  private get account(): AccountLearningClient {
+    if (!this.accountClient) throw new Error('Account storage is not configured.');
+    return this.accountClient;
+  }
+
+  private async remoteBoolean(action: string, args: readonly unknown[]): Promise<boolean> {
+    const result = await this.account.call(this.certificateId, action, args);
+    if (typeof result !== 'boolean') throw new Error('Invalid learning response');
+    return result;
   }
 
   private assertCertificate(record: { readonly certificateId?: string }): void {
