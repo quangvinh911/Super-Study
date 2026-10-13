@@ -101,7 +101,10 @@ export function createD1Repository(db) {
       try {
         const results = await db.batch([
           prepare(
-            `UPDATE users SET username=?,username_key=?,email=?,role=?,password_hash=?,deleted_at=?,token_version=?,updated_at=? WHERE id=? AND token_version=?`,
+            // Guard the write itself so concurrent demotions cannot remove every Admin.
+            `UPDATE users SET username=?,username_key=?,email=?,role=?,password_hash=?,deleted_at=?,token_version=?,updated_at=? WHERE id=? AND token_version=?
+             AND (role <> 'admin' OR deleted_at IS NOT NULL OR (? = 'admin' AND ? IS NULL)
+                  OR EXISTS(SELECT 1 FROM users AS other WHERE other.id <> users.id AND other.role='admin' AND other.deleted_at IS NULL))`,
             user.username,
             user.usernameKey,
             user.email,
@@ -112,6 +115,8 @@ export function createD1Repository(db) {
             user.updatedAt,
             user.id,
             expectedVersion,
+            user.role,
+            user.deletedAt,
           ),
           prepare(
             `UPDATE auth_sessions SET revoked_at=? WHERE user_id=? AND EXISTS(SELECT 1 FROM users WHERE id=? AND token_version=?)`,
@@ -121,7 +126,18 @@ export function createD1Repository(db) {
             user.tokenVersion,
           ),
         ]);
-        requireCondition(results[0].meta.changes === 1, 'concurrent_user_change', 409);
+        if (results[0].meta.changes !== 1) {
+          const current = await prepare('SELECT * FROM users WHERE id=?', user.id).first();
+          const removesAdmin = user.role !== 'admin' || user.deletedAt !== null;
+          if (
+            current?.token_version === expectedVersion &&
+            current.role === 'admin' &&
+            current.deleted_at === null &&
+            removesAdmin
+          )
+            throw new ApiError(409, 'last_admin');
+          throw new ApiError(409, 'concurrent_user_change');
+        }
       } catch (error) {
         if (String(error).includes('last_admin')) throw new ApiError(409, 'last_admin');
         if (String(error).includes('UNIQUE constraint')) throw new ApiError(409, 'username_exists');

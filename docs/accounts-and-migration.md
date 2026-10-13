@@ -46,7 +46,7 @@ App accounts do not bypass the existing ChatGPT Sites audience/access gate. This
 
 ## Migration and rollback plan
 
-The Node HTTP adapter and PostgreSQL implementation are **phase 2**; this release does not claim they are available. Implement the existing ports against PostgreSQL, preserving UUIDs, normalized unique usernames, scrypt hashes, token versions, certificate scopes and generation semantics. Replace SQLite triggers with equivalent transactional PostgreSQL rules for the last Admin. Supply snapshot storage retaining the same object keys and checksums. A Node reverse-proxy deployment can reuse the API modules and frontend without changing learning behavior.
+The Node HTTP adapter and PostgreSQL implementation are **phase 2**; this release does not claim they are available. Implement the existing ports against PostgreSQL, preserving UUIDs, normalized unique usernames, scrypt hashes, token versions, certificate scopes and generation semantics. Preserve the atomic last-Admin condition in the PostgreSQL update statement. Supply snapshot storage retaining the same object keys and checksums. A Node reverse-proxy deployment can reuse the API modules and frontend without changing learning behavior.
 
 Before cutover:
 
@@ -62,3 +62,5 @@ The maintenance export endpoints require both an active Admin JWT and `X-Account
 ## Verification
 
 `pnpm run test:ci` covers Angular/domain/persistence/auth behavior. `pnpm run test:accounts` exercises the actual bundled Worker with Miniflare D1/R2, including refresh rotation, privilege checks, account/certificate isolation, immutable history and revoked accounts. `pnpm run build:sites` verifies the production frontend and bundled Worker. No new E2E tests are introduced.
+
+The first production deployment rejected migration 0001 before applying it because the hosting SQL parser split trigger bodies. The repaired migration uses a single statement; the repository UPDATE now guards the last active Admin atomically, including concurrent demotions. Migration 0003 removes triggers from local databases that had applied the original local-only migration.
