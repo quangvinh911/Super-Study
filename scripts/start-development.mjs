@@ -1,8 +1,8 @@
 import { spawn } from 'node:child_process';
 
-// Run the dictionary endpoint alongside Angular so local saves can be enriched.
+// Run the Worker/D1 API alongside Angular, matching the production account runtime.
 const children = [
-  spawn(process.execPath, ['scripts/serve-vocabulary-api.mjs'], { stdio: 'inherit' }),
+  spawn(process.execPath, ['scripts/serve-account-api.mjs'], { stdio: 'inherit' }),
   spawn(
     process.execPath,
     ['node_modules/@angular/cli/bin/ng.js', 'serve', ...process.argv.slice(2)],

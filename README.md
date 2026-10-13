@@ -1,6 +1,6 @@
 # Certificate Practice
 
-Ứng dụng Angular 22 để luyện tập và thi thử nhiều chứng chỉ. Hiện có CTFL v4.0.1 và không gian TOEIC Listening & Reading đang chờ bộ đề. Giao diện tiếng Việt, câu hỏi tiếng Anh; tiến độ của mỗi chứng chỉ lưu riêng trong IndexedDB, không tài khoản/backend/analytics.
+Ứng dụng Angular 22 để luyện tập và thi thử nhiều chứng chỉ. Giao diện tiếng Việt, câu hỏi tiếng Anh. Khách luyện tập tối đa 10 câu mỗi phiên và lưu dữ liệu riêng trong IndexedDB. Tài khoản lưu tiến độ, từ vựng, đánh dấu và lịch sử trên API; đăng nhập bắt buộc khi làm thi thử. Admin quản lý tài khoản và mật khẩu.
 
 Trang chủ chọn chứng chỉ; mọi luồng dùng chung tại `/certificates/<id>/practice`, `/mock-exam`, `/progress` và `/methodology`. Link CTFL cũ và dữ liệu đã lưu vẫn hoạt động. TOEIC có bộ lọc Part, audio/bài đọc chung, cấu trúc 200 câu với 45/75 phút và kết quả raw theo Part; chưa mở bài làm khi ngân hàng rỗng.
 
@@ -20,6 +20,8 @@ pnpm start
 ```
 
 Mở `http://localhost:4200`.
+
+Xem [tài khoản, cấu hình Sites và chuyển hosting](docs/accounts-and-migration.md) để tạo Admin đầu tiên, cấu hình secrets và chuẩn bị chuyển sang Node API/PostgreSQL.
 
 ## Nội dung
 

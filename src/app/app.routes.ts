@@ -6,6 +6,7 @@ import { PROGRESS_DATABASE_NAME, ProgressRepository } from './core/persistence/p
 import { QuizSessionStore } from './core/state';
 import { FavoriteVocabularyRepository } from './core/persistence/favorite-vocabulary.repository';
 import { FavoriteVocabularyService } from './features/vocabulary/favorite-vocabulary.service';
+import { accountGuard, adminGuard, loginDialogGuard } from './core/auth/auth.guards';
 
 const learningRoutes: Routes = [
   {
@@ -39,6 +40,7 @@ const learningRoutes: Routes = [
   },
   {
     path: 'mock-exam/:sessionId',
+    canActivate: [accountGuard],
     title: 'Bài thi thử - CTFL Practice',
     data: { layout: 'focus' },
     loadComponent: () =>
@@ -109,6 +111,18 @@ const toeicKnowledgeRoutes: Routes = [
 ];
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    title: 'Đăng nhập · Certificate Practice',
+    canActivate: [loginDialogGuard],
+    children: [],
+  },
+  {
+    path: 'admin/users',
+    title: 'Quản lý user · Certificate Practice',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./features/account/users-page').then((m) => m.UsersPage),
+  },
   {
     path: '',
     pathMatch: 'full',

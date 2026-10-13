@@ -100,7 +100,13 @@ export class PracticeSessionPage implements OnInit {
   }
 
   protected async check(): Promise<void> {
-    const result = await this.store.checkCurrent();
+    let result: boolean | null;
+    try {
+      result = await this.store.checkCurrent();
+    } catch {
+      this.validationMessage.set('Chưa lưu được câu trả lời. Giữ trang mở và thử lưu lại.');
+      return;
+    }
     if (result === null) {
       const required = this.store.currentQuestion()?.question.interaction.requiredSelections ?? 1;
       this.validationMessage.set(
@@ -118,7 +124,11 @@ export class PracticeSessionPage implements OnInit {
     if (!question) {
       return;
     }
-    this.bookmarked.set(await this.repository.toggleBookmark(question.id, question.revision));
+    try {
+      this.bookmarked.set(await this.repository.toggleBookmark(question.id, question.revision));
+    } catch {
+      this.validationMessage.set('Không thể lưu đánh dấu. Hãy thử lại.');
+    }
   }
 
   protected goTo(index: number): void {
@@ -158,6 +168,8 @@ export class PracticeSessionPage implements OnInit {
       if (attempt) {
         await this.router.navigate(this.certificate.link('results', attempt.id));
       }
+    } catch {
+      this.validationMessage.set('Chưa lưu được kết quả. Giữ trang mở và thử lưu lại.');
     } finally {
       this.submitting.set(false);
     }
@@ -165,7 +177,21 @@ export class PracticeSessionPage implements OnInit {
 
   private async refreshBookmark(): Promise<void> {
     const id = this.store.currentQuestion()?.question.id;
-    this.bookmarked.set(id ? await this.repository.isBookmarked(id) : false);
+    try {
+      this.bookmarked.set(id ? await this.repository.isBookmarked(id) : false);
+    } catch {
+      this.validationMessage.set('Không thể tải đánh dấu. Hãy kiểm tra kết nối.');
+    }
+  }
+
+  protected async retrySave(): Promise<void> {
+    try {
+      const attempt = await this.store.retryPersistence();
+      this.validationMessage.set('');
+      if (attempt) await this.router.navigate(this.certificate.link('results', attempt.id));
+    } catch {
+      this.validationMessage.set('Vẫn chưa lưu được. Hãy kiểm tra kết nối và thử lại.');
+    }
   }
 
   private restoreFocus(): void {

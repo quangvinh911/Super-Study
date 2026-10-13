@@ -12,6 +12,46 @@ function normalize(text) {
   return text.replace(/\s+/gu, ' ').trim();
 }
 
+function compilePractice(example) {
+  const practice = example.practice;
+  if (
+    !practice ||
+    typeof practice.instruction !== 'string' ||
+    !practice.instruction.trim() ||
+    typeof practice.blank !== 'string' ||
+    !practice.blank.trim() ||
+    !Array.isArray(practice.options) ||
+    practice.options.length !== 4 ||
+    practice.options.some(
+      (option, index) =>
+        !option ||
+        option.id !== 'ABCD'[index] ||
+        typeof option.text !== 'string' ||
+        !option.text.trim(),
+    ) ||
+    new Set(practice.options.map((option) => normalize(option.text).toLowerCase())).size !== 4 ||
+    practice.options.find((option) => option.id === practice.correctOptionId)?.text !==
+      practice.blank
+  ) {
+    throw new Error(`${example.id}: invalid grammar practice options or answer.`);
+  }
+  const escaped = practice.blank.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const matches = [
+    ...example.highlight.matchAll(new RegExp(`(?<![a-zA-Z])${escaped}(?![a-zA-Z])`, 'g')),
+  ];
+  if (matches.length !== 1 || example.english.includes('_____')) {
+    throw new Error(`${example.id}: grammar practice blank must target one highlighted phrase.`);
+  }
+  const start = example.english.indexOf(example.highlight) + matches[0].index;
+  const prompt = `${example.english.slice(0, start)}_____${example.english.slice(start + practice.blank.length)}`;
+  return {
+    instruction: practice.instruction,
+    prompt,
+    options: practice.options,
+    correctOptionId: practice.correctOptionId,
+  };
+}
+
 export function compileGrammarExamples(source, bank) {
   if (
     source.schemaVersion !== 1 ||
@@ -110,7 +150,12 @@ export function compileGrammarExamples(source, bank) {
         throw new Error(`${example.id}: quote does not match the Hacker source.`);
       }
       return {
-        ...example,
+        id: example.id,
+        kind: example.kind,
+        english: example.english,
+        highlight: example.highlight,
+        explanation: example.explanation,
+        quiz: compilePractice(example),
         source: {
           ...example.source,
           test: Number(question.formId.slice(-2)),
@@ -123,7 +168,8 @@ export function compileGrammarExamples(source, bank) {
     });
     return { slug: group.slug, ruleLabel: group.ruleLabel, examples };
   });
-  return { ...source, groups };
+  // The exercises are authored from reviewed sentences; they do not change the bank's printed keys.
+  return { ...source, schemaVersion: 2, groups };
 }
 
 export async function buildToeicGrammar(rootDir, { write = true } = {}) {

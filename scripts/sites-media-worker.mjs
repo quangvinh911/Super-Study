@@ -1,4 +1,5 @@
 import { createVocabularyApi } from './vocabulary-api.mjs';
+import { accountRequest } from '../server/sites-accounts.mjs';
 
 const vocabularyApi = createVocabularyApi();
 
@@ -232,7 +233,12 @@ export default {
       if (url.pathname === '/api/vocabulary/enrich')
         return secure(await vocabularyApi(request, env));
       if (url.pathname === adminPath || url.pathname === singleUploadPath)
-        return secure(await administerMedia(request, env));
+        return secure(
+          env.ACCOUNT_MAINTENANCE === 'true'
+            ? json({ error: 'account_maintenance' }, 503)
+            : await administerMedia(request, env),
+        );
+      if (url.pathname.startsWith('/api/')) return secure(await accountRequest(request, env));
       const key = decodeURIComponent(url.pathname.slice(1));
       if (mediaType(key)) return secure(await serveMedia(request, env, key));
       if (MEDIA_ROOTS.includes(key.split('/')[0]))

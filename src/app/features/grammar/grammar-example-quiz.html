@@ -1,0 +1,58 @@
+<p class="grammar-example__source">
+  Hacker 3 · Test {{ example().source.test }} · Part {{ example().source.part.slice(-1) }} · Câu
+  {{ example().source.order }}
+  <span>{{ example().kind === 'adapted' ? 'Câu biến đổi' : 'Từ câu trích' }}</span>
+</p>
+<fieldset [disabled]="checked()">
+  <legend>Câu {{ number() }}. {{ example().quiz.instruction }}</legend>
+  <p class="grammar-example__sentence" lang="en">{{ example().quiz.prompt }}</p>
+  <div class="quiz-options">
+    @for (option of example().quiz.options; track option.id) {
+      <label class="quiz-option" [class.quiz-option--selected]="selectedOptionId() === option.id">
+        <input
+          #optionInput
+          type="radio"
+          [name]="example().id"
+          [value]="option.id"
+          [checked]="selectedOptionId() === option.id"
+          (change)="choose(option.id)"
+        />
+        <span class="quiz-option__letter">{{ option.id }}.</span>
+        <span lang="en">{{ option.text }}</span>
+      </label>
+    }
+  </div>
+</fieldset>
+<div class="quiz-actions">
+  <button
+    class="button button--secondary"
+    type="button"
+    [disabled]="!checked() && !selectedOptionId()"
+    (click)="checked() ? retry() : check()"
+  >
+    {{ checked() ? 'Làm lại' : 'Kiểm tra' }}
+  </button>
+</div>
+@if (checked()) {
+  <div class="quiz-feedback" [class.quiz-feedback--incorrect]="!isCorrect()" role="status">
+    <p>
+      <strong>{{ isCorrect() ? 'Chính xác!' : 'Chưa chính xác.' }}</strong>
+    </p>
+    <p>
+      Đáp án đúng:
+      <strong
+        >{{ correctOption()?.id }}. <span lang="en">{{ correctOption()?.text }}</span></strong
+      >
+    </p>
+    <p class="grammar-example__sentence" lang="en">
+      {{ sentenceParts()[0] }}<mark>{{ example().highlight }}</mark
+      >{{ sentenceParts()[1] }}
+    </p>
+    <p class="grammar-example__explanation">{{ example().explanation }}</p>
+    @if (example().kind === 'adapted') {
+      <p class="grammar-example__original">
+        <strong>Câu Hacker gốc:</strong> <span lang="en">{{ example().source.quote }}</span>
+      </p>
+    }
+  </div>
+}

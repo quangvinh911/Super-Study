@@ -117,13 +117,21 @@
           <label for="question-limit">Số câu</label>
           <select id="question-limit" name="questionLimit" [(ngModel)]="questionLimit">
             <option [ngValue]="10">10 câu</option>
-            <option [ngValue]="20">20 câu</option>
-            <option [ngValue]="40">40 câu</option>
-            <option [ngValue]="80">80 câu</option>
-            @if (isPdfSource()) {
-              <option [ngValue]="278">Toàn bộ 278 câu</option>
+            @if (auth.user()) {
+              <option [ngValue]="20">20 câu</option>
+              <option [ngValue]="40">40 câu</option>
+              <option [ngValue]="80">80 câu</option>
+              @if (isPdfSource()) {
+                <option [ngValue]="278">Toàn bộ 278 câu</option>
+              }
             }
           </select>
+          @if (!auth.user()) {
+            <p>
+              Khách luyện tối đa 10 câu mỗi phiên. <a routerLink="/login">Đăng nhập</a> để chọn
+              nhiều câu và lưu theo tài khoản.
+            </p>
+          }
         </div>
       </div>
 

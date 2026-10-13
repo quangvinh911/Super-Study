@@ -9,6 +9,22 @@
       </div>
       <h1 tabindex="-1">{{ current.title }}</h1>
       <p class="grammar-lesson-summary">{{ current.summary }}</p>
+      <button
+        class="button button--secondary"
+        type="button"
+        [disabled]="learningProgress.busy()"
+        [attr.aria-pressed]="learningProgress.completed().includes(current.slug)"
+        (click)="learningProgress.toggle(current.slug)"
+      >
+        {{
+          learningProgress.completed().includes(current.slug)
+            ? 'Đã học · Bỏ đánh dấu'
+            : 'Đánh dấu đã học'
+        }}
+      </button>
+      @if (learningProgress.error()) {
+        <p class="error" role="alert">{{ learningProgress.error() }}</p>
+      }
     </header>
 
     <article class="grammar-article">
@@ -65,39 +81,20 @@
                 }
               </div>
               <details class="grammar-rule-examples">
-                <summary>Xem 5 ví dụ từ đề Hacker</summary>
+                <summary>Luyện 5 câu trắc nghiệm từ ví dụ Hacker</summary>
                 @if (hackerExamples.loading()) {
                   <p role="status">Đang tải ví dụ…</p>
                 } @else if (hackerExamples.error()) {
                   <p>Ví dụ chưa có sẵn. Bạn có thể thử tải lại ở đầu phần quy tắc.</p>
                 } @else {
                   <ol class="grammar-hacker-examples">
-                    @for (example of examplesForRule(current.slug, rule.label); track example.id) {
+                    @for (
+                      example of examplesForRule(current.slug, rule.label);
+                      track example.id;
+                      let exampleIndex = $index
+                    ) {
                       <li class="grammar-example">
-                        <p class="grammar-example__source">
-                          Hacker 3 · Test {{ example.source.test }} · Part
-                          {{ example.source.part.slice(-1) }} · Câu {{ example.source.order }}
-                          <span>{{
-                            example.kind === 'adapted' ? 'Câu biến đổi' : 'Câu trích từ đề'
-                          }}</span>
-                        </p>
-                        @let parts = sentenceParts(example.english, example.highlight);
-                        <p class="grammar-example__sentence" lang="en">
-                          {{ parts[0] }}<mark>{{ example.highlight }}</mark
-                          >{{ parts[1] }}
-                        </p>
-                        <p class="grammar-example__explanation">{{ example.explanation }}</p>
-                        @if (example.kind === 'adapted') {
-                          <p class="grammar-example__original">
-                            <strong>Câu Hacker gốc:</strong>
-                            <span lang="en">{{ example.source.quote }}</span>
-                          </p>
-                        }
-                        @if (example.source.completedFromAnswerKey) {
-                          <p class="grammar-example__note">
-                            Câu gốc đã điền chỗ trống theo đáp án in trong đề.
-                          </p>
-                        }
+                        <app-grammar-example-quiz [example]="example" [number]="exampleIndex + 1" />
                       </li>
                     }
                   </ol>

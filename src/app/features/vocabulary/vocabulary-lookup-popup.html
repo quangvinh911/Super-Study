@@ -118,6 +118,23 @@
           @if (entry.pronunciationSource) {
             · Phiên âm: {{ entry.pronunciationSource }}
           }
+          @if (entry.exampleSource === 'Free Dictionary API') {
+            · Câu ví dụ:
+            <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer"
+              >Free Dictionary API</a
+            >
+          }
+          @if (entry.exampleSource === 'Tatoeba') {
+            · Câu ví dụ:
+            <a [href]="entry.exampleSourceUrl" target="_blank" rel="noopener noreferrer">Tatoeba</a>
+            · {{ entry.exampleAuthor }} ·
+            <a
+              href="https://creativecommons.org/licenses/by/2.0/fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >CC BY 2.0 FR</a
+            >
+          }
         </p>
       }
     }

@@ -144,34 +144,6 @@
   margin-top: 0;
   border-top: 0;
 }
-.grammar-example__source,
-.grammar-example__note,
-.grammar-example__original {
-  color: var(--grammar-muted);
-  font-size: 0.85rem;
-}
-.grammar-example__source span {
-  display: inline-block;
-  margin-left: 0.4rem;
-  padding: 0.15rem 0.45rem;
-  border: 1px solid var(--grammar-line);
-  border-radius: 0.35rem;
-  font-weight: 750;
-}
-.grammar-example__sentence {
-  font-size: 1.05rem;
-  line-height: 1.8;
-}
-.grammar-example__sentence mark {
-  padding: 0.12rem 0.2rem;
-  border-radius: 0.2rem;
-  color: var(--grammar-accent-dark);
-  background: var(--grammar-wash);
-  font-weight: 800;
-}
-.grammar-example__explanation {
-  margin-top: 0.7rem;
-}
 .grammar-examples-error {
   margin-bottom: 1rem;
 }

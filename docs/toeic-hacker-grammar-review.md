@@ -72,3 +72,21 @@ Dữ liệu biên soạn riêng tư nằm trong `content/toeic-hacker-grammar-re
 khi xuất `public/data/toeic/grammar/hacker-3.json`. Hai tệp JSON được bỏ qua
 bởi Git. Câu biến đổi chỉ phục vụ luyện cấu trúc, không được gán là nguyên văn
 đề thi. Các sơ đồ trực quan ở đầu bài vẫn dùng câu biên soạn riêng.
+
+## Bài luyện trắc nghiệm theo từng quy tắc (2026-10-13)
+
+420 ví dụ được chuyển thành bài điền một chỗ trống với bốn lựa chọn A–D.
+Chỗ trống nằm trong cụm ngữ pháp đã được đối chiếu; đáp án đúng khôi phục
+chính xác câu ví dụ. Câu hướng dẫn làm rõ loại cấu trúc hoặc ý nghĩa cần chọn,
+đặc biệt với giới từ, liên từ, trạng từ và câu điều kiện.
+
+Các lựa chọn và đáp án bài luyện được biên soạn riêng trong trường `practice`
+của dữ liệu riêng tư. Đây là bài luyện từ ví dụ, không khẳng định là nguyên văn
+câu trắc nghiệm trong sách. Đáp án in và trạng thái xác minh của ngân hàng
+Hacker không thay đổi. Compiler kiểm tra bốn lựa chọn khác nhau, mã đáp án,
+vị trí chỗ trống và nguồn câu trước khi xuất schema v2.
+
+Người học chọn đáp án rồi bấm “Kiểm tra” để xem kết quả, câu hoàn chỉnh và
+giải thích; “Làm lại” xóa lựa chọn và lời giải. Câu gốc của ví dụ biến đổi chỉ
+hiện sau khi kiểm tra để tránh lộ đáp án. Kết quả không ghi vào điểm thi hoặc
+tự đánh dấu bài học đã hoàn thành.

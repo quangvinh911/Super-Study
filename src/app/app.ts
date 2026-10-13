@@ -12,14 +12,30 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, tap } from 'rxjs';
 import { CERTIFICATES } from './certificates/registry';
 import { UiPreferencesRepository } from './core/persistence';
+import { AuthService } from './core/auth/auth.service';
+import { LoginDialogService } from './core/auth/login-dialog.service';
+import { LoginDialog } from './features/account/login-dialog';
+import { accountError } from './features/account/account-errors';
 
 @Component({
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, LoginDialog],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
 export class App {
+  protected readonly auth = inject(AuthService);
+  protected readonly loginDialog = inject(LoginDialogService);
+  protected readonly accountMessage = signal('');
+  protected async logout(): Promise<void> {
+    this.accountMessage.set('');
+    try {
+      await this.auth.logout();
+      await this.router.navigate(['/']);
+    } catch (error) {
+      this.accountMessage.set(accountError(error));
+    }
+  }
   private readonly router = inject(Router);
   private readonly preferences = inject(UiPreferencesRepository);
   private readonly menuButton = viewChild<ElementRef<HTMLButtonElement>>('menuButton');

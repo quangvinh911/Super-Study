@@ -25,6 +25,17 @@ function fixture() {
     english: `The team reviews report ${index + 1}.`,
     highlight: 'reviews',
     explanation: 'Động từ chia theo chủ ngữ.',
+    practice: {
+      instruction: 'Chọn động từ chia theo chủ ngữ.',
+      blank: 'reviews',
+      options: [
+        { id: 'A', text: 'review' },
+        { id: 'B', text: 'reviews' },
+        { id: 'C', text: 'reviewing' },
+        { id: 'D', text: 'to reviews' },
+      ],
+      correctOptionId: 'B',
+    },
     source: {
       questionId: question.id,
       location: 'stem',
@@ -54,7 +65,40 @@ describe('Hacker grammar compiler', () => {
       answerStatus: 'sourcePrinted',
     });
     expect(compiled.rightsStatus).toBe('privateUserProvided');
+    expect(compiled.schemaVersion).toBe(2);
+    expect(compiled.groups[0].examples[0].quiz).toMatchObject({
+      prompt: 'The team _____ report 1.',
+      correctOptionId: 'B',
+    });
     expect(bank.questions[0].stem[0].text).toContain('_____');
+  });
+
+  it('rejects missing, duplicate or mismatched exercise answers rather than inventing options', () => {
+    for (const mutate of [
+      (practice) => {
+        practice.correctOptionId = 'X';
+      },
+      (practice) => {
+        practice.options[1].text = 'review';
+      },
+      (practice) => {
+        practice.options[3].id = 'A';
+      },
+      (practice) => {
+        practice.options.pop();
+      },
+      (practice) => {
+        practice.blank = 'unrelated';
+        practice.options[1].text = 'unrelated';
+      },
+    ]) {
+      const { source, bank } = fixture();
+      mutate(source.groups[0].examples[0].practice);
+      expect(() => compileGrammarExamples(source, bank)).toThrow('grammar practice');
+    }
+    const { source, bank } = fixture();
+    delete source.groups[0].examples[0].practice;
+    expect(() => compileGrammarExamples(source, bank)).toThrow('grammar practice');
   });
 
   it('rejects an invalid key, missing question and quote not present in the source', () => {
@@ -100,6 +144,15 @@ describe('Hacker grammar compiler', () => {
       );
       expect(compiled.groups.map((group) => `${group.slug}/${group.ruleLabel}`)).toEqual(expected);
       expect(compiled.groups.flatMap((group) => group.examples)).toHaveLength(expected.length * 5);
+      for (const group of compiled.groups) {
+        for (const example of group.examples) {
+          const correct = example.quiz.options.find(
+            (option) => option.id === example.quiz.correctOptionId,
+          );
+          expect(example.quiz.options).toHaveLength(4);
+          expect(example.quiz.prompt.replace('_____', correct.text)).toBe(example.english);
+        }
+      }
     },
   );
 });

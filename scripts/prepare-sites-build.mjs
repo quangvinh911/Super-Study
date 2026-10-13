@@ -4,6 +4,7 @@ import { promisify } from 'node:util';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MEDIA_ROOTS } from './sites-media-worker.mjs';
+import { buildAccountWorker } from './build-account-worker.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const angularOutput = resolve(root, 'dist/cloudflare/browser');
@@ -54,11 +55,7 @@ await promisify(execFile)(
   { cwd: root },
 );
 await rm(configPath);
-await cp(resolve(root, 'scripts/sites-media-worker.mjs'), resolve(serverOutput, 'index.js'));
-await cp(resolve(root, 'scripts/vocabulary-api.mjs'), resolve(serverOutput, 'vocabulary-api.mjs'));
-await cp(
-  resolve(root, 'scripts/vocabulary-lookup.mjs'),
-  resolve(serverOutput, 'vocabulary-lookup.mjs'),
-);
+await buildAccountWorker(resolve(serverOutput, 'index.js'));
+await cp(resolve(root, 'drizzle'), resolve(root, 'dist/drizzle'), { recursive: true });
 await rm(buildOutput, { recursive: true, force: true });
 console.log('Prepared Sites application; media is served by the MEDIA R2 binding.');

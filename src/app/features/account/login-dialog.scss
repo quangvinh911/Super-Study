@@ -1,0 +1,35 @@
+dialog {
+  width: min(28rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  color: var(--color-text);
+  background: var(--color-paper-strong);
+  box-shadow: 0 1.5rem 4rem #0003;
+}
+dialog::backdrop {
+  background: #172b4db3;
+}
+.page-header {
+  position: relative;
+  padding-right: 3rem;
+}
+.close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+.account-form {
+  padding: 0;
+  box-shadow: none;
+  border: none;
+}

@@ -42,6 +42,9 @@ testem.log
 __screenshots__/
 .sites-sync/
 .env*.local
+.account-local/
+account-migration*.json
+account-migration*.zip
 __pycache__/
 *.pyc
 
@@ -53,11 +56,9 @@ __pycache__/
 /resources/toeic/hacker3/notes/
 /content/toeic-hacker-vocabulary-reviewed.json
 /public/data/toeic/vocabulary/hacker-3.json
+/content/toeic-hacker-grammar-reviewed.json
+/public/data/toeic/grammar/hacker-3.json
 
 # System files
 .DS_Store
 Thumbs.db
-
-# Private Hacker grammar examples.
-/content/toeic-hacker-grammar-reviewed.json
-/public/data/toeic/grammar/hacker-3.json

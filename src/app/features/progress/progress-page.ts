@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Attempt, Bookmark, QuestionStat, SessionSnapshot } from '../../core/models';
 import { ProgressRepository } from '../../core/persistence';
 import { QuizSessionStore } from '../../core/state';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-progress-page',
@@ -13,6 +14,7 @@ import { QuizSessionStore } from '../../core/state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressPage implements OnInit {
+  protected readonly auth = inject(AuthService);
   protected readonly certificate = inject(CertificateContext);
   private readonly repository = inject(ProgressRepository);
   private readonly store = inject(QuizSessionStore);
@@ -121,7 +123,7 @@ export class ProgressPage implements OnInit {
   protected async resetData(): Promise<void> {
     if (
       !globalThis.confirm(
-        `Xoá toàn bộ phiên đang làm, lịch sử, thống kê và bookmark của ${this.certificate.name} trên trình duyệt này? Hành động này không thể hoàn tác nếu chưa xuất bản sao.`,
+        `Xoá phiên đang làm, lịch sử, thống kê, bookmark và tiến độ bài học của ${this.certificate.name} ${this.auth.user() ? 'trong tài khoản này' : 'trên trình duyệt này'}? Hành động này không thể hoàn tác nếu chưa xuất bản sao.`,
       )
     ) {
       return;
@@ -132,7 +134,9 @@ export class ProgressPage implements OnInit {
       await this.store.close();
       await this.repository.reset();
       await this.reload(false);
-      this.message.set(`Đã xoá dữ liệu học tập ${this.certificate.name} trên thiết bị này.`);
+      this.message.set(
+        `Đã xoá tiến độ ${this.certificate.name} ${this.auth.user() ? 'trong tài khoản' : 'trên thiết bị này'}.`,
+      );
     } catch {
       this.error.set('Không thể xoá dữ liệu. Hãy đóng các tab luyện thi khác rồi thử lại.');
     } finally {
