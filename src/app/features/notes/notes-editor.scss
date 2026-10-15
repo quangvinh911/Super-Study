@@ -139,7 +139,6 @@ dialog::backdrop {
 .spacer {
   flex: 1;
 }
-.discard-confirm,
 .conflict-actions {
   display: flex;
   flex-wrap: wrap;
@@ -148,8 +147,25 @@ dialog::backdrop {
   padding: 1rem;
 }
 .discard-confirm {
-  background: var(--color-warning-wash);
-  border-top: 1px solid var(--color-border);
+  width: min(28rem, calc(100% - 1.2rem));
+  padding: 1.5rem;
+}
+.discard-confirm::backdrop {
+  background: rgb(16 43 58 / 35%);
+}
+.discard-confirm h2 {
+  margin: 0;
+  font: 650 1.2rem var(--font-sans);
+}
+.discard-confirm p {
+  margin: 0.8rem 0 1.4rem;
+  color: var(--color-text-muted);
+}
+.discard-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 @media (max-width: 35rem) {
   .draft-status {
