@@ -7,8 +7,13 @@ import { QuizSessionStore } from './core/state';
 import { FavoriteVocabularyRepository } from './core/persistence/favorite-vocabulary.repository';
 import { FavoriteVocabularyService } from './features/vocabulary/favorite-vocabulary.service';
 import { accountGuard, adminGuard, loginDialogGuard } from './core/auth/auth.guards';
+import { notesLeaveGuard } from './features/notes/notes-dialog.service';
 
 const learningRoutes: Routes = [
+  {
+    path: 'notes',
+    loadComponent: () => import('./features/notes/notes-page').then((m) => m.NotesPage),
+  },
   {
     path: 'saved-vocabulary',
     loadComponent: () =>
@@ -132,6 +137,7 @@ export const routes: Routes = [
   ...CERTIFICATES.map((certificate) => ({
     path: `certificates/${certificate.id}`,
     component: CertificateShell,
+    canDeactivate: [notesLeaveGuard],
     providers: [
       { provide: CERTIFICATE, useValue: certificate },
       {
@@ -148,6 +154,7 @@ export const routes: Routes = [
     children: [...learningRoutes, ...(certificate.id === 'toeic' ? toeicKnowledgeRoutes : [])].map(
       (route) => ({
         ...route,
+        canDeactivate: [...(route.canDeactivate ?? []), notesLeaveGuard],
         title: `${certificate.name} · Certificate Practice`,
       }),
     ),

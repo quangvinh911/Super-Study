@@ -139,9 +139,19 @@
               (click)="closeMenu()"
               >Luyện tập</a
             >
-            <details class="workspace-nav__knowledge" [open]="section() === 'saved-vocabulary'">
-              <summary>Từ vựng yêu thích</summary>
+            <details
+              class="workspace-nav__knowledge workspace-nav__notes"
+              [open]="section() === 'saved-vocabulary' || section() === 'notes'"
+            >
+              <summary>My Notes</summary>
               <div class="workspace-nav__subitems">
+                <a
+                  [routerLink]="link('notes')"
+                  routerLinkActive="workspace-nav__link--active"
+                  ariaCurrentWhenActive="page"
+                  (click)="closeMenu()"
+                  >Notes</a
+                >
                 <a
                   [routerLink]="link('saved-vocabulary')"
                   routerLinkActive="workspace-nav__link--active"
@@ -238,3 +248,4 @@
 </div>
 
 <app-login-dialog />
+<app-notes-dialog-host />

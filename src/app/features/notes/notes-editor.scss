@@ -1,0 +1,172 @@
+:host {
+  --notes-blue: #245dab;
+  --notes-blue-wash: #e6f0fc;
+}
+dialog {
+  width: min(52rem, calc(100% - 1.2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 1.1rem;
+  background: var(--color-paper-strong);
+  color: var(--color-text);
+  box-shadow: var(--shadow-md);
+}
+dialog::backdrop {
+  background: rgb(16 43 58 / 48%);
+}
+.editor-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.editor-header h2 {
+  margin: 0;
+  font: 600 0.95rem var(--font-sans);
+}
+.editor-header h2 span {
+  color: var(--color-warning);
+}
+.draft-status {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+.close-button {
+  border: 0;
+  background: transparent;
+  font-size: 1.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.5rem;
+}
+.editor-body {
+  padding: 1.4rem 1.7rem;
+}
+.editor-body .note-title {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: clamp(1.35rem, 4vw, 1.8rem);
+  font-weight: 650;
+  padding: 0.3rem 0 0.7rem;
+}
+.source {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  margin: 0.25rem 0 1.2rem;
+}
+.format-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+  padding: 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  background: var(--color-paper);
+  margin-top: 1rem;
+}
+.format-toolbar button,
+.format-toolbar select {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.35rem;
+  border: 0;
+  border-radius: 0.35rem;
+  background: transparent;
+  color: var(--color-text);
+}
+.format-toolbar button:hover,
+.format-toolbar button[aria-pressed='true'] {
+  background: var(--notes-blue-wash);
+  color: var(--notes-blue);
+}
+.format-toolbar select {
+  width: auto;
+  max-width: 8rem;
+}
+.format-toolbar button[aria-label='In đậm'] {
+  font-weight: 750;
+}
+.format-toolbar button[aria-label='In nghiêng'] {
+  font-style: italic;
+}
+.format-toolbar button[aria-label='Gạch chân'] {
+  text-decoration: underline;
+}
+.link-form {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+.link-form input {
+  flex: 1;
+  min-width: 8rem;
+  width: 100%;
+}
+.rich-editor {
+  padding: 1rem 0;
+  min-height: 17rem;
+  overflow-wrap: anywhere;
+}
+.editor-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+.editor-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.4rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-paper);
+}
+.editor-footer .button {
+  font-size: 0.8rem;
+}
+.note-save {
+  background: var(--notes-blue);
+  color: #fff;
+  border-color: var(--notes-blue);
+}
+.spacer {
+  flex: 1;
+}
+.discard-confirm,
+.conflict-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem;
+}
+.discard-confirm {
+  background: var(--color-warning-wash);
+  border-top: 1px solid var(--color-border);
+}
+@media (max-width: 35rem) {
+  .draft-status {
+    display: none;
+  }
+  .editor-body {
+    padding: 1.1rem;
+  }
+  .editor-footer {
+    padding: 0.8rem;
+  }
+  .spacer {
+    flex-basis: 100%;
+  }
+}

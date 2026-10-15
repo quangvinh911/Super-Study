@@ -16,9 +16,10 @@ import { AuthService } from './core/auth/auth.service';
 import { LoginDialogService } from './core/auth/login-dialog.service';
 import { LoginDialog } from './features/account/login-dialog';
 import { accountError } from './features/account/account-errors';
+import { NotesDialogHost } from './features/notes/notes-dialog-host';
 
 @Component({
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, LoginDialog],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, LoginDialog, NotesDialogHost],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
@@ -80,6 +81,7 @@ export class App {
         'mock-exam': 'Thi thử',
         progress: 'Tiến độ',
         'saved-vocabulary': 'Từ vựng đã lưu',
+        notes: 'Notes',
         methodology: 'Hướng dẫn & nguồn',
         results: 'Kết quả',
       }[section] ?? 'Tổng quan'

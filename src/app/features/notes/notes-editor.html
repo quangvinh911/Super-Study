@@ -1,0 +1,150 @@
+<dialog
+  #dialog
+  aria-labelledby="note-dialog-title"
+  (cancel)="close($event)"
+  (keydown)="keyboard($event)"
+>
+  <header class="editor-header">
+    <h2 id="note-dialog-title">
+      <span aria-hidden="true">▤</span>
+      {{ notes.draft()?.expectedRevision ? 'Chỉnh sửa ghi chú' : 'Ghi chú mới' }}
+    </h2>
+    <span class="draft-status">{{ notes.dirty() ? 'Có thay đổi chưa lưu' : 'Bản nháp' }}</span
+    ><button
+      type="button"
+      class="close-button"
+      aria-label="Đóng Notes"
+      [disabled]="notes.saving()"
+      (click)="close()"
+    >
+      ×
+    </button>
+  </header>
+  <div class="editor-body">
+    <label class="sr-only" for="note-title">Tiêu đề ghi chú</label
+    ><input
+      id="note-title"
+      class="note-title"
+      placeholder="Tiêu đề ghi chú"
+      maxlength="200"
+      [(ngModel)]="title"
+      (ngModelChange)="changed()"
+      [disabled]="notes.saving()"
+    />
+    @if (notes.draft()?.note?.source; as source) {
+      <p class="source">↗ {{ source.label }}</p>
+    }
+    <div class="format-toolbar" role="toolbar" aria-label="Định dạng ghi chú">
+      <select
+        #blockSelect
+        aria-label="Kiểu văn bản"
+        [value]="blockType()"
+        [disabled]="notes.saving()"
+        (change)="block(blockSelect.value)"
+      >
+        <option value="paragraph">Văn bản</option>
+        <option value="1">Tiêu đề 1</option>
+        <option value="2">Tiêu đề 2</option>
+        <option value="3">Tiêu đề 3</option>
+      </select>
+      @for (
+        item of [
+          { name: 'bold', label: 'In đậm', text: 'B' },
+          { name: 'italic', label: 'In nghiêng', text: 'I' },
+          { name: 'underline', label: 'Gạch chân', text: 'U' },
+          { name: 'highlight', label: 'Tô sáng', text: '▰' },
+          { name: 'bulletList', label: 'Danh sách', text: '≡' },
+          { name: 'orderedList', label: 'Danh sách đánh số', text: '1.' },
+          { name: 'taskList', label: 'Checklist', text: '☑' },
+          { name: 'blockquote', label: 'Trích dẫn', text: '❞' },
+          { name: 'undo', label: 'Hoàn tác', text: '↶' },
+          { name: 'redo', label: 'Làm lại', text: '↷' },
+        ];
+        track item.name
+      ) {
+        <button
+          type="button"
+          [attr.aria-label]="item.label"
+          [title]="item.label"
+          [attr.aria-pressed]="isActive(item.name)"
+          [disabled]="notes.saving()"
+          (click)="format(item.name)"
+        >
+          {{ item.text }}
+        </button>
+      }
+      <button
+        type="button"
+        aria-label="Chèn liên kết"
+        title="Liên kết"
+        [disabled]="notes.saving()"
+        (click)="linkOpen.set(!linkOpen())"
+      >
+        ↗
+      </button>
+    </div>
+    @if (linkOpen()) {
+      <div class="link-form">
+        <label for="note-link">Liên kết</label
+        ><input id="note-link" type="url" [(ngModel)]="linkUrl" placeholder="https://…" /><button
+          type="button"
+          class="button button--secondary"
+          (click)="applyLink()"
+        >
+          Áp dụng
+        </button>
+      </div>
+    }
+    <div #editor class="rich-editor"></div>
+    <div class="editor-meta">
+      <span>{{ characters() }} ký tự</span
+      ><span>{{
+        auth.user() ? 'Lưu theo tài khoản ' + auth.user()?.username : 'Lưu trên thiết bị này'
+      }}</span
+      ><span>Ctrl / ⌘ + S để lưu</span>
+    </div>
+    @if (notes.storageWarning()) {
+      <p class="error" role="alert">{{ notes.storageWarning() }}</p>
+    }
+    @if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+    }
+    @if (sessionExpired()) {
+      <button type="button" class="button button--secondary" (click)="reauthenticate()">
+        Đăng nhập lại
+      </button>
+    }
+    @if (conflict()) {
+      <div class="conflict-actions">
+        <button type="button" class="button button--secondary" (click)="latest()">
+          Tải bản mới</button
+        ><button type="button" class="button" (click)="save(true)">Lưu thành ghi chú mới</button>
+      </div>
+    }
+  </div>
+  <footer class="editor-footer">
+    <button type="button" class="button button--secondary" (click)="copy()">Copy nội dung</button
+    ><button type="button" class="button button--secondary" (click)="export()">Xuất .md</button
+    ><span class="spacer"></span
+    ><button
+      type="button"
+      class="button button--secondary"
+      [disabled]="notes.saving()"
+      (click)="close()"
+    >
+      Hủy</button
+    ><button type="button" class="button note-save" [disabled]="notes.saving()" (click)="save()">
+      {{ notes.saving() ? 'Đang lưu…' : 'Lưu ghi chú' }}
+    </button>
+  </footer>
+  @if (discard()) {
+    <div class="discard-confirm" role="alert">
+      <span>Bỏ thay đổi chưa lưu?</span
+      ><button type="button" class="button button--secondary" (click)="discard.set(false)">
+        Tiếp tục sửa</button
+      ><button type="button" class="button button--secondary" (click)="notes.close()">
+        Bỏ thay đổi
+      </button>
+    </div>
+  }
+</dialog>

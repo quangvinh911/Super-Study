@@ -39,7 +39,8 @@ export interface AuthSession {
   revokedAt: number | null;
 }
 export interface LearningRecord {
-  kind: 'activeSessions' | 'attempts' | 'questionStats' | 'bookmarks' | 'settings' | 'words';
+  kind:
+    'activeSessions' | 'attempts' | 'questionStats' | 'bookmarks' | 'settings' | 'words' | 'notes';
   key: string;
   value: unknown;
 }
