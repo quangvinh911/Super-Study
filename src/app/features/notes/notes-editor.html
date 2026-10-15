@@ -31,9 +31,6 @@
       (ngModelChange)="changed()"
       [disabled]="notes.saving()"
     />
-    @if (notes.draft()?.note?.source; as source) {
-      <p class="source">↗ {{ source.label }}</p>
-    }
     <div class="format-toolbar" role="toolbar" aria-label="Định dạng ghi chú">
       <select
         #blockSelect

@@ -65,7 +65,9 @@
           ><span class="source-chip">{{ certificateName(note) }}</span>
         </div>
         <h2>
-          <button type="button" (click)="dialogs.open(note)">{{ note.title }}</button>
+          <button class="note-card-open" type="button" (click)="dialogs.open(note)">
+            {{ note.title }}
+          </button>
         </h2>
         <p class="note-preview">{{ preview(note) }}</p>
         @if (note.source; as source) {
