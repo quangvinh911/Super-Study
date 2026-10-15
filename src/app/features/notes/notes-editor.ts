@@ -49,11 +49,12 @@ export class NotesEditor implements AfterViewInit, OnDestroy {
   protected readonly auth = inject(AuthService);
   private readonly login = inject(LoginDialogService);
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+  private readonly discardDialog =
+    viewChild.required<ElementRef<HTMLDialogElement>>('discardDialog');
   private readonly editorElement = viewChild.required<ElementRef<HTMLElement>>('editor');
   protected readonly error = signal('');
   protected readonly conflict = signal(false);
   protected readonly sessionExpired = signal(false);
-  protected readonly discard = signal(false);
   protected readonly linkOpen = signal(false);
   protected linkUrl = '';
   protected readonly version = signal(0);
@@ -105,6 +106,7 @@ export class NotesEditor implements AfterViewInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.editor?.destroy();
+    this.discardDialog().nativeElement.close();
     this.dialog().nativeElement.close();
     this.notes.restoreFocus();
   }
@@ -194,8 +196,16 @@ export class NotesEditor implements AfterViewInit, OnDestroy {
   protected close(event?: Event): void {
     event?.preventDefault();
     if (this.notes.saving()) return;
-    if (this.notes.dirty()) this.discard.set(true);
+    if (this.notes.dirty()) this.discardDialog().nativeElement.showModal();
     else this.notes.close();
+  }
+  protected continueEditing(event?: Event): void {
+    event?.preventDefault();
+    this.discardDialog().nativeElement.close();
+  }
+  protected discardChanges(): void {
+    this.discardDialog().nativeElement.close();
+    this.notes.close();
   }
   protected keyboard(event: KeyboardEvent): void {
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {

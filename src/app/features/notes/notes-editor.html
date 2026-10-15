@@ -134,14 +134,23 @@
       {{ notes.saving() ? 'Đang lưu…' : 'Lưu ghi chú' }}
     </button>
   </footer>
-  @if (discard()) {
-    <div class="discard-confirm" role="alert">
-      <span>Bỏ thay đổi chưa lưu?</span
-      ><button type="button" class="button button--secondary" (click)="discard.set(false)">
-        Tiếp tục sửa</button
-      ><button type="button" class="button button--secondary" (click)="notes.close()">
-        Bỏ thay đổi
-      </button>
-    </div>
-  }
+</dialog>
+<dialog
+  #discardDialog
+  class="discard-confirm"
+  role="alertdialog"
+  aria-labelledby="discard-dialog-title"
+  aria-describedby="discard-dialog-description"
+  (cancel)="continueEditing($event)"
+>
+  <h2 id="discard-dialog-title">Bỏ thay đổi chưa lưu?</h2>
+  <p id="discard-dialog-description">Những thay đổi vừa sửa sẽ bị mất nếu bạn đóng ghi chú.</p>
+  <div class="discard-actions">
+    <button type="button" class="button button--secondary" autofocus (click)="continueEditing()">
+      Tiếp tục sửa
+    </button>
+    <button type="button" class="button button--danger" (click)="discardChanges()">
+      Bỏ thay đổi
+    </button>
+  </div>
 </dialog>
