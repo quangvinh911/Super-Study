@@ -81,6 +81,7 @@
   gap: 1.1rem;
 }
 .note-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
@@ -130,6 +131,17 @@
   overflow-wrap: anywhere;
   font: inherit;
 }
+.note-card-open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.note-card-open:focus-visible::after {
+  outline: 2px solid var(--notes-blue);
+  outline-offset: 3px;
+}
 .note-preview {
   color: var(--color-text-muted);
   font-size: 0.85rem;
@@ -161,6 +173,8 @@
   color: var(--color-text-muted);
 }
 .note-actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: 0.2rem;
 }
