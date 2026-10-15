@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CertificateShell } from './certificate-shell';
 import { QuizSessionStore } from '../core/state';
+import { NotesDialogService } from '../features/notes/notes-dialog.service';
+import { documentFromText } from '../core/domain/notes';
 import {
   FavoriteVocabularyService,
   VocabularyLookupError,
@@ -24,6 +26,7 @@ async function setup() {
     enrichment: 'complete',
   };
   const lookup = vi.fn().mockResolvedValue(details);
+  const openNote = vi.fn();
   Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
     configurable: true,
     value: function (this: HTMLDialogElement) {
@@ -41,6 +44,7 @@ async function setup() {
     imports: [CertificateShell],
     providers: [
       provideRouter([]),
+      { provide: NotesDialogService, useValue: { draft: signal(null), open: openNote } },
       { provide: QuizSessionStore, useValue: { close: vi.fn().mockResolvedValue(undefined) } },
       {
         provide: FavoriteVocabularyService,
@@ -59,7 +63,7 @@ async function setup() {
     configurable: true,
     value: () => ({ offsetNode: paragraph.firstChild, offset: 6 }),
   });
-  return { fixture, element, paragraph, save, lookup, details };
+  return { fixture, element, paragraph, save, lookup, details, openNote };
 }
 function touch(type: string, x = 40): MouseEvent {
   const event = new MouseEvent(type, { bubbles: true, clientX: x, clientY: 40 });
@@ -71,6 +75,42 @@ function touch(type: string, x = 40): MouseEvent {
   return event;
 }
 describe('Dictionary selection gestures', () => {
+  it('offers Notes for a long Vietnamese paragraph and captures it before selection disappears', async () => {
+    const { fixture, element, paragraph, openNote, lookup } = await setup();
+    paragraph.lang = 'vi';
+    paragraph.textContent = 'Ghi chú tiếng Việt: đoạn văn dài, có số 2026 và dấu câu. '.repeat(4);
+    const range = document.createRange();
+    range.selectNodeContents(paragraph);
+    window.getSelection()?.addRange(range);
+    paragraph.dispatchEvent(
+      new MouseEvent('mouseup', { bubbles: true, clientX: 10000, clientY: 10000 }),
+    );
+    fixture.detectChanges();
+    const toolbar = element.querySelector<HTMLElement>('.selection-toolbar');
+    expect(toolbar).not.toBeNull();
+    expect(element.querySelector('.dictionary-trigger')).toBeNull();
+    expect(Number.parseFloat(toolbar?.style.left ?? '0')).toBeLessThan(window.innerWidth - 44);
+    window.getSelection()?.removeAllRanges();
+    element.querySelector<HTMLButtonElement>('.notes-trigger')?.click();
+    expect(openNote).toHaveBeenCalledWith(
+      undefined,
+      expect.objectContaining({ certificateId: 'ctfl' }),
+      documentFromText(paragraph.textContent ?? ''),
+    );
+    expect(lookup).not.toHaveBeenCalled();
+  });
+  it('places the yellow Notes button immediately after the dictionary button', async () => {
+    const { fixture, element, paragraph } = await setup();
+    paragraph.dispatchEvent(
+      new MouseEvent('dblclick', { bubbles: true, clientX: 40, clientY: 40 }),
+    );
+    fixture.detectChanges();
+    expect(
+      element
+        .querySelector('.dictionary-trigger')
+        ?.nextElementSibling?.classList.contains('notes-trigger'),
+    ).toBe(true);
+  });
   afterEach(() => {
     TestBed.resetTestingModule();
     vi.useRealTimers();

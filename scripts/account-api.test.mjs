@@ -128,11 +128,6 @@ afterAll(async () => {
 });
 
 describe('Worker/D1 account integration', () => {
-  it('accepts 11-character passwords and rejects shorter or oversized passwords', () => {
-    expect(() => validatePassword('a'.repeat(11))).not.toThrow();
-    expect(() => validatePassword('a'.repeat(128))).not.toThrow();
-    for (const length of [0, 10, 129]) expect(() => validatePassword('a'.repeat(length))).toThrow();
-  });
   it('publishes a complete multi-chunk generation and rejects stale writes', async () => {
     const repository = createD1Repository(await runtime.getD1Database('DB'));
     const records = ['first', 'second', 'third'].map((key) => ({
@@ -149,6 +144,79 @@ describe('Worker/D1 account integration', () => {
     const state = await repository.load(adminId, 'ctfl');
     expect(state.version).toBe(1);
     expect(state.records).toEqual(records);
+  });
+  it('isolates global Notes by account, detects conflicts and preserves them through certificate resets', async () => {
+    const noteAction = (token, name, args = []) =>
+      request('/api/notes', { method: 'POST', token, body: { action: name, args } });
+    const draft = {
+      id: crypto.randomUUID(),
+      title: 'Global note',
+      document: {
+        type: 'doc',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              { type: 'text', text: 'Please ' },
+              {
+                type: 'grammarToken',
+                attrs: { role: 'V' },
+                content: [{ type: 'text', text: 'submit' }],
+              },
+              { type: 'text', text: ' the form.' },
+            ],
+          },
+        ],
+      },
+      source: { certificateId: 'ctfl', path: '/certificates/ctfl/practice', label: 'CTFL' },
+    };
+    const created = await noteAction(adminToken, 'saveNote', [draft, null]);
+    expect(created.status).toBe(200);
+    expect(created.body.revision).toBe(1);
+    expect(created.body.document).toEqual(draft.document);
+    expect((await noteAction(adminToken, 'saveNote', [draft, null])).body).toEqual(created.body);
+    expect((await noteAction(userToken, 'getNote', [draft.id])).body).toBeNull();
+    const edited = { ...draft, title: 'Edited note' };
+    expect((await noteAction(adminToken, 'saveNote', [edited, 1])).body.revision).toBe(2);
+    expect((await noteAction(adminToken, 'saveNote', [edited, 1])).body.revision).toBe(2);
+    expect((await noteAction(adminToken, 'saveNote', [draft, 1])).status).toBe(409);
+    expect((await noteAction(adminToken, 'removeNote', [draft.id, 1])).status).toBe(409);
+    expect((await noteAction(userToken, 'saveNote', [draft, 2])).status).toBe(409);
+    expect(
+      (await noteAction(userToken, 'saveNote', [{ ...draft, owner: adminId }, null])).status,
+    ).toBe(400);
+    for (const certificateId of ['ctfl', 'toeic']) {
+      const exported = await action(adminToken, certificateId, 'exportProgress');
+      expect(
+        (await action(adminToken, certificateId, 'importProgress', [exported.body, 'replace']))
+          .status,
+      ).toBe(200);
+      expect((await action(adminToken, certificateId, 'reset')).status).toBe(200);
+    }
+    expect((await noteAction(adminToken, 'listNotes')).body.map((note) => note.id)).toContain(
+      draft.id,
+    );
+    expect((await action(adminToken, 'ctfl', 'listNotes')).status).toBe(400);
+    expect((await action(adminToken, 'global-notes', 'listNotes')).status).toBe(404);
+    expect(
+      (await request('/api/notes', { method: 'POST', body: { action: 'listNotes', args: [] } }))
+        .status,
+    ).toBe(401);
+    expect(
+      (
+        await noteAction(adminToken, 'saveNote', [
+          { ...draft, document: { type: 'doc', content: [{ type: 'image' }] } },
+          2,
+        ])
+      ).status,
+    ).toBe(400);
+    expect((await noteAction(adminToken, 'removeNote', [draft.id, 2])).status).toBe(200);
+    expect((await noteAction(adminToken, 'getNote', [draft.id])).body).toBeNull();
+  });
+  it('accepts 11-character passwords and rejects shorter or oversized passwords', () => {
+    expect(() => validatePassword('a'.repeat(11))).not.toThrow();
+    expect(() => validatePassword('a'.repeat(128))).not.toThrow();
+    for (const length of [0, 10, 129]) expect(() => validatePassword('a'.repeat(length))).toThrow();
   });
   it('allows only one concurrent demotion when two Admins remain', async () => {
     const isolated = await createLocalAccountRuntime();

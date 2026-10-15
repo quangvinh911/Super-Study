@@ -1,5 +1,83 @@
 @use 'fonts';
 
+app-root .workspace-nav__notes {
+  --color-ink: #245dab;
+  --color-teal: #245dab;
+  --color-teal-dark: #245dab;
+  --color-teal-wash: #d9e8fb;
+  background: #e6f0fc;
+  border-radius: var(--radius-md);
+  padding: 0.3rem;
+}
+
+/* ProseMirror creates its own DOM, outside Angular's emulated style attributes. */
+app-notes-editor .tiptap {
+  min-height: 16rem;
+  padding: 0.25rem;
+  line-height: 1.8;
+}
+app-notes-editor .tiptap .note-grammar-token {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  vertical-align: middle;
+  gap: 0.2rem;
+  max-width: 100%;
+  margin: 0.2rem 0.08rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--note-role-line);
+  border-radius: 0.65rem;
+  color: var(--note-role-ink);
+  background: var(--note-role-wash);
+  line-height: 1.4;
+}
+app-notes-editor .tiptap .note-grammar-label {
+  font-size: 0.75rem;
+  font-weight: 750;
+  user-select: none;
+}
+app-notes-editor .tiptap [data-note-grammar-text] {
+  font-size: 1rem;
+  font-weight: 650;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+app-notes-editor .tiptap p {
+  margin: 0 0 0.8rem;
+}
+app-notes-editor .tiptap h1,
+app-notes-editor .tiptap h2,
+app-notes-editor .tiptap h3 {
+  font-family: var(--font-sans);
+  margin: 1rem 0 0.5rem;
+}
+app-notes-editor .tiptap blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid #d9e8fb;
+  color: var(--color-text-muted);
+}
+app-notes-editor .tiptap mark {
+  color: var(--color-text);
+  background: var(--color-warning-wash);
+}
+app-notes-editor .tiptap ul[data-type='taskList'] {
+  padding: 0;
+  list-style: none;
+}
+app-notes-editor .tiptap ul[data-type='taskList'] li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+app-notes-editor .tiptap ul[data-type='taskList'] li > div {
+  flex: 1;
+  min-width: 0;
+}
+app-notes-editor .tiptap a {
+  color: #245dab;
+}
+
 /* CTFL Practice visual foundation: warm paper, technical navy, accessible controls. */
 
 :root {

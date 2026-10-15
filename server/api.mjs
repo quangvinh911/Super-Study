@@ -3,6 +3,7 @@ import { createAuth, publicUser, userFields, validatePassword } from './auth.mjs
 import { hashPassword } from './passwords.mjs';
 import { ApiError, readJson, requireCondition } from './errors.mjs';
 import { createLearningService } from './learning.mjs';
+import { createNotesService } from './notes.mjs';
 
 const json = (body, status = 200, cookie) =>
   Response.json(body, {
@@ -22,6 +23,7 @@ export function createAccountApi({
 }) {
   const auth = createAuth(authRepository, config);
   const learning = createLearningService(learningRepository, snapshotStorage);
+  const notes = createNotesService(learningRepository);
   return async function accountApi(request) {
     try {
       const url = new URL(request.url);
@@ -152,6 +154,10 @@ export function createAccountApi({
         } else throw new ApiError(405, 'method_not_allowed');
         await authRepository.updateUser(next, target.tokenVersion);
         return json(publicUser(next));
+      }
+      if (path === '/api/notes' && request.method === 'POST') {
+        auth.origin(request);
+        return json(await notes(user.id, await readJson(request, 300 * 1024)));
       }
       const match = path.match(/^\/api\/learning\/(ctfl|toeic)$/);
       if (match && request.method === 'POST') {

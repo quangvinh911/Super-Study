@@ -43,6 +43,7 @@ describe('App', () => {
           { path: 'certificates/ctfl', component: EmptyPage },
           { path: 'certificates/toeic', component: EmptyPage },
           { path: 'certificates/toeic/grammar', component: EmptyPage },
+          { path: 'certificates/toeic/notes', component: EmptyPage },
           {
             path: 'certificates/ctfl/practice/session-1',
             component: EmptyPage,
@@ -61,6 +62,20 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it('opens My Notes with Notes above saved vocabulary', async () => {
+    const fixture = TestBed.createComponent(App);
+    await TestBed.inject(Router).navigateByUrl('/certificates/toeic/notes');
+    await fixture.whenStable();
+    const group = fixture.nativeElement.querySelector(
+      '.workspace-nav__notes',
+    ) as HTMLDetailsElement;
+    expect(group.open).toBe(true);
+    expect(group.querySelector('summary')?.textContent).toBe('My Notes');
+    expect(Array.from(group.querySelectorAll('a')).map((link) => link.textContent?.trim())).toEqual(
+      ['Notes', 'Từ vựng đã lưu'],
+    );
   });
 
   it('should render title', async () => {

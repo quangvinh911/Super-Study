@@ -55,13 +55,14 @@
           [class]="'syntax-token role-' + node.role"
           [class.is-selected]="selectedToken()?.id === node.id"
           [attr.data-syntax-id]="node.id"
+          [attr.data-note-grammar-role]="node.role"
           [attr.aria-expanded]="selectedToken()?.id === node.id"
           (click)="selectToken(node, tokenButton)"
         >
           <span class="syntax-token__role" lang="vi"
             >{{ node.role }} · {{ roleLabel(node.role) }}</span
           >
-          <span class="syntax-token__text" lang="en">{{ node.text }}</span>
+          <span class="syntax-token__text" data-note-grammar-text lang="en">{{ node.text }}</span>
         </button>
       }
       @case ('group') {

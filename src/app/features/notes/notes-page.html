@@ -1,0 +1,138 @@
+<header class="notes-heading">
+  <div>
+    <p class="eyebrow">Không gian ghi nhớ</p>
+    <h1>My Notes<span aria-hidden="true">.</span></h1>
+    <p class="notes-subtitle">Những điều muốn nhớ, trong một không gian riêng.</p>
+  </div>
+  <button class="button notes-primary" type="button" (click)="dialogs.open()">
+    <span aria-hidden="true">＋</span> Tạo ghi chú
+  </button>
+</header>
+<div class="notes-filters">
+  <label class="search-field"
+    ><span class="sr-only">Tìm trong ghi chú</span
+    ><svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+    >
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m16 16 5 5" /></svg
+    ><input
+      type="search"
+      placeholder="Tìm trong ghi chú…"
+      [ngModel]="query()"
+      (ngModelChange)="query.set($event)" /></label
+  ><label
+    ><span class="sr-only">Lọc chứng chỉ nguồn</span
+    ><select [ngModel]="certificateId()" (ngModelChange)="certificateId.set($event)">
+      <option value="">Mọi chứng chỉ</option>
+      @for (certificate of certificates; track certificate.id) {
+        <option [value]="certificate.id">{{ certificate.name }}</option>
+      }
+    </select></label
+  >
+</div>
+@if (loading()) {
+  <p class="notes-empty" role="status">Đang tải ghi chú…</p>
+} @else if (error()) {
+  <div class="notes-empty" role="alert">
+    <p>{{ error() }}</p>
+    <button class="button button--secondary" type="button" (click)="load()">Thử lại</button>
+  </div>
+} @else {
+  <div class="notes-meta">
+    <span>{{ visible().length }} ghi chú</span><span>Cập nhật gần nhất</span>
+  </div>
+  <div class="notes-grid">
+    @for (note of visible(); track note.id) {
+      <article class="note-card">
+        <div class="note-card-top">
+          <span class="note-symbol"
+            ><svg
+              aria-hidden="true"
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9Z" />
+              <path d="M14 3v7h7M7 14h10M7 17h7" /></svg></span
+          ><span class="source-chip">{{ certificateName(note) }}</span>
+        </div>
+        <h2>
+          <button type="button" (click)="dialogs.open(note)">{{ note.title }}</button>
+        </h2>
+        <p class="note-preview">{{ preview(note) }}</p>
+        @if (note.source; as source) {
+          <p class="note-source">{{ source.label }}</p>
+        }
+        <div class="note-card-bottom">
+          <time [attr.datetime]="note.updatedAt">{{
+            note.updatedAt | date: 'dd/MM/yyyy HH:mm'
+          }}</time>
+          <div class="note-actions">
+            <button type="button" (click)="copy(note)" [attr.aria-label]="'Copy ' + note.title">
+              Copy</button
+            ><button
+              type="button"
+              (click)="export(note)"
+              [attr.aria-label]="'Xuất Markdown ' + note.title"
+            >
+              .md</button
+            ><button
+              type="button"
+              (click)="requestRemove(note)"
+              [attr.aria-label]="'Xóa ' + note.title"
+            >
+              Xóa
+            </button>
+          </div>
+        </div>
+      </article>
+    } @empty {
+      <div class="notes-empty">
+        <span class="empty-symbol" aria-hidden="true">▤</span>
+        <h2>{{ notes().length ? 'Không có ghi chú phù hợp' : 'Ghi lại điều bạn muốn nhớ' }}</h2>
+        <p>
+          {{
+            notes().length
+              ? 'Thử từ khóa khác hoặc chọn mọi chứng chỉ.'
+              : 'Tạo ghi chú đầu tiên, hoặc chọn một đoạn văn khi học và bấm icon Notes màu vàng.'
+          }}
+        </p>
+        @if (!notes().length) {
+          <button type="button" class="button notes-primary" (click)="dialogs.open()">
+            Tạo ghi chú
+          </button>
+        }
+      </div>
+    }
+  </div>
+}
+@if (actionError()) {
+  <p class="error" role="alert">{{ actionError() }}</p>
+}
+@if (pendingDelete(); as note) {
+  <div class="delete-confirm" role="alert">
+    <p>Xóa “{{ note.title }}”? Thao tác này không thể hoàn tác.</p>
+    <button
+      class="button button--secondary"
+      type="button"
+      [disabled]="removing()"
+      (click)="pendingDelete.set(null)"
+    >
+      Giữ lại</button
+    ><button class="button button--danger" type="button" [disabled]="removing()" (click)="remove()">
+      {{ removing() ? 'Đang xóa…' : 'Xóa ghi chú' }}
+    </button>
+  </div>
+}
+<p class="notes-privacy">
+  Ghi chú riêng tư · Dùng chung mọi chứng chỉ ·
+  {{ auth.user() ? 'Lưu theo tài khoản' : 'Lưu trên thiết bị này' }}
+</p>
