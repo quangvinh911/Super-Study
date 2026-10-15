@@ -1,0 +1,247 @@
+:host {
+  display: block;
+}
+
+.saved-vocabulary-page {
+  max-width: var(--content-max);
+  padding-block: 1.5rem 3rem;
+}
+
+.page-header {
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+}
+
+.page-header h1 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+
+.page-header > .eyebrow {
+  color: var(--color-coral-dark);
+  font-size: var(--text-xs);
+}
+
+.page-header > .page-subtitle {
+  font-size: var(--text-base);
+}
+
+.vocabulary-help {
+  max-width: var(--measure);
+  font-size: var(--text-sm);
+}
+
+.vocabulary-help summary {
+  width: fit-content;
+  padding-block: 0.5rem;
+  color: var(--color-teal-dark);
+  font-weight: 750;
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+}
+
+.vocabulary-help summary:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+}
+
+.vocabulary-help p {
+  margin: 0.4rem 0 0;
+  padding-left: 1rem;
+  color: var(--color-text-muted);
+  border-left: 2px solid var(--color-border);
+}
+
+.vocabulary-controls {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.add-word-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 0.75rem;
+}
+
+.vocabulary-field {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  font-size: var(--text-sm);
+}
+
+.vocabulary-field input,
+.add-word-form > .button {
+  height: 3rem;
+  min-height: 3rem;
+}
+
+.vocabulary-field input {
+  min-width: 0;
+  font-size: var(--text-base);
+}
+
+.add-word-form > .button {
+  white-space: nowrap;
+}
+
+.add-word-form > .button span {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.search {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.vocabulary-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 1.75rem 0 1rem;
+}
+
+.vocabulary-meta h2 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.vocabulary-meta span,
+.vocabulary-status {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.vocabulary-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  color: var(--color-danger);
+  background: var(--color-danger-wash);
+  border-radius: var(--radius-sm);
+}
+
+.vocabulary-error p {
+  flex: 1 1 15rem;
+  margin: 0;
+}
+
+.words {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1rem;
+}
+
+.word-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
+  min-width: 0;
+  padding: 1.25rem;
+  overflow-wrap: anywhere;
+}
+
+.word-card h2 {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+}
+
+.word-card p {
+  margin: 0;
+}
+
+.word-audio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  max-width: 100%;
+  padding: 0;
+  color: var(--color-ink);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-xs);
+  font: inherit;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.word-audio:hover {
+  color: var(--color-teal-dark);
+}
+
+.word-audio svg {
+  flex: 0 0 1.15rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--color-teal);
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.word-pronunciation,
+.word-card small,
+.word-status,
+.source-note {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.word-meaning {
+  font-weight: 700;
+}
+
+.word-card blockquote {
+  margin: 0.25rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--color-teal-wash);
+  border-left: 3px solid var(--color-teal);
+  border-radius: var(--radius-xs);
+  font-size: var(--text-sm);
+}
+
+.word-card > .button {
+  align-self: start;
+}
+
+.word-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.vocabulary-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 2.25rem 1.25rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+@media (max-width: 40rem) {
+  .add-word-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .add-word-form > .button {
+    width: 100%;
+  }
+}

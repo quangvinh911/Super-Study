@@ -11,43 +11,66 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
   selector: 'app-saved-vocabulary-page',
   imports: [FormsModule, FavoriteVocabularyEditor],
   template: `
-    <div class="page">
+    <div class="page saved-vocabulary-page">
       <header class="page-header">
-        <p class="eyebrow">Favorite Vocabulary</p>
+        <p class="eyebrow">Sổ tay từ vựng</p>
         <h1>Từ vựng đã lưu</h1>
-        <p>
-          Nhấn vào từ đã lưu để nghe phát âm. Double-click một từ hoặc bôi đen cụm từ trong nội dung
-          học, rồi nhấn biểu tượng từ điển để xem nghĩa, phiên âm và câu ví dụ. Trong popup, nhấn
-          “Thêm vào từ vựng yêu thích” để lưu. Trên điện thoại, giữ từ trong 1 giây để hiện biểu
-          tượng.
-        </p>
+        <p class="page-subtitle">Lưu từ mới, nghe phát âm và ôn lại theo cách của bạn.</p>
+        <details class="vocabulary-help">
+          <summary>Cách lưu và ôn từ vựng</summary>
+          <p>
+            Nhấn vào từ đã lưu để nghe phát âm. Double-click một từ hoặc bôi đen cụm từ trong nội
+            dung học, rồi nhấn biểu tượng từ điển để xem nghĩa, phiên âm và câu ví dụ. Trong popup,
+            nhấn “Thêm vào từ vựng yêu thích” để lưu. Trên điện thoại, giữ từ trong 1 giây để hiện
+            biểu tượng.
+          </p>
+        </details>
       </header>
-      <form (ngSubmit)="favorites.save({ term: newTerm }); newTerm = ''">
-        <label
-          >Từ / cụm từ tiếng Anh<input
-            name="newTerm"
-            required
-            maxlength="120"
-            [(ngModel)]="newTerm"
-        /></label>
-        <button class="button button--primary" type="submit">Thêm từ vựng</button>
-      </form>
-      <label class="search"
-        >Tìm từ hoặc nghĩa<input
-          type="search"
-          [ngModel]="query()"
-          (ngModelChange)="query.set($event)"
-      /></label>
+      <section class="vocabulary-controls surface" aria-label="Thêm và tìm từ vựng">
+        <form class="add-word-form" (ngSubmit)="favorites.save({ term: newTerm }); newTerm = ''">
+          <label class="vocabulary-field"
+            >Từ / cụm từ tiếng Anh
+            <input
+              name="newTerm"
+              required
+              maxlength="120"
+              placeholder="Ví dụ: shipment, on schedule…"
+              lang="en"
+              [(ngModel)]="newTerm"
+            />
+          </label>
+          <button class="button button--primary" type="submit">
+            <span aria-hidden="true">+</span> Thêm từ vựng
+          </button>
+        </form>
+        <label class="vocabulary-field search"
+          >Tìm trong từ vựng đã lưu
+          <input
+            type="search"
+            placeholder="Tìm từ hoặc nghĩa…"
+            [ngModel]="query()"
+            (ngModelChange)="query.set($event)"
+          />
+        </label>
+      </section>
+      <div class="vocabulary-meta">
+        <h2>Từ vựng của bạn</h2>
+        @if (!loading() && !error()) {
+          <span>{{ filtered().length }} từ đã lưu</span>
+        }
+      </div>
       @if (loading()) {
-        <p role="status">Đang tải…</p>
+        <p class="vocabulary-status" role="status">Đang tải…</p>
       }
       @if (error()) {
-        <p role="alert">{{ error() }}</p>
-        <button type="button" (click)="load()">Thử lại</button>
+        <div class="vocabulary-error">
+          <p role="alert">{{ error() }}</p>
+          <button class="button button--secondary" type="button" (click)="load()">Thử lại</button>
+        </div>
       }
       <div class="words">
         @for (word of filtered(); track word.term) {
-          <article class="surface">
+          <article class="word-card surface">
             <h2 lang="en">
               <button
                 class="word-audio"
@@ -58,9 +81,13 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
                 [attr.aria-label]="'Nghe phát âm ' + word.term"
               >
                 {{ word.term }}
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                  <path d="M11 5 6 9H3v6h3l5 4V5Z" />
+                  <path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14" />
+                </svg>
               </button>
             </h2>
-            <p [attr.lang]="word.pronunciation ? 'en' : 'vi'">
+            <p class="word-pronunciation" [attr.lang]="word.pronunciation ? 'en' : 'vi'">
               {{
                 word.pronunciation ||
                   (word.enrichment === 'pending' ? 'Đang tra phiên âm…' : 'Chưa có phiên âm')
@@ -77,7 +104,7 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
                 ></small
               >
             }
-            <p [attr.lang]="word.meaningLanguage ?? 'vi'">
+            <p class="word-meaning" [attr.lang]="word.meaningLanguage ?? 'vi'">
               {{
                 word.meaning ||
                   (word.enrichment === 'pending' ? 'Đang tra nghĩa…' : 'Chưa có nghĩa')
@@ -118,7 +145,7 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
               !word.meaning ||
               !word.example
             ) {
-              <p>
+              <p class="word-status">
                 {{
                   word.enrichment === 'pending'
                     ? 'Đang chờ bổ sung thông tin.'
@@ -158,21 +185,23 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
                 }
               </p>
             }
-            <button class="button button--secondary" type="button" (click)="editor.open(word)">
-              Chỉnh sửa<span class="sr-only"> {{ word.term }}</span>
-            </button>
-            <button
-              class="button button--quiet"
-              type="button"
-              [disabled]="removing()"
-              (click)="remove(word.term)"
-            >
-              Bỏ lưu<span class="sr-only"> {{ word.term }}</span>
-            </button>
+            <div class="word-actions">
+              <button class="button button--secondary" type="button" (click)="editor.open(word)">
+                Chỉnh sửa<span class="sr-only"> {{ word.term }}</span>
+              </button>
+              <button
+                class="button button--quiet"
+                type="button"
+                [disabled]="removing()"
+                (click)="remove(word.term)"
+              >
+                Bỏ lưu<span class="sr-only"> {{ word.term }}</span>
+              </button>
+            </div>
           </article>
         } @empty {
           @if (!loading() && !error()) {
-            <p>
+            <p class="vocabulary-empty surface">
               {{
                 query()
                   ? 'Không tìm thấy từ phù hợp.'
@@ -185,42 +214,7 @@ import { FavoriteVocabularyService } from './favorite-vocabulary.service';
       <app-favorite-vocabulary-editor #editor />
     </div>
   `,
-  styles: `
-    .search {
-      display: grid;
-      gap: 0.5rem;
-      margin: 1.5rem 0;
-    }
-    input {
-      padding: 0.75rem;
-    }
-    .words {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-      gap: 1rem;
-    }
-    article {
-      padding: 1.25rem;
-      overflow-wrap: anywhere;
-    }
-    h2 {
-      margin-top: 0;
-    }
-    .word-audio {
-      color: inherit;
-      font: inherit;
-      text-align: left;
-      background: transparent;
-      border: 0;
-      padding: 0;
-      cursor: pointer;
-    }
-    blockquote {
-      margin: 1rem 0;
-      padding-left: 1rem;
-      border-left: 3px solid #7294b4;
-    }
-  `,
+  styleUrl: './saved-vocabulary-page.scss',
 })
 export class SavedVocabularyPage {
   protected readonly favorites = inject(FavoriteVocabularyService);
