@@ -26,6 +26,8 @@ Frontend requests use relative `/api` URLs. For a future separate API service, p
 
 Use the pinned Node and pnpm versions. `pnpm start` runs Angular on port 4200 and a Miniflare Worker API on 8788 through `proxy.vocabulary.json`. D1, R2 and the local JWT secret persist under ignored `.account-local/`. Local migrations apply automatically in filename order. `pnpm run start:api` runs only the API. The dictionary endpoint remains available to guests.
 
+If port 4200 is occupied, use `pnpm start --port 4201` (or `--port=4201`). The launcher sets the API's allowed origin to the selected localhost port so login and account writes continue to work. An explicit `APP_ORIGIN` takes precedence; set it to the exact frontend origin when using a custom hostname, HTTPS or the standalone API.
+
 Before starting, supply `BOOTSTRAP_SECRET` with at least 32 random characters using your environment/secret manager. Optionally supply `JWT_SECRET`; otherwise a random local secret is generated. Create the first Admin with `node scripts/bootstrap-account-admin.mjs`. The script reads one JSON object from stdin:
 
 ```json
