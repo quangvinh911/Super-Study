@@ -1,247 +1,308 @@
-@use 'grammar-theme' as grammar;
-@include grammar.page;
-
 :host {
   display: block;
 }
 .grammar-overview {
   container-type: inline-size;
-  font-size: 0.875rem;
 }
 .grammar-overview p {
   margin: 0;
-  color: var(--grammar-muted);
+  color: var(--color-text-muted);
 }
-.grammar-hero {
-  display: grid;
-  gap: 1.75rem;
-  padding-bottom: 2.5rem;
+.grammar-header,
+.library-heading,
+.stage-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
-.grammar-hero h1 {
-  margin: 1rem 0;
-  font-size: clamp(2.1rem, 5cqi, 3.15rem);
-  line-height: 1.13;
-  letter-spacing: -0.045em;
+.grammar-header {
+  flex-wrap: wrap;
+  padding-bottom: 1.5rem;
+}
+.grammar-header h1 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: clamp(2rem, 5cqi, 2.65rem);
+  letter-spacing: -0.04em;
+}
+.grammar-header h1:focus {
+  outline: none;
+  box-shadow: none;
 }
 .grammar-overview .grammar-kicker {
-  color: var(--grammar-accent-dark);
-  font-size: 0.7rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
+  color: var(--color-teal-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
 }
-.grammar-hero__actions {
+.grammar-progress {
+  display: grid;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-teal);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+.grammar-progress strong {
+  color: var(--color-text);
+  font-size: 1.65rem;
+}
+.grammar-progress small {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.grammar-progress progress {
+  width: 100%;
+  height: 0.35rem;
+  accent-color: var(--color-teal);
+}
+.grammar-continue {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-top: 1.4rem;
+  gap: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--color-teal);
+  border-radius: var(--radius-sm);
+  color: var(--color-teal-dark);
+  background: var(--color-teal-wash);
+  font-size: 0.875rem;
+  text-decoration: none;
 }
-.grammar-demo,
+.grammar-continue > span:first-child,
+.stage-index a > span:last-child {
+  display: grid;
+  gap: 0.2rem;
+}
+.stage-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+.stage-index a,
 .grammar-filters,
-.grammar-lesson-card,
-.grammar-empty {
-  padding: 1.2rem;
-  background: #fff;
-  border: 1px solid var(--grammar-line);
-  border-radius: 0.9rem;
+.grammar-lesson-list,
+.grammar-view-switch {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper-strong);
 }
-.grammar-demo__heading,
-.grammar-stage__heading {
+.stage-index a {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.8rem;
+  color: var(--color-text);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+.stage-index a:hover {
+  border-color: var(--color-teal);
+  background: var(--color-teal-wash);
+}
+.stage-index__number,
+.stage-number {
+  color: var(--color-teal-dark);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.library-heading {
+  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
-.grammar-demo__icon,
-.grammar-stage__number {
-  display: grid;
-  place-items: center;
-  flex: 0 0 2.8rem;
-  height: 2.8rem;
-  color: var(--grammar-accent-dark);
-  background: var(--grammar-wash);
-  border-radius: 0.65rem;
-  font-weight: 850;
-}
-.grammar-demo__heading p {
-  font-size: 0.8rem;
-}
-.grammar-library {
-  scroll-margin-top: 6rem;
-}
-.grammar-library__heading {
-  margin-bottom: 1.3rem;
-}
-.grammar-library__heading h2 {
-  margin: 0.55rem 0;
-  font-size: clamp(1.4rem, 3.7cqi, 1.85rem);
+.grammar-library__title {
+  margin: 0;
+  font-size: 1.2rem;
 }
 .grammar-filters {
   display: grid;
   gap: 0.8rem;
+  padding: 1rem;
 }
 .grammar-filters label {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.4rem;
   min-width: 0;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 .grammar-filters input,
 .grammar-filters select {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
+  font-weight: 400;
 }
-.grammar-filter-status,
-.grammar-lesson-card__meta,
-.grammar-lesson-card__open {
+.grammar-filter-status {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  font-size: 0.8rem;
-}
-.grammar-filter-status {
-  min-height: 3.3rem;
+  min-height: 2.75rem;
+  font-size: 0.75rem;
 }
 .grammar-clear {
-  color: var(--grammar-accent-dark);
+  color: var(--color-teal-dark);
   background: transparent;
   border: 0;
-  border-radius: 0.3rem;
-  font-weight: 800;
 }
 .grammar-stage {
   margin: 0.75rem 0 2rem;
 }
-.grammar-stage__count {
-  margin-left: auto;
-  color: var(--grammar-muted);
-  white-space: nowrap;
+.stage-heading {
+  justify-content: start;
+  gap: 0.8rem;
+  margin-bottom: 0.85rem;
 }
-.grammar-stage__heading p,
+.stage-number {
+  display: grid;
+  place-items: center;
+  flex: 0 0 2.8rem;
+  height: 2.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-teal-wash);
+}
+.stage-heading p,
+.stage-count,
 .grammar-learning-note,
-.grammar-sources {
+.grammar-sources,
+.grammar-map-hint {
   font-size: 0.8rem;
 }
-.grammar-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: 0.9rem;
+.stage-count {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.grammar-lesson-list {
   margin: 0;
   padding: 0;
   list-style: none;
+  overflow: hidden;
+}
+.grammar-lesson-list li + li {
+  border-top: 1px solid var(--color-border);
 }
 .grammar-lesson-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  padding: 1rem;
   color: var(--color-text);
   text-decoration: none;
 }
-.grammar-lesson-card:hover {
-  color: var(--color-text);
-  border-color: #90b5f9;
-  box-shadow: 0 0.4rem 1rem rgb(37 99 235 / 8%);
+.grammar-lesson-card:hover,
+.grammar-lesson-card--recent {
+  background: var(--color-teal-wash);
 }
-.grammar-part {
-  padding: 0.2rem 0.5rem;
-  color: var(--grammar-accent-dark);
-  background: var(--grammar-wash);
-  border-radius: 0.35rem;
-  font-weight: 800;
-  white-space: nowrap;
+.grammar-lesson-card--recent {
+  box-shadow: inset 3px 0 var(--color-teal);
 }
-.grammar-mini-syntax {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin: 1.1rem 0 0.9rem;
+.grammar-lesson-card:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: -3px;
+}
+.grammar-lesson-card__number {
+  color: var(--color-text-muted);
   font-size: 0.7rem;
 }
-.grammar-mini-syntax > span {
-  padding: 0.24rem 0.5rem;
-  border-radius: 0.3rem;
-  font-weight: 850;
+.lesson-content {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  min-width: 0;
 }
-.grammar-mini-syntax i {
-  color: var(--grammar-muted);
-  font-style: normal;
+.lesson-content p {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
 }
-.grammar-mini-syntax__subject {
-  color: #1d4ed8;
-  background: #e8f0ff;
+.grammar-part,
+.grammar-lesson-card__status {
+  width: fit-content;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.65rem;
+  font-weight: 650;
+  white-space: nowrap;
 }
-.grammar-mini-syntax__verb {
-  color: #047857;
-  background: #e5f7ee;
+.grammar-part {
+  grid-row: 1;
+  grid-column: 2;
+  background: var(--color-paper-deep);
 }
-.grammar-mini-syntax__object {
-  color: #92400e;
-  background: #fff1d9;
+.grammar-lesson-card__status {
+  color: var(--color-text-muted);
+  background: var(--color-paper);
 }
-.grammar-lesson-card h4 {
-  font-size: 1.05rem;
-  line-height: 1.35;
+.grammar-lesson-card__status--completed {
+  color: var(--color-teal-dark);
+  background: var(--color-teal-wash);
 }
-.grammar-lesson-card > p {
-  margin: 0.55rem 0 1rem;
-}
-.grammar-lesson-card__open {
-  margin-top: auto;
-  padding-top: 0.8rem;
-  color: var(--grammar-accent-dark);
-  border-top: 1px solid var(--grammar-line);
-  font-weight: 800;
+.lesson-arrow {
+  display: none;
+  color: var(--color-teal-dark);
 }
 .grammar-empty {
-  padding-block: 2rem;
+  display: grid;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
   text-align: center;
-  border-style: dashed;
-}
-.grammar-empty > * + * {
-  margin-top: 0.75rem;
 }
 .grammar-sources {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--grammar-line);
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--color-border);
 }
 .grammar-sources summary {
   padding: 0.6rem 0;
-  cursor: pointer;
-  font-weight: 750;
+}
+.grammar-view-switch {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.2rem;
+}
+.grammar-view-switch button {
+  min-height: 2.1rem;
+  padding: 0.3rem 0.7rem;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-xs);
+  font-size: 0.75rem;
+}
+.grammar-view-switch button[aria-pressed='true'] {
+  color: var(--color-paper-strong);
+  background: var(--color-teal-dark);
+}
+.grammar-map-hint {
+  padding-block: 1rem;
+}
+@container (max-width: 24rem) {
+  .stage-count {
+    display: none;
+  }
+  .stage-index a {
+    padding: 0.75rem 0.55rem;
+    gap: 0.45rem;
+  }
 }
 @container (min-width: 34rem) {
   .grammar-filters {
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
   }
-}
-@container (min-width: 48rem) {
-  .grammar-hero {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    align-items: center;
+  .grammar-lesson-card {
+    grid-template-columns: 2.6rem minmax(0, 1fr) auto auto 1rem;
+    gap: 0.75rem;
+  }
+  .lesson-content,
+  .grammar-part {
+    grid-row: auto;
+    grid-column: auto;
+  }
+  .lesson-arrow {
+    display: inline;
   }
 }
-.grammar-view-switch {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-bottom: 0.8rem;
-}
-.grammar-view-switch button {
-  padding: 0.6rem 0.8rem;
-  color: var(--grammar-muted);
-  background: #fff;
-  border: 1px solid var(--grammar-line);
-  border-radius: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 750;
-}
-.grammar-view-switch button[aria-pressed='true'] {
-  color: var(--grammar-accent-dark);
-  background: var(--grammar-wash);
-  border-color: #90b5f9;
-}
-.grammar-map-hint {
-  padding-bottom: 0.8rem;
-  font-size: 0.8rem;
+@container (min-width: 46rem) {
+  .stage-index {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }

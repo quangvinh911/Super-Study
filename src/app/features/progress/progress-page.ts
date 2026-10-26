@@ -1,7 +1,14 @@
 import { CertificateContext } from '../../certificates/certificate-context';
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Attempt, Bookmark, QuestionStat, SessionSnapshot } from '../../core/models';
+import { Attempt, Bookmark, Question, QuestionStat, SessionSnapshot } from '../../core/models';
 import { ProgressRepository } from '../../core/persistence';
 import { QuizSessionStore } from '../../core/state';
 import { AuthService } from '../../core/auth/auth.service';
@@ -28,6 +35,15 @@ export class ProgressPage implements OnInit {
   protected readonly stats = signal<readonly QuestionStat[]>([]);
   protected readonly bookmarks = signal<readonly Bookmark[]>([]);
   protected importMode: 'merge' | 'replace' = 'merge';
+  private readonly questionSnapshots = computed(() => {
+    const questions = new Map<string, Question>();
+    for (const session of [...this.activeSessions(), ...this.attempts()]) {
+      for (const { question } of session.questions) {
+        questions.set(`${question.revision}:${question.id}`, question);
+      }
+    }
+    return questions;
+  });
 
   async ngOnInit(): Promise<void> {
     await this.reload();
@@ -59,6 +75,18 @@ export class ProgressPage implements OnInit {
 
   protected questionAccuracy(item: QuestionStat): number {
     return item.seenCount === 0 ? 0 : Math.round((item.correctCount / item.seenCount) * 100);
+  }
+
+  protected questionLabel(questionId: string, revision: number): string {
+    const question = this.questionSnapshots().get(`${revision}:${questionId}`);
+    if (!question) return questionId;
+    const number = question.provenance.sourceQuestionNumber ?? question.order;
+    return [
+      this.certificate.questionLabel(question),
+      number === undefined ? questionId : `Câu ${number}`,
+    ]
+      .filter(Boolean)
+      .join(' · ');
   }
 
   protected resumeLink(session: SessionSnapshot): readonly string[] {

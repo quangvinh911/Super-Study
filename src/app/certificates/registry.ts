@@ -50,7 +50,7 @@ export const CERTIFICATES: readonly CertificateDefinition[] = [
       {
         label: 'Ngữ pháp',
         path: 'grammar',
-        description: '16 bài học, ví dụ công việc và câu tự kiểm tra cho Part 5–6.',
+        description: 'Cấu trúc câu, ví dụ trực quan và bài luyện cho Part 5–6.',
       },
       {
         label: 'Từ vựng',

@@ -1,142 +1,201 @@
 <section class="page notes-page" aria-labelledby="notes-title">
   <header class="notes-heading">
-    <p class="eyebrow">Không gian ghi nhớ</p>
-    <h1 id="notes-title">My Notes<span aria-hidden="true">.</span></h1>
-    <p class="notes-subtitle">Những điều muốn nhớ, trong một không gian riêng.</p>
-    <button class="button notes-primary" type="button" (click)="dialogs.open()">
+    <div>
+      <h1 id="notes-title">Ghi chú</h1>
+      <p>Những điều cần nhớ, từ mọi chứng chỉ.</p>
+    </div>
+    <button class="button" type="button" (click)="dialogs.open()">
       <span aria-hidden="true">＋</span> Tạo ghi chú
     </button>
   </header>
-  <div class="notes-filters">
-    <label class="search-field"
-      ><span class="sr-only">Tìm trong ghi chú</span
-      ><svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-      >
-        <circle cx="10.5" cy="10.5" r="6.5" />
-        <path d="m16 16 5 5" /></svg
-      ><input
-        type="search"
-        placeholder="Tìm trong ghi chú…"
-        [ngModel]="query()"
-        (ngModelChange)="query.set($event)" /></label
-    ><label class="certificate-filter"
-      ><span class="sr-only">Lọc chứng chỉ nguồn</span
-      ><select [ngModel]="certificateId()" (ngModelChange)="certificateId.set($event)">
-        <option value="">Mọi chứng chỉ</option>
-        @for (certificate of certificates; track certificate.id) {
-          <option [value]="certificate.id">{{ certificate.name }}</option>
-        }
-      </select></label
-    >
-  </div>
-  @if (loading()) {
-    <p class="notes-empty" role="status">Đang tải ghi chú…</p>
-  } @else if (error()) {
-    <div class="notes-empty" role="alert">
-      <p>{{ error() }}</p>
-      <button class="button button--secondary" type="button" (click)="load()">Thử lại</button>
-    </div>
-  } @else {
-    <div class="notes-meta">
-      <span>{{ visible().length }} ghi chú</span><span>Cập nhật gần nhất</span>
-    </div>
-    <div class="notes-grid">
-      @for (note of visible(); track note.id) {
-        <article class="note-card">
-          <div class="note-card-top">
-            <span class="note-symbol"
-              ><svg
-                aria-hidden="true"
-                width="21"
-                height="21"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
+
+  <div class="notes-workspace" [class.notes-workspace--detail]="detailOpen()">
+    <section class="notes-library" aria-labelledby="notes-list-title">
+      <div class="library-heading">
+        <h2 #listHeading id="notes-list-title" tabindex="-1">Tất cả ghi chú</h2>
+        <span>{{ visible().length }}</span>
+      </div>
+      <div class="notes-filters">
+        <label class="search-field">
+          <span class="sr-only">Tìm trong ghi chú</span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="m16 16 5 5" />
+          </svg>
+          <input
+            type="search"
+            placeholder="Tìm ghi chú…"
+            [ngModel]="query()"
+            (ngModelChange)="changeQuery($event)"
+          />
+        </label>
+        <label class="certificate-filter">
+          <span class="sr-only">Lọc chứng chỉ nguồn</span>
+          <select [ngModel]="certificateId()" (ngModelChange)="changeCertificate($event)">
+            <option value="">Mọi chứng chỉ</option>
+            @for (certificate of certificates; track certificate.id) {
+              <option [value]="certificate.id">{{ certificate.name }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      @if (loading()) {
+        <p class="library-status" role="status">Đang tải ghi chú…</p>
+      } @else if (error()) {
+        <div class="library-status" role="alert">
+          <p>{{ error() }}</p>
+          <button class="button button--secondary" type="button" (click)="load()">Thử lại</button>
+        </div>
+      } @else {
+        <p class="list-order">Cập nhật gần nhất</p>
+        <ul class="note-list">
+          @for (note of visible(); track note.id) {
+            <li>
+              <button
+                class="note-row"
+                type="button"
+                [class.note-row--selected]="selected()?.id === note.id"
+                [attr.aria-current]="selected()?.id === note.id ? 'true' : null"
+                aria-controls="selected-note"
+                (click)="select(note)"
               >
-                <path d="M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9Z" />
-                <path d="M14 3v7h7M7 14h10M7 17h7" /></svg></span
-            ><span class="source-chip">{{ certificateName(note) }}</span>
-          </div>
-          <h2>
-            <button class="note-card-open" type="button" (click)="dialogs.open(note)">
-              {{ note.title }}
-            </button>
-          </h2>
-          <p class="note-preview">{{ preview(note) }}</p>
-          @if (note.source; as source) {
-            <p class="note-source">{{ source.label }}</p>
+                <span class="note-row__title">{{ note.title }}</span>
+                <span class="note-row__preview">{{ preview(note) }}</span>
+                <span class="note-row__meta">
+                  <span>{{ certificateName(note) }}</span>
+                  <time [attr.datetime]="note.updatedAt">{{
+                    note.updatedAt | date: 'dd/MM/yyyy'
+                  }}</time>
+                </span>
+              </button>
+            </li>
+          } @empty {
+            <li class="library-status">
+              <p>
+                {{ notes().length ? 'Không tìm thấy ghi chú phù hợp.' : 'Chưa có ghi chú nào.' }}
+              </p>
+              @if (notes().length) {
+                <button
+                  class="text-button"
+                  type="button"
+                  (click)="changeQuery(''); changeCertificate('')"
+                >
+                  Xóa bộ lọc
+                </button>
+              }
+            </li>
           }
-          <div class="note-card-bottom">
-            <time [attr.datetime]="note.updatedAt">{{
-              note.updatedAt | date: 'dd/MM/yyyy HH:mm'
-            }}</time>
-            <div class="note-actions">
-              <button type="button" (click)="copy(note)" [attr.aria-label]="'Copy ' + note.title">
-                Copy</button
-              ><button
+        </ul>
+      }
+    </section>
+
+    <section
+      id="selected-note"
+      class="note-detail"
+      aria-label="Nội dung ghi chú"
+      [attr.aria-busy]="loading()"
+    >
+      @if (selected(); as note) {
+        <div class="detail-toolbar">
+          <button class="text-button detail-back" type="button" (click)="backToList()">
+            ← Danh sách
+          </button>
+          <span class="detail-context">{{ certificateName(note) }}</span>
+          <div class="note-actions" aria-label="Thao tác với ghi chú">
+            <button class="text-button" type="button" (click)="dialogs.open(note)">
+              Chỉnh sửa
+            </button>
+            <details #moreActions class="note-more">
+              <summary aria-label="Thao tác khác">•••</summary>
+              <div class="note-more__menu">
+                <button
+                  class="text-button"
+                  type="button"
+                  (click)="copy(note); moreActions.open = false"
+                >
+                  Sao chép nội dung
+                </button>
+                <button
+                  class="text-button"
+                  type="button"
+                  (click)="export(note); moreActions.open = false"
+                >
+                  Xuất Markdown
+                </button>
+                <button
+                  class="text-button delete-action"
+                  type="button"
+                  (click)="requestRemove(note); moreActions.open = false"
+                >
+                  Xóa ghi chú
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+        @if (pendingDelete(); as pending) {
+          <div class="delete-confirm" role="alert">
+            <p>Xóa “{{ pending.title }}”? Thao tác này không thể hoàn tác.</p>
+            <div class="cluster">
+              <button
+                class="button button--secondary"
                 type="button"
-                (click)="export(note)"
-                [attr.aria-label]="'Xuất Markdown ' + note.title"
+                [disabled]="removing()"
+                (click)="pendingDelete.set(null)"
               >
-                .md</button
-              ><button
+                Giữ lại
+              </button>
+              <button
+                class="button delete-button"
                 type="button"
-                (click)="requestRemove(note)"
-                [attr.aria-label]="'Xóa ' + note.title"
+                [disabled]="removing()"
+                (click)="remove()"
               >
-                Xóa
+                {{ removing() ? 'Đang xóa…' : 'Xóa ghi chú' }}
               </button>
             </div>
           </div>
+        }
+        <article class="note-reading">
+          <header class="note-reading__heading">
+            <h2 #selectedHeading tabindex="-1">{{ note.title }}</h2>
+            <p class="note-updated">Cập nhật {{ note.updatedAt | date: 'dd/MM/yyyy · HH:mm' }}</p>
+          </header>
+          <app-note-preview [document]="note.document" />
+          @if (note.source; as source) {
+            <p class="note-source"><span>Nguồn ghi chú</span>{{ source.label }}</p>
+          }
         </article>
-      } @empty {
-        <div class="notes-empty">
-          <span class="empty-symbol" aria-hidden="true">▤</span>
-          <h2>{{ notes().length ? 'Không có ghi chú phù hợp' : 'Ghi lại điều bạn muốn nhớ' }}</h2>
-          <p>
-            {{
-              notes().length
-                ? 'Thử từ khóa khác hoặc chọn mọi chứng chỉ.'
-                : 'Tạo ghi chú đầu tiên, hoặc chọn một đoạn văn khi học và bấm icon Notes màu vàng.'
-            }}
-          </p>
-          @if (!notes().length) {
-            <button type="button" class="button notes-primary" (click)="dialogs.open()">
-              Tạo ghi chú
+      } @else {
+        <div class="detail-empty">
+          @if (loading()) {
+            <p role="status">Đang mở thư viện ghi chú…</p>
+          } @else if (error()) {
+            <p>Ghi chú sẽ hiển thị tại đây khi tải xong.</p>
+          } @else if (notes().length) {
+            <h2>Chưa có ghi chú phù hợp</h2>
+            <p>Thử từ khóa khác hoặc chọn mọi chứng chỉ.</p>
+          } @else {
+            <span class="empty-symbol" aria-hidden="true">▤</span>
+            <h2>Giữ lại điều vừa học</h2>
+            <p>Tạo ghi chú, hoặc chọn một đoạn văn khi học rồi bấm nút ghi chú màu vàng.</p>
+            <button class="button button--secondary" type="button" (click)="dialogs.open()">
+              Tạo ghi chú đầu tiên
             </button>
           }
         </div>
       }
-    </div>
-  }
+    </section>
+  </div>
   @if (actionError()) {
-    <p class="error" role="alert">{{ actionError() }}</p>
-  }
-  @if (pendingDelete(); as note) {
-    <div class="delete-confirm" role="alert">
-      <p>Xóa “{{ note.title }}”? Thao tác này không thể hoàn tác.</p>
-      <button
-        class="button button--secondary"
-        type="button"
-        [disabled]="removing()"
-        (click)="pendingDelete.set(null)"
-      >
-        Giữ lại</button
-      ><button
-        class="button button--danger"
-        type="button"
-        [disabled]="removing()"
-        (click)="remove()"
-      >
-        {{ removing() ? 'Đang xóa…' : 'Xóa ghi chú' }}
-      </button>
-    </div>
+    <p class="error notes-action-error" role="alert">{{ actionError() }}</p>
   }
   <p class="notes-privacy">
     Ghi chú riêng tư · Dùng chung mọi chứng chỉ ·

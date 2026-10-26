@@ -64,7 +64,7 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('opens My Notes with Notes above saved vocabulary', async () => {
+  it('opens the notebook with notes above saved vocabulary', async () => {
     const fixture = TestBed.createComponent(App);
     await TestBed.inject(Router).navigateByUrl('/certificates/toeic/notes');
     await fixture.whenStable();
@@ -72,9 +72,9 @@ describe('App', () => {
       '.workspace-nav__notes',
     ) as HTMLDetailsElement;
     expect(group.open).toBe(true);
-    expect(group.querySelector('summary')?.textContent).toBe('My Notes');
+    expect(group.querySelector('summary')?.textContent).toBe('Sổ tay');
     expect(Array.from(group.querySelectorAll('a')).map((link) => link.textContent?.trim())).toEqual(
-      ['Notes', 'Từ vựng đã lưu'],
+      ['Ghi chú', 'Từ vựng đã lưu'],
     );
   });
 

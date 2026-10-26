@@ -4,7 +4,7 @@
       <p class="eyebrow">{{ auth.user() ? 'Dữ liệu tài khoản' : 'Dữ liệu trên thiết bị' }}</p>
       <h1>Tiến độ học tập {{ certificate.name }}</h1>
       <p>
-        Lịch sử, điểm yếu và bookmark được lưu riêng cho {{ certificate.name }}
+        Lịch sử, điểm yếu và câu đã đánh dấu được lưu riêng cho {{ certificate.name }}
         {{ auth.user() ? 'trong tài khoản đang đăng nhập.' : 'trong trình duyệt này.' }}
       </p>
     </div>
@@ -23,21 +23,6 @@
     @if (error()) {
       <p class="notice notice--error" role="alert">{{ error() }}</p>
     }
-
-    <section class="metric-grid" aria-label="Tổng quan tiến độ">
-      <article class="metric-card">
-        <span>Lượt trả lời</span><strong>{{ totalAnswered() }}</strong>
-      </article>
-      <article class="metric-card">
-        <span>Độ chính xác</span><strong>{{ accuracy() }}%</strong>
-      </article>
-      <article class="metric-card">
-        <span>Phiên hoàn thành</span><strong>{{ attempts().length }}</strong>
-      </article>
-      <article class="metric-card">
-        <span>Bookmark</span><strong>{{ bookmarks().length }}</strong>
-      </article>
-    </section>
 
     @if (activeSessions().length) {
       <section class="section-block" aria-labelledby="active-title">
@@ -64,6 +49,21 @@
       </section>
     }
 
+    <section class="metric-grid" aria-label="Tổng quan tiến độ">
+      <article class="metric-card">
+        <span>Lượt trả lời</span><strong>{{ totalAnswered() }}</strong>
+      </article>
+      <article class="metric-card">
+        <span>Độ chính xác</span><strong>{{ accuracy() }}%</strong>
+      </article>
+      <article class="metric-card">
+        <span>Phiên hoàn thành</span><strong>{{ attempts().length }}</strong>
+      </article>
+      <article class="metric-card">
+        <span>Đã đánh dấu</span><strong>{{ bookmarks().length }}</strong>
+      </article>
+    </section>
+
     <section class="two-column section-block">
       <div aria-labelledby="weak-title">
         <div class="section-heading">
@@ -75,13 +75,19 @@
             @for (item of weakQuestions(); track item.questionId + item.revision) {
               <div class="weak-row">
                 <div>
-                  <strong>{{ item.questionId }}</strong
+                  <strong>{{ questionLabel(item.questionId, item.revision) }}</strong
                   ><span>{{ item.incorrectCount }} lần sai / {{ item.seenCount }} lượt</span>
                 </div>
                 <span class="accuracy">{{ questionAccuracy(item) }}%</span>
               </div>
             }
           </div>
+          <a
+            class="button button--secondary"
+            [routerLink]="certificate.link('practice')"
+            [queryParams]="{ history: 'incorrect' }"
+            >Ôn câu từng làm sai</a
+          >
         } @else {
           <div class="surface empty-inline">
             <p>Chưa có câu trả lời sai để phân tích.</p>
@@ -93,15 +99,15 @@
       <div aria-labelledby="bookmark-title">
         <div class="section-heading">
           <p class="eyebrow">Để xem lại</p>
-          <h2 id="bookmark-title">Bookmark</h2>
+          <h2 id="bookmark-title">Câu đã đánh dấu</h2>
         </div>
         <div class="surface bookmark-panel">
           @if (bookmarks().length) {
             <ul>
               @for (bookmark of bookmarks(); track bookmark.questionId) {
                 <li>
-                  <strong>{{ bookmark.questionId }}</strong
-                  ><span>revision {{ bookmark.revision }}</span>
+                  <strong>{{ questionLabel(bookmark.questionId, bookmark.revision) }}</strong
+                  ><span>Đã lưu để ôn lại</span>
                 </li>
               }
             </ul>
@@ -112,7 +118,7 @@
               >Luyện câu đã đánh dấu</a
             >
           } @else {
-            <p>Chưa có bookmark. Bạn có thể đánh dấu câu ngay trong chế độ luyện tập.</p>
+            <p>Chưa có câu đã đánh dấu. Bạn có thể đánh dấu câu trong lúc luyện tập.</p>
           }
         </div>
       </div>
@@ -147,7 +153,7 @@
                   {{ attempt.result.score }}/{{ attempt.result.total }} ·
                   {{ attempt.result.percent }}%
                 </h3>
-                <p>{{ formatDate(attempt.completedAt) }} · bank {{ attempt.bankVersion }}</p>
+                <p>{{ formatDate(attempt.completedAt) }}</p>
               </div>
               <a
                 class="button button--secondary"
@@ -162,49 +168,52 @@
       }
     </section>
 
-    <section class="surface data-tools" aria-labelledby="data-title">
-      <div>
-        <p class="eyebrow">Quyền kiểm soát dữ liệu</p>
-        <h2 id="data-title">Sao lưu hoặc xoá dữ liệu {{ certificate.name }}</h2>
-        <p>Chỉ áp dụng cho {{ certificate.name }}. Dữ liệu các chứng chỉ khác được giữ nguyên.</p>
-        <p>
-          Export tạo tệp JSON có cả snapshot câu hỏi để kết quả cũ không đổi khi ngân hàng được cập
-          nhật.
-        </p>
-      </div>
-      <div class="import-controls">
-        <label for="import-mode">Cách nhập dữ liệu</label>
-        <select
-          id="import-mode"
-          [value]="importMode"
-          (change)="importMode = $any($event.target).value"
-        >
-          <option value="merge">Gộp với dữ liệu hiện tại</option>
-          <option value="replace">Thay thế dữ liệu hiện tại</option>
-        </select>
-      </div>
-      <div class="cluster">
-        <button class="button" type="button" [disabled]="busy()" (click)="exportData()">
-          Export JSON
-        </button>
-        <label class="button button--secondary file-button">
-          Import JSON
-          <input
-            type="file"
-            accept="application/json,.json"
+    <details class="data-tools">
+      <summary>Quản lý dữ liệu học tập</summary>
+      <div class="data-tools__content">
+        <div>
+          <p class="eyebrow">Quyền kiểm soát dữ liệu</p>
+          <h2 id="data-title">Sao lưu hoặc xoá dữ liệu {{ certificate.name }}</h2>
+          <p>Chỉ áp dụng cho {{ certificate.name }}. Dữ liệu các chứng chỉ khác được giữ nguyên.</p>
+          <p>
+            Export tạo tệp JSON có cả snapshot câu hỏi để kết quả cũ không đổi khi ngân hàng được
+            cập nhật.
+          </p>
+        </div>
+        <div class="import-controls">
+          <label for="import-mode">Cách nhập dữ liệu</label>
+          <select
+            id="import-mode"
+            [value]="importMode"
+            (change)="importMode = $any($event.target).value"
+          >
+            <option value="merge">Gộp với dữ liệu hiện tại</option>
+            <option value="replace">Thay thế dữ liệu hiện tại</option>
+          </select>
+        </div>
+        <div class="cluster">
+          <button class="button" type="button" [disabled]="busy()" (click)="exportData()">
+            Export JSON
+          </button>
+          <label class="button button--secondary file-button">
+            Import JSON
+            <input
+              type="file"
+              accept="application/json,.json"
+              [disabled]="busy()"
+              (change)="importData($event)"
+            />
+          </label>
+          <button
+            class="button danger-button"
+            type="button"
             [disabled]="busy()"
-            (change)="importData($event)"
-          />
-        </label>
-        <button
-          class="button danger-button"
-          type="button"
-          [disabled]="busy()"
-          (click)="resetData()"
-        >
-          Reset dữ liệu
-        </button>
+            (click)="resetData()"
+          >
+            Reset dữ liệu
+          </button>
+        </div>
       </div>
-    </section>
+    </details>
   }
 </div>

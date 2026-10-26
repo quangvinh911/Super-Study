@@ -12,7 +12,6 @@
         <span class="brand__mark" aria-hidden="true">CP</span>
         <span class="brand__copy">
           <strong>Certificate Practice</strong>
-          <span>Không gian luyện thi</span>
         </span>
       </a>
 
@@ -22,13 +21,18 @@
 
       <div class="header-actions">
         @if (auth.user(); as user) {
-          <span>{{ user.username }}</span>
-          @if (user.role === 'admin') {
-            <a routerLink="/admin/users">Quản lý user</a>
-          }
-          <button class="button button--secondary" type="button" (click)="logout()">
-            Đăng xuất
-          </button>
+          <details class="account-menu">
+            <summary [attr.aria-label]="'Tài khoản ' + user.username">
+              <span class="account-name">{{ user.username }}</span>
+              <span aria-hidden="true">⌄</span>
+            </summary>
+            <div class="account-menu__items">
+              @if (user.role === 'admin') {
+                <a routerLink="/admin/users">Quản lý người dùng</a>
+              }
+              <button type="button" (click)="logout()">Đăng xuất</button>
+            </div>
+          </details>
         } @else {
           <button class="button button--secondary" type="button" (click)="loginDialog.open()">
             Đăng nhập
@@ -52,13 +56,21 @@
             #menuButton
             class="menu-toggle"
             type="button"
+            aria-label="Menu"
             [attr.aria-expanded]="isMenuOpen()"
             aria-controls="certificate-navigation"
             (click)="toggleMenu()"
           >
-            <span class="menu-toggle__icon" aria-hidden="true"
-              ><span></span><span></span><span></span
-            ></span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M2 4h12M2 8h12M2 12h12" />
+            </svg>
             <span>Menu</span>
           </button>
         }
@@ -87,7 +99,6 @@
           aria-label="Không gian học"
         >
           <div class="workspace-sidebar__heading">
-            <p class="eyebrow">Không gian học</p>
             <label for="certificate-switcher">Chứng chỉ</label>
             <select
               #certificateSelect
@@ -112,12 +123,12 @@
               [routerLinkActiveOptions]="{ exact: true }"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
-              >Tổng quan</a
+              ><app-study-icon name="home" />Tổng quan</a
             >
 
             @if (certificate.learningResources?.length) {
               <details class="workspace-nav__knowledge" [open]="isKnowledgeRoute()">
-                <summary>Kiến thức</summary>
+                <summary><app-study-icon name="book" />Kiến thức</summary>
                 <div class="workspace-nav__subitems">
                   @for (resource of certificate.learningResources; track resource.path) {
                     <a
@@ -137,20 +148,20 @@
               routerLinkActive="workspace-nav__link--active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
-              >Luyện tập</a
+              ><app-study-icon name="pencil" />Luyện tập</a
             >
             <details
               class="workspace-nav__knowledge workspace-nav__notes"
               [open]="section() === 'saved-vocabulary' || section() === 'notes'"
             >
-              <summary>My Notes</summary>
+              <summary><app-study-icon name="notes" />Sổ tay</summary>
               <div class="workspace-nav__subitems">
                 <a
                   [routerLink]="link('notes')"
                   routerLinkActive="workspace-nav__link--active"
                   ariaCurrentWhenActive="page"
                   (click)="closeMenu()"
-                  >Notes</a
+                  >Ghi chú</a
                 >
                 <a
                   [routerLink]="link('saved-vocabulary')"
@@ -166,14 +177,14 @@
               routerLinkActive="workspace-nav__link--active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
-              >Thi thử</a
+              ><app-study-icon name="exam" />Thi thử</a
             >
             <a
               [routerLink]="link('progress')"
               routerLinkActive="workspace-nav__link--active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
-              >Tiến độ</a
+              ><app-study-icon name="chart" />Tiến độ</a
             >
             <div class="workspace-nav__secondary">
               <a
@@ -181,7 +192,7 @@
                 routerLinkActive="workspace-nav__link--active"
                 ariaCurrentWhenActive="page"
                 (click)="closeMenu()"
-                >Hướng dẫn &amp; nguồn</a
+                ><app-study-icon name="help" />Hướng dẫn &amp; nguồn</a
               >
             </div>
           </nav>

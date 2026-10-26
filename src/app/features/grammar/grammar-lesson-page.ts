@@ -85,6 +85,12 @@ export class GrammarLessonPage {
     );
   }
 
+  protected focusSection(sectionId: string): void {
+    const target = this.host.nativeElement.querySelector<HTMLElement>(`#${sectionId}`);
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView({ block: 'start' });
+  }
+
   protected ruleUseLines(use: string): readonly string[] {
     return use
       .split(';')

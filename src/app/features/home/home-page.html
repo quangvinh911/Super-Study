@@ -1,68 +1,95 @@
 <div class="page certificate-catalog">
   <header class="page-header">
-    <p class="eyebrow">Không gian luyện thi</p>
-    <h1>Chọn mục tiêu học của bạn</h1>
-    <p>
-      Học kiến thức, luyện câu hỏi và theo dõi tiến độ trong từng chứng chỉ. Dữ liệu được lưu riêng
-      trên thiết bị này.
-    </p>
+    <p class="eyebrow">Không gian học tập</p>
+    <h1>Thư viện chứng chỉ</h1>
+    <p>Chọn chứng chỉ của bạn. Học kiến thức, luyện từng phần hoặc bắt đầu một đề thi thử.</p>
   </header>
 
   @if (recentCertificate; as recent) {
     <section class="recent-certificate surface" aria-labelledby="recent-title">
       <div>
-        <p class="eyebrow">Học tiếp</p>
+        <p class="eyebrow">Đã mở gần đây</p>
         <h2 id="recent-title">Quay lại {{ recent.name }}</h2>
-        <p>{{ recent.description }}</p>
+        <p>{{ recent.subtitle }}</p>
       </div>
-      <a class="button" [routerLink]="['/certificates', recent.id]">Mở {{ recent.name }}</a>
+      <a class="button button--secondary" [routerLink]="['/certificates', recent.id]"
+        >Mở {{ recent.name }} <span aria-hidden="true">→</span></a
+      >
     </section>
   }
 
-  <section class="catalog-group" aria-labelledby="language-title">
-    <div class="catalog-group__heading">
-      <p class="eyebrow">Khám phá</p>
-      <h2 id="language-title">Ngoại ngữ</h2>
-    </div>
-    <div class="certificate-grid">
+  <div class="catalog-groups">
+    <section class="catalog-group" aria-labelledby="language-title">
+      <h2 id="language-title" class="catalog-group__heading">Ngoại ngữ</h2>
       @for (certificate of languageCertificates; track certificate.id) {
-        <article class="surface certificate-card certificate-card--toeic">
-          <p class="eyebrow">{{ certificate.subtitle }}</p>
-          <h3>{{ certificate.name }}</h3>
-          <p>{{ certificate.description }}</p>
-          <ul class="certificate-highlights">
-            @for (highlight of certificate.catalogHighlights; track highlight) {
-              <li>{{ highlight }}</li>
-            }
-          </ul>
-          <a class="button" [routerLink]="['/certificates', certificate.id]"
-            >Mở {{ certificate.name }}</a
-          >
+        <article class="certificate-card certificate-card--toeic">
+          <div class="certificate-card__cover">
+            <div class="certificate-card__heading">
+              <h3>{{ certificate.name }}</h3>
+              <p>{{ certificate.subtitle }}</p>
+            </div>
+            <svg class="course-art" viewBox="0 0 150 136" aria-hidden="true" focusable="false">
+              <path class="course-art__fill" d="M25 87h100v39H25z" />
+              <g class="course-art__line">
+                <path d="M35 70V50a40 40 0 0 1 80 0v20" />
+                <rect x="26" y="47" width="19" height="35" rx="8" />
+                <rect x="105" y="47" width="19" height="35" rx="8" />
+                <path
+                  d="M30 97c16-6 30-3 45 4 15-7 29-10 45-4v29c-16-6-30-3-45 4-15-7-29-10-45-4Z"
+                />
+                <path d="M75 101v29M42 106l20 3m-20 7 20 3m26-10 20-3m-20 13 20-3" />
+                <path d="M62 45v15m9-22v29m9-23v17m9-14v11" />
+              </g>
+            </svg>
+          </div>
+          <div class="certificate-card__body">
+            <p class="certificate-card__description">{{ certificate.description }}</p>
+            <ul class="certificate-highlights">
+              @for (highlight of certificate.catalogHighlights; track highlight) {
+                <li>{{ highlight }}</li>
+              }
+            </ul>
+            <a class="button course-link" [routerLink]="['/certificates', certificate.id]">
+              Vào học {{ certificate.name }} <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </article>
       }
-    </div>
-  </section>
+    </section>
 
-  <section class="catalog-group" aria-labelledby="professional-title">
-    <div class="catalog-group__heading">
-      <h2 id="professional-title">Công nghệ &amp; nghề nghiệp</h2>
-    </div>
-    <div class="certificate-grid">
+    <section class="catalog-group" aria-labelledby="professional-title">
+      <h2 id="professional-title" class="catalog-group__heading">Công nghệ &amp; nghề nghiệp</h2>
       @for (certificate of professionalCertificates; track certificate.id) {
-        <article class="surface certificate-card">
-          <p class="eyebrow">{{ certificate.subtitle }}</p>
-          <h3>{{ certificate.name }}</h3>
-          <p>{{ certificate.description }}</p>
-          <ul class="certificate-highlights">
-            @for (highlight of certificate.catalogHighlights; track highlight) {
-              <li>{{ highlight }}</li>
-            }
-          </ul>
-          <a class="button" [routerLink]="['/certificates', certificate.id]"
-            >Mở {{ certificate.name }}</a
-          >
+        <article class="certificate-card certificate-card--ctfl">
+          <div class="certificate-card__cover">
+            <div class="certificate-card__heading">
+              <h3>{{ certificate.name }}</h3>
+              <p>{{ certificate.subtitle }}</p>
+            </div>
+            <svg class="course-art" viewBox="0 0 150 136" aria-hidden="true" focusable="false">
+              <path class="course-art__fill" d="M27 19h76v106H27z" />
+              <g class="course-art__line">
+                <rect x="28" y="20" width="76" height="104" rx="8" />
+                <rect x="49" y="11" width="34" height="18" rx="5" />
+                <path d="m42 48 5 5 9-11m8 6h25M42 71l5 5 9-11m8 6h25M42 94l5 5 9-11m8 6h14" />
+                <circle cx="112" cy="100" r="23" />
+                <path d="m101 100 8 8 15-16" />
+              </g>
+            </svg>
+          </div>
+          <div class="certificate-card__body">
+            <p class="certificate-card__description">{{ certificate.description }}</p>
+            <ul class="certificate-highlights">
+              @for (highlight of certificate.catalogHighlights; track highlight) {
+                <li>{{ highlight }}</li>
+              }
+            </ul>
+            <a class="button course-link" [routerLink]="['/certificates', certificate.id]">
+              Vào học {{ certificate.name }} <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </article>
       }
-    </div>
-  </section>
+    </section>
+  </div>
 </div>

@@ -1,0 +1,91 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+.note-document {
+  color: var(--color-text);
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+p {
+  margin: 0 0 1em;
+}
+h1,
+h2,
+h3 {
+  margin: 1.5em 0 0.65em;
+  font-family: var(--font-sans);
+  line-height: 1.35;
+}
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.25rem;
+}
+h3 {
+  font-size: 1.1rem;
+}
+ul,
+ol {
+  margin: 0 0 1.1em;
+  padding-inline-start: 1.5rem;
+}
+li > p {
+  margin-block-end: 0.35em;
+}
+blockquote {
+  margin: 1.25rem 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+}
+mark {
+  color: var(--color-text);
+  background: var(--color-warning-wash);
+  border-radius: 0.15rem;
+}
+a {
+  color: var(--color-teal-dark);
+}
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+.task-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+.task-item > div {
+  min-width: 0;
+}
+.task-item input {
+  flex: 0 0 auto;
+  opacity: 1;
+}
+.grammar-token {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  gap: 0.15rem;
+  margin: 0.2rem 0.08rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--role-line);
+  border-radius: 0.5rem;
+  color: var(--role-ink);
+  background: var(--role-wash);
+  line-height: 1.5;
+  max-width: 100%;
+}
+.grammar-label {
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+@media (forced-colors: active) {
+  .grammar-token,
+  mark {
+    border: 1px solid CanvasText;
+  }
+}

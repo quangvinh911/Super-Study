@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { GrammarOverviewPage } from './grammar-overview-page';
 import { GRAMMAR_LEARNING_ORDER } from './grammar-lessons';
+import { ProgressRepository } from '../../core/persistence/progress.repository';
 
 describe('TOEIC grammar overview', () => {
   let fixture: ComponentFixture<GrammarOverviewPage>;
@@ -10,7 +11,18 @@ describe('TOEIC grammar overview', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GrammarOverviewPage],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        {
+          provide: ProgressRepository,
+          useValue: {
+            getSetting: vi.fn().mockResolvedValue({
+              completed: ['cau-bi-dong'],
+              lastOpened: 'cau-bi-dong',
+            }),
+          },
+        },
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(GrammarOverviewPage);
     await fixture.whenStable();
@@ -53,15 +65,30 @@ describe('TOEIC grammar overview', () => {
     ).toEqual(
       Array.from({ length: 19 }, (_, index) => `Bài ${String(index + 1).padStart(2, '0')}`),
     );
-    expect(page.querySelector('app-grammar-syntax-sentence')).not.toBeNull();
-    expect(page.querySelector('.grammar-hero__actions a')?.getAttribute('href')).toBe(
-      '/certificates/toeic/grammar#grammar-library',
-    );
     expect(page.querySelector('nav[aria-label="Đường dẫn"]')).toBeNull();
     expect(page.querySelector<HTMLDetailsElement>('.grammar-sources')?.open).toBe(false);
   });
 
-  it('defaults to the mind map and allows each branch to collapse independently', async () => {
+  it('shows saved completion and a link to continue the last opened lesson', () => {
+    const progress = page.querySelector<HTMLProgressElement>('.grammar-progress progress');
+    expect(progress?.value).toBe(1);
+    expect(progress?.max).toBe(19);
+    expect(page.querySelector('.grammar-continue')?.getAttribute('href')).toBe(
+      '/certificates/toeic/grammar/cau-bi-dong',
+    );
+    expect(page.querySelector('.grammar-continue strong')?.textContent).toBe('Câu bị động');
+    expect(
+      page.querySelector('a.grammar-lesson-card[href$="/cau-bi-dong"] .grammar-lesson-card__status')
+        ?.textContent,
+    ).toBe('Đã học');
+    expect(page.querySelectorAll('.grammar-lesson-card__status--completed')).toHaveLength(1);
+  });
+
+  it('defaults to a grouped list and keeps the mind map available with independent branches', async () => {
+    expect(page.querySelectorAll('.grammar-lesson-card')).toHaveLength(19);
+    expect(page.querySelector('app-grammar-mind-map')).toBeNull();
+    page.querySelectorAll<HTMLButtonElement>('.grammar-view-switch button')[1]?.click();
+    await fixture.whenStable();
     expect(page.querySelector('nav[aria-label="Sơ đồ tư duy ngữ pháp TOEIC"]')).not.toBeNull();
     const branches = Array.from(page.querySelectorAll<HTMLDetailsElement>('.mind-map__branch'));
     expect(branches.every((branch) => branch.open)).toBe(true);
@@ -73,20 +100,20 @@ describe('TOEIC grammar overview', () => {
     expect(branches[0]?.open).toBe(true);
   });
 
-  it('switches between map and cards while preserving filters and lesson links', async () => {
+  it('switches between the list and map while preserving filters and lesson links', async () => {
     await search('menh de');
     await select('#grammar-part', 'part-6');
     const links = lessonLinks();
     const switches = page.querySelectorAll<HTMLButtonElement>('.grammar-view-switch button');
     switches[1]?.click();
     await fixture.whenStable();
-    expect(page.querySelector('app-grammar-mind-map')).toBeNull();
-    expect(page.querySelectorAll('.grammar-lesson-card')).toHaveLength(links.length);
+    expect(page.querySelector('app-grammar-mind-map')).not.toBeNull();
     expect(lessonLinks()).toEqual(links);
     expect(switches[1]?.getAttribute('aria-pressed')).toBe('true');
     switches[0]?.click();
     await fixture.whenStable();
-    expect(page.querySelector('app-grammar-mind-map')).not.toBeNull();
+    expect(page.querySelector('app-grammar-mind-map')).toBeNull();
+    expect(page.querySelectorAll('.grammar-lesson-card')).toHaveLength(links.length);
     expect(lessonLinks()).toEqual(links);
     expect(page.querySelector<HTMLInputElement>('#grammar-search')?.value).toBe('menh de');
     expect(page.querySelector<HTMLSelectElement>('#grammar-part')?.value).toBe('part-6');
@@ -94,7 +121,7 @@ describe('TOEIC grammar overview', () => {
 
   it('finds Vietnamese text without accents or case and keeps original lesson numbers', async () => {
     const originalNumber = page.querySelector(
-      'a[href$="/cau-bi-dong"] .mind-map__lesson-number',
+      'a.grammar-lesson-card[href$="/cau-bi-dong"] .grammar-lesson-card__number',
     )?.textContent;
     await search('CÂU BỊ ĐỘNG');
     const accentedLinks = lessonLinks();
@@ -102,7 +129,8 @@ describe('TOEIC grammar overview', () => {
     await search('  cau bi dong  ');
     expect(lessonLinks()).toEqual(accentedLinks);
     expect(
-      page.querySelector('a[href$="/cau-bi-dong"] .mind-map__lesson-number')?.textContent,
+      page.querySelector('a.grammar-lesson-card[href$="/cau-bi-dong"] .grammar-lesson-card__number')
+        ?.textContent,
     ).toBe(originalNumber);
   });
 

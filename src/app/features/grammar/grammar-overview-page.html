@@ -1,37 +1,49 @@
 <div class="page grammar-page grammar-overview">
-  <header class="grammar-hero">
-    <div class="grammar-hero__copy">
-      <p class="grammar-kicker"><span aria-hidden="true">✦</span> TOEIC · NGỮ PHÁP TRỰC QUAN</p>
-      <h1 #pageHeading tabindex="-1">Nhìn cấu trúc.<br />Hiểu ngữ pháp.</h1>
-      <p>
-        Khám phá câu bằng các khối màu, quan sát cách câu thay đổi và học qua ví dụ từ đề Hacker.
-      </p>
-      <div class="grammar-hero__actions">
-        <span>Đã học {{ learningProgress.completed().length }} / {{ lessonCount }} bài</span>
-        @if (learningProgress.lastOpened(); as slug) {
-          <a [routerLink]="['/certificates/toeic/grammar', slug]">Tiếp tục bài gần nhất</a>
-        }
-        <a class="button" href="/certificates/toeic/grammar#grammar-library"
-          >Khám phá {{ lessonCount }} bài học <span aria-hidden="true">↓</span></a
-        >
-        <span>4 chặng · Part 5 &amp; 6</span>
-      </div>
+  <header class="grammar-header">
+    <div>
+      <p class="grammar-kicker">TOEIC · Part 5 &amp; 6</p>
+      <h1 #pageHeading tabindex="-1">Ngữ pháp</h1>
+      <p>Nắm cấu trúc, hiểu quy tắc, áp dụng vào Part 5 &amp; 6.</p>
     </div>
-    <div class="grammar-demo">
-      <div class="grammar-demo__heading">
-        <span class="grammar-demo__icon" aria-hidden="true">S + V</span>
-        <div>
-          <strong>Một câu, nhiều manh mối</strong>
-          <p>Chạm vào khối màu để hiểu vai trò của từ.</p>
-        </div>
-      </div>
-      @if (demoSentence; as sentence) {
-        <app-grammar-syntax-sentence [sentence]="sentence" [showLegend]="true" />
-      }
+    <div class="grammar-progress">
+      <span>Tiến độ của bạn</span>
+      <strong
+        >{{ learningProgress.completed().length }}
+        <small>/ {{ lessonCount }} bài học</small></strong
+      >
+      <progress
+        aria-label="Tiến độ học ngữ pháp"
+        [value]="learningProgress.completed().length"
+        [max]="lessonCount"
+      ></progress>
     </div>
   </header>
+  @if (lastOpenedLesson(); as recentLesson) {
+    <a class="grammar-continue" [routerLink]="['/certificates/toeic/grammar', recentLesson.slug]">
+      <span
+        ><small>Bài học gần nhất</small><strong>{{ recentLesson.title }}</strong></span
+      >
+      <span>Học tiếp <span aria-hidden="true">→</span></span>
+    </a>
+  }
   @if (learningProgress.error()) {
     <p class="error" role="alert">{{ learningProgress.error() }}</p>
+  }
+  @if (view() === 'cards' && visibleStages().length > 0) {
+    <nav class="stage-index" aria-label="Các chặng ngữ pháp">
+      @for (group of visibleStages(); track group.name) {
+        <a
+          [href]="'/certificates/toeic/grammar#grammar-stage-' + group.number"
+          (click)="focusStage($event, group.number)"
+        >
+          <span class="stage-index__number" aria-hidden="true">{{ group.number }}</span>
+          <span
+            ><strong>{{ group.name }}</strong
+            ><small>{{ group.lessons.length }} bài học</small></span
+          >
+        </a>
+      }
+    </nav>
   }
 
   <section
@@ -40,12 +52,16 @@
     aria-labelledby="library-title"
     tabindex="-1"
   >
-    <div class="grammar-library__heading">
-      <div>
-        <p class="grammar-kicker">BẢN ĐỒ KIẾN THỨC</p>
-        <h2 id="library-title" tabindex="-1">Một sơ đồ, toàn bộ ngữ pháp TOEIC</h2>
+    <div class="library-heading">
+      <h2 class="grammar-library__title" id="library-title" tabindex="-1">Lộ trình ngữ pháp</h2>
+      <div class="grammar-view-switch" role="group" aria-label="Cách xem thư viện">
+        <button type="button" [attr.aria-pressed]="view() === 'cards'" (click)="view.set('cards')">
+          Danh sách
+        </button>
+        <button type="button" [attr.aria-pressed]="view() === 'map'" (click)="view.set('map')">
+          Sơ đồ tư duy
+        </button>
       </div>
-      <p>Đi theo nhánh kiến thức, chọn một bài để bắt đầu.</p>
     </div>
 
     <div class="grammar-filters" role="search" aria-label="Tìm bài học ngữ pháp">
@@ -93,14 +109,6 @@
       }
     </div>
 
-    <div class="grammar-view-switch" role="group" aria-label="Cách xem thư viện">
-      <button type="button" [attr.aria-pressed]="view() === 'map'" (click)="view.set('map')">
-        Sơ đồ tư duy
-      </button>
-      <button type="button" [attr.aria-pressed]="view() === 'cards'" (click)="view.set('cards')">
-        Thẻ bài học
-      </button>
-    </div>
     @if (filteredLessons().length > 0 && view() === 'map') {
       <p class="grammar-map-hint">
         Bấm tên nhóm để thu gọn hoặc mở nhánh. Bấm tên bài để khám phá.
@@ -108,55 +116,48 @@
       <app-grammar-mind-map [lessons]="filteredLessons()" />
     } @else {
       @for (group of visibleStages(); track group.name) {
-        <section class="grammar-stage" [attr.aria-labelledby]="'stage-' + group.number">
-          <div class="grammar-stage__heading">
-            <span class="grammar-stage__number" aria-hidden="true">{{ group.number }}</span>
+        <section
+          class="grammar-stage"
+          [id]="'grammar-stage-' + group.number"
+          [attr.aria-labelledby]="'stage-' + group.number"
+          tabindex="-1"
+        >
+          <div class="stage-heading">
+            <span class="stage-number" aria-hidden="true">{{ group.number }}</span>
             <div>
               <h3 [id]="'stage-' + group.number">{{ group.name }}</h3>
               <p>{{ stageDescriptions[group.name] }}</p>
             </div>
-            <span class="grammar-stage__count">{{ group.lessons.length }} bài</span>
+            <span class="stage-count">{{ group.lessons.length }} bài học</span>
           </div>
-          <ol class="grammar-card-grid">
+          <ol class="grammar-lesson-list">
             @for (lesson of group.lessons; track lesson.slug) {
               <li>
                 <a
                   class="grammar-lesson-card"
+                  [class.grammar-lesson-card--recent]="
+                    learningProgress.lastOpened() === lesson.slug
+                  "
                   [routerLink]="['/certificates/toeic/grammar', lesson.slug]"
                 >
-                  <div class="grammar-lesson-card__meta">
-                    <span class="grammar-lesson-card__number">Bài {{ position(lesson) }}</span
-                    ><span class="grammar-part">{{
-                      lesson.part === 'part-5' ? 'Part 5' : 'Part 6'
-                    }}</span>
+                  <span class="grammar-lesson-card__number">Bài {{ position(lesson) }}</span>
+                  <div class="lesson-content">
+                    <h4>{{ lesson.title }}</h4>
+                    <p>{{ lesson.goal }}</p>
                   </div>
-                  <div class="grammar-mini-syntax" aria-hidden="true">
-                    @switch (lesson.slug) {
-                      @case ('cac-thi') {
-                        <span class="grammar-mini-syntax__subject">Past</span><i>→</i>
-                        <span class="grammar-mini-syntax__verb">● Now</span><i>→</i>
-                        <span class="grammar-mini-syntax__object">Future</span>
-                      }
-                      @case ('cau-bi-dong') {
-                        <span class="grammar-mini-syntax__subject">O → S</span><i>→</i>
-                        <span class="grammar-mini-syntax__verb">be + V3</span>
-                      }
-                      @case ('phan-tu-va-rut-gon') {
-                        <span class="grammar-mini-syntax__subject">who + V</span><i>→</i>
-                        <span class="grammar-mini-syntax__verb">V-ing / V3</span>
-                      }
-                      @default {
-                        <span class="grammar-mini-syntax__subject">S</span><i>+</i>
-                        <span class="grammar-mini-syntax__verb">V</span><i>+</i>
-                        <span class="grammar-mini-syntax__object">O / C</span>
-                      }
-                    }
-                  </div>
-                  <h4>{{ lesson.title }}</h4>
-                  <p>{{ lesson.goal }}</p>
-                  <span class="grammar-lesson-card__open"
-                    >Khám phá bài học <span aria-hidden="true">↗</span></span
+                  <span class="grammar-part">{{
+                    lesson.part === 'part-5' ? 'Part 5' : 'Part 6'
+                  }}</span>
+                  <span
+                    class="grammar-lesson-card__status"
+                    [class.grammar-lesson-card__status--completed]="
+                      learningProgress.completed().includes(lesson.slug)
+                    "
+                    >{{
+                      learningProgress.completed().includes(lesson.slug) ? 'Đã học' : 'Chưa học'
+                    }}</span
                   >
+                  <span class="lesson-arrow" aria-hidden="true">→</span>
                 </a>
               </li>
             }
