@@ -15,7 +15,6 @@ import {
   GrammarLesson,
   GrammarStage,
 } from './grammar-lessons';
-import { GrammarSyntaxSentence } from './grammar-syntax-sentence';
 import { GrammarMindMap } from './grammar-mind-map';
 import { LessonProgressService } from '../../core/state/lesson-progress.service';
 
@@ -31,7 +30,7 @@ function normalizeSearch(value: string): string {
 @Component({
   selector: 'app-grammar-overview-page',
   providers: [LessonProgressService],
-  imports: [RouterLink, GrammarSyntaxSentence, GrammarMindMap],
+  imports: [RouterLink, GrammarMindMap],
   templateUrl: './grammar-overview-page.html',
   styleUrl: './grammar-overview-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,11 +43,13 @@ export class GrammarOverviewPage {
   private readonly searchControl = viewChild<ElementRef<HTMLInputElement>>('searchInput');
   protected readonly stages = GRAMMAR_STAGES;
   protected readonly lessonCount = GRAMMAR_LEARNING_ORDER.length;
-  protected readonly demoSentence = GRAMMAR_LEARNING_ORDER[0]?.examples[0];
+  protected readonly lastOpenedLesson = computed(() =>
+    GRAMMAR_LEARNING_ORDER.find((lesson) => lesson.slug === this.learningProgress.lastOpened()),
+  );
   protected readonly search = signal('');
   protected readonly stage = signal('all');
   protected readonly part = signal('all');
-  protected readonly view = signal<'map' | 'cards'>('map');
+  protected readonly view = signal<'map' | 'cards'>('cards');
   protected readonly hasFilters = computed(
     () => this.search().trim() !== '' || this.stage() !== 'all' || this.part() !== 'all',
   );
@@ -97,6 +98,19 @@ export class GrammarOverviewPage {
 
   protected position(lesson: GrammarLesson): string {
     return String(GRAMMAR_LEARNING_ORDER.indexOf(lesson) + 1).padStart(2, '0');
+  }
+
+  protected focusStage(event: MouseEvent, stageNumber: string): void {
+    if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.button !== 0) {
+      return;
+    }
+    const section = this.host.nativeElement.querySelector<HTMLElement>(
+      `#grammar-stage-${stageNumber}`,
+    );
+    if (!section) return;
+    event.preventDefault();
+    section.focus({ preventScroll: true });
+    section.scrollIntoView({ block: 'start' });
   }
 
   protected clearFilters(): void {

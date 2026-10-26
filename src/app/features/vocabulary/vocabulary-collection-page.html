@@ -1,7 +1,6 @@
 <div class="page vocabulary-page">
   <header class="page-header">
     <a routerLink="/certificates/toeic/vocabulary">← Các bộ từ vựng</a>
-    <p class="eyebrow">TOEIC · Bộ tài liệu</p>
     <h1>{{ collection()?.title ?? 'Từ vựng' }}</h1>
     @if (collection(); as data) {
       <p>{{ data.entries.length }} mục học · 30 chủ đề · Có nghĩa tiếng Việt và cách dùng.</p>
@@ -91,6 +90,10 @@
                 (click)="speak(entry.term)"
               >
                 {{ entry.term }}
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M11 5 6 9H3v6h3l5 4V5Z" />
+                  <path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14" />
+                </svg>
               </button>
             </h2>
             <button

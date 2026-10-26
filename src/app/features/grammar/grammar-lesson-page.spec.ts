@@ -99,6 +99,22 @@ describe('TOEIC grammar lessons', () => {
     expect(page.querySelector('app-grammar-example-quiz input[type=radio]:checked')).toBeNull();
   });
 
+  it('moves focus to each reading section from the lesson outline', async () => {
+    const { fixture, page } = await render();
+    const buttons = page.querySelectorAll<HTMLButtonElement>('.grammar-outline button');
+    const sectionIds = ['explore-heading', 'rules-heading', 'practice-heading'];
+    expect(buttons).toHaveLength(sectionIds.length);
+    for (const [index, sectionId] of sectionIds.entries()) {
+      const heading = element<HTMLElement>(page, '#' + sectionId);
+      const scrollToHeading = vi.fn();
+      heading.scrollIntoView = scrollToHeading;
+      buttons[index]?.click();
+      await fixture.whenStable();
+      expect(document.activeElement).toBe(heading);
+      expect(scrollToHeading).toHaveBeenCalledWith({ block: 'start' });
+    }
+  });
+
   it('opens each rule independently and resets disclosures and timeline on navigation', async () => {
     const { fixture, params, page } = await render();
     const disclosures = page.querySelectorAll<HTMLDetailsElement>('.grammar-rule-examples');

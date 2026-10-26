@@ -9,17 +9,21 @@ import { VOCABULARY_COLLECTIONS } from './vocabulary-data';
     <div class="page vocabulary-page">
       <header class="page-header">
         <a routerLink="/certificates/toeic">← TOEIC</a>
-        <p class="eyebrow">Kiến thức · Từ vựng</p>
-        <h1>Học từ trong ngữ cảnh TOEIC</h1>
-        <p>Chọn bộ tài liệu để học từ vựng, thành ngữ và cụm từ trước khi luyện đề.</p>
+        <h1>Từ vựng TOEIC</h1>
+        <p>Chọn bộ tài liệu để học từ, cụm từ và cách dùng trong ngữ cảnh.</p>
       </header>
+      <div class="library-heading">
+        <h2>Bộ tài liệu</h2>
+        <span>{{ collections.length }} bộ</span>
+      </div>
       <section class="collection-grid" aria-label="Bộ tài liệu">
         @for (collection of collections; track collection.id) {
           <a class="surface collection-card" [routerLink]="[collection.id]">
-            <p class="eyebrow">Bộ tài liệu TOEIC</p>
-            <h2>{{ collection.title }}</h2>
-            <p>{{ collection.description }}</p>
-            <strong>Mở bộ từ vựng →</strong>
+            <div>
+              <h2>{{ collection.title }}</h2>
+              <p>{{ collection.description }}</p>
+            </div>
+            <span class="collection-open">Mở bộ từ <span aria-hidden="true">→</span></span>
           </a>
         }
       </section>

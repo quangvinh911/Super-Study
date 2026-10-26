@@ -1,6 +1,6 @@
 .progress-page,
 .section-block,
-.data-tools {
+.data-tools__content {
   display: grid;
   gap: 1.25rem;
 }
@@ -21,16 +21,14 @@
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
+  gap: 0;
+  border-block: 1px solid var(--color-border);
 }
 
 .metric-card {
   display: grid;
   gap: 0.25rem;
-  padding: 1rem;
-  background: var(--color-paper-strong);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  padding: 1rem 0.75rem;
 }
 
 .metric-card span {
@@ -68,6 +66,18 @@
 .history-card > div {
   display: grid;
   gap: 0.4rem;
+}
+
+.history-card {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: 1rem 0;
+}
+
+.section-heading h2 {
+  font-size: 1.1rem;
 }
 
 .session-card h3,
@@ -160,6 +170,29 @@
   color: var(--color-text-muted);
 }
 
+.data-tools {
+  padding-block: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.data-tools summary {
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: var(--text-sm);
+}
+
+.data-tools__content {
+  padding-top: 1.25rem;
+}
+
+.data-tools h2 {
+  font-size: 1.1rem;
+}
+
+.file-button:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
 .import-controls {
   display: grid;
   gap: 0.45rem;
@@ -197,10 +230,6 @@
 
   .metric-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .history-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .two-column {

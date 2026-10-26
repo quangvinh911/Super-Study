@@ -27,6 +27,13 @@
       }
     </header>
 
+    <nav class="grammar-outline" aria-label="Nội dung bài học">
+      <span>Trong bài này</span>
+      <button type="button" (click)="focusSection('explore-heading')">Khám phá</button>
+      <button type="button" (click)="focusSection('rules-heading')">Quy tắc &amp; ví dụ</button>
+      <button type="button" (click)="focusSection('practice-heading')">Luyện tập</button>
+    </nav>
+
     <article class="grammar-article">
       <section class="grammar-explore" aria-labelledby="explore-heading">
         <p class="eyebrow">01 · Khám phá trực quan</p>

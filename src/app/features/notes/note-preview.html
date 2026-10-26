@@ -1,0 +1,196 @@
+<div class="note-document">
+  <ng-container
+    [ngTemplateOutlet]="nodeTemplate"
+    [ngTemplateOutletContext]="{ $implicit: document() }"
+  />
+</div>
+
+<ng-template #children let-node>
+  @for (child of node.content ?? []; track $index) {
+    <ng-container
+      [ngTemplateOutlet]="nodeTemplate"
+      [ngTemplateOutletContext]="{ $implicit: child }"
+    />
+  }
+</ng-template>
+
+<ng-template #nodeTemplate let-node>
+  @switch (node.type) {
+    @case ('doc') {
+      <ng-container [ngTemplateOutlet]="children" [ngTemplateOutletContext]="{ $implicit: node }" />
+    }
+    @case ('paragraph') {
+      <p>
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+        @if (!node.content?.length) {
+          <br />
+        }
+      </p>
+    }
+    @case ('heading') {
+      @switch (node.attrs?.['level']) {
+        @case (1) {
+          <h1>
+            <ng-container
+              [ngTemplateOutlet]="children"
+              [ngTemplateOutletContext]="{ $implicit: node }"
+            />
+          </h1>
+        }
+        @case (2) {
+          <h2>
+            <ng-container
+              [ngTemplateOutlet]="children"
+              [ngTemplateOutletContext]="{ $implicit: node }"
+            />
+          </h2>
+        }
+        @case (3) {
+          <h3>
+            <ng-container
+              [ngTemplateOutlet]="children"
+              [ngTemplateOutletContext]="{ $implicit: node }"
+            />
+          </h3>
+        }
+      }
+    }
+    @case ('text') {
+      <ng-container
+        [ngTemplateOutlet]="markedText"
+        [ngTemplateOutletContext]="{ $implicit: node, index: 0 }"
+      />
+    }
+    @case ('hardBreak') {
+      <br />
+    }
+    @case ('bulletList') {
+      <ul>
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </ul>
+    }
+    @case ('orderedList') {
+      <ol [attr.start]="node.attrs?.['start'] ?? 1">
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </ol>
+    }
+    @case ('listItem') {
+      <li>
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </li>
+    }
+    @case ('taskList') {
+      <ul class="task-list">
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </ul>
+    }
+    @case ('taskItem') {
+      <li class="task-item">
+        <input
+          type="checkbox"
+          disabled
+          [checked]="node.attrs?.['checked'] === true"
+          aria-label="Trạng thái mục ghi chú"
+        />
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="children"
+            [ngTemplateOutletContext]="{ $implicit: node }"
+          />
+        </div>
+      </li>
+    }
+    @case ('blockquote') {
+      <blockquote>
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </blockquote>
+    }
+    @case ('grammarToken') {
+      @if (grammarRole(node); as role) {
+        <span
+          class="grammar-token"
+          [attr.data-note-grammar-role]="role.role"
+          [style.--role-ink]="role.ink"
+          [style.--role-wash]="role.wash"
+          [style.--role-line]="role.line"
+        >
+          <span class="grammar-label" lang="vi">{{ role.role }} · {{ role.label }}</span>
+          <span lang="en"
+            ><ng-container
+              [ngTemplateOutlet]="children"
+              [ngTemplateOutletContext]="{ $implicit: node }"
+          /></span>
+        </span>
+      }
+    }
+  }
+</ng-template>
+
+<ng-template #markedText let-node let-index="index">
+  @if (node.marks?.[index]; as mark) {
+    @switch (mark.type) {
+      @case ('bold') {
+        <strong
+          ><ng-container
+            [ngTemplateOutlet]="markedText"
+            [ngTemplateOutletContext]="{ $implicit: node, index: index + 1 }"
+        /></strong>
+      }
+      @case ('italic') {
+        <em
+          ><ng-container
+            [ngTemplateOutlet]="markedText"
+            [ngTemplateOutletContext]="{ $implicit: node, index: index + 1 }"
+        /></em>
+      }
+      @case ('underline') {
+        <u
+          ><ng-container
+            [ngTemplateOutlet]="markedText"
+            [ngTemplateOutletContext]="{ $implicit: node, index: index + 1 }"
+        /></u>
+      }
+      @case ('highlight') {
+        <mark
+          ><ng-container
+            [ngTemplateOutlet]="markedText"
+            [ngTemplateOutletContext]="{ $implicit: node, index: index + 1 }"
+        /></mark>
+      }
+      @case ('link') {
+        @if (safeLink(mark); as href) {
+          <a [href]="href" target="_blank" rel="noopener noreferrer"
+            ><ng-container
+              [ngTemplateOutlet]="markedText"
+              [ngTemplateOutletContext]="{ $implicit: node, index: index + 1 }"
+          /></a>
+        } @else {
+          <ng-container
+            [ngTemplateOutlet]="markedText"
+            [ngTemplateOutletContext]="{ $implicit: node, index: index + 1 }"
+          />
+        }
+      }
+    }
+  } @else {
+    <span [textContent]="node.text ?? ''"></span>
+  }
+</ng-template>
