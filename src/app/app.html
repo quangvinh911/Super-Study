@@ -3,15 +3,11 @@
 <div class="site-shell" [class.site-shell--focus]="isFocusLayout()" lang="vi">
   <header class="site-header">
     <div class="shell-container header-row">
-      <a
-        class="brand"
-        routerLink="/"
-        (click)="closeMenu()"
-        aria-label="Certificate Practice — Trang chủ"
-      >
-        <span class="brand__mark" aria-hidden="true">CP</span>
+      <a class="brand" routerLink="/" (click)="closeMenu()" aria-label="Certiva — Trang chủ">
+        <img class="brand__mark" src="brand/certiva-symbol.png" width="40" height="32" alt="" />
         <span class="brand__copy">
-          <strong>Certificate Practice</strong>
+          <strong>Certiva</strong>
+          <span class="brand__tagline">Luyện vững kiến thức. Chinh phục chứng chỉ.</span>
         </span>
       </a>
 
@@ -249,8 +245,8 @@
     <footer class="site-footer">
       <div class="shell-container footer-row">
         <p>
-          © {{ currentYear }} Certificate Practice · Công cụ luyện tập độc lập, không liên kết với
-          tổ chức cấp chứng chỉ.
+          © {{ currentYear }} Certiva · Công cụ luyện tập độc lập, không liên kết với tổ chức cấp
+          chứng chỉ.
         </p>
         <a routerLink="/">Tất cả chứng chỉ</a>
       </div>

@@ -1,7 +1,7 @@
 {
-  "name": "Certificate Practice",
-  "short_name": "Practice",
-  "description": "Luyện tập và thi thử CTFL, TOEIC với tiến độ riêng cho từng chứng chỉ.",
+  "name": "Certiva",
+  "short_name": "Certiva",
+  "description": "Luyện vững kiến thức. Chinh phục chứng chỉ. Luyện tập và thi thử CTFL, TOEIC.",
   "lang": "vi",
   "categories": ["education", "productivity"],
   "theme_color": "#102c3a",
@@ -11,9 +11,9 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {

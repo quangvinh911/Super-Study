@@ -1,4 +1,6 @@
-# Certificate Practice
+# Certiva
+
+**Luyện vững kiến thức. Chinh phục chứng chỉ.**
 
 Ứng dụng Angular 22 để luyện tập và thi thử nhiều chứng chỉ. Giao diện tiếng Việt, câu hỏi tiếng Anh. Khách luyện tập tối đa 10 câu mỗi phiên và lưu dữ liệu riêng trong IndexedDB. Tài khoản lưu tiến độ, từ vựng, đánh dấu và lịch sử trên API; đăng nhập bắt buộc khi làm thi thử. Admin quản lý tài khoản và mật khẩu.
 
