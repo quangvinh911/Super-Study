@@ -26,44 +26,44 @@ const learningRoutes: Routes = [
   },
   {
     path: 'practice',
-    title: 'Luyện tập - CTFL Practice',
+    title: 'Luyện tập - Certiva',
     loadComponent: () =>
       import('./features/practice/practice-setup-page').then((m) => m.PracticeSetupPage),
   },
   {
     path: 'practice/:sessionId',
-    title: 'Phiên luyện tập - CTFL Practice',
+    title: 'Phiên luyện tập - Certiva',
     data: { layout: 'focus' },
     loadComponent: () =>
       import('./features/practice/practice-session-page').then((m) => m.PracticeSessionPage),
   },
   {
     path: 'mock-exam',
-    title: 'Thi thử - CTFL Practice',
+    title: 'Thi thử - Certiva',
     loadComponent: () =>
       import('./features/mock-exam/mock-exam-setup-page').then((m) => m.MockExamSetupPage),
   },
   {
     path: 'mock-exam/:sessionId',
     canActivate: [accountGuard],
-    title: 'Bài thi thử - CTFL Practice',
+    title: 'Bài thi thử - Certiva',
     data: { layout: 'focus' },
     loadComponent: () =>
       import('./features/mock-exam/mock-exam-session-page').then((m) => m.MockExamSessionPage),
   },
   {
     path: 'results/:sessionId',
-    title: 'Kết quả - CTFL Practice',
+    title: 'Kết quả - Certiva',
     loadComponent: () => import('./features/results/results-page').then((m) => m.ResultsPage),
   },
   {
     path: 'progress',
-    title: 'Tiến độ - CTFL Practice',
+    title: 'Tiến độ - Certiva',
     loadComponent: () => import('./features/progress/progress-page').then((m) => m.ProgressPage),
   },
   {
     path: 'methodology',
-    title: 'Phương pháp và nguồn - CTFL Practice',
+    title: 'Phương pháp và nguồn - Certiva',
     loadComponent: () =>
       import('./features/methodology/methodology-page').then((m) => m.MethodologyPage),
   },
@@ -118,20 +118,20 @@ const toeicKnowledgeRoutes: Routes = [
 export const routes: Routes = [
   {
     path: 'login',
-    title: 'Đăng nhập · Certificate Practice',
+    title: 'Đăng nhập · Certiva',
     canActivate: [loginDialogGuard],
     children: [],
   },
   {
     path: 'admin/users',
-    title: 'Quản lý user · Certificate Practice',
+    title: 'Quản lý user · Certiva',
     canActivate: [adminGuard],
     loadComponent: () => import('./features/account/users-page').then((m) => m.UsersPage),
   },
   {
     path: '',
     pathMatch: 'full',
-    title: 'Certificate Practice · Chọn chứng chỉ',
+    title: 'Certiva · Chọn chứng chỉ',
     loadComponent: () => import('./features/home/home-page').then((m) => m.HomePage),
   },
   ...CERTIFICATES.map((certificate) => ({
@@ -155,7 +155,7 @@ export const routes: Routes = [
       (route) => ({
         ...route,
         canDeactivate: [...(route.canDeactivate ?? []), notesLeaveGuard],
-        title: `${certificate.name} · Certificate Practice`,
+        title: `${certificate.name} · Certiva`,
       }),
     ),
   })),
