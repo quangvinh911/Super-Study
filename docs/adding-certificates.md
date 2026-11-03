@@ -74,6 +74,28 @@ pnpm run test:content
 
 The importer writes `content/toeic-jimmy-generated.json`; `scripts/build-toeic.mjs` publishes separate Jimmy and Hacker banks plus a combined compatibility bank during `content:build`. The practice and mock-exam setup pages expose the separate banks, so learners can choose the source before starting. Normal content builds do not require private PDFs or Python. Keep original PDFs and temporary OCR outside commits. Imported material is marked `privateUserProvided` and `sourcePrinted`; neither redistribution clearance nor independent answer verification is claimed. The source contains answer letters only, so explanations truthfully say no rationale was provided.
 
+### Hacker 2 Listening and Reading
+
+The private source folder `resources/toeic/hacker2/` contains ten 30-page Reading tests, ten Reading key images, ten 14-page Listening tests and a 61-page Listening transcript/key PDF. `scripts/extract-toeic-hacker2-answers.py` reads the Reading keys; `scripts/extract-toeic-hacker2.py` records PDF/audio hashes, exact PDF pages, panel/passage crops, transcript pages, printed keys and audio boundaries. Targeted visual corrections live separately in the ignored `content/toeic-hacker2-overrides.json`. The answer extractor requires Pillow and `rapidocr_onnxruntime`; the source extractor/importer use `pdfplumber`, `pypdf`, ffmpeg and ffprobe. Pass `--ffmpeg` and `--ffprobe` if they are not on PATH.
+
+```sh
+python scripts/extract-toeic-hacker2-answers.py
+python scripts/extract-toeic-hacker2.py
+python scripts/import-toeic-hacker2.py
+python scripts/extract-toeic-hacker2-answers.py --check
+python scripts/extract-toeic-hacker2.py --check
+python scripts/import-toeic-hacker2.py --check
+pnpm run content:build
+pnpm run content:check
+pnpm run test:content
+```
+
+The imported pack has 1,000 Reading and 728 Listening questions. Tests 1, 2, 4, 5, 6, 9 and 10 have all 200 questions. Test 3's 803-second recording supplies questions 1–28 only, leaving a 128-question practice form. Test 7 has no audio. Test 8's 213-second recording has no regular answer pauses and cannot be aligned; its Listening questions remain omitted. Tests 7–8 each retain their 100 Reading questions. Missing Listening IDs are reserved. Do not infer missing audio or questions from transcript keys. Full recordings have 105 source pauses; Part 1/2 transitions are excluded, and Part 3/4 clips share one conversation/talk across three questions. The partial Test 3 recording has 30 pauses, including its two transitions.
+
+Stable `hacker-2-test-XX-qNNN` IDs keep Hacker 2 separate from Hacker 3 and Jimmy. `scripts/import-toeic-hacker2.py` generates bounded WebP evidence and 406 audio clips. Layout-sensitive Reading passages use source image blocks because the PDF text layer drops blanks, symbols and table cells; question stems and A–D options remain text. Spoken Part 1/2 options remain in solutions, and photograph alt text does not disclose the answer. Keys have `sourcePrinted` status and sources have `privateUserProvided` rights; full transcription/audio alignment and redistribution rights are not independently verified.
+
+`content:build` optionally reads the ignored `content/toeic-hacker2-generated.json` and emits the ignored `hacker2-{manifest,questions,solutions}.json` bank. The registry exposes **Hacker 2 TOEIC** separately; the existing `hacker` source ID still identifies Hacker 3. The compatibility bank remains Jimmy + Hacker 3. A checkout without the private pack skips its build; malformed input still fails. Source documents, authored corrections, generated text, audio and images stay out of Git and deployment unless separately authorized.
+
 ### Hacker 3 Reading
 
 The user-provided Hacker 3 RC PDF contains ten 29-page Reading tests. Each test has 30 Part 5, 16 Part 6 and 54 Part 7 questions. Printed keys are ten separate numbered PNGs. `content/toeic-hacker-answers.json` stores the Test/question key mapping and source hashes; `content/toeic-hacker-items.json` stores extracted text, question boxes, passage groups and crop coordinates; `content/toeic-hacker-overrides.json` records visual corrections to the PDF text layer. The generated source pack is `content/toeic-hacker-generated.json`. Edit the authored files, then rebuild.

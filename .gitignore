@@ -59,6 +59,13 @@ __pycache__/
 /content/toeic-hacker-grammar-reviewed.json
 /public/data/toeic/grammar/hacker-3.json
 
+# Private Hacker 2 sources, extraction and generated practice media.
+/resources/toeic/hacker2/
+/content/toeic-hacker2-*.json
+/public/data/toeic/hacker2-*.json
+/public/audio/toeic/hacker-2-*.mp3
+/public/pdf-evidence/hacker-2-*.webp
+
 # System files
 .DS_Store
 Thumbs.db

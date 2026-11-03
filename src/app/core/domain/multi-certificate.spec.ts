@@ -26,11 +26,15 @@ afterEach(async () => {
 });
 
 describe('certificate exam policies', () => {
-  it('exposes Hacker and Jimmy as separate TOEIC banks', () => {
+  it('exposes Hacker 2, Hacker 3 and Jimmy as separate TOEIC banks', () => {
     expect(toeic.banks).toEqual([
       expect.objectContaining({
         id: 'hacker',
         manifestUrl: '/data/toeic/hacker-manifest.json',
+      }),
+      expect.objectContaining({
+        id: 'hacker2',
+        manifestUrl: '/data/toeic/hacker2-manifest.json',
       }),
       expect.objectContaining({
         id: 'jimmy',
