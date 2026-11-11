@@ -1,5 +1,5 @@
 import { CertificateContext } from '../../certificates/certificate-context';
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { QuestionBankService } from '../../core/data';
@@ -29,6 +29,9 @@ export class MockExamSetupPage implements OnInit {
   protected readonly banks = signal<
     Readonly<Partial<Record<QuestionBankSource, LoadedQuestionBank>>>
   >({});
+  protected readonly availableSources = computed(() =>
+    this.certificate.definition.banks.filter((source) => this.banks()[source.id]),
+  );
   protected readonly loading = signal(true);
   protected readonly starting = signal(false);
   protected readonly error = signal('');
@@ -68,24 +71,13 @@ export class MockExamSetupPage implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const [entries, preferredDuration, preferredSource] = await Promise.all([
-        Promise.all(
-          this.certificate.definition.banks.map(
-            async (bank) =>
-              [
-                bank.id,
-                await this.bankService.load(bank.manifestUrl, this.certificate.id),
-              ] as const,
-          ),
-        ),
+      const [banks, preferredDuration, preferredSource] = await Promise.all([
+        this.bankService.loadCertificateBanks(this.certificate.definition),
         this.repository.getSetting<number>('preferredExamDurationMinutes'),
         this.repository.getSetting<QuestionBankSource>('lastQuestionBankSource'),
       ]);
-      this.banks.set(Object.fromEntries(entries));
-      if (
-        preferredSource &&
-        this.certificate.definition.banks.some((bank) => bank.id === preferredSource)
-      ) {
+      this.banks.set(banks);
+      if (preferredSource && banks[preferredSource]) {
         this.bankSource = preferredSource;
       }
       if (

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
+  CertificateDefinition,
   LoadedQuestionBank,
   QuestionBankManifest,
+  QuestionBankSource,
   QuestionEnvelope,
   SolutionEnvelope,
 } from '../models';
@@ -10,6 +12,15 @@ export class QuestionBankLoadError extends Error {
   constructor(message: string, options?: ErrorOptions) {
     super(message, options);
     this.name = 'QuestionBankLoadError';
+  }
+}
+
+class QuestionBankFileUnavailableError extends QuestionBankLoadError {
+  constructor(
+    readonly url: string,
+    options?: ErrorOptions,
+  ) {
+    super(`Question-bank file is unavailable: ${url}`, options);
   }
 }
 
@@ -36,11 +47,22 @@ function resolveFileUrl(manifestUrl: string, fileUrl: string): string {
 async function fetchJson(url: string): Promise<unknown> {
   let response: Response;
   try {
-    response = await globalThis.fetch(url);
+    response = await globalThis.fetch(url, { headers: { Accept: 'application/json' } });
   } catch (error) {
+    if (globalThis.navigator.onLine === false) {
+      throw new QuestionBankFileUnavailableError(url, { cause: error });
+    }
     throw new QuestionBankLoadError(`Could not load question-bank file: ${url}`, {
       cause: error,
     });
+  }
+  // Static SPA hosts may return the HTML shell for an absent data file.
+  if (
+    response.status === 404 ||
+    (response.status === 504 && globalThis.navigator.onLine === false) ||
+    (response.ok && response.headers.get('content-type')?.startsWith('text/html'))
+  ) {
+    throw new QuestionBankFileUnavailableError(url);
   }
   if (!response.ok) {
     throw new QuestionBankLoadError(`Question-bank request failed (${response.status}): ${url}`);
@@ -97,6 +119,28 @@ function parseSolutionEnvelope(value: unknown): SolutionEnvelope {
 @Injectable({ providedIn: 'root' })
 export class QuestionBankService {
   private readonly cache = new Map<string, Promise<LoadedQuestionBank>>();
+
+  async loadCertificateBanks(
+    certificate: CertificateDefinition,
+  ): Promise<Partial<Record<QuestionBankSource, LoadedQuestionBank>>> {
+    const entries = await Promise.all(
+      certificate.banks.map(async (source) => {
+        try {
+          return [source.id, await this.load(source.manifestUrl, certificate.id)] as const;
+        } catch (error) {
+          if (
+            source.optional &&
+            error instanceof QuestionBankFileUnavailableError &&
+            error.url === source.manifestUrl
+          ) {
+            return undefined;
+          }
+          throw error;
+        }
+      }),
+    );
+    return Object.fromEntries(entries.filter((entry) => entry !== undefined));
+  }
 
   load(manifestUrl = '/data/manifest.json', certificateId = 'ctfl'): Promise<LoadedQuestionBank> {
     let pending = this.cache.get(manifestUrl);

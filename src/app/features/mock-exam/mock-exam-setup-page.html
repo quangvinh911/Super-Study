@@ -61,7 +61,7 @@
     <form class="surface start-panel" (ngSubmit)="start()">
       <fieldset class="source-picker">
         <legend>Nguồn câu hỏi</legend>
-        @for (source of certificate.definition.banks; track source.id) {
+        @for (source of availableSources(); track source.id) {
           <label class="source-option">
             <input type="radio" name="bankSource" [value]="source.id" [(ngModel)]="bankSource" />
             <span
