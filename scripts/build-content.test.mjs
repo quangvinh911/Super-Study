@@ -16,6 +16,7 @@ async function documents() {
 }
 
 describe('CTFL content compiler', () => {
+  // This also validates every imported certificate bank and its local media.
   it('builds the complete, versioned 80-question bank', async () => {
     const output = await buildContent({ write: false });
 
@@ -23,22 +24,22 @@ describe('CTFL content compiler', () => {
     expect(output.solutionEnvelope.solutions).toHaveLength(80);
     expect(output.manifest.inventory.totalBlueprintBuckets).toBe(40);
     expect(output.manifest.inventory.byChapter).toEqual({
-      '1': 16,
-      '2': 12,
-      '3': 8,
-      '4': 22,
-      '5': 18,
-      '6': 4,
+      1: 16,
+      2: 12,
+      3: 8,
+      4: 22,
+      5: 18,
+      6: 4,
     });
     expect(output.manifest.inventory.byKLevel).toEqual({ K1: 16, K2: 48, K3: 16 });
     expect(output.manifest.inventory.byInteraction).toEqual({
       singleChoice: 78,
       multiSelect: 2,
     });
-    expect(output.manifest.inventory.buckets.every((bucket) => bucket.questionIds.length === 2)).toBe(
-      true,
-    );
-  });
+    expect(
+      output.manifest.inventory.buckets.every((bucket) => bucket.questionIds.length === 2),
+    ).toBe(true);
+  }, 15_000);
 
   it('rejects duplicate question and option IDs', async () => {
     const source = await documents();

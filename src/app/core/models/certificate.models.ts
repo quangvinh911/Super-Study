@@ -45,6 +45,7 @@ export interface CertificateDefinition {
     readonly label: string;
     readonly description: string;
     readonly manifestUrl: string;
+    readonly optional?: boolean;
   }[];
   readonly exam: ExamDefinition;
   readonly references: readonly { readonly title: string; readonly url: string }[];

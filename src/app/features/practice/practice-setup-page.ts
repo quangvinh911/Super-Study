@@ -1,5 +1,5 @@
 import { CertificateContext } from '../../certificates/certificate-context';
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
@@ -37,6 +37,9 @@ export class PracticeSetupPage implements OnInit {
   protected readonly banks = signal<
     Readonly<Partial<Record<QuestionBankSource, LoadedQuestionBank>>>
   >({});
+  protected readonly availableSources = computed(() =>
+    this.certificate.definition.banks.filter((source) => this.banks()[source.id]),
+  );
   protected readonly chapters: readonly Chapter[] = [1, 2, 3, 4, 5, 6];
   protected readonly kLevels: readonly KLevel[] = ['K1', 'K2', 'K3'];
   protected readonly styles: readonly { value: QuestionStyleTag; label: string }[] = [
@@ -92,10 +95,7 @@ export class PracticeSetupPage implements OnInit {
     ) {
       this.section = requestedPart;
     }
-    const requestedSource = this.certificate.definition.banks.find(
-      (bank) => bank.id === this.route.snapshot.queryParamMap.get('source'),
-    );
-    if (requestedSource) this.bankSource = requestedSource.id;
+    const requestedSource = this.route.snapshot.queryParamMap.get('source');
     if (
       requestedHistory === 'unseen' ||
       requestedHistory === 'incorrect' ||
@@ -104,13 +104,9 @@ export class PracticeSetupPage implements OnInit {
       this.history = requestedHistory;
     }
     try {
-      const entries = await Promise.all(
-        this.certificate.definition.banks.map(
-          async (bank) =>
-            [bank.id, await this.bankService.load(bank.manifestUrl, this.certificate.id)] as const,
-        ),
-      );
-      this.banks.set(Object.fromEntries(entries));
+      this.banks.set(await this.bankService.loadCertificateBanks(this.certificate.definition));
+      const source = this.availableSources().find((bank) => bank.id === requestedSource);
+      if (source) this.bankSource = source.id;
       if (this.history !== 'all') {
         await this.start();
       }

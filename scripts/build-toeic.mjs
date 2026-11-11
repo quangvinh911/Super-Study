@@ -84,6 +84,26 @@ export async function buildToeic(rootDir, { write = true } = {}) {
     ...jimmyBank.files,
     ...hackerBank.files,
   };
+  // Private source packs are optional on other checkouts. Malformed packs still
+  // fail the build; only an absent local import is skipped.
+  let hacker2;
+  try {
+    hacker2 = await readJson(join(content, 'toeic-hacker2-generated.json'));
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  if (hacker2 !== undefined) {
+    Object.assign(
+      artifacts,
+      createBankArtifacts({
+        bankVersion: 'toeic-hacker2-listening-reading-1.0.0',
+        filePrefix: 'hacker2',
+        questions: hacker2.questions,
+        solutions: hacker2.solutions,
+        publishedAt: '2026-10-29',
+      }).files,
+    );
+  }
   for (const [name, value] of Object.entries(artifacts)) {
     const path = join(output, name);
     const serialized = `${JSON.stringify(value, null, 2)}\n`;

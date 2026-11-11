@@ -17,7 +17,7 @@
       <fieldset class="source-picker">
         <legend>Nguồn câu hỏi</legend>
         <div class="source-picker__grid">
-          @for (source of certificate.definition.banks; track source.id) {
+          @for (source of availableSources(); track source.id) {
             <label class="source-option">
               <input
                 type="radio"

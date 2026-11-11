@@ -25,15 +25,11 @@ export class CertificatePage implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       const [banksResult, sessionsResult] = await Promise.allSettled([
-        Promise.all(
-          this.certificate.definition.banks.map((bank) =>
-            this.banks.load(bank.manifestUrl, this.certificate.id),
-          ),
-        ),
+        this.banks.loadCertificateBanks(this.certificate.definition),
         this.repository.listActiveSessions(),
       ]);
       if (banksResult.status === 'fulfilled') {
-        const banks = banksResult.value;
+        const banks = Object.values(banksResult.value).filter((bank) => bank !== undefined);
         this.count.set(banks.reduce((count, bank) => count + bank.questions.length, 0));
         this.examReady.set(
           banks.some((bank) => {
