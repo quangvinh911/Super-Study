@@ -1,8 +1,13 @@
-import { parseNote, parseNoteDraft } from '../src/app/core/domain/notes.ts';
+import {
+  noteAttachments,
+  noteSchemaVersion,
+  parseNote,
+  parseNoteDraft,
+} from '../src/app/core/domain/notes.ts';
 import { ApiError, record, requireCondition } from './errors.mjs';
 
 // This reserved account scope is never exposed through certificate learning actions.
-const NOTES_SCOPE = 'global-notes';
+export const NOTES_SCOPE = 'global-notes';
 const sameDraft = (note, draft) =>
   JSON.stringify({
     id: note.id,
@@ -10,7 +15,7 @@ const sameDraft = (note, draft) =>
     document: note.document,
     ...(note.source ? { source: note.source } : {}),
   }) === JSON.stringify(draft);
-export function createNotesService(repository) {
+export function createNotesService(repository, noteMedia) {
   return async (userId, input) => {
     requireCondition(
       record(input) && typeof input.action === 'string' && Array.isArray(input.args),
@@ -43,6 +48,8 @@ export function createNotesService(repository) {
           ((action === 'saveNote' && args[1] === null) ||
             (Number.isSafeInteger(args[1]) && args[1] > 0)),
       );
+    const attachments = draft ? noteAttachments(draft.document) : [];
+    let attachmentsValidated = false;
     for (let retry = 0; retry < 5; retry++) {
       const state = await repository.load(userId, NOTES_SCOPE);
       const entries = state.records
@@ -62,12 +69,17 @@ export function createNotesService(repository) {
       )
         return existing;
       requireCondition((existing?.revision ?? null) === args[1], 'note_conflict', 409);
+      if (attachments.length && !attachmentsValidated) {
+        requireCondition(noteMedia, 'note_media_unavailable', 503);
+        await noteMedia.requireAttachments(userId, attachments);
+        attachmentsValidated = true;
+      }
       const now = new Date().toISOString();
       const saved =
         action === 'saveNote'
           ? {
               ...draft,
-              schemaVersion: 1,
+              schemaVersion: noteSchemaVersion(draft.document),
               revision: (existing?.revision ?? 0) + 1,
               createdAt: existing?.createdAt ?? now,
               updatedAt: now,

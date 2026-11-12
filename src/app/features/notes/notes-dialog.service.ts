@@ -1,9 +1,16 @@
 import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
-import { AuthService } from '../../core/auth/auth.service';
-import { AccountApiError } from '../../core/auth/auth.service';
+import { AccountApiError, AuthService } from '../../core/auth/auth.service';
 import { NotesRepository } from '../../core/persistence/notes.repository';
 import { documentFromText, parseNoteDocument, parseNoteDraft } from '../../core/domain/notes';
-import { Note, NoteEditorDraft, NoteNode, NoteSource } from '../../core/models/notes.models';
+import { isNoteAttachmentId } from '../../core/domain/note-media';
+import {
+  Note,
+  NoteAttachment,
+  NoteEditorDraft,
+  NoteMediaKind,
+  NoteNode,
+  NoteSource,
+} from '../../core/models/notes.models';
 import { CanDeactivateFn } from '@angular/router';
 
 const contentKey = (title: string, document: NoteNode) => JSON.stringify({ title, document });
@@ -16,6 +23,7 @@ export class NotesDialogService {
   readonly storageWarning = signal('');
   readonly notice = signal('');
   readonly saving = signal(false);
+  readonly stagingAttachment = signal(false);
   readonly dirty = computed(() => {
     const draft = this.draft();
     return !!draft && contentKey(draft.note.title, draft.note.document) !== draft.initialContent;
@@ -64,6 +72,7 @@ export class NotesDialogService {
     const noteSource = note?.source ?? source;
     this.draft.set({
       owner: this.repository.owner(),
+      draftId: crypto.randomUUID(),
       note: {
         id: note?.id ?? crypto.randomUUID(),
         title,
@@ -82,6 +91,24 @@ export class NotesDialogService {
     const document = parseNoteDocument(value);
     this.draft.set({ ...current, note: { ...current.note, title, document } });
     this.persist();
+  }
+  async stageAttachment(file: File, kind: NoteMediaKind): Promise<NoteAttachment> {
+    const draft = this.draft();
+    if (!draft || draft.owner !== this.repository.owner())
+      throw new AccountApiError('account_changed', 409);
+    if (this.saving() || this.stagingAttachment()) throw new Error('note_media_busy');
+    const { owner, draftId } = draft;
+    this.stagingAttachment.set(true);
+    try {
+      const attachment = await this.repository.stageAttachment(file, kind, owner, draftId);
+      if (this.draft()?.draftId !== draftId || this.repository.owner() !== owner) {
+        await this.repository.discardStagedAttachment(owner, draftId, attachment.attachmentId);
+        throw new AccountApiError('account_changed', 409);
+      }
+      return attachment;
+    } finally {
+      this.stagingAttachment.set(false);
+    }
   }
   private storageKey(owner: string): string {
     return `certificate-notes-draft:${owner}`;
@@ -118,13 +145,16 @@ export class NotesDialogService {
       )
         throw new Error('invalid_draft');
       const expected = raw.expectedRevision;
+      const draftId = 'draftId' in raw ? raw.draftId : crypto.randomUUID();
       if (
-        expected !== null &&
-        (typeof expected !== 'number' || !Number.isSafeInteger(expected) || expected < 1)
+        !isNoteAttachmentId(draftId) ||
+        (expected !== null &&
+          (typeof expected !== 'number' || !Number.isSafeInteger(expected) || expected < 1))
       )
         throw new Error('invalid_draft');
       this.recovery.set({
         owner,
+        draftId,
         note: parseNoteDraft(raw.note, true),
         expectedRevision: expected,
         initialContent: raw.initialContent,
@@ -145,8 +175,15 @@ export class NotesDialogService {
   }
   discardRecovery(): void {
     const draft = this.recovery();
-    if (draft) this.removeRecovery(draft.owner);
+    if (draft) this.clearDraft(draft);
     this.recovery.set(null);
+  }
+  private clearDraft({ owner, draftId }: NoteEditorDraft): void {
+    this.removeRecovery(owner);
+    void this.repository.discardDraftAttachments(owner, draftId).catch(() => {
+      if (this.repository.owner() === owner && !this.draft())
+        this.storageWarning.set('Không thể xóa tệp tạm của bản nháp trên thiết bị.');
+    });
   }
   private removeRecovery(owner: string): void {
     try {
@@ -157,7 +194,7 @@ export class NotesDialogService {
   }
   close(): void {
     const draft = this.draft();
-    if (draft) this.removeRecovery(draft.owner);
+    if (draft) this.clearDraft(draft);
     this.draft.set(null);
     // Let Angular remove the modal before focusing a control in the page below it.
     requestAnimationFrame(() => this.restoreFocus());
@@ -171,6 +208,7 @@ export class NotesDialogService {
   }
   save(asNew = false): Promise<Note> {
     if (this.pendingSave) return this.pendingSave;
+    if (this.stagingAttachment()) return Promise.reject(new Error('note_media_busy'));
     let draft = this.draft();
     if (!draft || draft.owner !== this.repository.owner())
       return Promise.reject(new AccountApiError('account_changed', 409));
@@ -185,12 +223,12 @@ export class NotesDialogService {
       this.persist();
     }
     this.saving.set(true);
-    const owner = draft.owner;
-    const request = this.repository.save(draft.note, draft.expectedRevision, owner);
+    const { owner, draftId } = draft;
+    const request = this.repository.save(draft.note, draft.expectedRevision, owner, draftId);
     this.pendingSave = request;
     return request
       .then((note) => {
-        if (this.draft()?.owner === owner) {
+        if (this.draft()?.draftId === draftId && this.draft()?.owner === owner) {
           this.close();
           this.showNotice('Đã lưu ghi chú');
         }
@@ -210,14 +248,15 @@ export class NotesDialogService {
     if (!note) throw new Error('note_deleted');
     this.draft.set({
       ...draft,
+      draftId: crypto.randomUUID(),
       note,
       expectedRevision: note.revision,
       initialContent: contentKey(note.title, note.document),
     });
-    this.removeRecovery(draft.owner);
+    this.clearDraft(draft);
   }
   confirmLeave(): boolean {
-    if (this.saving()) return false;
+    if (this.saving() || this.stagingAttachment()) return false;
     if (this.dirty() && !window.confirm('Ghi chú có thay đổi chưa lưu. Bỏ thay đổi và rời trang?'))
       return false;
     if (this.draft()) this.close();

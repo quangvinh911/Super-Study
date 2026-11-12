@@ -4,6 +4,7 @@ import { hashPassword } from './passwords.mjs';
 import { ApiError, readJson, requireCondition } from './errors.mjs';
 import { createLearningService } from './learning.mjs';
 import { createNotesService } from './notes.mjs';
+import { NoteMediaMissingError, noteMediaPath } from './notes-media.mjs';
 
 const json = (body, status = 200, cookie) =>
   Response.json(body, {
@@ -18,20 +19,24 @@ export function createAccountApi({
   authRepository,
   learningRepository,
   snapshotStorage,
+  noteMedia,
   migrationStorage,
   config,
 }) {
   const auth = createAuth(authRepository, config);
   const learning = createLearningService(learningRepository, snapshotStorage);
-  const notes = createNotesService(learningRepository);
+  const notes = createNotesService(learningRepository, noteMedia);
   return async function accountApi(request) {
     try {
       const url = new URL(request.url);
       const path = url.pathname;
       if (path === '/api/capabilities' && request.method === 'GET')
         return json({ guestPracticeLimit: 10 });
+      const noteMediaGarbagePath = path === '/api/admin/migration/notes-media';
       const migrationPath =
-        path === '/api/admin/migration/export' || path === '/api/admin/migration/object';
+        noteMediaGarbagePath ||
+        path === '/api/admin/migration/export' ||
+        path === '/api/admin/migration/object';
       const identityPath = [
         '/api/auth/login',
         '/api/auth/refresh',
@@ -51,7 +56,7 @@ export function createAccountApi({
         return json(result.body, 200, result.cookie);
       }
       const { user, session } = await auth.authenticate(request);
-      if (migrationPath && request.method === 'GET') {
+      if (migrationPath) {
         requireCondition(user.role === 'admin', 'forbidden', 403);
         requireCondition(
           config.ACCOUNT_MAINTENANCE === 'true' &&
@@ -69,6 +74,15 @@ export function createAccountApi({
           'forbidden',
           403,
         );
+        if (noteMediaGarbagePath) {
+          requireCondition(request.method === 'POST', 'method_not_allowed', 405);
+          auth.origin(request);
+          requireCondition(noteMedia, 'note_media_unavailable', 503);
+          return json(
+            await noteMedia.collectGarbage(learningRepository, await readJson(request, 8192)),
+          );
+        }
+        requireCondition(request.method === 'GET', 'method_not_allowed', 405);
         requireCondition(migrationStorage, 'migration_unavailable', 503);
         if (path.endsWith('/object')) {
           const key = url.searchParams.get('key');
@@ -159,6 +173,17 @@ export function createAccountApi({
         auth.origin(request);
         return json(await notes(user.id, await readJson(request, 300 * 1024)));
       }
+      const noteMediaMatch = noteMediaPath.exec(path);
+      if (noteMediaMatch) {
+        requireCondition(noteMedia, 'note_media_unavailable', 503);
+        const attachmentId = noteMediaMatch[1];
+        if (request.method === 'GET') return await noteMedia.get(user.id, attachmentId);
+        if (request.method === 'PUT') {
+          auth.origin(request);
+          return json(await noteMedia.put(user.id, attachmentId, request));
+        }
+        throw new ApiError(405, 'method_not_allowed');
+      }
       const match = path.match(/^\/api\/learning\/(ctfl|toeic)$/);
       if (match && request.method === 'POST') {
         auth.origin(request);
@@ -167,6 +192,8 @@ export function createAccountApi({
       }
       throw new ApiError(404, 'not_found');
     } catch (error) {
+      if (error instanceof NoteMediaMissingError)
+        return json({ error: error.code, attachmentId: error.attachmentId }, error.status);
       if (error instanceof ApiError) return json({ error: error.code }, error.status);
       console.error(
         'Account API failed:',

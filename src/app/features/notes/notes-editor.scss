@@ -104,6 +104,40 @@ dialog::backdrop {
   min-width: 8rem;
   width: 100%;
 }
+.insert-options,
+.table-options {
+  margin-top: 0.8rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  background: var(--color-paper);
+  font-size: 0.85rem;
+}
+.insert-options {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 31rem;
+}
+.insert-options input {
+  min-width: 0;
+  max-width: 100%;
+}
+.table-options,
+.column-width,
+.table-dimensions,
+.table-header-option {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.table-options .button {
+  font-size: inherit;
+}
+.column-width input,
+.table-dimensions input {
+  width: 6rem;
+}
 .rich-editor {
   padding: 1rem 0;
   min-height: 17rem;

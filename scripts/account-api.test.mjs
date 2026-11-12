@@ -1,7 +1,9 @@
+import { createHash } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createLocalAccountRuntime } from './account-local-runtime.mjs';
 import { createD1Repository } from '../server/d1-repository.mjs';
 import { validatePassword } from '../server/auth.mjs';
+import { collectNoteMediaGarbage, createNoteMediaStorage } from '../server/notes-media.mjs';
 
 let runtime;
 let adminToken;
@@ -10,6 +12,10 @@ let userToken;
 let userId;
 const password = 'Test-password-12345';
 const bootstrapSecret = 'test-bootstrap-secret-with-at-least-32-characters';
+const noteImage = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jtt0AAAAASUVORK5CYII=',
+  'base64',
+);
 const workerOptions = {
   modules: true,
   scriptPath: 'dist/local-account-worker.mjs',
@@ -91,6 +97,36 @@ const action = (token, certificateId, name, args = []) =>
     token,
     body: { action: name, args },
   });
+const noteAction = (token, name, args = []) =>
+  request('/api/notes', { method: 'POST', token, body: { action: name, args } });
+
+function putNoteImage(attachmentId, token, bytes = noteImage, headers = {}) {
+  return runtime.dispatchFetch(`http://localhost:4200/api/notes/media/${attachmentId}`, {
+    method: 'PUT',
+    headers: {
+      Origin: 'http://localhost:4200',
+      Authorization: `Bearer ${token}`,
+      'Content-Length': String(bytes.length),
+      'Content-Type': 'image/png',
+      'X-Note-Media-Sha256': createHash('sha256').update(bytes).digest('hex'),
+      ...headers,
+    },
+    body: bytes,
+  });
+}
+
+function noteWithImage(attachmentId) {
+  return {
+    id: crypto.randomUUID(),
+    title: 'A note with an attachment',
+    document: {
+      type: 'doc',
+      content: [
+        { type: 'image', attrs: { attachmentId, fileName: 'image.png', mimeType: 'image/png' } },
+      ],
+    },
+  };
+}
 beforeAll(async () => {
   runtime = await createLocalAccountRuntime({
     jwtSecret: 'test-jwt-secret-with-at-least-32-characters',
@@ -146,8 +182,6 @@ describe('Worker/D1 account integration', () => {
     expect(state.records).toEqual(records);
   });
   it('isolates global Notes by account, detects conflicts and preserves them through certificate resets', async () => {
-    const noteAction = (token, name, args = []) =>
-      request('/api/notes', { method: 'POST', token, body: { action: name, args } });
     const draft = {
       id: crypto.randomUUID(),
       title: 'Global note',
@@ -212,6 +246,89 @@ describe('Worker/D1 account integration', () => {
     ).toBe(400);
     expect((await noteAction(adminToken, 'removeNote', [draft.id, 2])).status).toBe(200);
     expect((await noteAction(adminToken, 'getNote', [draft.id])).body).toBeNull();
+  });
+  it('checks and streams immutable Notes attachments isolated by account', async () => {
+    const attachmentId = crypto.randomUUID();
+    const draft = noteWithImage(attachmentId);
+    const url = `http://localhost:4200/api/notes/media/${attachmentId}`;
+    expect((await noteAction(adminToken, 'saveNote', [draft, null])).body).toEqual({
+      error: 'note_media_not_found',
+      attachmentId,
+    });
+    expect(
+      (await putNoteImage(attachmentId, adminToken, Buffer.from('forged signature'))).status,
+    ).toBe(400);
+    expect(
+      (await putNoteImage(attachmentId, adminToken, noteImage, { 'Content-Type': 'image/svg+xml' }))
+        .status,
+    ).toBe(415);
+    expect(
+      (
+        await putNoteImage(attachmentId, adminToken, noteImage, {
+          Origin: 'https://another.example',
+        })
+      ).status,
+    ).toBe(403);
+    expect(
+      (
+        await putNoteImage(attachmentId, adminToken, noteImage, {
+          'X-Note-Media-Sha256': '0'.repeat(64),
+        })
+      ).status,
+    ).toBe(400);
+
+    const upload = await putNoteImage(attachmentId, adminToken);
+    expect(upload.status).toBe(200);
+    const metadata = { attachmentId, mimeType: 'image/png', size: noteImage.length };
+    expect(await upload.json()).toEqual(metadata);
+    expect(await (await putNoteImage(attachmentId, adminToken)).json()).toEqual(metadata);
+    const changedImage = Buffer.from(noteImage);
+    changedImage[changedImage.length - 1] ^= 1;
+    expect((await putNoteImage(attachmentId, adminToken, changedImage)).status).toBe(409);
+
+    const downloaded = await runtime.dispatchFetch(url, {
+      headers: { Authorization: `Bearer ${adminToken}` },
+    });
+    expect(downloaded.status).toBe(200);
+    expect(downloaded.headers.get('Cache-Control')).toBe('private, no-store');
+    expect(downloaded.headers.get('Content-Type')).toBe('image/png');
+    expect(Buffer.from(await downloaded.arrayBuffer())).toEqual(noteImage);
+    expect((await runtime.dispatchFetch(url)).status).toBe(401);
+    expect(
+      (await runtime.dispatchFetch(url, { headers: { Authorization: `Bearer ${userToken}` } }))
+        .status,
+    ).toBe(404);
+    expect(
+      (
+        await runtime.dispatchFetch(
+          `http://localhost:4200/account-note-media/${adminId}/${attachmentId}`,
+        )
+      ).status,
+    ).toBe(404);
+    expect((await noteAction(userToken, 'saveNote', [draft, null])).body).toEqual({
+      error: 'note_media_not_found',
+      attachmentId,
+    });
+
+    const saved = await noteAction(adminToken, 'saveNote', [draft, null]);
+    expect(saved.status).toBe(200);
+    expect(saved.body).toMatchObject({ schemaVersion: 2, revision: 1, document: draft.document });
+    expect((await noteAction(adminToken, 'saveNote', [draft, null])).body).toEqual(saved.body);
+    expect((await noteAction(adminToken, 'removeNote', [draft.id, 1])).status).toBe(200);
+  });
+  it('rejects a Notes upload whose declared length reaches 50 MB before reading the body', async () => {
+    const upload = new Request('http://localhost:4200/api/notes/media/id', {
+      method: 'PUT',
+      headers: { 'Content-Length': '50000000' },
+      body: noteImage,
+    });
+    await expect(
+      createNoteMediaStorage({}).put(adminId, crypto.randomUUID(), upload),
+    ).rejects.toMatchObject({
+      code: 'invalid_note_media_size',
+      status: 413,
+    });
+    expect(upload.bodyUsed).toBe(false);
   });
   it('accepts 11-character passwords and rejects shorter or oversized passwords', () => {
     expect(() => validatePassword('a'.repeat(11))).not.toThrow();
@@ -461,6 +578,24 @@ describe('Worker/D1 account integration', () => {
     ).rejects.toMatchObject({ code: 'last_admin' });
   });
   it('requires maintenance, Admin and a separate secret for confidential migration exports', async () => {
+    const retainedId = crypto.randomUUID();
+    const orphanId = crypto.randomUUID();
+    expect((await putNoteImage(retainedId, adminToken)).status).toBe(200);
+    expect((await putNoteImage(orphanId, adminToken)).status).toBe(200);
+    const retainedNote = noteWithImage(retainedId);
+    expect((await noteAction(adminToken, 'saveNote', [retainedNote, null])).status).toBe(200);
+    const collect = (token, key, body = {}) =>
+      runtime.dispatchFetch('http://localhost:4200/api/admin/migration/notes-media', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Origin: 'http://localhost:4200',
+          'Content-Type': 'application/json',
+          'X-Account-Migration-Key': key,
+        },
+        body: JSON.stringify(body),
+      });
+    expect((await collect(adminToken, bootstrapSecret)).status).toBe(409);
     expect(
       (await request('/api/admin/migration/export?table=users', { token: adminToken })).status,
     ).toBe(409);
@@ -475,33 +610,57 @@ describe('Worker/D1 account integration', () => {
     });
     try {
       expect((await action(userToken, 'ctfl', 'listAttempts')).status).toBe(503);
+      expect((await noteAction(adminToken, 'listNotes')).status).toBe(503);
+      expect((await putNoteImage(crypto.randomUUID(), adminToken)).status).toBe(503);
+      expect((await collect(userToken, bootstrapSecret)).status).toBe(403);
+      expect((await collect(adminToken, 'invalid')).status).toBe(403);
+      const recent = await collect(adminToken, bootstrapSecret, { apply: true });
+      expect(recent.status).toBe(200);
+      expect(await recent.json()).toMatchObject({ orphaned: 0, deleted: 0 });
+
+      const bucket = await runtime.getR2Bucket('MEDIA');
+      const repository = createD1Repository(await runtime.getD1Database('DB'));
+      const mature = Date.now() + 25 * 60 * 60 * 1000;
+      const dryRun = await collectNoteMediaGarbage(bucket, repository, {}, mature);
+      expect(dryRun.orphaned).toBeGreaterThan(0);
+      expect(dryRun.deleted).toBe(0);
+      const orphanKey = `account-note-media/${adminId}/${orphanId}`;
+      expect(await bucket.head(orphanKey)).not.toBeNull();
+      const applied = await collectNoteMediaGarbage(bucket, repository, { apply: true }, mature);
+      expect(applied.deleted).toBe(dryRun.orphaned);
+      expect(await bucket.head(orphanKey)).toBeNull();
+      const retainedKey = `account-note-media/${adminId}/${retainedId}`;
+      expect(await bucket.head(retainedKey)).not.toBeNull();
+
       expect((await request('/api/auth/me', { token: adminToken })).status).toBe(200);
       expect(
         (await request('/api/admin/migration/export?table=users', { token: adminToken })).status,
       ).toBe(403);
-      const response = await runtime.dispatchFetch(
-        'http://localhost:4200/api/admin/migration/export?table=users',
-        {
+      const fetchMigration = (path) =>
+        runtime.dispatchFetch(`http://localhost:4200/api/admin/migration/${path}`, {
           headers: {
             Authorization: `Bearer ${adminToken}`,
             'X-Account-Migration-Key': bootstrapSecret,
           },
-        },
-      );
+        });
+      const response = await fetchMigration('export?table=users');
       expect(response.status).toBe(200);
       const page = await response.json();
       expect(page.total).toBe(2);
       expect(page.rows[0].password_hash).toMatch(/^scrypt/);
-      const blocked = await runtime.dispatchFetch(
-        'http://localhost:4200/api/admin/migration/export?table=auth_sessions',
-        {
-          headers: {
-            Authorization: `Bearer ${adminToken}`,
-            'X-Account-Migration-Key': bootstrapSecret,
-          },
-        },
-      );
+      const blocked = await fetchMigration('export?table=auth_sessions');
       expect(blocked.status).toBe(400);
+      const objects = await fetchMigration('export?table=objects');
+      expect(objects.status).toBe(200);
+      expect((await objects.json()).objects).toContainEqual({
+        key: retainedKey,
+        size: noteImage.length,
+        contentType: 'image/png',
+      });
+      const object = await fetchMigration(`object?key=${encodeURIComponent(retainedKey)}`);
+      expect(object.status).toBe(200);
+      expect(object.headers.get('Content-Type')).toBe('application/octet-stream');
+      expect(Buffer.from(await object.arrayBuffer())).toEqual(noteImage);
     } finally {
       await runtime.setOptions({
         ...workerOptions,

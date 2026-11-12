@@ -1,49 +1,11 @@
 import { createVocabularyApi } from './vocabulary-api.mjs';
 import { accountRequest } from '../server/sites-accounts.mjs';
+import { noteMediaObjectPrefix } from '../server/notes-media.mjs';
+import { MEDIA_ROOTS, mediaType } from './sites-media-paths.mjs';
 
 const vocabularyApi = createVocabularyApi();
 
-export const MEDIA_ROOTS = [
-  'audio',
-  'pdf-evidence',
-  'media',
-  'images',
-  'documents',
-  'video',
-  'videos',
-];
-export const MEDIA_TYPES = {
-  mp3: 'audio/mpeg',
-  wav: 'audio/wav',
-  m4a: 'audio/mp4',
-  ogg: 'audio/ogg',
-  webp: 'image/webp',
-  png: 'image/png',
-  jpg: 'image/jpeg',
-  jpeg: 'image/jpeg',
-  avif: 'image/avif',
-  gif: 'image/gif',
-  svg: 'image/svg+xml',
-  pdf: 'application/pdf',
-  txt: 'text/plain',
-  csv: 'text/csv',
-  docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  mp4: 'video/mp4',
-  webm: 'video/webm',
-};
-
-export function mediaType(key) {
-  const segments = key.split('/');
-  if (
-    !MEDIA_ROOTS.includes(segments[0]) ||
-    segments.length < 2 ||
-    segments.some((segment) => !segment || segment === '.' || segment === '..') ||
-    /[\\\u0000-\u001f]/.test(key)
-  )
-    return null;
-  const extension = key.split('.').at(-1).toLowerCase();
-  return Object.hasOwn(MEDIA_TYPES, extension) ? MEDIA_TYPES[extension] : null;
-}
+export { MEDIA_ROOTS, MEDIA_TYPES, mediaType } from './sites-media-paths.mjs';
 
 const adminPath = '/api/site-media';
 const singleUploadPath = `${adminPath}/file`;
@@ -240,6 +202,8 @@ export default {
         );
       if (url.pathname.startsWith('/api/')) return secure(await accountRequest(request, env));
       const key = decodeURIComponent(url.pathname.slice(1));
+      if (key.startsWith(noteMediaObjectPrefix))
+        return secure(new Response('Not found', { status: 404 }));
       if (mediaType(key)) return secure(await serveMedia(request, env, key));
       if (MEDIA_ROOTS.includes(key.split('/')[0]))
         return secure(new Response('Not found', { status: 404 }));

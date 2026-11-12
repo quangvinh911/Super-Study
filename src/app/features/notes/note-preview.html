@@ -123,6 +123,62 @@
         />
       </blockquote>
     }
+    @case ('image') {
+      <ng-container [ngTemplateOutlet]="media" [ngTemplateOutletContext]="{ $implicit: node }" />
+    }
+    @case ('video') {
+      <ng-container [ngTemplateOutlet]="media" [ngTemplateOutletContext]="{ $implicit: node }" />
+    }
+    @case ('table') {
+      @let columns = tables().get(node) ?? [];
+      <div class="table-scroll" role="region" aria-label="Bảng trong ghi chú" tabindex="0">
+        <table [style.width.px]="tableWidth(columns)" [style.min-width.px]="tableMinWidth(columns)">
+          <colgroup>
+            @for (width of columns; track $index) {
+              <col [style.width.px]="width || null" />
+            }
+          </colgroup>
+          <tbody>
+            <ng-container
+              [ngTemplateOutlet]="children"
+              [ngTemplateOutletContext]="{ $implicit: node }"
+            />
+          </tbody>
+        </table>
+      </div>
+    }
+    @case ('tableRow') {
+      <tr>
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </tr>
+    }
+    @case ('tableHeader') {
+      <th
+        [attr.colspan]="node.attrs?.['colspan'] ?? 1"
+        [attr.rowspan]="node.attrs?.['rowspan'] ?? 1"
+        [style.text-align]="node.attrs?.['align']"
+      >
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </th>
+    }
+    @case ('tableCell') {
+      <td
+        [attr.colspan]="node.attrs?.['colspan'] ?? 1"
+        [attr.rowspan]="node.attrs?.['rowspan'] ?? 1"
+        [style.text-align]="node.attrs?.['align']"
+      >
+        <ng-container
+          [ngTemplateOutlet]="children"
+          [ngTemplateOutletContext]="{ $implicit: node }"
+        />
+      </td>
+    }
     @case ('grammarToken') {
       @if (grammarRole(node); as role) {
         <span
@@ -141,6 +197,18 @@
         </span>
       }
     }
+  }
+</ng-template>
+
+<ng-template #media let-node>
+  @if (attachment(node); as file) {
+    <app-note-media
+      [attachmentId]="file.attachmentId"
+      [fileName]="file.fileName"
+      [mimeType]="file.mimeType"
+      [alt]="altText(node)"
+      [noteId]="noteId()"
+    />
   }
 </ng-template>
 

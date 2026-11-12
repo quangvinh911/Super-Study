@@ -10,7 +10,15 @@ import { documentFromText } from '../../core/domain/notes';
 function setup(owner = 'guest') {
   const save = vi.fn();
   const hook = vi.fn();
-  const repository = { owner: () => owner, save, get: vi.fn(), revision: signal(0) };
+  const repository = {
+    owner: () => owner,
+    save,
+    get: vi.fn(),
+    revision: signal(0),
+    stageAttachment: vi.fn(),
+    discardStagedAttachment: vi.fn().mockResolvedValue(undefined),
+    discardDraftAttachments: vi.fn().mockResolvedValue(undefined),
+  };
   TestBed.configureTestingModule({
     providers: [
       { provide: NotesRepository, useValue: repository },
@@ -101,5 +109,42 @@ describe('Notes draft lifecycle', () => {
     await hook();
     expect(service.draft()).toBeNull();
     expect(sessionStorage.getItem('certificate-notes-draft:user:a')).not.toBeNull();
+  });
+  it('keeps draft attachment IDs across recovery and cleans their scope on discard', async () => {
+    const { service, repository } = setup('user:a');
+    const file = new File(['file'], 'draft.png', { type: 'image/png' });
+    const attachment = {
+      attachmentId: crypto.randomUUID(),
+      fileName: file.name,
+      mimeType: file.type,
+    };
+    repository.stageAttachment.mockResolvedValue(attachment);
+    service.open();
+    const draftId = service.draft()?.draftId;
+    await expect(service.stageAttachment(file, 'image')).resolves.toEqual(attachment);
+    expect(repository.stageAttachment).toHaveBeenCalledWith(file, 'image', 'user:a', draftId);
+    service.update('Nháp ảnh', { type: 'doc', content: [{ type: 'image', attrs: attachment }] });
+    TestBed.resetTestingModule();
+    const original = setup('user:a');
+    original.service.recover();
+    expect(original.service.recovery()?.draftId).toBe(draftId);
+    expect(original.service.recovery()?.note.document.content?.[0]?.attrs).toEqual(attachment);
+    original.service.discardRecovery();
+    expect(original.repository.discardDraftAttachments).toHaveBeenCalledWith('user:a', draftId);
+  });
+  it('recovers text-only drafts created before draft IDs were added', () => {
+    const { service } = setup();
+    sessionStorage.setItem(
+      'certificate-notes-draft:guest',
+      JSON.stringify({
+        owner: 'guest',
+        note: { id: crypto.randomUUID(), title: 'Nháp cũ', document: documentFromText('Nội dung') },
+        expectedRevision: null,
+        initialContent: '',
+      }),
+    );
+    service.recover();
+    expect(service.recovery()?.note.title).toBe('Nháp cũ');
+    expect(service.recovery()?.draftId).toMatch(/^[a-f0-9-]{36}$/);
   });
 });

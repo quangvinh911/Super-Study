@@ -57,7 +57,11 @@ do {
   );
   if (!Array.isArray(page.objects)) throw new Error('Invalid object manifest.');
   for (const object of page.objects) {
-    if (typeof object.key !== 'string' || typeof object.size !== 'number')
+    if (
+      typeof object.key !== 'string' ||
+      typeof object.size !== 'number' ||
+      (object.contentType !== undefined && typeof object.contentType !== 'string')
+    )
       throw new Error('Invalid object metadata.');
     const filename = createHash('sha256').update(object.key).digest('hex');
     const response = await fetch(
@@ -85,6 +89,7 @@ do {
       file: `objects/${filename}`,
       size: bytes,
       sha256: checksum.digest('hex'),
+      ...(object.contentType === undefined ? {} : { contentType: object.contentType }),
     });
   }
   cursor = page.cursor;

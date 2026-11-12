@@ -3,7 +3,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MEDIA_ROOTS } from './sites-media-worker.mjs';
+import { MEDIA_ROOTS } from './sites-media-paths.mjs';
 import { buildAccountWorker } from './build-account-worker.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');

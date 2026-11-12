@@ -67,6 +67,49 @@ app-notes-editor .tiptap ul[data-type='taskList'] li > div {
 app-notes-editor .tiptap a {
   color: #245dab;
 }
+app-notes-editor .tiptap .tableWrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+app-notes-editor .tiptap table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+app-notes-editor .tiptap td,
+app-notes-editor .tiptap th {
+  position: relative;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--color-border-strong);
+  text-align: left;
+  vertical-align: top;
+}
+app-notes-editor .tiptap th {
+  background: var(--color-paper);
+}
+app-notes-editor .tiptap :is(td, th) > p:last-child {
+  margin-bottom: 0;
+}
+app-notes-editor .tiptap .selectedCell {
+  background: var(--notes-blue-wash);
+}
+app-notes-editor .tiptap .column-resize-handle {
+  position: absolute;
+  z-index: 1;
+  inset: 0 -2px 0 auto;
+  width: 4px;
+  background: var(--notes-blue);
+  pointer-events: none;
+}
+app-notes-editor .tiptap.resize-cursor {
+  cursor: col-resize;
+}
+app-notes-editor .tiptap app-note-media.ProseMirror-selectednode {
+  outline: 2px solid var(--notes-blue);
+  outline-offset: 2px;
+  border-radius: 0.6rem;
+}
 
 /* Shared reading surfaces, clear navigation and a stronger action accent. */
 
