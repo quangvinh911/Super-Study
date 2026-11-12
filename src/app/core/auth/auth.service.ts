@@ -13,6 +13,7 @@ export class AccountApiError extends Error {
   constructor(
     readonly code: string,
     readonly status: number,
+    readonly attachmentId?: string,
   ) {
     super(code);
   }
@@ -40,6 +41,12 @@ export function parseUser(value: unknown): AccountUser {
     createdAt: user['createdAt'],
     updatedAt: user['updatedAt'],
   };
+}
+
+async function readAccountJson(response: Response): Promise<unknown> {
+  if (!response.headers.get('Content-Type')?.includes('application/json'))
+    throw new AccountApiError('service_unavailable', response.status);
+  return response.json();
 }
 
 @Injectable({ providedIn: 'root' })
@@ -152,20 +159,32 @@ export class AuthService implements OnDestroy {
     });
     return this.refreshPromise;
   }
-  async request(path: string, init: RequestInit = {}): Promise<unknown> {
+  request(path: string, init: RequestInit = {}, timeoutMs?: number): Promise<unknown> {
+    return this.authorizedRequest(path, init, readAccountJson, timeoutMs);
+  }
+  requestBlob(path: string, init: RequestInit = {}, timeoutMs?: number): Promise<Blob> {
+    return this.authorizedRequest(path, init, (response) => response.blob(), timeoutMs);
+  }
+  private async authorizedRequest<T>(
+    path: string,
+    init: RequestInit,
+    read: (response: Response) => Promise<T>,
+    timeoutMs?: number,
+  ): Promise<T> {
     const owner = this.user()?.id;
     const epoch = this.epoch;
     if (!owner || !this.token) throw new AccountApiError('login_required', 401);
-    const send = () =>
-      this.raw(path, {
-        ...init,
-        headers: { ...init.headers, Authorization: `Bearer ${this.token}` },
-      });
-    let value: unknown;
+    const send = () => {
+      const headers = new Headers(init.headers);
+      headers.set('Authorization', `Bearer ${this.token}`);
+      return this.send(path, { ...init, headers }, read, timeoutMs);
+    };
+    let value: T;
     try {
       value = await send();
     } catch (error) {
       if (!(error instanceof AccountApiError && error.status === 401)) throw error;
+      init.signal?.throwIfAborted();
       try {
         await this.refresh();
       } catch (refreshError) {
@@ -184,22 +203,34 @@ export class AuthService implements OnDestroy {
       throw new AccountApiError('account_changed', 409);
     return value;
   }
-  private async raw(path: string, init: RequestInit): Promise<unknown> {
+  private raw(path: string, init: RequestInit): Promise<unknown> {
+    return this.send(path, init, readAccountJson);
+  }
+  private async send<T>(
+    path: string,
+    init: RequestInit,
+    read: (response: Response) => Promise<T>,
+    timeoutMs = 30_000,
+  ): Promise<T> {
     const controller = new AbortController();
+    const headers = new Headers(init.headers);
+    if (!headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
+    const signal = init.signal
+      ? AbortSignal.any([init.signal, controller.signal])
+      : controller.signal;
     this.controllers.add(controller);
-    const timeout = setTimeout(() => controller.abort(), 30_000);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
+      signal.throwIfAborted();
       const response = await fetch(path, {
         ...init,
-        headers: { 'Content-Type': 'application/json', ...init.headers },
+        headers,
         credentials: 'same-origin',
         cache: 'no-store',
-        signal: controller.signal,
+        signal,
       });
-      if (!response.headers.get('Content-Type')?.includes('application/json'))
-        throw new AccountApiError('service_unavailable', response.status);
-      const value: unknown = await response.json();
       if (!response.ok) {
+        const value = await readAccountJson(response);
         const code =
           typeof value === 'object' &&
           value !== null &&
@@ -207,8 +238,17 @@ export class AuthService implements OnDestroy {
           typeof value.error === 'string'
             ? value.error
             : 'request_failed';
-        throw new AccountApiError(code, response.status);
+        const attachmentId =
+          value !== null &&
+          typeof value === 'object' &&
+          'attachmentId' in value &&
+          typeof value.attachmentId === 'string'
+            ? value.attachmentId
+            : undefined;
+        throw new AccountApiError(code, response.status, attachmentId);
       }
+      const value = await read(response);
+      init.signal?.throwIfAborted();
       return value;
     } finally {
       clearTimeout(timeout);

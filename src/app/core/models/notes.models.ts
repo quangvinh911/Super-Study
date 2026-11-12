@@ -3,6 +3,16 @@ export interface NoteMark {
   readonly attrs?: Readonly<Record<string, string | number | boolean>>;
 }
 
+export type NoteMediaKind = 'image' | 'video';
+export type NoteMediaType =
+  'image/jpeg' | 'image/png' | 'image/webp' | 'image/gif' | 'video/mp4' | 'video/webm';
+
+export interface NoteAttachment {
+  readonly attachmentId: string;
+  readonly fileName: string;
+  readonly mimeType: NoteMediaType;
+}
+
 export interface NoteNode {
   readonly type:
     | 'doc'
@@ -16,10 +26,15 @@ export interface NoteNode {
     | 'listItem'
     | 'taskList'
     | 'taskItem'
-    | 'blockquote';
+    | 'blockquote'
+    | 'table'
+    | 'tableRow'
+    | 'tableCell'
+    | 'tableHeader'
+    | NoteMediaKind;
   readonly content?: readonly NoteNode[];
   readonly text?: string;
-  readonly attrs?: Readonly<Record<string, string | number | boolean>>;
+  readonly attrs?: Readonly<Record<string, string | number | boolean | readonly number[] | null>>;
   readonly marks?: readonly NoteMark[];
 }
 
@@ -37,7 +52,7 @@ export interface NoteDraft {
 }
 
 export interface Note extends NoteDraft {
-  readonly schemaVersion: 1;
+  readonly schemaVersion: 1 | 2;
   readonly revision: number;
   readonly createdAt: string;
   readonly updatedAt: string;
@@ -45,6 +60,7 @@ export interface Note extends NoteDraft {
 
 export interface NoteEditorDraft {
   readonly owner: string;
+  readonly draftId: string;
   readonly note: NoteDraft;
   readonly expectedRevision: number | null;
   readonly initialContent: string;

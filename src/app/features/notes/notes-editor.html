@@ -14,7 +14,7 @@
       type="button"
       class="close-button"
       aria-label="Đóng Notes"
-      [disabled]="notes.saving()"
+      [disabled]="busy()"
       (click)="close()"
     >
       ×
@@ -29,14 +29,14 @@
       maxlength="200"
       [(ngModel)]="title"
       (ngModelChange)="changed()"
-      [disabled]="notes.saving()"
+      [disabled]="busy()"
     />
     <div class="format-toolbar" role="toolbar" aria-label="Định dạng ghi chú">
       <select
         #blockSelect
         aria-label="Kiểu văn bản"
         [value]="blockType()"
-        [disabled]="notes.saving()"
+        [disabled]="busy()"
         (change)="block(blockSelect.value)"
       >
         <option value="paragraph">Văn bản</option>
@@ -64,7 +64,7 @@
           [attr.aria-label]="item.label"
           [title]="item.label"
           [attr.aria-pressed]="isActive(item.name)"
-          [disabled]="notes.saving()"
+          [disabled]="busy()"
           (click)="format(item.name)"
         >
           {{ item.text }}
@@ -74,11 +74,38 @@
         type="button"
         aria-label="Chèn liên kết"
         title="Liên kết"
-        [disabled]="notes.saving()"
-        (click)="linkOpen.set(!linkOpen())"
+        [disabled]="busy()"
+        (click)="attachmentKind.set(null); tableOpen.set(false); linkOpen.set(!linkOpen())"
       >
         ↗
       </button>
+      <button
+        type="button"
+        [disabled]="busy()"
+        [attr.aria-expanded]="attachmentKind() === 'image'"
+        (click)="openAttachment('image')"
+      >
+        Chèn ảnh
+      </button>
+      <button
+        type="button"
+        [disabled]="busy()"
+        [attr.aria-expanded]="attachmentKind() === 'video'"
+        (click)="openAttachment('video')"
+      >
+        Chèn video
+      </button>
+      <button
+        type="button"
+        [disabled]="busy()"
+        [attr.aria-expanded]="tableOpen()"
+        (click)="toggleTableForm()"
+      >
+        Chèn bảng
+      </button>
+      @if (mediaSelected()) {
+        <button type="button" [disabled]="busy()" (click)="removeMedia()">Xóa tệp</button>
+      }
     </div>
     @if (linkOpen()) {
       <div class="link-form">
@@ -90,6 +117,134 @@
         >
           Áp dụng
         </button>
+      </div>
+    }
+    @if (attachmentKind(); as kind) {
+      <div class="insert-options">
+        @if (kind === 'image') {
+          <label for="note-image-alt">Mô tả ảnh (không bắt buộc)</label>
+          <input
+            id="note-image-alt"
+            type="text"
+            maxlength="500"
+            [(ngModel)]="imageAlt"
+            [disabled]="busy()"
+          />
+        }
+        <label for="note-attachment-file"
+          >{{ kind === 'image' ? 'Chọn ảnh' : 'Chọn video' }} dưới 50 MB</label
+        >
+        <input
+          #fileInput
+          id="note-attachment-file"
+          type="file"
+          [accept]="
+            kind === 'image' ? 'image/jpeg,image/png,image/webp,image/gif' : 'video/mp4,video/webm'
+          "
+          [disabled]="busy()"
+          (change)="insertAttachment(fileInput, kind)"
+        />
+        @if (notes.stagingAttachment()) {
+          <span role="status">Đang thêm tệp…</span>
+        }
+      </div>
+    }
+    @if (tableOpen()) {
+      <form
+        class="table-options"
+        (ngSubmit)="
+          insertTable(tableRows.valueAsNumber, tableColumns.valueAsNumber, tableHeader.checked)
+        "
+      >
+        <div class="table-dimensions">
+          <label for="note-table-rows">Số hàng</label>
+          <input
+            #tableRows
+            id="note-table-rows"
+            type="number"
+            min="1"
+            [max]="maxTableCells"
+            value="3"
+            required
+            [disabled]="busy()"
+          />
+        </div>
+        <div class="table-dimensions">
+          <label for="note-table-columns">Số cột</label>
+          <input
+            #tableColumns
+            id="note-table-columns"
+            type="number"
+            min="1"
+            [max]="maxTableCells"
+            value="3"
+            required
+            [disabled]="busy()"
+          />
+        </div>
+        <label class="table-header-option" for="note-table-header">
+          <input #tableHeader id="note-table-header" type="checkbox" checked [disabled]="busy()" />
+          Hàng tiêu đề
+        </label>
+        <button type="submit" class="button button--secondary" [disabled]="busy()">Tạo bảng</button>
+      </form>
+    }
+    @if (inTable()) {
+      <div class="table-options" role="group" aria-label="Chỉnh sửa bảng">
+        <select #tableAction aria-label="Thao tác với bảng" [disabled]="busy()">
+          <option value="">Thao tác với bảng</option>
+          @for (action of tableActions; track action.name) {
+            <option [value]="action.name" [disabled]="!canChangeTable(action.name)">
+              {{ action.label }}
+            </option>
+          }
+        </select>
+        <button
+          type="button"
+          class="button button--secondary"
+          [disabled]="busy()"
+          (click)="applyTableAction(tableAction)"
+        >
+          Thực hiện
+        </button>
+        <button
+          type="button"
+          class="button button--secondary"
+          [disabled]="!canChangeTable('mergeCells')"
+          (click)="changeTable('mergeCells')"
+        >
+          Gộp ô
+        </button>
+        <button
+          type="button"
+          class="button button--secondary"
+          [disabled]="!canChangeTable('splitCell')"
+          (click)="changeTable('splitCell')"
+        >
+          Tách ô
+        </button>
+        <div class="column-width">
+          <label for="note-column-width">Rộng cột (px)</label>
+          <input
+            #columnWidth
+            id="note-column-width"
+            type="number"
+            [min]="minColumnWidth"
+            [max]="maxColumnWidth"
+            [value]="selectedColumnWidth()"
+            [disabled]="busy()"
+            placeholder="Tự động"
+            (keyup.enter)="applyColumnWidth(columnWidth.value)"
+          />
+          <button
+            type="button"
+            class="button button--secondary"
+            [disabled]="busy()"
+            (click)="applyColumnWidth(columnWidth.value)"
+          >
+            Áp dụng
+          </button>
+        </div>
       </div>
     }
     <div #editor class="rich-editor"></div>
@@ -123,14 +278,9 @@
     <button type="button" class="button button--secondary" (click)="copy()">Copy nội dung</button
     ><button type="button" class="button button--secondary" (click)="export()">Xuất .md</button
     ><span class="spacer"></span
-    ><button
-      type="button"
-      class="button button--secondary"
-      [disabled]="notes.saving()"
-      (click)="close()"
-    >
+    ><button type="button" class="button button--secondary" [disabled]="busy()" (click)="close()">
       Hủy</button
-    ><button type="button" class="button note-save" [disabled]="notes.saving()" (click)="save()">
+    ><button type="button" class="button note-save" [disabled]="busy()" (click)="save()">
       {{ notes.saving() ? 'Đang lưu…' : 'Lưu ghi chú' }}
     </button>
   </footer>

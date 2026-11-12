@@ -83,6 +83,30 @@ a {
   font-size: 0.7rem;
   font-weight: 750;
 }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+.table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  line-height: 1.5;
+}
+.table-scroll th,
+.table-scroll td {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--color-border-strong);
+  text-align: left;
+  vertical-align: top;
+}
+.table-scroll th {
+  background: var(--color-paper);
+}
+.table-scroll p:last-child {
+  margin-bottom: 0;
+}
 @media (forced-colors: active) {
   .grammar-token,
   mark {

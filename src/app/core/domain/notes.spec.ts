@@ -1,13 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import {
   documentFromText,
+  isNoteMediaSize,
   isSafeNoteLink,
   noteHtml,
+  noteAttachments,
   noteMarkdown,
   notePlainText,
+  noteSchemaVersion,
+  noteTableColumnWidths,
   parseNote,
   parseNoteDocument,
   parseNoteDraft,
+  validateNoteAttachment,
 } from './notes';
 import { NoteDraft, NoteNode } from '../models/notes.models';
 
@@ -15,6 +20,20 @@ const draft = (): NoteDraft => ({
   id: '12345678-1234-1234-1234-123456789012',
   title: 'Ghi chú',
   document: documentFromText('Dòng một\nDòng hai'),
+});
+const attachmentId = 'a2345678-1234-1234-1234-123456789012';
+const picture: NoteNode = {
+  type: 'image',
+  attrs: { attachmentId, fileName: 'mẫu <ảnh>.png', mimeType: 'image/png', alt: 'Mẫu' },
+};
+const cell = (
+  type: 'tableHeader' | 'tableCell',
+  value = '',
+  attrs?: NoteNode['attrs'],
+): NoteNode => ({
+  type,
+  content: documentFromText(value).content,
+  attrs,
 });
 describe('Notes content boundaries and transfer', () => {
   it('preserves paragraph breaks and derives a title only on final save', () => {
@@ -150,5 +169,125 @@ describe('Notes content boundaries and transfer', () => {
     expect(() =>
       parseNoteDraft({ ...draft(), source: { path: '//evil.com', label: 'Source' } }),
     ).toThrow();
+  });
+  it('saves and searches notes containing only a table or attachment', () => {
+    const input = parseNoteDraft({
+      ...draft(),
+      title: '',
+      document: { type: 'doc', content: [picture] },
+    });
+    expect(input.title).toBe('mẫu <ảnh>.png');
+    expect(notePlainText(input.document)).toBe(input.title);
+    expect(noteAttachments(input.document)).toEqual([
+      { attachmentId, fileName: input.title, mimeType: 'image/png' },
+    ]);
+    expect(noteSchemaVersion(input.document)).toBe(2);
+    expect(noteHtml(input)).toContain('<p>Ảnh · mẫu &lt;ảnh&gt;.png</p>');
+    expect(noteHtml(input)).not.toContain(attachmentId);
+    expect(noteMarkdown(input)).toContain('Ảnh · mẫu \\<ảnh\\>.png');
+    const emptyTable: NoteNode = {
+      type: 'table',
+      content: [{ type: 'tableRow', content: [cell('tableCell')] }],
+    };
+    expect(
+      parseNoteDraft({ ...input, title: '', document: { type: 'doc', content: [emptyTable] } })
+        .title,
+    ).toBe('Bảng');
+  });
+  it('exports simple tables as GFM, including pipes and line breaks', () => {
+    const document = parseNoteDocument({
+      type: 'doc',
+      content: [
+        {
+          type: 'table',
+          content: [
+            {
+              type: 'tableRow',
+              content: [cell('tableHeader', 'Cột A'), cell('tableHeader', 'Cột B')],
+            },
+            {
+              type: 'tableRow',
+              content: [cell('tableCell', 'x | y'), cell('tableCell', 'một\nhai')],
+            },
+          ],
+        },
+      ],
+    });
+    expect(notePlainText(document)).toBe('Cột A\tCột B\nx | y\tmột\nhai');
+    expect(noteMarkdown({ ...draft(), document })).toContain(
+      '| Cột A | Cột B |\n| --- | --- |\n| x \\| y | một<br>hai |',
+    );
+  });
+  it('roundtrips merged and resized tables and preserves their structure in HTML', () => {
+    const table: NoteNode = {
+      type: 'table',
+      content: [
+        {
+          type: 'tableRow',
+          content: [cell('tableHeader', 'A', { colspan: 2, rowspan: 2, colwidth: [180, 230] })],
+        },
+        { type: 'tableRow' },
+      ],
+    };
+    const note = parseNote({
+      ...draft(),
+      document: { type: 'doc', content: [table] },
+      schemaVersion: 2,
+      revision: 1,
+      createdAt: '2026-10-14',
+      updatedAt: '2026-10-14',
+    });
+    expect(parseNote(note)).toEqual(note);
+    expect(noteTableColumnWidths(table)).toEqual([180, 230]);
+    expect(noteHtml(note)).toContain(
+      '<th colspan="2" rowspan="2" colwidth="180,230"><p>A</p></th>',
+    );
+    expect(noteMarkdown(note)).toContain(
+      '<colgroup><col style="width:180px"><col style="width:230px"></colgroup>',
+    );
+    const invalidRow = { type: 'tableRow', content: [cell('tableCell', 'Overlaps')] };
+    expect(() =>
+      parseNoteDocument({
+        type: 'doc',
+        content: [{ ...table, content: [table.content?.[0], invalidRow] }],
+      }),
+    ).toThrow('invalid_note');
+  });
+  it('rejects invalid attachment metadata, nesting and table cell attributes', () => {
+    const invalid: unknown[] = [
+      { ...picture, attrs: { ...picture.attrs, mimeType: 'video/webm' } },
+      { ...picture, attrs: { ...picture.attrs, fileName: 'a\nb' } },
+      { ...picture, attrs: { ...picture.attrs, src: 'blob:attached' } },
+      { type: 'blockquote', content: [picture] },
+      {
+        type: 'table',
+        content: [
+          { type: 'tableRow', content: [cell('tableCell', 'A', { colwidth: [200, 200] })] },
+        ],
+      },
+    ];
+    for (const node of invalid) {
+      expect(() => parseNoteDocument({ type: 'doc', content: [node] })).toThrow('invalid_note');
+    }
+  });
+  it('validates file signatures and the strict decimal size limit', async () => {
+    expect(isNoteMediaSize(0)).toBe(false);
+    expect(isNoteMediaSize(49_999_999)).toBe(true);
+    expect(isNoteMediaSize(50_000_000)).toBe(false);
+    const png = new Blob([new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])], {
+      type: 'image/png',
+    });
+    const mp4 = new Blob([new Uint8Array([0, 0, 0, 16]), 'ftypisom', new Uint8Array(4)], {
+      type: 'video/mp4',
+    });
+    await expect(validateNoteAttachment(png, 'image')).resolves.toBeUndefined();
+    await expect(validateNoteAttachment(mp4, 'video')).resolves.toBeUndefined();
+    await expect(validateNoteAttachment(png, 'video')).rejects.toThrow('invalid_note_media_type');
+    await expect(
+      validateNoteAttachment(new Blob(['<svg>'], { type: 'image/png' }), 'image'),
+    ).rejects.toThrow('invalid_note_media_type');
+    await expect(validateNoteAttachment(new Blob([]), 'image')).rejects.toThrow(
+      'invalid_note_media_size',
+    );
   });
 });

@@ -168,7 +168,7 @@
             <h2 #selectedHeading tabindex="-1">{{ note.title }}</h2>
             <p class="note-updated">Cập nhật {{ note.updatedAt | date: 'dd/MM/yyyy · HH:mm' }}</p>
           </header>
-          <app-note-preview [document]="note.document" />
+          <app-note-preview [document]="note.document" [noteId]="note.id" />
           @if (note.source; as source) {
             <p class="note-source"><span>Nguồn ghi chú</span>{{ source.label }}</p>
           }

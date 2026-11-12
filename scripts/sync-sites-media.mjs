@@ -4,7 +4,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
-import { MEDIA_ROOTS, mediaType } from './sites-media-worker.mjs';
+import { MEDIA_ROOTS, mediaType } from './sites-media-paths.mjs';
 
 const publicDirectory = resolve(dirname(fileURLToPath(import.meta.url)), '../public');
 const mediaFiles = [];
