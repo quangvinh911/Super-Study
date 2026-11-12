@@ -185,6 +185,24 @@ describe('Notes editor public behavior', () => {
     expect(table.rows[0].cells[0].colSpan).toBe(1);
     expect(table.rows[0].cells[0].rowSpan).toBe(1);
   });
+  it('stages an image pasted from the native clipboard', async () => {
+    vi.stubGlobal(
+      'URL',
+      Object.assign(class extends URL {}, {
+        createObjectURL: vi.fn().mockReturnValue('blob:pasted-image'),
+        revokeObjectURL: vi.fn(),
+      }),
+    );
+    const { fixture, element, notes, stageAttachment } = await setup();
+    const file = new File(['test'], image.fileName, { type: image.mimeType });
+    const event = new Event('paste', { bubbles: true, cancelable: true });
+    Object.defineProperty(event, 'clipboardData', { value: { files: [file], getData: () => '' } });
+    element.querySelector('.tiptap')?.dispatchEvent(event);
+    await fixture.whenStable();
+    expect(event.defaultPrevented).toBe(true);
+    expect(stageAttachment).toHaveBeenCalledWith(file, 'image', 'guest', notes.draft()?.draftId);
+    expect(notes.draft()?.note.document.content).toContainEqual({ type: 'image', attrs: image });
+  });
   it('stages an image with its description and removes the selected file', async () => {
     const createObjectURL = vi.fn().mockReturnValue('blob:note-image');
     const revokeObjectURL = vi.fn();
