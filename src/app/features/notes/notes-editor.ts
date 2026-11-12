@@ -143,6 +143,18 @@ export class NotesEditor implements AfterViewInit, OnDestroy {
       ],
       content: editorDocument(draft.note.document),
       editorProps: {
+        handlePaste: (_view, event) => {
+          const image =
+            Array.from(event.clipboardData?.files ?? []).find((file) =>
+              file.type.startsWith('image/'),
+            ) ??
+            Array.from(event.clipboardData?.items ?? [])
+              .find((item) => item.kind === 'file' && item.type.startsWith('image/'))
+              ?.getAsFile();
+          if (!image) return false;
+          void this.insertAttachmentFile(image, 'image');
+          return true;
+        },
         attributes: {
           role: 'textbox',
           'aria-label': 'Nội dung ghi chú',
@@ -257,14 +269,42 @@ export class NotesEditor implements AfterViewInit, OnDestroy {
   protected async insertAttachment(input: HTMLInputElement, kind: NoteMediaKind): Promise<void> {
     const file = input.files?.[0];
     input.value = '';
+    if (file) await this.insertAttachmentFile(file, kind);
+  }
+  protected async pasteImage(): Promise<void> {
+    const draftId = this.notes.draft()?.draftId;
+    if (!draftId || this.busy()) return;
+    const pasteHint = 'Chạm vào nội dung ghi chú rồi chọn Dán, hoặc dùng Ctrl/Cmd+V.';
+    try {
+      const items = await navigator.clipboard.read();
+      if (this.notes.draft()?.draftId !== draftId) return;
+      for (const item of items) {
+        const type = item.types.find((format) => /^image\/(png|jpeg|webp|gif)$/.test(format));
+        if (!type) continue;
+        const blob = await item.getType(type);
+        if (this.notes.draft()?.draftId !== draftId) return;
+        await this.insertAttachmentFile(
+          new File([blob], 'Ảnh đã dán.' + type.split('/')[1], { type }),
+          'image',
+        );
+        return;
+      }
+      this.error.set('Clipboard chưa có ảnh JPEG, PNG, WebP hoặc GIF. ' + pasteHint);
+    } catch {
+      if (this.notes.draft()?.draftId !== draftId) return;
+      this.error.set(pasteHint);
+      this.editor?.commands.focus();
+    }
+  }
+  private async insertAttachmentFile(file: File, kind: NoteMediaKind): Promise<void> {
     const editor = this.editor;
     const draft = this.notes.draft();
-    if (!file || !editor || !draft || this.busy()) return;
+    if (!editor || !draft || this.busy()) return;
+    const alt = kind === 'image' && this.attachmentKind() === 'image' ? this.imageAlt.trim() : '';
     this.error.set('');
     try {
       const attachment = await this.notes.stageAttachment(file, kind);
       if (editor.isDestroyed || this.notes.draft()?.draftId !== draft.draftId) return;
-      const alt = kind === 'image' ? this.imageAlt.trim() : '';
       const node = editor.schema.nodes[kind].create({ ...attachment, ...(alt ? { alt } : {}) });
       editor.chain().focus().command(insertNoteBlock(node)).run();
       this.attachmentKind.set(null);

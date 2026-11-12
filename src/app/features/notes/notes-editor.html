@@ -122,6 +122,14 @@
     @if (attachmentKind(); as kind) {
       <div class="insert-options">
         @if (kind === 'image') {
+          <button
+            type="button"
+            class="button button--secondary"
+            [disabled]="busy()"
+            (click)="pasteImage()"
+          >
+            Dán ảnh
+          </button>
           <label for="note-image-alt">Mô tả ảnh (không bắt buộc)</label>
           <input
             id="note-image-alt"
