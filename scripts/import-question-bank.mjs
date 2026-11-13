@@ -142,7 +142,7 @@ async function checkMedia(paths, input) {
   for (let start = 0; start < paths.length; start += BANK_MEDIA_BATCH) {
     const batch = paths.slice(start, start + BANK_MEDIA_BATCH);
     if (input) {
-      const result = await fetchBankApi(input, '/api/admin/question-banks/media', {
+      const result = await fetchBankApi(input, `${input.apiRoot}/media`, {
         method: 'POST',
         body: batch,
       });
@@ -166,8 +166,8 @@ async function checkMedia(paths, input) {
   return missing;
 }
 
-function adminPath(certificateId, bankId) {
-  return `/api/admin/question-banks/${certificateId}/${bankId}`;
+function adminPath(input, certificateId, bankId) {
+  return `${input.apiRoot}/${certificateId}/${bankId}`;
 }
 
 async function activate(input, path, bankVersion, previousVersion) {
@@ -179,7 +179,7 @@ async function activate(input, path, bankVersion, previousVersion) {
 
 async function importBank(input, bank, uploads, stageOnly) {
   const { certificateId, bankId, manifest, checksum } = bank;
-  const path = adminPath(certificateId, bankId);
+  const path = adminPath(input, certificateId, bankId);
   const { bankVersion } = manifest;
   const versionPath = `${path}/versions/${bankVersion}`;
   const previousVersion = (await fetchBankApi(input, `${path}/active`)).bankVersion;
@@ -244,12 +244,26 @@ async function run() {
   if (args['stage-only'] && (!args.remote || args['dry-run'])) {
     throw new Error('--stage-only requires a remote import.');
   }
-  const input = args.remote ? await operatorInput() : null;
-  if (input && (typeof input.accessToken !== 'string' || !input.accessToken)) {
-    throw new Error('Provide the target Site URL and an Admin accessToken.');
+  let input = null;
+  if (args.remote) {
+    const remote = await operatorInput();
+    if (typeof remote.backfillSecret === 'string' && remote.backfillSecret.length >= 32) {
+      if (args.activate !== undefined)
+        throw new Error('Use an Admin accessToken to change an active version.');
+      input = {
+        ...remote,
+        accessToken: remote.backfillSecret,
+        apiRoot: '/api/internal/question-bank-backfill',
+      };
+    } else {
+      if (typeof remote.accessToken !== 'string' || !remote.accessToken) {
+        throw new Error('Provide the target Site URL and an Admin accessToken.');
+      }
+      input = { ...remote, apiRoot: '/api/admin/question-banks' };
+    }
   }
   if (args.activate !== undefined) {
-    const path = adminPath(args.certificate, args.bank);
+    const path = adminPath(input, args.certificate, args.bank);
     const { bankVersion } = await fetchBankApi(input, `${path}/active`);
     const target = args.activate === 'json' ? null : args.activate;
     await activate(input, path, target, bankVersion);

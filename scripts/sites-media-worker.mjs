@@ -1,6 +1,7 @@
 import { createVocabularyApi } from './vocabulary-api.mjs';
 import { accountRequest } from '../server/sites-accounts.mjs';
 import { readQuestionBanks } from '../server/question-bank-api.mjs';
+import { backfillQuestionBanks, bankBackfillPrefix } from '../server/question-bank-backfill.mjs';
 import { noteMediaObjectPrefix } from '../server/notes-media.mjs';
 import { MEDIA_ROOTS, mediaType } from './sites-media-paths.mjs';
 
@@ -197,6 +198,8 @@ export default {
         return secure(await vocabularyApi(request, env));
       if (url.pathname.startsWith('/api/question-banks/'))
         return secure(await readQuestionBanks(request, env));
+      if (url.pathname.startsWith(bankBackfillPrefix))
+        return secure(await backfillQuestionBanks(request, env));
       if (url.pathname === adminPath || url.pathname === singleUploadPath)
         return secure(
           env.ACCOUNT_MAINTENANCE === 'true'

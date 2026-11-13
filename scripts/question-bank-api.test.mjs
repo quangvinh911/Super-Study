@@ -9,6 +9,7 @@ const origin = 'http://localhost:4200';
 const adminPath = '/api/admin/question-banks';
 const readPath = '/api/question-banks';
 const bootstrapSecret = 'bank-test-bootstrap-secret-at-least-32';
+const backfillSecret = 'bank-test-backfill-secret-at-least-32';
 const password = 'Test-question-bank-password-1';
 let runtime;
 let admin;
@@ -60,6 +61,7 @@ beforeAll(async () => {
   runtime = await createLocalAccountRuntime({
     workerPath: 'dist/local-question-bank-test-worker.mjs',
     bootstrapSecret,
+    bankBackfillSecret: backfillSecret,
     jwtSecret: 'bank-test-jwt-secret-at-least-32-characters',
   });
   const created = await request('/api/auth/bootstrap', {
@@ -93,6 +95,39 @@ afterAll(async () => {
 });
 
 describe('versioned question banks in the Sites Worker', () => {
+  it('limits the initial backfill credential to the shipped bank versions', async () => {
+    const bank = await fixture('');
+    const checksum = bankChecksum(bank);
+    const path = '/api/internal/question-bank-backfill/ctfl/original';
+    const draft = `${path}/versions/${bank.manifest.bankVersion}`;
+    const create = { method: 'PUT', body: { manifest: bank.manifest, checksum } };
+    expect((await request(draft, create)).status).toBe(404);
+    expect((await request(draft, { ...create, token: backfillSecret })).status).toBe(200);
+    expect(
+      (
+        await request(`${draft}/entries`, {
+          method: 'PUT',
+          token: backfillSecret,
+          body: { checksum, entries: entries(bank).slice(0, 2) },
+        })
+      ).status,
+    ).toBe(200);
+    expect(
+      (await request(`${path}/versions/other-version`, { ...create, token: backfillSecret }))
+        .status,
+    ).toBe(404);
+    expect(
+      (
+        await request(`${path}/active`, {
+          method: 'PUT',
+          token: backfillSecret,
+          body: { bankVersion: null, previousVersion: null },
+        })
+      ).status,
+    ).toBe(404);
+    expect((await request('/api/admin/users', { token: backfillSecret })).status).toBe(401);
+  });
+
   it('isolates drafts, verifies actual stored contents and rolls back only the active bank', async () => {
     const bank = await fixture('');
     const checksum = bankChecksum(bank);

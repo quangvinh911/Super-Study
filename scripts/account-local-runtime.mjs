@@ -29,6 +29,7 @@ export async function createLocalAccountRuntime({
   jwtSecret,
   bootstrapSecret,
   migrationSecret,
+  bankBackfillSecret,
   maintenance = false,
   appOrigin = 'http://localhost:4200',
   workerPath = 'dist/local-account-worker.mjs',
@@ -51,6 +52,7 @@ export async function createLocalAccountRuntime({
       ...(jwtSecret ? { JWT_SECRET: jwtSecret } : {}),
       ...(bootstrapSecret ? { BOOTSTRAP_SECRET: bootstrapSecret } : {}),
       ...(migrationSecret ? { MIGRATION_SECRET: migrationSecret } : {}),
+      ...(bankBackfillSecret ? { QUESTION_BANK_BACKFILL_SECRET: bankBackfillSecret } : {}),
       ACCOUNT_MAINTENANCE: String(maintenance),
     },
   });
