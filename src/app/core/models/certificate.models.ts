@@ -26,6 +26,14 @@ export interface ExamDefinition {
   readonly sections?: readonly ExamSection[];
 }
 
+export interface QuestionBankDefinition {
+  readonly id: QuestionBankSource;
+  readonly label: string;
+  readonly description: string;
+  readonly manifestUrl: string;
+  readonly optional?: boolean;
+}
+
 export interface CertificateDefinition {
   readonly id: string;
   readonly name: string;
@@ -40,13 +48,7 @@ export interface CertificateDefinition {
   }[];
   readonly taxonomy: 'syllabus' | 'sections';
   readonly topics?: readonly { readonly id: string; readonly label: string }[];
-  readonly banks: readonly {
-    readonly id: QuestionBankSource;
-    readonly label: string;
-    readonly description: string;
-    readonly manifestUrl: string;
-    readonly optional?: boolean;
-  }[];
+  readonly banks: readonly QuestionBankDefinition[];
   readonly exam: ExamDefinition;
   readonly references: readonly { readonly title: string; readonly url: string }[];
 }

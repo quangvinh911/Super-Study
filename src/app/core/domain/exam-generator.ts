@@ -49,3 +49,19 @@ export function generateExam(
     form.map((question) => ({ question, solution: solutionsById.get(question.id)! })),
   );
 }
+
+export function canGenerateExam(
+  bank: { readonly questions: readonly Question[]; readonly solutions: readonly Solution[] },
+  exam: ExamDefinition,
+): boolean {
+  if (bank.questions.length < exam.questionCount) return false;
+  if (exam.generation === 'sections') {
+    return completeExamForms(bank.questions, bank.solutions, exam).length > 0;
+  }
+  try {
+    generateExam(bank.questions, bank.solutions, exam, 'inventory-check');
+    return true;
+  } catch {
+    return false;
+  }
+}

@@ -12,6 +12,11 @@ Routes are generated as distinct `/certificates/ctfl/...` and `/certificates/toe
 
 ## Data compatibility
 
+The question-bank catalog can read active versions from D1. Registry bank IDs still control
+which sources appear. The existing JSON under `public/data/` remains the source for imports
+and the fallback for banks without an active D1 version. See [importing question banks into
+D1](question-bank-import.md).
+
 Authenticated learners use the online account API with user/certificate isolation; guest IndexedDB data is never automatically imported. See [accounts and hosting migration](accounts-and-migration.md).
 
 For guests, CTFL continues using the existing `ctfl-practice` IndexedDB database. Other certificates use `certificate-practice:<id>`. Question IDs may overlap between certificates without colliding. Preferences, bookmarks, active sessions, attempts, export/import and reset are scoped to that database.

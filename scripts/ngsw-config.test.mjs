@@ -33,4 +33,14 @@ it('caches PDF question images lazily while prefetching bank data and ordinary i
     .flatMap((group) => group.urls);
   expect(prefetched).toEqual(expect.arrayContaining(ordinaryAssets));
   expect(prefetched.some((url) => evidence.includes(url))).toBe(false);
+  const [catalog, versions] = manifest.dataGroups;
+  const catalogPattern = new RegExp(catalog.patterns[0]);
+  const versionPattern = new RegExp(versions.patterns[0]);
+  const api = 'https://example.com/api';
+  expect(catalog.strategy).toBe('freshness');
+  expect(catalogPattern.test(`${api}/question-banks/toeic`)).toBe(true);
+  expect(catalogPattern.test(`${api}/question-banks/toeic/hacker/v1`)).toBe(false);
+  expect(versionPattern.test(`${api}/question-banks/toeic/hacker/v1`)).toBe(true);
+  expect(versionPattern.test(`${api}/question-banks/toeic`)).toBe(false);
+  expect(versionPattern.test(`${api}/admin/question-banks/toeic/hacker/versions/v1`)).toBe(false);
 });
