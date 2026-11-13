@@ -30,7 +30,8 @@ missing from the static fallback. New certificates also need their exam and prog
    Admin login. For a restricted Site, also supply its raw `bypassToken`. Pipe the JSON from
    a secure source. Credentials belong in stdin and out of command arguments and history.
 4. Verify the catalog and start a new practice session or mock exam. Repeat for CTFL PDF,
-   Jimmy and Hacker 3. The script reports any missing files before writing that bank.
+   Jimmy and Hacker 3. The importer checks media before writing each batch. Run a remote
+   dry run first when you want a full report of missing files.
 
 The first verified version becomes active by default. Use `--stage-only` to verify a version
 without activating it. Each import validates the full bank, writes bounded batches to a

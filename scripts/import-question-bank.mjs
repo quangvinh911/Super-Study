@@ -26,6 +26,14 @@ const defaultBanks = [
   ['toeic', 'hacker2', 'public/data/toeic/hacker2-manifest.json'],
 ];
 
+async function runBatches(batches, operation) {
+  for (let start = 0; start < batches.length; start += 4) {
+    const results = await Promise.allSettled(batches.slice(start, start + 4).map(operation));
+    const failure = results.find((result) => result.status === 'rejected');
+    if (failure) throw failure.reason;
+  }
+}
+
 async function readBank(certificateId, bankId, manifestPath) {
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   validateBankManifest(manifest, certificateId);
@@ -142,7 +150,7 @@ async function checkMedia(paths, input) {
   for (let start = 0; start < paths.length; start += BANK_MEDIA_BATCH) {
     const batch = paths.slice(start, start + BANK_MEDIA_BATCH);
     if (input) {
-      const result = await fetchBankApi(input, `${input.apiRoot}/media`, {
+      const result = await fetchBankApi(input, '/api/admin/question-banks/media', {
         method: 'POST',
         body: batch,
       });
@@ -166,8 +174,8 @@ async function checkMedia(paths, input) {
   return missing;
 }
 
-function adminPath(input, certificateId, bankId) {
-  return `${input.apiRoot}/${certificateId}/${bankId}`;
+function adminPath(certificateId, bankId) {
+  return `/api/admin/question-banks/${certificateId}/${bankId}`;
 }
 
 async function activate(input, path, bankVersion, previousVersion) {
@@ -179,7 +187,7 @@ async function activate(input, path, bankVersion, previousVersion) {
 
 async function importBank(input, bank, uploads, stageOnly) {
   const { certificateId, bankId, manifest, checksum } = bank;
-  const path = adminPath(input, certificateId, bankId);
+  const path = adminPath(certificateId, bankId);
   const { bankVersion } = manifest;
   const versionPath = `${path}/versions/${bankVersion}`;
   const previousVersion = (await fetchBankApi(input, `${path}/active`)).bankVersion;
@@ -188,12 +196,17 @@ async function importBank(input, bank, uploads, stageOnly) {
     body: { manifest, checksum },
   });
   if (!version.verified) {
-    for (const entries of uploads) {
+    let completed = 0;
+    await runBatches(uploads, async (entries) => {
       await fetchBankApi(input, `${versionPath}/entries`, {
         method: 'PUT',
         body: { checksum, entries },
       });
-    }
+      completed += 1;
+      if (completed % 10 === 0 || completed === uploads.length) {
+        console.log(`${certificateId}/${bankId}: uploaded ${completed}/${uploads.length} batches.`);
+      }
+    });
     version = await fetchBankApi(input, `${versionPath}/verify`, {
       method: 'POST',
       body: { checksum },
@@ -244,26 +257,12 @@ async function run() {
   if (args['stage-only'] && (!args.remote || args['dry-run'])) {
     throw new Error('--stage-only requires a remote import.');
   }
-  let input = null;
-  if (args.remote) {
-    const remote = await operatorInput();
-    if (typeof remote.backfillSecret === 'string' && remote.backfillSecret.length >= 32) {
-      if (args.activate !== undefined)
-        throw new Error('Use an Admin accessToken to change an active version.');
-      input = {
-        ...remote,
-        accessToken: remote.backfillSecret,
-        apiRoot: '/api/internal/question-bank-backfill',
-      };
-    } else {
-      if (typeof remote.accessToken !== 'string' || !remote.accessToken) {
-        throw new Error('Provide the target Site URL and an Admin accessToken.');
-      }
-      input = { ...remote, apiRoot: '/api/admin/question-banks' };
-    }
+  const input = args.remote ? await operatorInput() : null;
+  if (input && (typeof input.accessToken !== 'string' || !input.accessToken)) {
+    throw new Error('Provide the target Site URL and an Admin accessToken.');
   }
   if (args.activate !== undefined) {
-    const path = adminPath(input, args.certificate, args.bank);
+    const path = adminPath(args.certificate, args.bank);
     const { bankVersion } = await fetchBankApi(input, `${path}/active`);
     const target = args.activate === 'json' ? null : args.activate;
     await activate(input, path, target, bankVersion);
@@ -293,16 +292,19 @@ async function run() {
       }
       const bank = await readBank(certificateId, bankId, manifestPath);
       const uploads = batches(bank);
-      const missing = await checkMedia([...bank.media], input);
       console.log(
         `${certificateId}/${bankId} ${bank.manifest.bankVersion}: ${bank.questions.length} questions, ${uploads.length} batches, SHA-256 ${bank.checksum}.`,
       );
-      if (missing.length) {
-        throw new Error(
-          `${missing.length} missing media files (first 3: ${missing.slice(0, 3).join(', ')}).`,
-        );
+      if (args['dry-run']) {
+        const missing = await checkMedia([...bank.media], input);
+        if (missing.length) {
+          throw new Error(
+            `${missing.length} missing media files (first 3: ${missing.slice(0, 3).join(', ')}).`,
+          );
+        }
+      } else {
+        await importBank(input, bank, uploads, args['stage-only']);
       }
-      if (input && !args['dry-run']) await importBank(input, bank, uploads, args['stage-only']);
     } catch (error) {
       console.error(`${certificateId}/${bankId}: ${error.message}`);
       process.exitCode = 1;
