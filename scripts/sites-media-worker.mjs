@@ -1,6 +1,7 @@
 import { createVocabularyApi } from './vocabulary-api.mjs';
 import { createPracticeExplanationApi } from './practice-explanation-api.mjs';
 import { accountRequest } from '../server/sites-accounts.mjs';
+import { readQuestionBanks } from '../server/question-bank-api.mjs';
 import { noteMediaObjectPrefix } from '../server/notes-media.mjs';
 import { MEDIA_ROOTS, mediaType } from './sites-media-paths.mjs';
 
@@ -198,6 +199,8 @@ export default {
         return secure(await practiceExplanationApi(request, env));
       if (url.pathname === '/api/vocabulary/enrich')
         return secure(await vocabularyApi(request, env));
+      if (url.pathname.startsWith('/api/question-banks/'))
+        return secure(await readQuestionBanks(request, env));
       if (url.pathname === adminPath || url.pathname === singleUploadPath)
         return secure(
           env.ACCOUNT_MAINTENANCE === 'true'

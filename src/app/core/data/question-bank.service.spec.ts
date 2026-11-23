@@ -7,9 +7,10 @@ const toeic = findCertificate('toeic');
 if (!toeic) throw new Error('The TOEIC certificate is required for these tests.');
 
 const hacker2Manifest = '/data/toeic/hacker2-manifest.json';
+const catalog = '/api/question-banks/toeic';
 
-function serveBanks(overrides = new Map<string, Response | Error>()): void {
-  const responses = new Map<string, Response>();
+function serveBanks(overrides = new Map<string, Response | Error>()) {
+  const responses = new Map<string, Response>([[catalog, Response.json({ banks: [] })]]);
   for (const id of ['hacker', 'hacker2', 'jimmy']) {
     const { manifest, questions, solutions } = toeicFixture(id);
     const prefix = `/data/toeic/${id}-`;
@@ -29,12 +30,14 @@ function serveBanks(overrides = new Map<string, Response | Error>()): void {
       Response.json({ bankVersion, schemaVersion, solutions }),
     );
   }
-  vi.stubGlobal('fetch', async (url: string) => {
+  const fetch = vi.fn(async (url: string) => {
     const response = overrides.get(url) ?? responses.get(url);
     if (!response) throw new Error(`Unexpected request for ${url}`);
     if (response instanceof Error) throw response;
-    return response;
+    return response.clone();
   });
+  vi.stubGlobal('fetch', fetch);
+  return fetch;
 }
 
 afterEach(() => vi.unstubAllGlobals());
@@ -43,10 +46,11 @@ describe('loading the TOEIC banks', () => {
   it('includes Hacker 2 when the complete pack is served', async () => {
     serveBanks();
 
-    const banks = await new QuestionBankService().loadCertificateBanks(toeic);
+    const service = new QuestionBankService();
+    const banks = await service.listBanks(toeic);
 
-    expect(Object.keys(banks)).toEqual(['hacker', 'hacker2', 'jimmy']);
-    expect(banks['hacker2']?.questions).toHaveLength(200);
+    expect(banks.map((bank) => bank.id)).toEqual(['hacker', 'hacker2', 'jimmy']);
+    expect((await service.loadBank(banks[1]!, 'toeic')).questions).toHaveLength(200);
   });
 
   it.each([
@@ -56,9 +60,9 @@ describe('loading the TOEIC banks', () => {
     vi.stubGlobal('navigator', { onLine: false });
     serveBanks(new Map([[hacker2Manifest, response]]));
 
-    const banks = await new QuestionBankService().loadCertificateBanks(toeic);
+    const banks = await new QuestionBankService().listBanks(toeic);
 
-    expect(Object.keys(banks)).toEqual(['hacker', 'jimmy']);
+    expect(banks.map((bank) => bank.id)).toEqual(['hacker', 'jimmy']);
   });
 
   it.each([
@@ -69,17 +73,15 @@ describe('loading the TOEIC banks', () => {
     async (_, response) => {
       serveBanks(new Map([[hacker2Manifest, response]]));
 
-      const banks = await new QuestionBankService().loadCertificateBanks(toeic);
+      const banks = await new QuestionBankService().listBanks(toeic);
 
-      expect(Object.keys(banks)).toEqual(['hacker', 'jimmy']);
-      expect(banks['hacker']?.questions).toHaveLength(200);
-      expect(banks['jimmy']?.questions).toHaveLength(200);
+      expect(banks.map((bank) => bank.id)).toEqual(['hacker', 'jimmy']);
+      expect(banks.map((bank) => bank.questionCount)).toEqual([200, 200]);
     },
   );
 
   it.each([
     ['/data/toeic/hacker-manifest.json', 404],
-    ['/data/toeic/hacker2-solutions.json', 404],
     [hacker2Manifest, 503],
     [hacker2Manifest, 504],
   ])('reports an error when %s returns %s', async (url, status) => {
@@ -89,7 +91,7 @@ describe('loading the TOEIC banks', () => {
     });
     serveBanks(new Map([[url, response]]));
 
-    await expect(new QuestionBankService().loadCertificateBanks(toeic)).rejects.toBeInstanceOf(
+    await expect(new QuestionBankService().listBanks(toeic)).rejects.toBeInstanceOf(
       QuestionBankLoadError,
     );
   });
@@ -97,8 +99,81 @@ describe('loading the TOEIC banks', () => {
   it('reports a malformed Hacker 2 manifest instead of omitting the bank', async () => {
     serveBanks(new Map([[hacker2Manifest, Response.json({ files: {} })]]));
 
-    await expect(new QuestionBankService().loadCertificateBanks(toeic)).rejects.toBeInstanceOf(
+    await expect(new QuestionBankService().listBanks(toeic)).rejects.toBeInstanceOf(
       QuestionBankLoadError,
     );
+  });
+
+  it('reports missing solutions when a learner selects an available bank', async () => {
+    serveBanks(
+      new Map([['/data/toeic/hacker2-solutions.json', new Response(null, { status: 404 })]]),
+    );
+    const service = new QuestionBankService();
+    const banks = await service.listBanks(toeic);
+    await expect(service.loadBank(banks[1]!, 'toeic')).rejects.toBeInstanceOf(
+      QuestionBankLoadError,
+    );
+  });
+});
+
+describe('loading published D1 versions', () => {
+  const bank = toeicFixture('hacker');
+  const manifest = { ...bank.manifest, bankVersion: 'database-v1' };
+  const versionPath = `${catalog}/hacker/${manifest.bankVersion}`;
+  const active = Response.json({
+    banks: [
+      { id: 'hacker', bankVersion: manifest.bankVersion, questionCount: 200, examReady: true },
+    ],
+  });
+
+  it('uses the catalog for availability and downloads only the selected version', async () => {
+    const fetch = serveBanks(
+      new Map([
+        [catalog, active],
+        [versionPath, Response.json({ ...bank, manifest })],
+      ]),
+    );
+    const service = new QuestionBankService();
+    const sources = await service.listBanks(toeic);
+    expect(sources[0]).toMatchObject({
+      id: 'hacker',
+      storage: 'd1',
+      bankVersion: manifest.bankVersion,
+    });
+    await expect(service.examAvailable(toeic, sources)).resolves.toBe(true);
+    expect(fetch.mock.calls.map(([url]) => url)).toEqual([
+      catalog,
+      hacker2Manifest,
+      '/data/toeic/jimmy-manifest.json',
+    ]);
+    await expect(service.loadBank(sources[0]!, 'toeic')).resolves.toMatchObject({ manifest });
+    expect(fetch.mock.calls.at(-1)?.[0]).toBe(versionPath);
+  });
+
+  it('loads static JSON when the active version is temporarily unavailable', async () => {
+    const fetch = serveBanks(
+      new Map([
+        [catalog, active],
+        [versionPath, new Response(null, { status: 503 })],
+      ]),
+    );
+    const service = new QuestionBankService();
+    const [source] = await service.listBanks(toeic);
+    const result = await service.loadBank(source!, 'toeic');
+    expect(result.manifest.bankVersion).toBe(bank.manifest.bankVersion);
+    expect(fetch.mock.calls.map(([url]) => url)).toContain('/data/toeic/hacker-questions.json');
+    expect(fetch.mock.calls.map(([url]) => url)).not.toContain('/data/toeic/jimmy-questions.json');
+  });
+
+  it('reports inconsistent D1 content instead of silently loading an older version', async () => {
+    serveBanks(
+      new Map([
+        [catalog, active],
+        [versionPath, Response.json(bank)],
+      ]),
+    );
+    const service = new QuestionBankService();
+    const [source] = await service.listBanks(toeic);
+    await expect(service.loadBank(source!, 'toeic')).rejects.toBeInstanceOf(QuestionBankLoadError);
   });
 });

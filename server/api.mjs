@@ -5,6 +5,7 @@ import { ApiError, readJson, requireCondition } from './errors.mjs';
 import { createLearningService } from './learning.mjs';
 import { createNotesService } from './notes.mjs';
 import { NoteMediaMissingError, noteMediaPath } from './notes-media.mjs';
+import { administerQuestionBanks } from './question-bank-api.mjs';
 
 const json = (body, status = 200, cookie) =>
   Response.json(body, {
@@ -21,6 +22,7 @@ export function createAccountApi({
   snapshotStorage,
   noteMedia,
   migrationStorage,
+  questionBankEnvironment,
   config,
 }) {
   const auth = createAuth(authRepository, config);
@@ -56,6 +58,12 @@ export function createAccountApi({
         return json(result.body, 200, result.cookie);
       }
       const { user, session } = await auth.authenticate(request);
+      if (path.startsWith('/api/admin/question-banks/')) {
+        requireCondition(user.role === 'admin', 'forbidden', 403);
+        if (request.method !== 'GET') auth.origin(request);
+        requireCondition(questionBankEnvironment, 'bank_storage_unavailable', 503);
+        return await administerQuestionBanks(request, questionBankEnvironment);
+      }
       if (migrationPath) {
         requireCondition(user.role === 'admin', 'forbidden', 403);
         requireCondition(

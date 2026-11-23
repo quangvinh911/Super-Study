@@ -1,5 +1,5 @@
 import { CertificateContext } from '../../certificates/certificate-context';
-import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
@@ -10,7 +10,7 @@ import {
   QuestionBankSource,
   QuestionStyleTag,
 } from '../../core/models';
-import { QuestionBankService } from '../../core/data';
+import { AvailableQuestionBank, QuestionBankService } from '../../core/data';
 import { ProgressRepository } from '../../core/persistence';
 import { QuizSessionStore } from '../../core/state';
 import { AuthService } from '../../core/auth/auth.service';
@@ -32,14 +32,11 @@ export class PracticeSetupPage implements OnInit {
   private readonly route = inject(ActivatedRoute);
 
   protected readonly loading = signal(true);
+  protected readonly loadingBank = signal(false);
   protected readonly starting = signal(false);
   protected readonly error = signal('');
-  protected readonly banks = signal<
-    Readonly<Partial<Record<QuestionBankSource, LoadedQuestionBank>>>
-  >({});
-  protected readonly availableSources = computed(() =>
-    this.certificate.definition.banks.filter((source) => this.banks()[source.id]),
-  );
+  protected readonly availableSources = signal<readonly AvailableQuestionBank[]>([]);
+  protected readonly selectedBank = signal<LoadedQuestionBank | null>(null);
   protected readonly chapters: readonly Chapter[] = [1, 2, 3, 4, 5, 6];
   protected readonly kLevels: readonly KLevel[] = ['K1', 'K2', 'K3'];
   protected readonly styles: readonly { value: QuestionStyleTag; label: string }[] = [
@@ -58,11 +55,8 @@ export class PracticeSetupPage implements OnInit {
   protected style: 'all' | QuestionStyleTag = 'all';
   protected history: 'all' | PracticeHistoryFilter = 'all';
   protected questionLimit = 10;
-  protected bankSource: QuestionBankSource = this.certificate.definition.banks[0]!.id;
-
-  protected selectedBank(): LoadedQuestionBank | null {
-    return this.banks()[this.bankSource] ?? null;
-  }
+  protected bankSource: QuestionBankSource = '';
+  private bankRequest = 0;
 
   protected isPdfSource(): boolean {
     return this.bankSource === 'pdf';
@@ -104,9 +98,12 @@ export class PracticeSetupPage implements OnInit {
       this.history = requestedHistory;
     }
     try {
-      this.banks.set(await this.bankService.loadCertificateBanks(this.certificate.definition));
-      const source = this.availableSources().find((bank) => bank.id === requestedSource);
-      if (source) this.bankSource = source.id;
+      const sources = await this.bankService.listBanks(this.certificate.definition);
+      this.availableSources.set(sources);
+      const source = sources.find((bank) => bank.id === requestedSource) ?? sources[0];
+      if (!source) return;
+      this.bankSource = source.id;
+      await this.loadSelectedBank(source);
       if (this.history !== 'all') {
         await this.start();
       }
@@ -126,11 +123,31 @@ export class PracticeSetupPage implements OnInit {
     }
   }
 
-  protected sourceChanged(): void {
+  protected async sourceChanged(id: QuestionBankSource): Promise<void> {
+    if (this.starting()) return;
+    this.bankSource = id;
     this.chapter = 'all';
     this.learningObjective = 'all';
     this.kLevel = 'all';
     this.style = 'all';
+    const source = this.availableSources().find((bank) => bank.id === id);
+    if (source) await this.loadSelectedBank(source);
+  }
+
+  private async loadSelectedBank(source: AvailableQuestionBank): Promise<void> {
+    const request = ++this.bankRequest;
+    this.loadingBank.set(true);
+    this.selectedBank.set(null);
+    this.error.set('');
+    try {
+      const bank = await this.bankService.loadBank(source, this.certificate.id);
+      if (request === this.bankRequest) this.selectedBank.set(bank);
+    } catch {
+      if (request === this.bankRequest)
+        this.error.set('Không thể tải bộ câu hỏi này. Hãy thử lại.');
+    } finally {
+      if (request === this.bankRequest) this.loadingBank.set(false);
+    }
   }
 
   protected async start(): Promise<void> {

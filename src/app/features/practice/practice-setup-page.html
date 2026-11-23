@@ -12,7 +12,7 @@
       <span class="spinner" aria-hidden="true"></span>
       Đang tải ngân hàng câu hỏi…
     </section>
-  } @else if (selectedBank()) {
+  } @else if (availableSources().length) {
     <form class="surface setup-form" (ngSubmit)="start()">
       <fieldset class="source-picker">
         <legend>Nguồn câu hỏi</legend>
@@ -23,8 +23,9 @@
                 type="radio"
                 name="bankSource"
                 [value]="source.id"
-                [(ngModel)]="bankSource"
-                (ngModelChange)="sourceChanged()"
+                [ngModel]="bankSource"
+                [disabled]="starting()"
+                (ngModelChange)="sourceChanged($event)"
               />
               <span
                 ><strong>{{ source.label }}</strong
@@ -35,145 +36,147 @@
         </div>
       </fieldset>
 
-      @if (isPdfSource()) {
-        <p class="source-notice" role="note">
-          Nhãn chapter/LO/K-level được đối chiếu theo chủ đề với CTFL v4.0.1 vì PDF không cung cấp
-          metadata này. Chỉ dùng trong site riêng tư.
-        </p>
-      }
-
-      <div class="form-grid">
-        @if (certificate.isSyllabus) {
-          <div class="field">
-            <label for="chapter">Chapter</label>
-            <select
-              id="chapter"
-              name="chapter"
-              [(ngModel)]="chapter"
-              (ngModelChange)="chapterChanged()"
-            >
-              <option value="all">Tất cả chapter</option>
-              @for (item of chapters; track item) {
-                <option [ngValue]="item">Chapter {{ item }}</option>
-              }
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="learning-objective">Learning Objective</label>
-            <select
-              id="learning-objective"
-              name="learningObjective"
-              [(ngModel)]="learningObjective"
-            >
-              <option value="all">Tất cả Learning Objective</option>
-              @for (item of availableLearningObjectives(); track item) {
-                <option [value]="item">{{ item }}</option>
-              }
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="k-level">K-level</label>
-            <select id="k-level" name="kLevel" [(ngModel)]="kLevel">
-              <option value="all">Tất cả K-level</option>
-              @for (item of kLevels; track item) {
-                <option [value]="item">{{ item }}</option>
-              }
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="style">Dạng câu hỏi</label>
-            <select id="style" name="style" [(ngModel)]="style">
-              <option value="all">Tất cả dạng</option>
-              @for (item of styles; track item.value) {
-                <option [value]="item.value">{{ item.label }}</option>
-              }
-            </select>
-          </div>
-        } @else {
-          <div class="field">
-            <label for="part">Phần thi</label>
-            <select id="part" name="part" [(ngModel)]="section">
-              <option value="all">Tất cả Part</option>
-              @for (part of certificate.topics; track part.id) {
-                <option [value]="part.id">{{ part.label }}</option>
-              }
-            </select>
-          </div>
-        }
-        <div class="field">
-          <label for="history">Theo lịch sử</label>
-          <select id="history" name="history" [(ngModel)]="history">
-            <option value="all">Tất cả câu phù hợp</option>
-            <option value="unseen">Chưa từng làm</option>
-            <option value="incorrect">Từng trả lời sai</option>
-            <option value="bookmarked">Đã đánh dấu</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="question-limit">Số câu</label>
-          <select id="question-limit" name="questionLimit" [(ngModel)]="questionLimit">
-            <option [ngValue]="10">10 câu</option>
-            @if (auth.user()) {
-              <option [ngValue]="20">20 câu</option>
-              <option [ngValue]="40">40 câu</option>
-              <option [ngValue]="80">80 câu</option>
-              @if (isPdfSource()) {
-                <option [ngValue]="278">Toàn bộ 278 câu</option>
-              }
-            }
-          </select>
-          @if (!auth.user()) {
-            <p>
-              Khách luyện tối đa 10 câu mỗi phiên. <a routerLink="/login">Đăng nhập</a> để chọn
-              nhiều câu và lưu theo tài khoản.
-            </p>
-          }
-        </div>
-      </div>
-
-      <div class="inventory" aria-label="Thông tin ngân hàng câu hỏi">
-        <strong>{{ selectedBank()!.manifest.questionCount }}</strong>
-        <span
-          >câu hỏi {{ certificate.name }} · phiên bản
-          {{ selectedBank()!.manifest.bankVersion }}</span
-        >
-      </div>
-
-      @if (!selectedBank()!.questions.length) {
-        <section class="empty-bank" role="status">
-          <h2>Chưa có bộ đề {{ certificate.name }}</h2>
-          <p>
-            Bộ đề sẽ được bổ sung sau. Khi có câu hỏi, bạn có thể luyện theo Part, xem giải thích và
-            lưu tiến độ tại đây.
+      @if (loadingBank()) {
+        <p role="status">Đang tải bộ câu hỏi…</p>
+      } @else if (selectedBank(); as bank) {
+        @if (isPdfSource()) {
+          <p class="source-notice" role="note">
+            Nhãn chapter/LO/K-level được đối chiếu theo chủ đề với CTFL v4.0.1 vì PDF không cung cấp
+            metadata này. Chỉ dùng trong site riêng tư.
           </p>
-        </section>
-      }
+        }
 
-      @if (error()) {
+        <div class="form-grid">
+          @if (certificate.isSyllabus) {
+            <div class="field">
+              <label for="chapter">Chapter</label>
+              <select
+                id="chapter"
+                name="chapter"
+                [(ngModel)]="chapter"
+                (ngModelChange)="chapterChanged()"
+              >
+                <option value="all">Tất cả chapter</option>
+                @for (item of chapters; track item) {
+                  <option [ngValue]="item">Chapter {{ item }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="learning-objective">Learning Objective</label>
+              <select
+                id="learning-objective"
+                name="learningObjective"
+                [(ngModel)]="learningObjective"
+              >
+                <option value="all">Tất cả Learning Objective</option>
+                @for (item of availableLearningObjectives(); track item) {
+                  <option [value]="item">{{ item }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="k-level">K-level</label>
+              <select id="k-level" name="kLevel" [(ngModel)]="kLevel">
+                <option value="all">Tất cả K-level</option>
+                @for (item of kLevels; track item) {
+                  <option [value]="item">{{ item }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="style">Dạng câu hỏi</label>
+              <select id="style" name="style" [(ngModel)]="style">
+                <option value="all">Tất cả dạng</option>
+                @for (item of styles; track item.value) {
+                  <option [value]="item.value">{{ item.label }}</option>
+                }
+              </select>
+            </div>
+          } @else {
+            <div class="field">
+              <label for="part">Phần thi</label>
+              <select id="part" name="part" [(ngModel)]="section">
+                <option value="all">Tất cả Part</option>
+                @for (part of certificate.topics; track part.id) {
+                  <option [value]="part.id">{{ part.label }}</option>
+                }
+              </select>
+            </div>
+          }
+          <div class="field">
+            <label for="history">Theo lịch sử</label>
+            <select id="history" name="history" [(ngModel)]="history">
+              <option value="all">Tất cả câu phù hợp</option>
+              <option value="unseen">Chưa từng làm</option>
+              <option value="incorrect">Từng trả lời sai</option>
+              <option value="bookmarked">Đã đánh dấu</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="question-limit">Số câu</label>
+            <select id="question-limit" name="questionLimit" [(ngModel)]="questionLimit">
+              <option [ngValue]="10">10 câu</option>
+              @if (auth.user()) {
+                <option [ngValue]="20">20 câu</option>
+                <option [ngValue]="40">40 câu</option>
+                <option [ngValue]="80">80 câu</option>
+                @if (isPdfSource()) {
+                  <option [ngValue]="bank.questions.length">
+                    Toàn bộ {{ bank.questions.length }} câu
+                  </option>
+                }
+              }
+            </select>
+            @if (!auth.user()) {
+              <p>
+                Khách luyện tối đa 10 câu mỗi phiên. <a routerLink="/login">Đăng nhập</a> để chọn
+                nhiều câu và lưu theo tài khoản.
+              </p>
+            }
+          </div>
+        </div>
+
+        <div class="inventory" aria-label="Thông tin ngân hàng câu hỏi">
+          <strong>{{ bank.manifest.questionCount }}</strong>
+          <span>câu hỏi {{ certificate.name }} · phiên bản {{ bank.manifest.bankVersion }}</span>
+        </div>
+
+        @if (!bank.questions.length) {
+          <section class="empty-bank" role="status">
+            <h2>Chưa có bộ đề {{ certificate.name }}</h2>
+            <p>
+              Bộ đề sẽ được bổ sung sau. Khi có câu hỏi, bạn có thể luyện theo Part, xem giải thích
+              và lưu tiến độ tại đây.
+            </p>
+          </section>
+        }
+
+        @if (error()) {
+          <p class="error" role="alert">{{ error() }}</p>
+        }
+
+        <div class="cluster actions">
+          <button class="button" type="submit" [disabled]="starting() || !bank.questions.length">
+            {{ starting() ? 'Đang chuẩn bị…' : 'Bắt đầu luyện' }}
+          </button>
+          <a class="button button--secondary" [routerLink]="certificate.link('progress')"
+            >Xem tiến độ</a
+          >
+        </div>
+      } @else if (error()) {
         <p class="error" role="alert">{{ error() }}</p>
+        <button class="button" type="button" (click)="sourceChanged(bankSource)">Thử lại</button>
       }
-
-      <div class="cluster actions">
-        <button
-          class="button"
-          type="submit"
-          [disabled]="starting() || !selectedBank()!.questions.length"
-        >
-          {{ starting() ? 'Đang chuẩn bị…' : 'Bắt đầu luyện' }}
-        </button>
-        <a class="button button--secondary" [routerLink]="certificate.link('progress')"
-          >Xem tiến độ</a
-        >
-      </div>
     </form>
   } @else {
     <section class="surface error-state">
       <h2>Chưa tải được dữ liệu</h2>
-      <p>{{ error() }}</p>
+      <p>{{ error() || 'Chưa có ngân hàng câu hỏi.' }}</p>
       <button class="button" type="button" (click)="ngOnInit()">Thử lại</button>
     </section>
   }

@@ -50,6 +50,8 @@ __pycache__/
 
 # Private Hacker 3 Listening source material and locally extracted media.
 /resources/toeic/hacker3/lc/
+/resources/toeic/hacker3/rc/
+/resources/toeic/jimmy/
 /content/toeic-hacker-lc-*.json
 /public/audio/toeic/hacker-3-test-*.mp3
 /public/pdf-evidence/hacker-3-lc-test-*.webp

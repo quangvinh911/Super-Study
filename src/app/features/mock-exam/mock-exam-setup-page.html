@@ -63,7 +63,14 @@
         <legend>Nguồn câu hỏi</legend>
         @for (source of availableSources(); track source.id) {
           <label class="source-option">
-            <input type="radio" name="bankSource" [value]="source.id" [(ngModel)]="bankSource" />
+            <input
+              type="radio"
+              name="bankSource"
+              [value]="source.id"
+              [ngModel]="bankSource"
+              [disabled]="starting()"
+              (ngModelChange)="sourceChanged($event)"
+            />
             <span
               ><strong>{{ source.label }}</strong
               ><small>{{ source.description }}</small></span
@@ -91,6 +98,9 @@
         <p role="status">Đang kiểm tra ngân hàng câu hỏi…</p>
       } @else if (error()) {
         <p class="error" role="alert">{{ error() }}</p>
+        @if (!selectedBank()) {
+          <button class="button button--secondary" type="button" (click)="retry()">Thử lại</button>
+        }
       } @else if (inventoryReady()) {
         <p class="ready">
           ✓ Sẵn sàng tạo đề từ {{ selectedBank()!.manifest.questionCount }} câu

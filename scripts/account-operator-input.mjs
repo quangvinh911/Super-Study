@@ -2,13 +2,21 @@ import { createInterface } from 'node:readline';
 export async function operatorInput() {
   // Pipe JSON through stdin; credentials never appear in command arguments or logs.
   console.error('Provide one JSON object on stdin. Keep secrets out of shell history.');
-  const reader = createInterface({ input: process.stdin, terminal: false });
+  const stdin = process.stdin;
+  const terminal = stdin.isTTY;
+  if (terminal) stdin.setRawMode(true);
+  const reader = createInterface({ input: stdin, terminal: false });
   let line;
-  for await (const input of reader) {
-    line = input;
-    break;
+  try {
+    for await (const input of reader) {
+      line = input;
+      break;
+    }
+  } finally {
+    reader.close();
+    if (terminal) stdin.setRawMode(false);
+    stdin.pause();
   }
-  reader.close();
   const value = JSON.parse(line || '{}');
   if (!value || typeof value !== 'object' || typeof value.siteUrl !== 'string')
     throw new Error('Missing siteUrl.');

@@ -44,5 +44,27 @@
         "files": ["/pdf-evidence/*.webp"]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "question-bank-catalog",
+      "urls": ["/api/question-banks/*$"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 10,
+        "maxAge": "30d",
+        "timeout": "2s"
+      }
+    },
+    {
+      "name": "published-question-bank-versions",
+      "urls": ["/api/question-banks/*/*/*$"],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 12,
+        "maxAge": "30d",
+        "timeout": "12s"
+      }
+    }
   ]
 }

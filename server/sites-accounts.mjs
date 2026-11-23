@@ -33,6 +33,7 @@ export function accountRequest(request, env) {
         };
       },
     },
+    questionBankEnvironment: env,
     config: env,
   })(request);
 }
