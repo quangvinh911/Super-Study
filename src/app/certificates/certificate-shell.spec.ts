@@ -5,7 +5,6 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CertificateShell } from './certificate-shell';
 import { QuizSessionStore } from '../core/state';
 import { NotesDialogService } from '../features/notes/notes-dialog.service';
-import { documentFromText } from '../core/domain/notes';
 import {
   FavoriteVocabularyService,
   VocabularyLookupError,
@@ -75,7 +74,7 @@ function touch(type: string, x = 40): MouseEvent {
   return event;
 }
 describe('Dictionary selection gestures', () => {
-  it('offers Notes for a long Vietnamese paragraph and captures it before selection disappears', async () => {
+  it('does not offer Notes when selecting a paragraph', async () => {
     const { fixture, element, paragraph, openNote, lookup } = await setup();
     paragraph.lang = 'vi';
     paragraph.textContent = 'Ghi chú tiếng Việt: đoạn văn dài, có số 2026 và dấu câu. '.repeat(4);
@@ -85,31 +84,31 @@ describe('Dictionary selection gestures', () => {
     paragraph.dispatchEvent(
       new MouseEvent('mouseup', { bubbles: true, clientX: 10000, clientY: 10000 }),
     );
+    document.dispatchEvent(new Event('selectionchange'));
     fixture.detectChanges();
-    const toolbar = element.querySelector<HTMLElement>('.selection-toolbar');
-    expect(toolbar).not.toBeNull();
+    expect(element.querySelector('.selection-toolbar')).toBeNull();
     expect(element.querySelector('.dictionary-trigger')).toBeNull();
-    expect(Number.parseFloat(toolbar?.style.left ?? '0')).toBeLessThan(window.innerWidth - 44);
-    window.getSelection()?.removeAllRanges();
-    element.querySelector<HTMLButtonElement>('.notes-trigger')?.click();
-    expect(openNote).toHaveBeenCalledWith(
-      undefined,
-      expect.objectContaining({ certificateId: 'ctfl' }),
-      documentFromText(paragraph.textContent ?? ''),
-    );
+    expect(element.querySelector('.notes-trigger')).toBeNull();
+    expect(element.textContent).not.toContain('Ghi chú đoạn đang bôi đen');
+    expect(openNote).not.toHaveBeenCalled();
     expect(lookup).not.toHaveBeenCalled();
   });
-  it('places the yellow Notes button immediately after the dictionary button', async () => {
-    const { fixture, element, paragraph } = await setup();
+  it('offers only the dictionary when selecting an English word', async () => {
+    const { fixture, element, paragraph, openNote } = await setup();
+    const range = document.createRange();
+    if (!paragraph.firstChild) throw new Error('Missing paragraph text');
+    range.setStart(paragraph.firstChild, 4);
+    range.setEnd(paragraph.firstChild, 12);
+    window.getSelection()?.addRange(range);
+    document.dispatchEvent(new Event('selectionchange'));
     paragraph.dispatchEvent(
       new MouseEvent('dblclick', { bubbles: true, clientX: 40, clientY: 40 }),
     );
     fixture.detectChanges();
-    expect(
-      element
-        .querySelector('.dictionary-trigger')
-        ?.nextElementSibling?.classList.contains('notes-trigger'),
-    ).toBe(true);
+    expect(element.querySelector('.dictionary-trigger')).not.toBeNull();
+    expect(element.querySelectorAll('.selection-toolbar button')).toHaveLength(1);
+    expect(element.querySelector('.notes-trigger')).toBeNull();
+    expect(openNote).not.toHaveBeenCalled();
   });
   afterEach(() => {
     TestBed.resetTestingModule();
@@ -289,6 +288,70 @@ describe('Dictionary selection gestures', () => {
       expect.any(AbortSignal),
     );
     expect(save).not.toHaveBeenCalled();
+  });
+
+  for (const { type, disabled } of [
+    { type: 'radio', disabled: false },
+    { type: 'checkbox', disabled: false },
+    { type: 'radio', disabled: true },
+  ]) {
+    it(`looks up selected answer text with a ${disabled ? 'disabled' : 'selectable'} ${type}`, async () => {
+      const { fixture, element, paragraph, lookup, save } = await setup();
+      const label = document.createElement('label');
+      label.className = 'option';
+      const input = document.createElement('input');
+      input.type = type;
+      input.disabled = disabled;
+      const content = document.createElement('span');
+      content.className = 'option-content';
+      content.append(paragraph);
+      label.append(input, content);
+      element.append(label);
+      const range = document.createRange();
+      if (!paragraph.firstChild) throw new Error('Missing answer text');
+      range.setStart(paragraph.firstChild, 4);
+      range.setEnd(paragraph.firstChild, 12);
+      window.getSelection()?.addRange(range);
+      paragraph.dispatchEvent(
+        new MouseEvent('mouseup', { bubbles: true, clientX: 40, clientY: 40 }),
+      );
+      document.dispatchEvent(new Event('selectionchange'));
+      fixture.detectChanges();
+      expect(element.querySelector('.dictionary-trigger')?.getAttribute('aria-label')).toBe(
+        'Tra từ điển: shipment',
+      );
+      expect(input.checked).toBe(false);
+      element.querySelector<HTMLButtonElement>('.dictionary-trigger')?.click();
+      await fixture.whenStable();
+      expect(lookup).toHaveBeenCalledWith(
+        { term: 'shipment', example: 'The shipment arrived today.' },
+        expect.any(AbortSignal),
+      );
+      expect(input.checked).toBe(false);
+      expect(save).not.toHaveBeenCalled();
+    });
+  }
+
+  it('supports double-click on answer text while ignoring controls inside the answer', async () => {
+    const { fixture, element, paragraph } = await setup();
+    const label = document.createElement('label');
+    label.className = 'option';
+    const content = document.createElement('span');
+    content.className = 'option-content';
+    const button = document.createElement('button');
+    button.textContent = 'shipment';
+    button.lang = 'en';
+    content.append(paragraph, button);
+    label.append(content);
+    element.append(label);
+    button.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+    fixture.detectChanges();
+    expect(element.querySelector('.dictionary-trigger')).toBeNull();
+    paragraph.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+    fixture.detectChanges();
+    expect(element.querySelector('.dictionary-trigger')?.getAttribute('aria-label')).toBe(
+      'Tra từ điển: shipment',
+    );
   });
 
   it('cancels a pending lookup when closed and restores focus to the icon', async () => {

@@ -4,10 +4,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { QuizSessionStore } from '../core/state';
 import { FavoriteVocabularyNotice } from '../features/vocabulary/favorite-vocabulary-notice';
 import { VocabularyLookupPopup } from '../features/vocabulary/vocabulary-lookup-popup';
-import { NotesDialogService } from '../features/notes/notes-dialog.service';
-import { noteDocumentFromSelection } from '../features/notes/notes-selection';
-import { NoteNode } from '../core/models/notes.models';
-import { CertificateContext } from './certificate-context';
 
 const excludedVocabularyTargets =
   'button, a, input, textarea, select, label, dialog, summary, audio, [contenteditable], app-vocabulary-lookup-popup';
@@ -25,46 +21,20 @@ export function wordAtOffset(text: string, offset: number): string | undefined {
     <button class="button button--quiet" type="button" (click)="lookupSelection()">
       Tra từ / cụm từ đang bôi đen
     </button>
-    <button class="button button--quiet" type="button" (click)="noteSelection()">
-      Ghi chú đoạn đang bôi đen
-    </button>
-    @if (selectedNote(); as selection) {
+    @if (selectedWord(); as word) {
       <div
         class="selection-toolbar"
-        [style.left.px]="selection.x"
-        [style.top.px]="selection.y"
+        [style.left.px]="word.x"
+        [style.top.px]="word.y"
         aria-label="Thao tác với văn bản đã chọn"
       >
-        @if (selectedWord(); as word) {
-          <button
-            class="dictionary-trigger"
-            type="button"
-            [attr.aria-label]="'Tra từ điển: ' + word.term"
-            [title]="'Tra từ điển: ' + word.term"
-            aria-haspopup="dialog"
-            (click)="openDictionary()"
-          >
-            <svg
-              aria-hidden="true"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-            >
-              <path d="M12 5v15M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Z" />
-              <path d="M5 8h4M5 11h4M15 8h4M15 11h4" />
-            </svg>
-          </button>
-        }
         <button
-          class="notes-trigger"
+          class="dictionary-trigger"
           type="button"
-          aria-label="Thêm vào Notes"
-          title="Thêm vào Notes"
+          [attr.aria-label]="'Tra từ điển: ' + word.term"
+          [title]="'Tra từ điển: ' + word.term"
           aria-haspopup="dialog"
-          (click)="openNotes()"
+          (click)="openDictionary()"
         >
           <svg
             aria-hidden="true"
@@ -75,8 +45,8 @@ export function wordAtOffset(text: string, offset: number): string | undefined {
             stroke="currentColor"
             stroke-width="1.8"
           >
-            <path d="M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9Z" />
-            <path d="M14 3v7h7M7 14h10M7 17h7" />
+            <path d="M12 5v15M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Z" />
+            <path d="M5 8h4M5 11h4M15 8h4M15 11h4" />
           </svg>
         </button>
       </div>
@@ -97,8 +67,7 @@ export function wordAtOffset(text: string, offset: number): string | undefined {
       background: var(--color-paper-strong);
       box-shadow: 0 4px 20px #0002;
     }
-    .dictionary-trigger,
-    .notes-trigger {
+    .dictionary-trigger {
       display: grid;
       place-items: center;
       width: 44px;
@@ -110,25 +79,11 @@ export function wordAtOffset(text: string, offset: number): string | undefined {
       color: var(--color-teal-dark);
       cursor: pointer;
     }
-    .notes-trigger {
-      border-color: var(--color-warning);
-      background: var(--color-warning-wash);
-      color: var(--color-warning);
-    }
   `,
 })
 export class CertificateShell implements OnDestroy {
   private readonly store = inject(QuizSessionStore);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly notes = inject(NotesDialogService);
-  private readonly certificate = inject(CertificateContext);
-  private readonly router = inject(Router);
-  protected readonly selectedNote = signal<{
-    text: string;
-    document?: NoteNode;
-    x: number;
-    y: number;
-  } | null>(null);
   protected readonly lookupWord = signal<{ term: string; example: string } | null>(null);
   protected readonly selectedWord = signal<{
     term: string;
@@ -165,10 +120,9 @@ export class CertificateShell implements OnDestroy {
 
   @HostListener('mouseup', ['$event'])
   protected selectPhrase(event: MouseEvent): void {
-    if (!this.isNotesText(event.target) || this.lookupWord() || this.notes.draft()) return;
-    const text = this.selectedNotesText();
+    if (!this.isStudyText(event.target) || this.lookupWord()) return;
     const word = this.selectedText();
-    if (text) this.showSelection(text, word, event.clientX, event.clientY);
+    if (word) this.showDictionaryIcon(word, event.clientX, event.clientY);
   }
 
   @HostListener('dblclick', ['$event'])
@@ -223,7 +177,7 @@ export class CertificateShell implements OnDestroy {
   protected dismissOutside(event: PointerEvent): void {
     if (this.hold && event.pointerId !== this.hold.pointerId) this.cancelHold();
     if (
-      this.selectedNote() &&
+      this.selectedWord() &&
       !this.lookupWord() &&
       event.target instanceof Element &&
       !event.target.closest('.selection-toolbar')
@@ -240,7 +194,6 @@ export class CertificateShell implements OnDestroy {
   protected dismissSelection(returnFocus = true): void {
     this.cancelHold();
     this.selectedWord.set(null);
-    this.selectedNote.set(null);
     this.lookupWord.set(null);
     if (returnFocus) this.previousFocus?.focus();
   }
@@ -267,97 +220,36 @@ export class CertificateShell implements OnDestroy {
 
   private showDictionaryIcon(word: { term: string; example: string }, x: number, y: number): void {
     if (word.term.length > 120) return;
-    this.showSelection(word.term, word, x, y);
-  }
-
-  private showSelection(
-    text: string,
-    word: { term: string; example: string } | undefined,
-    x: number,
-    y: number,
-  ): void {
-    const left = Math.max(8, Math.min(x, window.innerWidth - (word ? 104 : 54) - 8));
+    const left = Math.max(8, Math.min(x, window.innerWidth - 54 - 8));
     const top = Math.max(8, Math.min(y + 16, window.innerHeight - 60));
-    const selection = window.getSelection();
-    let document: NoteNode | undefined;
-    if (selection?.rangeCount && this.selectedNotesText()) {
-      try {
-        document = noteDocumentFromSelection(selection.getRangeAt(0));
-      } catch {
-        // Keep the original text available when the selected markup is unsupported.
-      }
-    }
-    this.selectedNote.set({ text, document, x: left, y: top });
     this.selectedWord.set({
-      term: word?.term ?? '',
-      example: word?.example ?? '',
+      ...word,
       x: left,
       y: top,
     });
-    if (!word) this.selectedWord.set(null);
-  }
-
-  protected openNotes(): void {
-    const selection = this.selectedNote();
-    if (!selection) return;
-    const heading = this.host.nativeElement.querySelector('h1')?.textContent?.trim();
-    this.notes.open(
-      undefined,
-      {
-        certificateId: this.certificate.id,
-        path: this.router.url,
-        label: `${this.certificate.name}${heading ? ' · ' + heading : ''}`.slice(0, 200),
-      },
-      selection.document ?? selection.text,
-    );
-    this.dismissSelection(false);
-  }
-
-  protected noteSelection(): void {
-    const text = this.selectedNotesText();
-    if (!text) return;
-    this.showSelection(text, this.selectedText(), 12, 12);
-    this.openNotes();
   }
 
   @HostListener('document:selectionchange')
   protected selectionChanged(): void {
-    if (this.lookupWord() || this.notes.draft()) return;
-    const text = this.selectedNotesText();
-    if (!text) return;
+    if (this.lookupWord()) return;
+    const word = this.selectedText();
+    if (!word) return;
     const range = window.getSelection()?.getRangeAt(0);
     const rect =
       range && typeof range.getBoundingClientRect === 'function'
         ? range.getBoundingClientRect()
         : null;
-    this.showSelection(text, this.selectedText(), rect?.left ?? 12, rect?.bottom ?? 12);
-  }
-
-  private isNotesText(target: EventTarget | null): target is HTMLElement {
-    return (
-      target instanceof HTMLElement &&
-      this.host.nativeElement.contains(target) &&
-      (!target.closest(excludedVocabularyTargets) ||
-        (!!target.closest('[data-note-grammar-text]') &&
-          !target.closest('dialog, [contenteditable]')))
-    );
-  }
-
-  private selectedNotesText(): string | undefined {
-    const selection = window.getSelection();
-    if (!selection?.rangeCount || selection.isCollapsed) return;
-    const range = selection.getRangeAt(0);
-    const start = range.startContainer.parentElement,
-      end = range.endContainer.parentElement;
-    if (!this.isNotesText(start) || !this.isNotesText(end)) return;
-    const text = selection.toString();
-    return text.trim() ? text : undefined;
+    this.showDictionaryIcon(word, rect?.left ?? 12, rect?.bottom ?? 12);
   }
 
   private isStudyText(target: EventTarget | null): target is HTMLElement {
+    if (!(target instanceof HTMLElement)) return false;
+    const excludedTarget = target.closest(excludedVocabularyTargets);
+    // Answer labels wrap both the input and the readable content. Allow only the text area.
+    const isAnswerText =
+      excludedTarget?.tagName === 'LABEL' && !!target.closest('label.option .option-content');
     return (
-      target instanceof HTMLElement &&
-      (!target.closest(excludedVocabularyTargets) || !!target.closest('[data-vocabulary-term]')) &&
+      (!excludedTarget || isAnswerText || !!target.closest('[data-vocabulary-term]')) &&
       !target.closest('dialog, app-vocabulary-lookup-popup') &&
       !!target.closest('[lang="en"], .content-blocks')
     );

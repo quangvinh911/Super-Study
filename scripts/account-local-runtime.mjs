@@ -10,6 +10,8 @@ export async function createLocalAccountRuntime({
   migrationSecret,
   maintenance = false,
   appOrigin = 'http://localhost:4200',
+  openaiApiKey,
+  explanationModel,
 } = {}) {
   await buildAccountWorker('dist/local-account-worker.mjs');
   const runtime = new Miniflare({
@@ -24,6 +26,8 @@ export async function createLocalAccountRuntime({
     ...(port ? { port, host: '127.0.0.1' } : {}),
     bindings: {
       APP_ORIGIN: appOrigin,
+      ...(openaiApiKey ? { OPENAI_API_KEY: openaiApiKey } : {}),
+      ...(explanationModel ? { OPENAI_EXPLANATION_MODEL: explanationModel } : {}),
       ...(jwtSecret ? { JWT_SECRET: jwtSecret } : {}),
       ...(bootstrapSecret ? { BOOTSTRAP_SECRET: bootstrapSecret } : {}),
       ...(migrationSecret ? { MIGRATION_SECRET: migrationSecret } : {}),

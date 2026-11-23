@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  OnDestroy,
   ViewChild,
   inject,
   signal,
@@ -12,6 +13,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContentBlocks } from '../../components/content-blocks/content-blocks';
 import { ProgressRepository } from '../../core/persistence';
 import { QuizSessionStore } from '../../core/state';
+import { PracticeExplanationService } from './practice-explanation.service';
 
 @Component({
   selector: 'app-practice-session-page',
@@ -20,7 +22,7 @@ import { QuizSessionStore } from '../../core/state';
   styleUrl: './practice-session-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PracticeSessionPage implements OnInit {
+export class PracticeSessionPage implements OnInit, OnDestroy {
   protected readonly certificate = inject(CertificateContext);
   @ViewChild('questionHeading') private questionHeading?: ElementRef<HTMLElement>;
 
@@ -28,6 +30,12 @@ export class PracticeSessionPage implements OnInit {
   private readonly repository = inject(ProgressRepository);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly explanations = inject(PracticeExplanationService);
+  private explanationRequest?: AbortController;
+  private readonly explanationCache = new Map<string, string>();
+  protected readonly aiExplanation = signal('');
+  protected readonly aiLoading = signal(false);
+  protected readonly aiError = signal('');
 
   protected readonly loading = signal(true);
   protected readonly error = signal('');
@@ -48,10 +56,51 @@ export class PracticeSessionPage implements OnInit {
         return;
       }
       await this.refreshBookmark();
+      void this.loadAiExplanation();
     } catch {
       this.error.set('Không thể khôi phục phiên luyện tập.');
     } finally {
       this.loading.set(false);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.explanationRequest?.abort();
+  }
+
+  protected async loadAiExplanation(): Promise<void> {
+    this.explanationRequest?.abort();
+    this.aiExplanation.set('');
+    this.aiError.set('');
+    this.aiLoading.set(false);
+    const item = this.store.currentQuestion();
+    const answer = this.store.currentResponse();
+    if (!item || !answer?.checked || this.store.snapshot()?.mode !== 'practice') return;
+    const cached = this.explanationCache.get(item.question.id);
+    if (cached) {
+      this.aiExplanation.set(cached);
+      return;
+    }
+    const controller = new AbortController();
+    this.explanationRequest = controller;
+    this.aiLoading.set(true);
+    try {
+      const explanation = await this.explanations.explain(
+        this.certificate.id,
+        item,
+        answer,
+        controller.signal,
+      );
+      if (controller.signal.aborted) return;
+      this.explanationCache.set(item.question.id, explanation);
+      this.aiExplanation.set(explanation);
+    } catch (error) {
+      if (!controller.signal.aborted)
+        this.aiError.set(
+          error instanceof Error ? error.message : 'Chưa tải được giải thích AI. Hãy thử lại.',
+        );
+    } finally {
+      if (!controller.signal.aborted) this.aiLoading.set(false);
     }
   }
 
@@ -116,6 +165,7 @@ export class PracticeSessionPage implements OnInit {
       );
     } else {
       this.validationMessage.set('');
+      void this.loadAiExplanation();
     }
   }
 
@@ -133,6 +183,7 @@ export class PracticeSessionPage implements OnInit {
 
   protected goTo(index: number): void {
     this.store.goTo(index);
+    void this.loadAiExplanation();
     this.validationMessage.set('');
     void this.refreshBookmark();
     this.restoreFocus();

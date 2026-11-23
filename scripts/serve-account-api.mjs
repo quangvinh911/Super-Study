@@ -1,6 +1,12 @@
 import { randomBytes } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createLocalAccountRuntime } from './account-local-runtime.mjs';
+import { loadEnvFile } from 'node:process';
+try {
+  loadEnvFile('.env.local');
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error;
+}
 await mkdir('.account-local', { recursive: true });
 let secret;
 try {
@@ -18,6 +24,8 @@ const runtime = await createLocalAccountRuntime({
   jwtSecret: process.env.JWT_SECRET || secret,
   bootstrapSecret: process.env.BOOTSTRAP_SECRET,
   appOrigin: process.env.APP_ORIGIN || 'http://localhost:4200',
+  openaiApiKey: process.env.OPENAI_API_KEY,
+  explanationModel: process.env.OPENAI_EXPLANATION_MODEL,
 });
 await runtime.ready;
 console.log('Account and dictionary API listening on 127.0.0.1:8788');

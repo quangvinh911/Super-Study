@@ -5,6 +5,7 @@ import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MEDIA_ROOTS } from './sites-media-paths.mjs';
 import { buildAccountWorker } from './build-account-worker.mjs';
+import { validateSitesVocabulary } from './validate-sites-vocabulary.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const angularOutput = resolve(root, 'dist/cloudflare/browser');
@@ -17,6 +18,7 @@ for (const directory of [angularOutput, clientOutput, serverOutput, buildOutput]
 }
 const hosting = JSON.parse(await readFile(resolve(root, '.openai/hosting.json'), 'utf8'));
 if (hosting.r2 !== 'MEDIA') throw new Error('Sites requires the MEDIA R2 binding.');
+await validateSitesVocabulary(angularOutput);
 
 await rm(clientOutput, { recursive: true, force: true });
 await rm(serverOutput, { recursive: true, force: true });

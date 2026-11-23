@@ -82,7 +82,9 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   font-weight: 500;
-  transition: border-color var(--motion-fast), background var(--motion-fast);
+  transition:
+    border-color var(--motion-fast),
+    background var(--motion-fast);
 }
 
 .option:hover:not(:has(input:disabled)),
@@ -170,6 +172,22 @@
 
 .feedback h2 {
   font-size: var(--text-lg);
+}
+
+.ai-explanation__text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.answer-summary ul,
+.option-rationales {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.answer-summary ul {
+  margin: 0.75rem 0 0;
+  padding-inline-start: 1.25rem;
 }
 
 .feedback details {

@@ -1,9 +1,11 @@
 import { createVocabularyApi } from './vocabulary-api.mjs';
+import { createPracticeExplanationApi } from './practice-explanation-api.mjs';
 import { accountRequest } from '../server/sites-accounts.mjs';
 import { noteMediaObjectPrefix } from '../server/notes-media.mjs';
 import { MEDIA_ROOTS, mediaType } from './sites-media-paths.mjs';
 
 const vocabularyApi = createVocabularyApi();
+const practiceExplanationApi = createPracticeExplanationApi();
 
 export { MEDIA_ROOTS, MEDIA_TYPES, mediaType } from './sites-media-paths.mjs';
 
@@ -192,6 +194,8 @@ export default {
   async fetch(request, env) {
     try {
       const url = new URL(request.url);
+      if (url.pathname === '/api/practice/explanation')
+        return secure(await practiceExplanationApi(request, env));
       if (url.pathname === '/api/vocabulary/enrich')
         return secure(await vocabularyApi(request, env));
       if (url.pathname === adminPath || url.pathname === singleUploadPath)

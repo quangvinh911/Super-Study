@@ -7,6 +7,15 @@ The build excludes `public/audio`, `public/pdf-evidence`, `public/media`,
 archive. Only existing public media is synchronized; source scans in `resources`
 are never uploaded by the sync script.
 
+The Hacker 3 vocabulary JSON is also required in the application archive at
+`data/toeic/vocabulary/hacker-3.json` (300 entries). Its reviewed input, PDF sources
+and generated JSON are intentionally ignored by Git. Build with `pnpm run build:sites`
+from the checkout containing those private inputs; a fresh Git checkout alone
+cannot reproduce this collection. Sites preparation now fails if the generated
+vocabulary asset is missing, malformed or has the wrong inventory. Do not commit
+the private inputs to resolve this error. Media synchronization does not upload
+this JSON; it must be present in `dist/client` in the application archive.
+
 `scripts/sites-media-worker.mjs` serves these paths from R2 on the same origin,
 preserving existing bank URLs and saved-session snapshots. It supports GET,
 HEAD, ETag revalidation and single byte ranges for audio/video seeking. Missing

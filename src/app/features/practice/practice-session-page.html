@@ -136,6 +136,45 @@
         >
           <h2>{{ store.currentResponse()?.isCorrect ? 'Chính xác' : 'Chưa chính xác' }}</h2>
 
+          <section
+            class="ai-explanation"
+            aria-labelledby="ai-explanation-heading"
+            [attr.aria-busy]="aiLoading()"
+          >
+            <h3 id="ai-explanation-heading">Giải thích chi tiết bằng AI</h3>
+            @if (aiLoading()) {
+              <p role="status">Đang phân tích câu hỏi và từng đáp án…</p>
+            } @else if (aiError()) {
+              <p role="status">{{ aiError() }}</p>
+              <button class="button button--secondary" type="button" (click)="loadAiExplanation()">
+                Thử lại giải thích AI
+              </button>
+            } @else {
+              <p class="ai-explanation__text">{{ aiExplanation() }}</p>
+              <p class="muted">Lời giải do AI tạo để tham khảo; đáp án chấm điểm vẫn theo bộ đề.</p>
+            }
+          </section>
+
+          <section class="answer-summary" aria-label="Đối chiếu đáp án">
+            <h3>Đáp án của bạn và đáp án đúng</h3>
+            <ul>
+              @for (option of item.question.options; track option.id; let optionIndex = $index) {
+                @if (isSelected(option.id) || isCorrectOption(option.id)) {
+                  <li>
+                    <strong>
+                      {{ 'ABCDE'[optionIndex] }} ·
+                      {{ isCorrectOption(option.id) ? 'Đáp án đúng' : 'Đáp án chưa đúng' }}
+                      @if (isSelected(option.id)) {
+                        · Bạn đã chọn
+                      }
+                    </strong>
+                    <app-content-blocks [blocks]="option.content" />
+                  </li>
+                }
+              }
+            </ul>
+          </section>
+
           @if (item.question.sourceEvidence; as evidence) {
             <div class="pdf-solution" lang="en">
               <div class="pdf-solution__answer">
@@ -165,7 +204,25 @@
               />
             </details>
           } @else {
+            <h3>Giải thích đáp án</h3>
             <app-content-blocks [blocks]="item.solution.explanation" />
+          }
+
+          @if (item.solution.optionRationales; as rationales) {
+            <section class="option-rationales" aria-label="Giải thích từng lựa chọn">
+              <h3>Giải thích từng lựa chọn</h3>
+              @for (option of item.question.options; track option.id; let optionIndex = $index) {
+                @if (rationales[option.id]?.length) {
+                  <div>
+                    <h4>
+                      {{ 'ABCDE'[optionIndex] }} ·
+                      {{ isCorrectOption(option.id) ? 'Đúng' : 'Chưa đúng' }}
+                    </h4>
+                    <app-content-blocks [blocks]="rationales[option.id]" />
+                  </div>
+                }
+              }
+            </section>
           }
 
           @if (item.question.sourceQuestionImage; as sourceImage) {
