@@ -59,6 +59,7 @@ function entries(bank) {
 beforeAll(async () => {
   runtime = await createLocalAccountRuntime({
     workerPath: 'dist/local-question-bank-test-worker.mjs',
+    localAssets: false,
     bootstrapSecret,
     jwtSecret: 'bank-test-jwt-secret-at-least-32-characters',
   });

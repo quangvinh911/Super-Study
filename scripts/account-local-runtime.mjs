@@ -33,6 +33,7 @@ export async function createLocalAccountRuntime({
   appOrigin = 'http://localhost:4200',
   openaiApiKey,
   explanationModel,
+  localAssets = true,
   workerPath = 'dist/local-account-worker.mjs',
 } = {}) {
   await buildAccountWorker(workerPath);
@@ -45,13 +46,13 @@ export async function createLocalAccountRuntime({
     r2Buckets: ['MEDIA'],
     d1Persist: persist ? '.account-local/d1' : false,
     r2Persist: persist ? '.account-local/r2' : false,
-    serviceBindings: { ASSETS: localMedia },
+    ...(localAssets ? { serviceBindings: { ASSETS: localMedia } } : {}),
     ...(port ? { port, host: '127.0.0.1' } : {}),
     bindings: {
       APP_ORIGIN: appOrigin,
       ...(openaiApiKey ? { OPENAI_API_KEY: openaiApiKey } : {}),
       ...(explanationModel ? { OPENAI_EXPLANATION_MODEL: explanationModel } : {}),
-      LOCAL_ASSETS: true,
+      LOCAL_ASSETS: localAssets,
       ...(jwtSecret ? { JWT_SECRET: jwtSecret } : {}),
       ...(bootstrapSecret ? { BOOTSTRAP_SECRET: bootstrapSecret } : {}),
       ...(migrationSecret ? { MIGRATION_SECRET: migrationSecret } : {}),
