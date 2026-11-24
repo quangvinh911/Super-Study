@@ -44,6 +44,7 @@ export class GrammarLessonPage {
   protected readonly passiveDemo = PASSIVE_DEMO;
   protected readonly reductionDemos = REDUCTION_DEMOS;
   protected readonly lesson = signal<GrammarLesson | undefined>(undefined);
+  protected readonly exampleIndex = signal(0);
   protected readonly index = computed(() => {
     const currentLesson = this.lesson();
     return currentLesson ? GRAMMAR_LEARNING_ORDER.indexOf(currentLesson) : -1;
@@ -55,6 +56,7 @@ export class GrammarLessonPage {
     void this.hackerExamples.load();
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       this.lesson.set(GRAMMAR_LEARNING_ORDER.find((item) => item.slug === params.get('slug')));
+      this.exampleIndex.set(0);
       const slug = this.lesson()?.slug;
       if (slug) void this.learningProgress.opened(slug);
       afterNextRender(
@@ -89,13 +91,5 @@ export class GrammarLessonPage {
     const target = this.host.nativeElement.querySelector<HTMLElement>(`#${sectionId}`);
     target?.focus({ preventScroll: true });
     target?.scrollIntoView({ block: 'start' });
-  }
-
-  protected ruleUseLines(use: string): readonly string[] {
-    return use
-      .split(';')
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0)
-      .map((line) => (/[.!?]$/u.test(line) ? line : `${line}.`));
   }
 }

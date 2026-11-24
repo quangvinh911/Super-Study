@@ -5,202 +5,255 @@
 
 .tense-explorer {
   container-type: inline-size;
-  overflow: hidden;
-  border: 1px solid var(--grammar-line, #dce5f0);
-  border-radius: 1rem;
-  background: #fff;
-  color: var(--color-ink, #14263d);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-paper-strong);
+  color: var(--color-text);
 }
 
 .tense-controls {
   display: grid;
-  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr);
-  gap: 1.5rem;
-  padding: 1.25rem;
-  border-bottom: 1px solid var(--grammar-line, #dce5f0);
-  background: #f8fafc;
+  gap: 1.25rem;
+  padding: clamp(0.85rem, 4cqi, 1.5rem);
+  border-block-end: 1px solid var(--color-border);
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+  background: var(--color-paper);
 }
 
-.tense-period {
-  display: block;
-  min-width: 0;
-}
-.tense-control-label {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 650;
-
-  strong {
-    color: var(--grammar-accent, #2563eb);
-  }
-}
-
-input[type='range'] {
-  width: 100%;
-  min-height: 2.25rem;
-  margin: 0.5rem 0 0;
-  accent-color: #2563eb;
-}
-.tense-period-labels {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.2rem;
-  font-size: 0.7rem;
-  color: #52657c;
-}
-.tense-period-labels .is-active {
-  color: #1d4ed8;
-  font-weight: 750;
-}
-.tense-aspects {
+.tense-controls fieldset {
   min-width: 0;
   margin: 0;
   padding: 0;
   border: 0;
 }
-.tense-aspects legend {
-  margin-bottom: 0.7rem;
+
+.tense-controls legend {
+  margin-bottom: 0.6rem;
   padding: 0;
-  font-size: 0.8rem;
-  font-weight: 650;
+  color: var(--color-ink);
+  font-weight: 700;
 }
+
+.tense-period-options,
 .tense-aspect-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem;
 }
-.tense-aspect-options label {
+
+.tense-period-options {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tense-aspect-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tense-controls label {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  min-height: 2.5rem;
-  padding: 0.45rem 0.6rem;
-  border: 1px solid #dce5f0;
-  border-radius: 0.6rem;
-  background: #fff;
-  font-size: 0.75rem;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper-strong);
+  font-size: 0.9375rem;
   line-height: 1.4;
   cursor: pointer;
 
-  &.is-active {
-    border-color: #2563eb;
-    background: #eff6ff;
-    color: #1d4ed8;
+  &:hover {
+    border-color: var(--color-teal);
   }
+
+  &.is-active {
+    border-color: var(--color-teal);
+    background: var(--color-teal-wash);
+    color: var(--color-teal-dark);
+  }
+
   input {
     flex-shrink: 0;
     margin: 0;
-    accent-color: #2563eb;
+    accent-color: var(--color-teal-dark);
   }
+}
+
+.tense-period-options label {
+  justify-content: center;
+  font-weight: 650;
+}
+
+.tense-aspect-clue {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
 }
 
 .tense-example {
-  padding: 1.25rem;
+  padding: clamp(0.85rem, 4cqi, 1.5rem);
 }
-.tense-eyebrow {
-  color: #52657c;
-  font-size: 0.7rem;
-  font-weight: 750;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+
+.tense-example h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.3;
 }
-.tense-example__heading h3 {
-  margin: 0.35rem 0 0;
-  font-size: 1.3rem;
-}
+
 .tense-formula {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.8rem;
-  margin: 1rem 0;
-  padding: 0.75rem 1rem;
-  border-radius: 0.65rem;
-  background: #eff6ff;
-  color: #1d4ed8;
+  align-items: baseline;
+  gap: 0.25rem 0.85rem;
+  margin: 0.75rem 0 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-teal-wash);
+  color: var(--color-teal-dark);
   line-height: 1.5;
 
   span {
-    font-size: 0.72rem;
+    font-size: 0.875rem;
     font-weight: 650;
   }
+
   strong {
     overflow-wrap: anywhere;
-    font-size: 0.95rem;
+    font-size: 1.0625rem;
   }
 }
 
 .tense-diagram {
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
+  padding: 0.6rem 0.8rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
 }
+
 .tense-diagram svg {
   display: block;
   width: 100%;
-  max-height: 13rem;
-  overflow: visible;
 }
-.tense-diagram text {
-  fill: #52657c;
-  font-family: inherit;
-  font-size: 3.7px;
+
+.tense-axis-labels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0 4.5%;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-size: 0.875rem;
+
+  span:first-child {
+    text-align: start;
+  }
+
+  span:last-child {
+    text-align: end;
+  }
+
+  .is-active {
+    color: var(--color-teal-dark);
+    font-weight: 750;
+  }
 }
+
 .diagram-axis {
-  stroke: #cbd5e1;
-  stroke-width: 0.8;
+  stroke: var(--color-text-muted);
+  stroke-width: 0.45;
 }
+
 .diagram-now {
-  stroke: #94a3b8;
-  stroke-width: 0.6;
+  stroke: var(--color-text-muted);
+  stroke-width: 0.55;
   stroke-dasharray: 1.5 1.5;
 }
+
 .diagram-event {
-  fill: #2563eb;
-  stroke: #fff;
+  fill: var(--color-teal-dark);
+  stroke: var(--color-paper-strong);
   stroke-width: 0.8;
 }
+
 .diagram-duration {
-  fill: #dbeafe;
-  stroke: #2563eb;
+  fill: var(--color-teal-wash);
+  stroke: var(--color-teal-dark);
   stroke-width: 0.8;
 }
+
 .diagram-result {
-  stroke: #2563eb;
+  stroke: var(--color-teal-dark);
   stroke-width: 1;
   stroke-dasharray: 2 1;
 }
+
 .diagram-reference {
-  fill: #fff;
-  stroke: #2563eb;
+  fill: var(--color-paper-strong);
+  stroke: var(--color-teal-dark);
   stroke-width: 1;
 }
-.tense-diagram figcaption {
-  color: var(--grammar-muted, #52657c);
-  font-size: 0.8rem;
-  line-height: 1.65;
+
+.tense-diagram-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  span {
+    flex: 0 0 auto;
+    inline-size: 0.65rem;
+    block-size: 0.65rem;
+    border: 2px solid var(--color-teal-dark);
+    border-radius: 50%;
+    background: var(--color-paper-strong);
+  }
+
+  .tense-key-event {
+    background: var(--color-teal-dark);
+  }
+
+  .tense-key-duration {
+    inline-size: 1.2rem;
+    border-radius: var(--radius-xs);
+    background: var(--color-teal-wash);
+  }
 }
+
+.tense-diagram figcaption {
+  margin-top: 0.65rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.tense-sentence-heading {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+}
+
 .tense-unavailable {
   padding: 1.25rem;
 }
-input:focus-visible {
-  outline: 3px solid #2563eb;
-  outline-offset: 3px;
-}
 
-@container (max-width: 20rem) {
-  .tense-diagram text {
-    font-size: 6.5px;
+@container (max-width: 24rem) {
+  .tense-period-options label {
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-inline: 0.25rem;
+    text-align: center;
   }
-}
 
-@media (max-width: 650px) {
-  .tense-controls {
+  .tense-aspect-options {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-    padding: 1rem;
-  }
-  .tense-example {
-    padding: 1rem;
   }
 }

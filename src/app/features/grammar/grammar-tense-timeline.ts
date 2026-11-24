@@ -16,37 +16,36 @@ export class GrammarTenseTimeline {
     { value: 'present', label: 'Hiện tại' },
     { value: 'future', label: 'Tương lai' },
   ];
-  protected readonly aspects: readonly { readonly value: TenseAspect; readonly label: string }[] = [
-    { value: 'simple', label: 'Đơn' },
-    { value: 'continuous', label: 'Tiếp diễn' },
-    { value: 'perfect', label: 'Hoàn thành' },
-    { value: 'perfect-continuous', label: 'Hoàn thành tiếp diễn' },
+  protected readonly aspects: readonly {
+    readonly value: TenseAspect;
+    readonly label: string;
+    readonly clue: string;
+  }[] = [
+    { value: 'simple', label: 'Đơn', clue: 'Sự việc hoặc thói quen' },
+    { value: 'continuous', label: 'Tiếp diễn', clue: 'Đang xảy ra ở mốc xét' },
+    { value: 'perfect', label: 'Hoàn thành', clue: 'Việc xảy ra trước mốc xét' },
+    {
+      value: 'perfect-continuous',
+      label: 'Hoàn thành tiếp diễn',
+      clue: 'Nhấn thời gian kéo dài tới mốc xét',
+    },
   ];
-  protected readonly periodIndex = linkedSignal({ source: this.examples, computation: () => 1 });
+  protected readonly period = linkedSignal<readonly TenseExample[], TensePeriod>({
+    source: this.examples,
+    computation: () => 'present',
+  });
   protected readonly aspect = linkedSignal<readonly TenseExample[], TenseAspect>({
     source: this.examples,
     computation: () => 'simple',
   });
-  protected readonly periodLabel = computed(() => this.periods[this.periodIndex()].label);
-  protected readonly example = computed(() => {
-    const period = this.periods[this.periodIndex()].value;
-    return this.examples().find(
-      (example) => example.period === period && example.aspect === this.aspect(),
-    );
-  });
+  protected readonly example = computed(() =>
+    this.examples().find(
+      (example) => example.period === this.period() && example.aspect === this.aspect(),
+    ),
+  );
   protected readonly routinePoints = computed(() => {
     const diagram = this.example()?.diagram;
     return diagram ? [diagram.start, (diagram.start + diagram.end) / 2, diagram.end] : [];
   });
-  protected readonly radioName = computed(() => `${this.examples()[0]?.id ?? 'empty'}-aspect`);
-
-  protected selectPeriod(index: number): void {
-    if (Number.isInteger(index) && index >= 0 && index < this.periods.length) {
-      this.periodIndex.set(index);
-    }
-  }
-
-  protected selectAspect(aspect: TenseAspect): void {
-    this.aspect.set(aspect);
-  }
+  protected readonly radioPrefix = computed(() => this.examples()[0]?.id ?? 'empty');
 }

@@ -7,27 +7,28 @@ import { ProgressRepository } from '../../core/persistence/progress.repository';
 describe('TOEIC grammar overview', () => {
   let fixture: ComponentFixture<GrammarOverviewPage>;
   let page: HTMLElement;
+  const getSetting = vi.fn();
 
   beforeEach(async () => {
+    getSetting.mockResolvedValue({ completed: ['cau-bi-dong'], lastOpened: 'cau-bi-dong' });
     await TestBed.configureTestingModule({
       imports: [GrammarOverviewPage],
       providers: [
         provideRouter([]),
         {
           provide: ProgressRepository,
-          useValue: {
-            getSetting: vi.fn().mockResolvedValue({
-              completed: ['cau-bi-dong'],
-              lastOpened: 'cau-bi-dong',
-            }),
-          },
+          useValue: { getSetting },
         },
       ],
     }).compileComponents();
+    await render();
+  });
+
+  async function render(): Promise<void> {
     fixture = TestBed.createComponent(GrammarOverviewPage);
     await fixture.whenStable();
     page = fixture.nativeElement;
-  });
+  }
 
   async function search(value: string): Promise<void> {
     const input = page.querySelector<HTMLInputElement>('#grammar-search');
@@ -69,19 +70,47 @@ describe('TOEIC grammar overview', () => {
     expect(page.querySelector<HTMLDetailsElement>('.grammar-sources')?.open).toBe(false);
   });
 
-  it('shows saved completion and a link to continue the last opened lesson', () => {
+  it('shows saved completion and suggests the next lesson after a completed one', () => {
     const progress = page.querySelector<HTMLProgressElement>('.grammar-progress progress');
     expect(progress?.value).toBe(1);
     expect(progress?.max).toBe(19);
+    const recentIndex = GRAMMAR_LEARNING_ORDER.findIndex((lesson) => lesson.slug === 'cau-bi-dong');
+    const next = GRAMMAR_LEARNING_ORDER[recentIndex + 1];
     expect(page.querySelector('.grammar-continue')?.getAttribute('href')).toBe(
-      '/certificates/toeic/grammar/cau-bi-dong',
+      `/certificates/toeic/grammar/${next.slug}`,
     );
-    expect(page.querySelector('.grammar-continue strong')?.textContent).toBe('Câu bị động');
+    expect(page.querySelector('.grammar-continue')?.textContent).toContain('Học bài tiếp theo');
     expect(
       page.querySelector('a.grammar-lesson-card[href$="/cau-bi-dong"] .grammar-lesson-card__status')
         ?.textContent,
     ).toBe('Đã học');
     expect(page.querySelectorAll('.grammar-lesson-card__status--completed')).toHaveLength(1);
+    const verbStageProgress = page.querySelector<HTMLProgressElement>(
+      '.stage-index progress[aria-label="Tiến độ chặng Động từ"]',
+    );
+    expect(verbStageProgress?.value).toBe(1);
+    expect(verbStageProgress?.max).toBe(
+      GRAMMAR_LEARNING_ORDER.filter((lesson) => lesson.stage === 'Động từ').length,
+    );
+  });
+
+  it('starts at the first lesson and resumes an unfinished lesson if one was opened', async () => {
+    fixture.destroy();
+    getSetting.mockResolvedValue(undefined);
+    await render();
+    expect(page.querySelector('.grammar-continue')?.textContent).toContain('Bắt đầu học');
+    expect(page.querySelector('.grammar-continue')?.getAttribute('href')).toBe(
+      `/certificates/toeic/grammar/${GRAMMAR_LEARNING_ORDER[0].slug}`,
+    );
+
+    fixture.destroy();
+    getSetting.mockResolvedValue({ completed: [], lastOpened: 'cau-bi-dong' });
+    await render();
+    expect(page.querySelector('.grammar-continue')?.textContent).toContain('Học tiếp');
+    expect(page.querySelector('.grammar-continue')?.getAttribute('href')).toBe(
+      '/certificates/toeic/grammar/cau-bi-dong',
+    );
+    expect(page.querySelector('.grammar-lesson-card--recent')?.textContent).toContain('Đang học');
   });
 
   it('defaults to a grouped list and keeps the mind map available with independent branches', async () => {

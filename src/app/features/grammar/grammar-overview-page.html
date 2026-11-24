@@ -1,49 +1,33 @@
 <div class="page grammar-page grammar-overview">
   <header class="grammar-header">
-    <div>
-      <p class="grammar-kicker">TOEIC · Part 5 &amp; 6</p>
-      <h1 #pageHeading tabindex="-1">Ngữ pháp</h1>
-      <p>Nắm cấu trúc, hiểu quy tắc, áp dụng vào Part 5 &amp; 6.</p>
-    </div>
+    <h1 #pageHeading tabindex="-1">Ngữ pháp TOEIC</h1>
+    <p>Học cách nhận diện cấu trúc câu và áp dụng vào Part 5 &amp; 6.</p>
+  </header>
+
+  @let suggestion = studySuggestion();
+  <section class="study-panel" aria-label="Bài học và tiến độ của bạn">
+    <a
+      class="grammar-continue"
+      [routerLink]="['/certificates/toeic/grammar', suggestion.lesson.slug]"
+    >
+      <span class="study-panel__lesson">
+        <small>Bài {{ position(suggestion.lesson) }} · {{ suggestion.lesson.stage }}</small>
+        <strong>{{ suggestion.lesson.title }}</strong>
+      </span>
+      <span class="study-panel__action">{{ suggestion.action }}</span>
+    </a>
     <div class="grammar-progress">
-      <span>Tiến độ của bạn</span>
-      <strong
-        >{{ learningProgress.completed().length }}
-        <small>/ {{ lessonCount }} bài học</small></strong
-      >
+      <span>Tiến độ học</span>
+      <strong>{{ completedCount() }} / {{ lessonCount }} bài đã học</strong>
       <progress
         aria-label="Tiến độ học ngữ pháp"
-        [value]="learningProgress.completed().length"
+        [value]="completedCount()"
         [max]="lessonCount"
       ></progress>
     </div>
-  </header>
-  @if (lastOpenedLesson(); as recentLesson) {
-    <a class="grammar-continue" [routerLink]="['/certificates/toeic/grammar', recentLesson.slug]">
-      <span
-        ><small>Bài học gần nhất</small><strong>{{ recentLesson.title }}</strong></span
-      >
-      <span>Học tiếp <span aria-hidden="true">→</span></span>
-    </a>
-  }
+  </section>
   @if (learningProgress.error()) {
     <p class="error" role="alert">{{ learningProgress.error() }}</p>
-  }
-  @if (view() === 'cards' && visibleStages().length > 0) {
-    <nav class="stage-index" aria-label="Các chặng ngữ pháp">
-      @for (group of visibleStages(); track group.name) {
-        <a
-          [href]="'/certificates/toeic/grammar#grammar-stage-' + group.number"
-          (click)="focusStage($event, group.number)"
-        >
-          <span class="stage-index__number" aria-hidden="true">{{ group.number }}</span>
-          <span
-            ><strong>{{ group.name }}</strong
-            ><small>{{ group.lessons.length }} bài học</small></span
-          >
-        </a>
-      }
-    </nav>
   }
 
   <section
@@ -102,12 +86,34 @@
     </div>
     <div class="grammar-filter-status">
       <p role="status" aria-live="polite">
-        {{ filteredLessons().length }} / {{ lessonCount }} bài học
+        @if (hasFilters()) {
+          {{ filteredLessons().length }} / {{ lessonCount }} bài học
+        }
       </p>
       @if (hasFilters()) {
         <button type="button" class="grammar-clear" (click)="clearFilters()">Xóa bộ lọc</button>
       }
     </div>
+
+    @if (view() === 'cards' && visibleStages().length > 0) {
+      <nav class="stage-index" aria-label="Các chặng ngữ pháp">
+        @for (group of visibleStages(); track group.name) {
+          <a
+            [href]="'/certificates/toeic/grammar#grammar-stage-' + group.number"
+            (click)="focusStage($event, group.number)"
+          >
+            <span class="stage-index__number" aria-hidden="true">{{ group.number }}</span>
+            <strong>{{ group.name }}</strong>
+            <small>{{ group.completed }} / {{ group.total }} đã học</small>
+            <progress
+              [attr.aria-label]="'Tiến độ chặng ' + group.name"
+              [value]="group.completed"
+              [max]="group.total"
+            ></progress>
+          </a>
+        }
+      </nav>
+    }
 
     @if (filteredLessons().length > 0 && view() === 'map') {
       <p class="grammar-map-hint">
@@ -123,7 +129,6 @@
           tabindex="-1"
         >
           <div class="stage-heading">
-            <span class="stage-number" aria-hidden="true">{{ group.number }}</span>
             <div>
               <h3 [id]="'stage-' + group.number">{{ group.name }}</h3>
               <p>{{ stageDescriptions[group.name] }}</p>
@@ -145,19 +150,19 @@
                     <h4>{{ lesson.title }}</h4>
                     <p>{{ lesson.goal }}</p>
                   </div>
-                  <span class="grammar-part">{{
-                    lesson.part === 'part-5' ? 'Part 5' : 'Part 6'
-                  }}</span>
-                  <span
-                    class="grammar-lesson-card__status"
-                    [class.grammar-lesson-card__status--completed]="
-                      learningProgress.completed().includes(lesson.slug)
-                    "
-                    >{{
-                      learningProgress.completed().includes(lesson.slug) ? 'Đã học' : 'Chưa học'
-                    }}</span
-                  >
-                  <span class="lesson-arrow" aria-hidden="true">→</span>
+                  <span class="lesson-meta">
+                    <span class="grammar-part">{{
+                      lesson.part === 'part-5' ? 'Part 5' : 'Part 6'
+                    }}</span>
+                    @if (completedLessons().has(lesson.slug)) {
+                      <span
+                        class="grammar-lesson-card__status grammar-lesson-card__status--completed"
+                        >Đã học</span
+                      >
+                    } @else if (learningProgress.lastOpened() === lesson.slug) {
+                      <span class="grammar-lesson-card__status">Đang học</span>
+                    }
+                  </span>
                 </a>
               </li>
             }
@@ -165,7 +170,6 @@
         </section>
       } @empty {
         <div class="grammar-empty">
-          <span aria-hidden="true">⌕</span>
           <h3>Chưa tìm thấy bài phù hợp</h3>
           <p>Thử từ khóa khác hoặc xóa bộ lọc để xem toàn bộ lộ trình.</p>
           <button class="button button--secondary" type="button" (click)="clearFilters()">
@@ -174,9 +178,6 @@
         </div>
       }
     }
-    <p class="grammar-learning-note">
-      Mỗi quy tắc có 5 ví dụ từ bộ Hacker. Câu biến đổi được ghi rõ và kèm câu gốc để đối chiếu.
-    </p>
   </section>
 
   <details class="grammar-sources">
@@ -184,6 +185,9 @@
     <p>
       Lộ trình được tổng hợp theo chủ điểm; lời giải, ví dụ, câu hỏi và sơ đồ là nội dung viết mới.
       Cấu trúc bài thi tham khảo ETS.
+    </p>
+    <p>
+      Mỗi quy tắc có 5 ví dụ từ bộ Hacker. Câu biến đổi được ghi rõ và kèm câu gốc để đối chiếu.
     </p>
     <ul>
       <li>

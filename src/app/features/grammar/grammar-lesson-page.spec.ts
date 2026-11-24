@@ -115,6 +115,33 @@ describe('TOEIC grammar lessons', () => {
     }
   });
 
+  it('shows the learning goal, switches visual examples and jumps to an individual rule', async () => {
+    const lesson = GRAMMAR_LEARNING_ORDER[0];
+    const { fixture, params, page } = await render(lesson.slug);
+    expect(page.querySelector('.grammar-goal')?.textContent).toContain(lesson.goal);
+    const examples = page.querySelectorAll<HTMLButtonElement>('.grammar-example-picker button');
+    expect(examples[0].getAttribute('aria-pressed')).toBe('true');
+    examples[1].click();
+    await fixture.whenStable();
+    expect(examples[1].getAttribute('aria-pressed')).toBe('true');
+    expect(page.querySelector('.syntax-translation')?.textContent).toBe(
+      lesson.examples[1].vietnamese,
+    );
+
+    const heading = element<HTMLElement>(page, '#rule-1');
+    heading.scrollIntoView = vi.fn();
+    element<HTMLElement>(page, '.grammar-rule-outline summary').click();
+    page.querySelectorAll<HTMLButtonElement>('.grammar-rule-outline button')[1].click();
+    expect(document.activeElement).toBe(heading);
+    expect(heading.textContent?.trim()).toBe(lesson.rules[1].label);
+
+    params.next(convertToParamMap({ slug: 'hoa-hop-chu-vi' }));
+    await fixture.whenStable();
+    expect(page.querySelector('.grammar-example-picker button')?.getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+  });
+
   it('opens each rule independently and resets disclosures and timeline on navigation', async () => {
     const { fixture, params, page } = await render();
     const disclosures = page.querySelectorAll<HTMLDetailsElement>('.grammar-rule-examples');
@@ -126,9 +153,7 @@ describe('TOEIC grammar lessons', () => {
     await fixture.whenStable();
     expect(disclosures[0].open).toBe(false);
     disclosures[0].open = true;
-    const slider = element<HTMLInputElement>(page, 'input[type="range"]');
-    slider.value = '2';
-    slider.dispatchEvent(new Event('input'));
+    element<HTMLInputElement>(page, 'input[value="future"]').click();
     await fixture.whenStable();
     params.next(convertToParamMap({ slug: 'cau-bi-dong' }));
     await fixture.whenStable();
@@ -136,7 +161,7 @@ describe('TOEIC grammar lessons', () => {
     expect(page.querySelector('app-grammar-transformation')).not.toBeNull();
     params.next(convertToParamMap({ slug: 'cac-thi' }));
     await fixture.whenStable();
-    expect(page.querySelector<HTMLInputElement>('input[type="range"]')?.value).toBe('1');
+    expect(element<HTMLInputElement>(page, 'input[value="present"]').checked).toBe(true);
     expect(element<HTMLDetailsElement>(page, '.grammar-rule-examples').open).toBe(false);
   });
 

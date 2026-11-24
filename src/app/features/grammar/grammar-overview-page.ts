@@ -46,6 +46,29 @@ export class GrammarOverviewPage {
   protected readonly lastOpenedLesson = computed(() =>
     GRAMMAR_LEARNING_ORDER.find((lesson) => lesson.slug === this.learningProgress.lastOpened()),
   );
+  protected readonly completedLessons = computed(() => new Set(this.learningProgress.completed()));
+  protected readonly completedCount = computed(
+    () =>
+      GRAMMAR_LEARNING_ORDER.filter((lesson) => this.completedLessons().has(lesson.slug)).length,
+  );
+  protected readonly studySuggestion = computed(() => {
+    const recent = this.lastOpenedLesson();
+    const isUnfinished = (lesson: GrammarLesson) => !this.completedLessons().has(lesson.slug);
+    if (recent && isUnfinished(recent)) return { lesson: recent, action: 'Học tiếp' };
+
+    const nextIndex = recent ? GRAMMAR_LEARNING_ORDER.indexOf(recent) + 1 : 0;
+    const next =
+      GRAMMAR_LEARNING_ORDER.slice(nextIndex).find(isUnfinished) ??
+      GRAMMAR_LEARNING_ORDER.find(isUnfinished);
+    if (next) {
+      return {
+        lesson: next,
+        action: this.completedCount() > 0 ? 'Học bài tiếp theo' : 'Bắt đầu học',
+      };
+    }
+
+    return { lesson: recent ?? GRAMMAR_LEARNING_ORDER[0], action: 'Ôn lại bài học' };
+  });
   protected readonly search = signal('');
   protected readonly stage = signal('all');
   protected readonly part = signal('all');
@@ -64,13 +87,20 @@ export class GrammarOverviewPage {
       return matchesStage && matchesPart && matchesSearch;
     });
   });
-  protected readonly visibleStages = computed(() =>
-    GRAMMAR_STAGES.map((name, index) => ({
-      name,
-      number: String(index + 1).padStart(2, '0'),
-      lessons: this.filteredLessons().filter((lesson) => lesson.stage === name),
-    })).filter((stage) => stage.lessons.length > 0),
-  );
+  protected readonly visibleStages = computed(() => {
+    const filtered = this.filteredLessons();
+    const completed = this.completedLessons();
+    return GRAMMAR_STAGES.map((name, index) => {
+      const stageLessons = GRAMMAR_LEARNING_ORDER.filter((lesson) => lesson.stage === name);
+      return {
+        name,
+        number: String(index + 1).padStart(2, '0'),
+        lessons: filtered.filter((lesson) => lesson.stage === name),
+        completed: stageLessons.filter((lesson) => completed.has(lesson.slug)).length,
+        total: stageLessons.length,
+      };
+    }).filter((stage) => stage.lessons.length > 0);
+  });
   protected readonly stageDescriptions: Readonly<Record<GrammarStage, string>> = {
     'Nền tảng': 'Nhìn vị trí, hiểu vai trò của từng từ.',
     'Động từ': 'Hiểu thời điểm, hành động và dạng động từ.',

@@ -54,10 +54,7 @@ describe('GrammarTenseTimeline', () => {
   it('defaults to present simple and provides a text equivalent of its diagram', async () => {
     const { page } = await render();
     expect(page.querySelector('h3')?.textContent).toBe('present/simple');
-    expect(page.querySelector<HTMLInputElement>('input[type="range"]')?.value).toBe('1');
-    expect(page.querySelector('input[type="range"]')?.getAttribute('aria-valuetext')).toBe(
-      'Hiện tại',
-    );
+    expect(page.querySelector<HTMLInputElement>('input[value="present"]')?.checked).toBe(true);
     expect(page.querySelector<HTMLInputElement>('input[value="simple"]')?.checked).toBe(true);
     expect(page.querySelector('svg')?.getAttribute('aria-label')).toBe('Mô tả present/simple.');
     expect(page.querySelector('figcaption')?.textContent).toBe('Mô tả present/simple.');
@@ -65,13 +62,10 @@ describe('GrammarTenseTimeline', () => {
     expect(page.querySelector('.diagram-now')?.getAttribute('x1')).toBe('50');
   });
 
-  it('updates all twelve authored combinations through native range and radio controls', async () => {
+  it('updates all twelve authored combinations through the time and aspect radio groups', async () => {
     const { fixture, page } = await render();
-    const range = page.querySelector<HTMLInputElement>('input[type="range"]');
-    if (!range) throw new Error('Missing time control');
-    for (const [index, period] of PERIODS.entries()) {
-      range.value = String(index);
-      range.dispatchEvent(new Event('input', { bubbles: true }));
+    for (const period of PERIODS) {
+      page.querySelector<HTMLInputElement>(`input[value="${period}"]`)?.click();
       await fixture.whenStable();
       for (const aspect of ASPECTS) {
         page.querySelector<HTMLInputElement>(`input[value="${aspect}"]`)?.click();
@@ -106,10 +100,7 @@ describe('GrammarTenseTimeline', () => {
 
   it('resets controls on a new examples input and reports missing data without a substitute', async () => {
     const { fixture, page } = await render();
-    const range = page.querySelector<HTMLInputElement>('input[type="range"]');
-    if (!range) throw new Error('Missing time control');
-    range.value = '2';
-    range.dispatchEvent(new Event('input', { bubbles: true }));
+    page.querySelector<HTMLInputElement>('input[value="future"]')?.click();
     page.querySelector<HTMLInputElement>('input[value="perfect"]')?.click();
     await fixture.whenStable();
     expect(page.querySelector('h3')?.textContent).toBe('future/perfect');

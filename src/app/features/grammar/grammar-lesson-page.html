@@ -1,7 +1,7 @@
 <div class="page grammar-page grammar-page--lesson">
   @if (lesson(); as current) {
-    <header class="grammar-lesson-header">
-      <a class="grammar-back" routerLink="/certificates/toeic/grammar">← Thư viện ngữ pháp</a>
+    <a class="grammar-back" routerLink="/certificates/toeic/grammar">← Thư viện ngữ pháp</a>
+    <header class="grammar-lesson-header surface">
       <div class="grammar-lesson-meta">
         <span>{{ current.stage }}</span>
         <span>Bài {{ index() + 1 }} / {{ lessonCount }}</span>
@@ -9,146 +9,181 @@
       </div>
       <h1 tabindex="-1">{{ current.title }}</h1>
       <p class="grammar-lesson-summary">{{ current.summary }}</p>
-      <button
-        class="button button--secondary"
-        type="button"
-        [disabled]="learningProgress.busy()"
-        [attr.aria-pressed]="learningProgress.completed().includes(current.slug)"
-        (click)="learningProgress.toggle(current.slug)"
-      >
-        {{
-          learningProgress.completed().includes(current.slug)
-            ? 'Đã học · Bỏ đánh dấu'
-            : 'Đánh dấu đã học'
-        }}
-      </button>
+      <div class="grammar-goal">
+        <p><strong>Mục tiêu bài học</strong>{{ current.goal }}</p>
+        <button
+          class="button button--secondary"
+          type="button"
+          [disabled]="learningProgress.busy()"
+          [attr.aria-pressed]="learningProgress.completed().includes(current.slug)"
+          (click)="learningProgress.toggle(current.slug)"
+        >
+          {{
+            learningProgress.completed().includes(current.slug)
+              ? 'Đã học · Bỏ đánh dấu'
+              : 'Đánh dấu đã học'
+          }}
+        </button>
+      </div>
       @if (learningProgress.error()) {
         <p class="error" role="alert">{{ learningProgress.error() }}</p>
       }
     </header>
 
-    <nav class="grammar-outline" aria-label="Nội dung bài học">
-      <span>Trong bài này</span>
-      <button type="button" (click)="focusSection('explore-heading')">Khám phá</button>
-      <button type="button" (click)="focusSection('rules-heading')">Quy tắc &amp; ví dụ</button>
-      <button type="button" (click)="focusSection('practice-heading')">Luyện tập</button>
-    </nav>
+    <div class="grammar-lesson-layout">
+      <aside class="grammar-lesson-navigation surface">
+        <p class="grammar-outline-title">Trong bài này</p>
+        <nav class="grammar-outline" aria-label="Nội dung bài học">
+          <button type="button" (click)="focusSection('explore-heading')">Ví dụ</button>
+          <button type="button" (click)="focusSection('rules-heading')">Quy tắc</button>
+          <button type="button" (click)="focusSection('practice-heading')">Luyện tập</button>
+        </nav>
+        <details class="grammar-rule-outline">
+          <summary>Đến một quy tắc</summary>
+          <ul>
+            @for (rule of current.rules; track rule; let ruleIndex = $index) {
+              <li>
+                <button type="button" (click)="focusSection('rule-' + ruleIndex)">
+                  {{ rule.label }}
+                </button>
+              </li>
+            }
+          </ul>
+        </details>
+      </aside>
 
-    <article class="grammar-article">
-      <section class="grammar-explore" aria-labelledby="explore-heading">
-        <p class="eyebrow">01 · Khám phá trực quan</p>
-        <h2 tabindex="-1" id="explore-heading">{{ current.visual.title }}</h2>
-        <p class="grammar-section-intro">
-          Chạm vào một khối để hiểu vai trò của nó trong câu. Màu thể hiện chức năng, không phải từ
-          loại.
-        </p>
-        @switch (current.slug) {
-          @case ('cac-thi') {
-            <app-grammar-tense-timeline [examples]="tenseExamples" />
-          }
-          @case ('cau-bi-dong') {
-            <app-grammar-transformation [demo]="passiveDemo" />
-          }
-          @case ('phan-tu-va-rut-gon') {
-            @for (demo of reductionDemos; track demo.id) {
-              <app-grammar-transformation [demo]="demo" />
+      <article class="grammar-article">
+        <section class="grammar-explore" aria-labelledby="explore-heading">
+          <p class="grammar-section-label">Ví dụ trực quan</p>
+          <h2 tabindex="-1" id="explore-heading">{{ current.visual.title }}</h2>
+          @switch (current.slug) {
+            @case ('cac-thi') {
+              <app-grammar-tense-timeline [examples]="tenseExamples" />
+            }
+            @case ('cau-bi-dong') {
+              <app-grammar-transformation [demo]="passiveDemo" />
+            }
+            @case ('phan-tu-va-rut-gon') {
+              @for (demo of reductionDemos; track demo.id) {
+                <app-grammar-transformation [demo]="demo" />
+              }
+            }
+            @default {
+              <div class="grammar-explore__example surface">
+                <div class="grammar-example-picker" role="group" aria-label="Chọn câu ví dụ">
+                  @for (example of current.examples; track example.id; let index = $index) {
+                    <button
+                      type="button"
+                      [attr.aria-pressed]="exampleIndex() === index"
+                      (click)="exampleIndex.set(index)"
+                    >
+                      {{ example.ruleLabel }}
+                    </button>
+                  }
+                </div>
+                <p class="grammar-section-intro">
+                  Chọn một cụm trong câu để xem vai trò và cách nhận diện.
+                </p>
+                <app-grammar-syntax-sentence
+                  [sentence]="current.examples[exampleIndex()]"
+                  [showLegend]="true"
+                />
+              </div>
             }
           }
-          @default {
-            <div class="grammar-explore__example surface">
-              <app-grammar-syntax-sentence [sentence]="current.examples[0]" [showLegend]="true" />
+        </section>
+
+        <section aria-labelledby="rules-heading">
+          <h2 tabindex="-1" id="rules-heading">Công thức và cách dùng</h2>
+          @if (hackerExamples.error()) {
+            <div class="grammar-examples-error" role="alert">
+              <p>{{ hackerExamples.error() }}</p>
+              <button
+                class="button button--secondary"
+                type="button"
+                (click)="hackerExamples.load()"
+              >
+                Tải lại ví dụ
+              </button>
             </div>
           }
-        }
-      </section>
-
-      <section aria-labelledby="rules-heading">
-        <p class="eyebrow">02 · Ghi nhớ cách dùng</p>
-        <h2 tabindex="-1" id="rules-heading">Cấu trúc / Quy tắc</h2>
-        @if (hackerExamples.error()) {
-          <div class="grammar-examples-error" role="alert">
-            <p>{{ hackerExamples.error() }}</p>
-            <button class="button button--secondary" type="button" (click)="hackerExamples.load()">
-              Tải lại ví dụ
-            </button>
+          <div class="grammar-rules">
+            @for (rule of current.rules; track rule; let ruleIndex = $index) {
+              <article class="grammar-rule surface">
+                <h3 class="grammar-rule__heading" tabindex="-1" [id]="'rule-' + ruleIndex">
+                  {{ rule.label }}
+                </h3>
+                <div class="grammar-rule__body">
+                  <div class="grammar-rule__formula">
+                    <p class="grammar-formula-label">Công thức</p>
+                    <p class="grammar-pattern" lang="en">{{ rule.pattern }}</p>
+                  </div>
+                  <div class="grammar-rule__use">
+                    <p class="grammar-formula-label">Cách dùng</p>
+                    <p>{{ rule.use }}</p>
+                  </div>
+                </div>
+                <details class="grammar-rule-examples">
+                  <summary>5 câu trắc nghiệm <span>· Hacker 3</span></summary>
+                  @if (hackerExamples.loading()) {
+                    <p role="status">Đang tải ví dụ…</p>
+                  } @else if (hackerExamples.error()) {
+                    <p>Ví dụ chưa có sẵn. Bạn có thể thử tải lại ở đầu phần quy tắc.</p>
+                  } @else {
+                    <ol class="grammar-hacker-examples" role="list">
+                      @for (
+                        example of examplesForRule(current.slug, rule.label);
+                        track example.id;
+                        let exampleIndex = $index
+                      ) {
+                        <li class="grammar-example">
+                          <app-grammar-example-quiz
+                            [example]="example"
+                            [number]="exampleIndex + 1"
+                          />
+                        </li>
+                      }
+                    </ol>
+                  }
+                </details>
+              </article>
+            }
           </div>
-        }
-        <div class="grammar-rules">
-          @for (rule of current.rules; track rule; let ruleIndex = $index) {
-            <article class="grammar-rule surface">
-              <div class="grammar-rule__heading">
-                <span aria-hidden="true">{{ ruleIndex + 1 }}</span>
-                <h3>{{ rule.label }}</h3>
-              </div>
-              <p class="grammar-formula-label">Công thức</p>
-              <p class="grammar-pattern" lang="en">{{ rule.pattern }}</p>
-              <div class="grammar-rule__use">
-                @for (line of ruleUseLines(rule.use); track line) {
-                  <p>{{ line }}</p>
-                }
-              </div>
-              <details class="grammar-rule-examples">
-                <summary>Luyện 5 câu trắc nghiệm từ ví dụ Hacker</summary>
-                @if (hackerExamples.loading()) {
-                  <p role="status">Đang tải ví dụ…</p>
-                } @else if (hackerExamples.error()) {
-                  <p>Ví dụ chưa có sẵn. Bạn có thể thử tải lại ở đầu phần quy tắc.</p>
-                } @else {
-                  <ol class="grammar-hacker-examples">
-                    @for (
-                      example of examplesForRule(current.slug, rule.label);
-                      track example.id;
-                      let exampleIndex = $index
-                    ) {
-                      <li class="grammar-example">
-                        <app-grammar-example-quiz [example]="example" [number]="exampleIndex + 1" />
-                      </li>
-                    }
-                  </ol>
-                }
-              </details>
-            </article>
-          }
-        </div>
-        <aside class="grammar-trap">
-          <span aria-hidden="true">!</span>
-          <p><strong>Bẫy thường gặp</strong>{{ current.trap }}</p>
-        </aside>
-      </section>
+          <aside class="grammar-trap">
+            <p><strong>Bẫy thường gặp</strong>{{ current.trap }}</p>
+          </aside>
+        </section>
 
-      <section class="grammar-practice" aria-labelledby="practice-heading">
-        <div>
-          <p class="eyebrow">03 · Từ kiến thức đến luyện đề</p>
-          <h2 tabindex="-1" id="practice-heading">
-            Luyện thêm Part {{ current.part === 'part-5' ? '5' : '6' }}
-          </h2>
-          <p>
-            Áp dụng kiến thức vào bài luyện TOEIC. Bạn có thể đổi Part, nguồn đề và số câu trước khi
-            bắt đầu.
-          </p>
-        </div>
-        <a
-          class="button"
-          [routerLink]="['/certificates/toeic/practice']"
-          [queryParams]="{ part: current.part }"
-          >Luyện {{ current.part === 'part-5' ? 'Part 5' : 'Part 6' }} →</a
-        >
-      </section>
-      <nav class="grammar-neighbors" aria-label="Bài học liền kề">
-        @if (previous(); as previousLesson) {
-          <a [routerLink]="['/certificates/toeic/grammar', previousLesson.slug]"
-            ><span>← Bài trước</span><strong>{{ previousLesson.title }}</strong></a
+        <section class="grammar-practice" aria-labelledby="practice-heading">
+          <div>
+            <h2 tabindex="-1" id="practice-heading">
+              Luyện thêm Part {{ current.part === 'part-5' ? '5' : '6' }}
+            </h2>
+            <p>Chọn bộ đề và số câu để luyện thêm theo Part của bài học.</p>
+          </div>
+          <a
+            class="button"
+            [routerLink]="['/certificates/toeic/practice']"
+            [queryParams]="{ part: current.part }"
+            >Luyện {{ current.part === 'part-5' ? 'Part 5' : 'Part 6' }}</a
           >
-        } @else {
-          <span></span>
-        }
-        @if (next(); as nextLesson) {
-          <a [routerLink]="['/certificates/toeic/grammar', nextLesson.slug]"
-            ><span>Bài tiếp theo →</span><strong>{{ nextLesson.title }}</strong></a
-          >
-        }
-      </nav>
-    </article>
+        </section>
+        <nav class="grammar-neighbors" aria-label="Bài học liền kề">
+          @if (previous(); as previousLesson) {
+            <a [routerLink]="['/certificates/toeic/grammar', previousLesson.slug]"
+              ><span>← Bài trước</span><strong>{{ previousLesson.title }}</strong></a
+            >
+          } @else {
+            <span></span>
+          }
+          @if (next(); as nextLesson) {
+            <a [routerLink]="['/certificates/toeic/grammar', nextLesson.slug]"
+              ><span>Bài tiếp theo →</span><strong>{{ nextLesson.title }}</strong></a
+            >
+          }
+        </nav>
+      </article>
+    </div>
   } @else {
     <div class="grammar-not-found surface" role="status">
       <p class="eyebrow">Thư viện ngữ pháp</p>

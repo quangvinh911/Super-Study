@@ -5,13 +5,12 @@
   display: block;
 }
 .grammar-page {
-  max-width: 54rem;
-  margin-inline: auto;
+  max-width: 70rem;
   padding-bottom: 3rem;
 }
 .grammar-back {
   display: inline-block;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.85rem;
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
@@ -22,67 +21,159 @@
   gap: 0.5rem 0.8rem;
 }
 .grammar-lesson-meta span {
-  color: var(--grammar-muted);
-  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  background: var(--grammar-wash);
+  color: var(--grammar-accent-dark);
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .grammar-lesson-header h1 {
-  max-width: 23ch;
-  margin-block: 0.7rem 0.6rem;
-  font-size: clamp(1.75rem, 3vw, 2.2rem);
-  line-height: 1.25;
+  max-width: 30ch;
+  margin-block: 0.85rem 0.5rem;
+  font-size: clamp(1.75rem, 3vw, 2.65rem);
+  line-height: 1.2;
 }
 .grammar-lesson-summary {
   max-width: 60ch;
-  color: var(--grammar-muted);
-  font-size: 1rem;
+  margin: 0;
+  font-size: 1.0625rem;
 }
 .grammar-lesson-header {
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.25rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  border-block-start: 3px solid var(--grammar-accent);
+}
+.grammar-goal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--grammar-line);
+}
+.grammar-goal p {
+  flex: 1 1 17rem;
+  margin: 0;
+  color: var(--grammar-muted);
+}
+.grammar-goal strong,
+.grammar-trap strong {
+  display: block;
+}
+.grammar-goal button[aria-pressed='true'] {
+  border-color: var(--grammar-accent);
+  background: var(--grammar-wash);
+}
+.grammar-lesson-layout {
+  display: grid;
+  align-items: start;
+  gap: 1.5rem;
+}
+.grammar-lesson-navigation {
+  padding: 0.875rem;
+}
+.grammar-outline-title {
+  margin: 0 0 0.4rem 0.5rem;
+  font-weight: 750;
 }
 .grammar-outline {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 0.25rem 0.8rem;
-  margin-bottom: 2rem;
-  padding-block: 0.65rem;
-  border-block: 1px solid var(--grammar-line);
-  font-size: 0.8rem;
+  gap: 0.125rem 0.3rem;
 }
-.grammar-outline > span {
-  color: var(--grammar-muted);
-}
-.grammar-outline button {
-  padding: 0.4rem 0;
+.grammar-lesson-navigation button,
+.grammar-rule-outline summary {
+  padding: 0.45rem 0.5rem;
   border: 0;
   border-radius: var(--radius-xs);
   color: var(--grammar-accent-dark);
   background: transparent;
-  font-size: inherit;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-align: start;
+  cursor: pointer;
+}
+.grammar-lesson-navigation button:hover,
+.grammar-rule-outline summary:hover {
+  background: var(--grammar-wash);
+}
+.grammar-rule-outline {
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--grammar-line);
+}
+.grammar-rule-outline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+@media (min-width: 75rem) {
+  .grammar-lesson-layout {
+    grid-template-columns: minmax(0, 1fr) 13rem;
+  }
+  .grammar-lesson-navigation {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100dvh - 6rem);
+    overflow-y: auto;
+  }
+  .grammar-article {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .grammar-outline {
+    display: grid;
+    gap: 0.125rem;
+  }
 }
 .grammar-trap p {
   margin: 0;
 }
-.grammar-trap strong {
-  display: block;
-  margin-bottom: 0.25rem;
-}
 .grammar-article > section {
-  margin-bottom: 2.8rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.8rem);
+}
+.grammar-article :is(h2, h3)[tabindex] {
+  scroll-margin-top: 5rem;
 }
 .grammar-article h2 {
-  margin-block: 0.4rem 1rem;
-  scroll-margin-top: 5rem;
-  font-size: 1.35rem;
+  margin-block: 0 0.85rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+}
+.grammar-section-label {
+  margin: 0 0 0.25rem;
+  color: var(--grammar-accent-dark);
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 .grammar-section-intro {
+  margin-block: 0.75rem 1rem;
   color: var(--grammar-muted);
-  max-width: 65ch;
 }
 .grammar-explore__example {
-  padding: 1rem;
+  padding: clamp(0.85rem, 2vw, 1.25rem);
+}
+.grammar-example-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.grammar-example-picker button {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--grammar-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper-strong);
+  color: var(--grammar-accent-dark);
+  font-size: 0.9rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+.grammar-example-picker button[aria-pressed='true'] {
+  border-color: var(--grammar-accent);
+  background: var(--grammar-wash);
 }
 .grammar-explore app-grammar-transformation + app-grammar-transformation {
   display: block;
@@ -90,91 +181,82 @@
 }
 .grammar-rules {
   display: grid;
-  gap: 1.5rem;
+  gap: 0.9rem;
 }
 .grammar-rule {
-  padding: 1.4rem 0 0;
-  border: 0;
-  border-top: 1px solid var(--grammar-line);
-  border-radius: 0;
-  background: transparent;
+  padding: clamp(0.85rem, 2vw, 1.25rem);
 }
 .grammar-rule__heading {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin-bottom: 0.9rem;
+  margin: 0 0 0.7rem;
+  font-size: 1.1rem;
 }
-.grammar-rule__heading > span {
+.grammar-rule__body {
   display: grid;
-  place-items: center;
-  flex: 0 0 1.8rem;
-  height: 1.8rem;
-  border-radius: var(--radius-xs);
-  background: var(--color-paper-deep);
-  color: var(--grammar-muted);
-  font-size: 0.8rem;
-  font-weight: 700;
+  gap: 0.9rem;
+}
+.grammar-rule__formula {
+  padding: 0.75rem;
+  border-inline-start: 3px solid var(--grammar-accent);
+  border-radius: var(--radius-sm);
+  background: var(--grammar-wash);
 }
 .grammar-formula-label {
-  margin-bottom: 0.4rem;
-  color: var(--grammar-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--grammar-accent-dark);
+  font-size: 0.875rem;
+  font-weight: 750;
 }
 .grammar-pattern {
-  margin-bottom: 1rem;
-  padding: 0.8rem 1rem;
-  border-radius: var(--radius-sm);
-  background: var(--color-paper-deep);
+  margin: 0;
   font-weight: 700;
   overflow-wrap: anywhere;
 }
-.grammar-rule__use {
-  color: var(--grammar-muted);
+.grammar-rule__use p:last-child {
+  margin: 0;
+  line-height: 1.65;
 }
-.grammar-rule__use p {
-  margin-bottom: 0.4rem;
-}
-.grammar-example {
-  margin-top: 1.3rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--grammar-line);
+@media (min-width: 43rem) {
+  .grammar-rule__body {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: start;
+    gap: 1.25rem;
+  }
+  .grammar-rule__use {
+    padding-block-start: 0.75rem;
+  }
 }
 .grammar-rule-examples {
   margin-top: 1.2rem;
   border-top: 1px solid var(--grammar-line);
 }
 .grammar-rule-examples summary {
-  padding: 1rem 0.3rem;
+  padding: 0.7rem 0 0;
   color: var(--grammar-accent-dark);
   font-weight: 650;
   cursor: pointer;
 }
-.grammar-rule-examples summary:focus-visible {
-  outline: 2px solid var(--grammar-accent);
-  outline-offset: 3px;
-  border-radius: 0.3rem;
+.grammar-rule-examples summary span {
+  margin-inline-start: 0.4rem;
+  color: var(--grammar-muted);
+  font-size: 0.875rem;
 }
 .grammar-hacker-examples {
-  padding-left: 1.4rem;
-  margin-bottom: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.grammar-hacker-examples .grammar-example {
-  padding-left: 0.3rem;
+.grammar-example {
+  margin-top: 0.75rem;
   overflow-wrap: anywhere;
 }
-.grammar-hacker-examples .grammar-example:first-child {
-  margin-top: 0;
-  border-top: 0;
+.grammar-example + .grammar-example {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--grammar-line);
 }
 .grammar-examples-error {
   margin-bottom: 1rem;
 }
 .grammar-trap {
-  display: flex;
-  align-items: start;
-  gap: 0.8rem;
   padding: 1rem 1.2rem;
   margin-top: 1rem;
   border: 1px solid #eed09b;
@@ -182,22 +264,13 @@
   background: #fff8eb;
   color: #704711;
 }
-.grammar-trap > span {
-  display: grid;
-  flex: 0 0 1.4rem;
-  height: 1.4rem;
-  place-items: center;
-  border-radius: 50%;
-  border: 1px solid currentColor;
-  font-weight: 900;
-}
 .grammar-practice {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.25rem;
+  padding: clamp(1rem, 2vw, 1.25rem);
   border: 1px solid var(--grammar-line);
   border-radius: var(--radius-sm);
   background: var(--color-paper-strong);
@@ -229,10 +302,7 @@
   text-align: right;
 }
 @media (max-width: 35rem) {
-  .grammar-practice {
-    padding: 1rem;
-  }
-  .grammar-neighbors {
-    font-size: 0.875rem;
+  .grammar-page {
+    width: calc(100% - 1.5rem);
   }
 }

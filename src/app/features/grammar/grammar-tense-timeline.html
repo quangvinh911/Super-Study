@@ -1,39 +1,38 @@
 <div class="tense-explorer">
   <div class="tense-controls">
-    <label class="tense-period">
-      <span class="tense-control-label"
-        >Mốc thời gian <strong>{{ periodLabel() }}</strong></span
-      >
-      <input
-        #periodRange
-        type="range"
-        min="0"
-        max="2"
-        step="1"
-        [value]="periodIndex()"
-        [attr.aria-valuetext]="periodLabel()"
-        aria-label="Mốc thời gian"
-        (input)="selectPeriod(periodRange.valueAsNumber)"
-      />
-      <span class="tense-period-labels" aria-hidden="true">
-        @for (period of periods; track period.value; let index = $index) {
-          <span [class.is-active]="periodIndex() === index">{{ period.label }}</span>
+    <fieldset>
+      <legend>Chọn mốc thời gian</legend>
+      <div class="tense-period-options">
+        @for (option of periods; track option.value) {
+          <label [class.is-active]="period() === option.value">
+            <input
+              type="radio"
+              [name]="radioPrefix() + '-period'"
+              [value]="option.value"
+              [checked]="period() === option.value"
+              (change)="period.set(option.value)"
+            />
+            <span>{{ option.label }}</span>
+          </label>
         }
-      </span>
-    </label>
-    <fieldset class="tense-aspects">
-      <legend>Dạng thì</legend>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Chọn cách nhìn hành động</legend>
       <div class="tense-aspect-options">
         @for (option of aspects; track option.value) {
           <label [class.is-active]="aspect() === option.value">
             <input
               type="radio"
-              [name]="radioName()"
+              [name]="radioPrefix() + '-aspect'"
               [value]="option.value"
               [checked]="aspect() === option.value"
-              (change)="selectAspect(option.value)"
+              (change)="aspect.set(option.value)"
             />
-            <span>{{ option.label }}</span>
+            <span>
+              <strong>{{ option.label }}</strong>
+              <span class="tense-aspect-clue">{{ option.clue }}</span>
+            </span>
           </label>
         }
       </div>
@@ -42,21 +41,15 @@
 
   @if (example(); as selected) {
     <div class="tense-example">
-      <div class="tense-example__heading">
-        <span class="tense-eyebrow">Khám phá 12 thì</span>
-        <h3 aria-live="polite">{{ selected.label }}</h3>
-      </div>
+      <h3 aria-live="polite">{{ selected.label }}</h3>
       <p class="tense-formula">
         <span>Công thức</span><strong lang="en">{{ selected.formula }}</strong>
       </p>
       <figure class="tense-diagram">
-        <svg viewBox="-6 0 112 54" role="img" [attr.aria-label]="selected.description">
+        <svg viewBox="-5 5 110 32" role="img" [attr.aria-label]="selected.description">
           <title>{{ selected.label }}</title>
           <line x1="0" y1="25" x2="100" y2="25" class="diagram-axis" />
           <line x1="50" y1="7" x2="50" y2="35" class="diagram-now" />
-          <text x="0" y="47" text-anchor="start">Quá khứ</text>
-          <text x="50" y="47" text-anchor="middle">Hiện tại</text>
-          <text x="100" y="47" text-anchor="end">Tương lai</text>
           @switch (selected.diagram.shape) {
             @case ('routine') {
               @for (point of routinePoints(); track $index) {
@@ -117,8 +110,35 @@
             }
           }
         </svg>
+        <div class="tense-axis-labels" aria-hidden="true">
+          @for (option of periods; track option.value) {
+            <span [class.is-active]="period() === option.value">{{ option.label }}</span>
+          }
+        </div>
+        <ul class="tense-diagram-key" aria-label="Chú giải dòng thời gian">
+          @switch (selected.diagram.shape) {
+            @case ('routine') {
+              <li><span class="tense-key-event" aria-hidden="true"></span>Lần lặp lại</li>
+            }
+            @case ('point') {
+              <li><span class="tense-key-event" aria-hidden="true"></span>Việc xảy ra</li>
+            }
+            @case ('duration') {
+              <li><span class="tense-key-duration" aria-hidden="true"></span>Quá trình diễn ra</li>
+            }
+            @case ('perfect') {
+              <li><span class="tense-key-event" aria-hidden="true"></span>Việc đã xong</li>
+              <li><span class="tense-key-reference" aria-hidden="true"></span>Mốc đối chiếu</li>
+            }
+            @case ('perfect-duration') {
+              <li><span class="tense-key-duration" aria-hidden="true"></span>Quá trình kéo dài</li>
+              <li><span class="tense-key-reference" aria-hidden="true"></span>Mốc đối chiếu</li>
+            }
+          }
+        </ul>
         <figcaption>{{ selected.description }}</figcaption>
       </figure>
+      <h4 class="tense-sentence-heading">Ví dụ phân tích</h4>
       <app-grammar-syntax-sentence [sentence]="selected.sentence" />
     </div>
   } @else {
